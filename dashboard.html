@@ -1213,61 +1213,308 @@
             }
         }
 
-        .exec-brief-card {
-            padding: 10px 14px !important;
-            gap: 6px;
-        }
-
-        .exec-brief-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .exec-brief-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 2px 8px;
-            border-radius: 999px;
-            background: rgba(0, 229, 255, 0.06);
-            border: 1px solid rgba(0, 229, 255, 0.14);
-            color: #c8ecf5;
-            font-size: 9px;
-            font-family: var(--font-display);
-            text-transform: uppercase;
-            letter-spacing: 0.35px;
-            flex-shrink: 0;
-            line-height: 1.2;
-        }
-
-        .exec-brief-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--color-secondary);
-            box-shadow: 0 0 6px var(--color-secondary);
-        }
-
-        .exec-brief-text {
-            margin: 0;
-            font-size: 13px;
-            line-height: 1.5;
-            color: #d8e4f5;
-        }
-
-        .exec-brief-text strong {
-            color: #ffffff;
-            font-weight: 700;
-        }
-
         .exec-hero-grid,
         .exec-chart-grid,
         .exec-bottom-grid {
             display: grid;
-            gap: 16px;
+            gap: 14px;
+        }
+
+        .exec-kpi-strip {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .exec-kpi-card {
+            background: linear-gradient(145deg, rgba(16, 20, 32, 0.88) 0%, rgba(8, 10, 16, 0.96) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 3px solid var(--exec-kpi-accent, #00e5ff);
+            border-radius: 10px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0;
+            min-height: 84px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 6px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .exec-kpi-card.hero {
+            grid-column: span 1;
+            background: linear-gradient(145deg, rgba(12, 18, 30, 0.94) 0%, rgba(8, 12, 22, 0.98) 100%);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .exec-kpi-card.span-2 {
+            grid-column: span 1;
+        }
+
+        .exec-kpi-card::before {
+            display: none;
+        }
+
+        .exec-kpi-card.accent-cyan { --exec-kpi-accent: #00e5ff; }
+        .exec-kpi-card.accent-green { --exec-kpi-accent: #39ff14; }
+        .exec-kpi-card.accent-amber { --exec-kpi-accent: #ffcc00; }
+        .exec-kpi-card.accent-red { --exec-kpi-accent: #ff4466; }
+        .exec-kpi-card.accent-purple { --exec-kpi-accent: #bf5af2; }
+
+        .exec-kpi-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .exec-kpi-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--exec-kpi-accent, #00e5ff);
+            background: linear-gradient(145deg, rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0.04));
+            border: 1px solid color-mix(in srgb, var(--exec-kpi-accent, #00e5ff) 36%, transparent);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 0 16px color-mix(in srgb, var(--exec-kpi-accent, #00e5ff) 22%, transparent);
+            flex-shrink: 0;
+            overflow: visible;
+        }
+
+        .exec-kpi-icon svg {
+            width: 28px;
+            height: 28px;
+            display: block;
+            flex-shrink: 0;
+        }
+
+        .exec-kpi-copy {
+            min-width: 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .exec-kpi-label {
+            font-size: 10px;
+            font-weight: 650;
+            text-transform: uppercase;
+            letter-spacing: 0.45px;
+            color: var(--text-muted);
+            line-height: 1.2;
+        }
+
+        .exec-kpi-value {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.05;
+            letter-spacing: -0.4px;
+        }
+
+        .exec-kpi-value.sm {
+            font-size: 16px;
+            letter-spacing: 0;
+        }
+
+        .exec-kpi-meta {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.45);
+            line-height: 1.25;
+        }
+
+        .exec-kpi-target,
+        .exec-kpi-bar,
+        .exec-kpi-bar-fill,
+        .exec-kpi-status,
+        .exec-kpi-divider {
+            display: none !important;
+        }
+
+        #executive-tab .panel-card.exec-overview-panel {
+            background: linear-gradient(145deg, rgba(14, 18, 28, 0.94) 0%, rgba(8, 10, 16, 0.98) 100%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: 10px !important;
+            padding: 12px 14px !important;
+            backdrop-filter: none !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 6px 22px rgba(0, 0, 0, 0.38) !important;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        #executive-tab .exec-overview-panel .panel-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            padding-left: 0;
+            border-left: none;
+        }
+
+        #executive-tab .exec-overview-panel .panel-title-desc {
+            display: block;
+            margin-left: 0;
+            margin-top: 2px;
+            font-size: 9px;
+            text-transform: none;
+            letter-spacing: 0;
+            font-weight: 400;
+        }
+
+        #executive-tab .exec-overview-panel .panel-title-desc::before {
+            content: none;
+        }
+
+        .exec-panel-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .exec-panel-copy {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .exec-panel-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.03);
+            color: #d7e2f2;
+            font-size: 8px;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 0.55px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .exec-panel-chip strong {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .exec-mini-stats {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
+            margin-bottom: 8px;
+            flex-shrink: 0;
+        }
+
+        .exec-mini-stat {
+            padding: 6px 8px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            min-width: 0;
+        }
+
+        .exec-mini-stat-label {
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 3px;
+            font-family: var(--font-display);
+        }
+
+        .exec-mini-stat-value {
+            font-size: 11px;
+            color: #ffffff;
+            font-weight: 700;
+            font-family: var(--font-display);
+            line-height: 1.25;
+        }
+
+        .exec-allocation-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+            gap: 8px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .exec-allocation-layout .chart-container {
+            min-height: 0;
+        }
+
+        .exec-allocation-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            min-height: 0;
+            overflow-y: auto;
+            padding-right: 2px;
+        }
+
+        .exec-alloc-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 8px;
+            align-items: center;
+            padding: 7px 8px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .exec-alloc-name {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            min-width: 0;
+            font-size: 10px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .exec-alloc-swatch {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            flex-shrink: 0;
+        }
+
+        .exec-alloc-meta {
+            text-align: right;
+            font-size: 9px;
+            color: #d7e2f2;
+            white-space: nowrap;
+        }
+
+        .exec-rank-group {
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            padding: 8px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .exec-rank-title {
+            font-family: var(--font-display);
+            font-size: 9.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .exec-hero-grid {
@@ -1275,15 +1522,15 @@
         }
 
         .exec-chart-grid {
-            grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr) minmax(280px, 0.8fr);
+            grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.95fr) minmax(260px, 0.8fr);
         }
 
         .exec-bottom-grid {
-            grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(280px, 0.9fr);
+            grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.95fr) minmax(260px, 0.95fr);
         }
 
         .exec-card-tight {
-            padding: 16px !important;
+            padding: 12px 14px !important;
         }
 
         .exec-primary-chart .chart-container {
@@ -1291,12 +1538,672 @@
         }
 
         @media (max-width: 1180px) {
+            .exec-kpi-strip {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .exec-kpi-card.hero,
+            .exec-kpi-card.span-2 {
+                grid-column: span 1;
+            }
+
             .exec-hero-grid,
             .exec-chart-grid,
             .exec-bottom-grid {
                 grid-template-columns: 1fr;
             }
         }
+
+        @media (max-width: 640px) {
+            .exec-kpi-strip {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Dashboard — all tabs single-screen fit (no page scroll) */
+        body.dashboard-fit-view .content-body {
+            overflow: hidden;
+            padding: 8px 14px 10px;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        body.dashboard-fit-view .main-header {
+            min-height: 54px;
+            padding: 8px 16px;
+            gap: 10px;
+        }
+
+        body.dashboard-fit-view .header-title-section h1 {
+            font-size: 17px;
+        }
+
+        body.dashboard-fit-view .header-title-section p {
+            font-size: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        body.dashboard-fit-view .header-meta-row {
+            display: none;
+        }
+
+        body.dashboard-fit-view #executive-tab.active {
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+            gap: 0;
+        }
+
+        #executive-tab .exec-page-layout {
+            display: grid;
+            grid-template-rows: auto minmax(0, 1.06fr) minmax(0, 0.94fr);
+            grid-template-columns: 1fr;
+            gap: 10px;
+            height: 100%;
+            min-height: 0;
+            margin-top: 0;
+            overflow: hidden;
+        }
+
+        body.dashboard-fit-view #executive-tab .exec-page-layout {
+            grid-template-rows: auto minmax(0, 1.1fr) minmax(0, 0.9fr);
+            gap: 6px;
+        }
+
+        body.dashboard-fit-view .exec-kpi-strip {
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 6px;
+        }
+
+        body.dashboard-fit-view .exec-kpi-card.hero,
+        body.dashboard-fit-view .exec-kpi-card.span-2 {
+            grid-column: span 1;
+        }
+
+        body.dashboard-fit-view .exec-kpi-card {
+            min-height: 62px;
+            padding: 6px 8px 5px;
+            gap: 3px;
+        }
+
+        body.dashboard-fit-view .exec-kpi-card.hero {
+            background: rgba(12, 14, 22, 0.94);
+        }
+
+        body.dashboard-fit-view .exec-kpi-card {
+            min-height: 68px;
+            padding: 10px 12px;
+        }
+
+        body.dashboard-fit-view .exec-kpi-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+        }
+
+        body.dashboard-fit-view .exec-kpi-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        body.dashboard-fit-view .exec-kpi-label {
+            font-size: 8px;
+            letter-spacing: 0.3px;
+        }
+
+        body.dashboard-fit-view .exec-kpi-value {
+            font-size: 16px;
+        }
+
+        body.dashboard-fit-view .exec-kpi-value.sm {
+            font-size: 12px;
+            line-height: 1.15;
+        }
+
+        body.dashboard-fit-view .exec-kpi-meta {
+            font-size: 8px;
+        }
+
+        body.dashboard-fit-view .exec-chart-grid {
+            grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.9fr) minmax(0, 0.72fr);
+        }
+
+        body.dashboard-fit-view .exec-bottom-grid {
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.88fr) minmax(0, 0.88fr);
+        }
+
+        body.dashboard-fit-view .exec-chart-grid,
+        body.dashboard-fit-view .exec-bottom-grid {
+            min-height: 0;
+            gap: 6px;
+            align-items: stretch;
+        }
+
+        body.dashboard-fit-view #executive-tab .exec-mini-stats,
+        body.dashboard-fit-view #executive-tab .exec-panel-chip,
+        body.dashboard-fit-view #executive-tab .exec-overview-panel .panel-title-desc {
+            display: none !important;
+        }
+
+        body.dashboard-fit-view #executive-tab .exec-overview-panel {
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 8px !important;
+        }
+
+        body.dashboard-fit-view #executive-tab .exec-overview-panel .panel-title {
+            margin-bottom: 0 !important;
+            font-size: 9px;
+        }
+
+        body.dashboard-fit-view #executive-tab .exec-panel-head {
+            margin-bottom: 4px;
+        }
+
+        body.dashboard-fit-view #executive-tab .exec-allocation-layout {
+            grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+            gap: 4px;
+        }
+
+        body.dashboard-fit-view #executive-tab .exec-allocation-legend {
+            gap: 4px;
+        }
+
+        body.dashboard-fit-view #executive-tab .exec-alloc-row {
+            padding: 5px 6px;
+        }
+
+        body.dashboard-fit-view #executive-tab .exec-alloc-name {
+            font-size: 9px;
+        }
+
+        body.dashboard-fit-view #executive-tab .exec-alloc-meta {
+            font-size: 8px;
+        }
+
+        body.dashboard-fit-view #executive-tab .chart-container {
+            flex: 1;
+            min-height: 0 !important;
+            height: auto !important;
+            position: relative;
+            width: 100%;
+        }
+
+        body.dashboard-fit-view #executive-tab .exec-rankings-body {
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        body.dashboard-fit-view #executive-tab #exec-top-products,
+        body.dashboard-fit-view #executive-tab #exec-bottom-products {
+            overflow-y: auto;
+            max-height: 100%;
+        }
+
+        body.dashboard-fit-view #executive-tab .exec-rank-group {
+            padding: 5px;
+        }
+
+        body.dashboard-fit-view #executive-tab .exec-rank-title {
+            font-size: 8px;
+            margin-bottom: 4px;
+        }
+
+        body.dashboard-fit-view #executive-tab .product-performer-row {
+            padding: 3px 6px !important;
+            margin-bottom: 2px !important;
+        }
+
+        body.dashboard-fit-view #executive-tab .product-performer-row span {
+            font-size: 10px !important;
+        }
+
+        body.dashboard-fit-view #executive-tab .product-performer-row .param-value-badge {
+            font-size: 9px !important;
+            padding: 1px 4px !important;
+        }
+
+        /* --- Global tab viewport rules --- */
+        body.dashboard-fit-view .tab-panel.active {
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+            gap: 8px;
+        }
+
+        body.dashboard-fit-view .tab-panel.active > .metrics-row {
+            flex-shrink: 0;
+            gap: 8px !important;
+        }
+
+        body.dashboard-fit-view .tab-panel.active > .panel-layout,
+        body.dashboard-fit-view .tab-panel.active > .panel-layout-vertical,
+        body.dashboard-fit-view .tab-panel.active > .exec-page-layout,
+        body.dashboard-fit-view .tab-panel.active > #overview-content,
+        body.dashboard-fit-view .tab-panel.active > #losses-content,
+        body.dashboard-fit-view .tab-panel.active > #products-content,
+        body.dashboard-fit-view .tab-panel.active > #erema-content,
+        body.dashboard-fit-view .tab-panel.active > #comparison-content,
+        body.dashboard-fit-view #forecast-content,
+        body.dashboard-fit-view #skutrends-content {
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+            gap: 8px !important;
+        }
+
+        body.dashboard-fit-view #overview-content {
+            display: grid;
+            grid-template-rows: minmax(0, 0.5fr) minmax(0, 1fr);
+        }
+
+        body.dashboard-fit-view #overview-content .scorecards-grid {
+            min-height: 0;
+            gap: 8px;
+        }
+
+        body.dashboard-fit-view #overview-content .scorecards-grid > .panel-card,
+        body.dashboard-fit-view #overview-content > .panel-card {
+            min-height: 0 !important;
+            padding: 10px 12px !important;
+        }
+
+        body.dashboard-fit-view #losses-tab.active {
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+            gap: 6px;
+        }
+
+        body.dashboard-fit-view #losses-tab > .metrics-row {
+            flex-shrink: 0;
+            gap: 8px !important;
+            margin-bottom: 0 !important;
+        }
+
+        body.dashboard-fit-view #losses-tab > .metrics-row .metric-card {
+            min-height: 72px !important;
+            padding: 8px 10px !important;
+        }
+
+        body.dashboard-fit-view #losses-tab > .metrics-row .metric-val {
+            font-size: 18px !important;
+            line-height: 1.15 !important;
+        }
+
+        body.dashboard-fit-view #losses-tab > .metrics-row .kpi-3d-icon {
+            transform: scale(0.72);
+            transform-origin: center right;
+            right: 10px !important;
+        }
+
+        body.dashboard-fit-view #losses-tab > .metrics-row .kpi-3d-icon svg {
+            width: 34px !important;
+            height: 34px !important;
+        }
+
+        body.dashboard-fit-view #losses-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: minmax(0, 1fr);
+            align-items: stretch;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+            gap: 8px !important;
+            margin: 0 !important;
+        }
+
+        body.dashboard-fit-view #losses-content > .panel-card {
+            min-height: 0 !important;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 10px 12px !important;
+            margin: 0 !important;
+        }
+
+        body.dashboard-fit-view #losses-content .chart-container,
+        body.dashboard-fit-view #losses-content .losses-waste-chart,
+        body.dashboard-fit-view #losses-content .losses-dt-chart {
+            flex: 1;
+            min-height: 0 !important;
+            height: auto !important;
+            max-width: none !important;
+            margin: 0 !important;
+            position: relative;
+        }
+
+        body.dashboard-fit-view #losses-content .panel-title {
+            margin-bottom: 6px !important;
+            flex-shrink: 0;
+        }
+
+        body.dashboard-fit-view #losses-content #waste-note-container,
+        body.dashboard-fit-view #losses-content #waste-add-note-container {
+            display: none !important;
+        }
+
+        body.dashboard-fit-view #losses-content #downtime-remarks-card {
+            display: none !important;
+        }
+
+        body.dashboard-fit-view #losses-content .loss-list {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            gap: 6px;
+        }
+
+        body.dashboard-fit-view #products-content {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            grid-template-rows: minmax(0, 1fr) minmax(0, 0.36fr);
+        }
+
+        body.dashboard-fit-view #products-content > .panel-card:nth-child(3) {
+            grid-column: 1 / -1;
+            min-height: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        body.dashboard-fit-view #products-content .sku-grid,
+        body.dashboard-fit-view #products-content #sku-table-wrapper,
+        body.dashboard-fit-view #products-content .product-performer-col > div {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+        }
+
+        body.dashboard-fit-view #products-content > .panel-card:nth-child(3) > div:last-child {
+            min-height: 0;
+            overflow: hidden;
+            margin-top: 8px !important;
+            gap: 12px !important;
+        }
+
+        body.dashboard-fit-view #erema-tab.active {
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+            gap: 6px;
+        }
+
+        body.dashboard-fit-view #erema-tab > .metrics-row {
+            flex-shrink: 0;
+            gap: 8px !important;
+            margin-bottom: 0 !important;
+            grid-template-columns: minmax(220px, 320px) !important;
+        }
+
+        body.dashboard-fit-view #erema-tab > .metrics-row .metric-card {
+            min-height: 72px !important;
+            padding: 8px 10px !important;
+        }
+
+        body.dashboard-fit-view #erema-tab > .metrics-row .metric-val {
+            font-size: 18px !important;
+            line-height: 1.15 !important;
+        }
+
+        body.dashboard-fit-view #erema-tab > .metrics-row .kpi-3d-icon {
+            transform: scale(0.72);
+            transform-origin: center right;
+            right: 10px !important;
+        }
+
+        body.dashboard-fit-view #erema-tab > .metrics-row .kpi-3d-icon svg {
+            width: 34px !important;
+            height: 34px !important;
+        }
+
+        body.dashboard-fit-view #erema-content {
+            display: grid;
+            grid-template-columns: 1.35fr 1fr;
+            grid-template-rows: minmax(0, 1fr);
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+            gap: 8px !important;
+            margin: 0 !important;
+        }
+
+        body.dashboard-fit-view #erema-content > .panel-card {
+            min-height: 0 !important;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 10px 12px !important;
+        }
+
+        body.dashboard-fit-view #erema-content .panel-title {
+            margin-bottom: 6px !important;
+            flex-shrink: 0;
+        }
+
+        body.dashboard-fit-view #erema-content .chart-container {
+            flex: 1;
+            min-height: 0 !important;
+            height: auto !important;
+        }
+
+        body.dashboard-fit-view #erema-content .table-wrapper {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+        }
+
+        body.dashboard-fit-view #comparison-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: minmax(0, 1fr);
+        }
+
+        body.dashboard-fit-view #comparison-content > .panel-card {
+            min-height: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.dashboard-fit-view #comparison-content .downtime-checkbox-grid {
+            max-height: 68px;
+            overflow-y: auto;
+        }
+
+        body.dashboard-fit-view #comparison-content .comparison-controls {
+            flex-shrink: 0;
+            gap: 8px !important;
+        }
+
+        body.dashboard-fit-view #forecast-content,
+        body.dashboard-fit-view #skutrends-content {
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        body.dashboard-fit-view #forecast-content > .panel-layout {
+            flex: 1;
+            min-height: 0;
+            display: grid;
+            grid-template-rows: minmax(0, 1.35fr) minmax(0, 0.65fr);
+            gap: 8px !important;
+            margin-top: 0 !important;
+        }
+
+        body.dashboard-fit-view #forecast-content .panel-card {
+            min-height: 0 !important;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.dashboard-fit-view #forecast-content .forecast-controls,
+        body.dashboard-fit-view #forecast-content .metrics-row {
+            margin-bottom: 8px !important;
+            flex-shrink: 0;
+        }
+
+        body.dashboard-fit-view #forecast-content .table-container {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+        }
+
+        body.dashboard-fit-view #skutrends-content > .metrics-row {
+            margin-bottom: 0 !important;
+            flex-shrink: 0;
+        }
+
+        body.dashboard-fit-view #skutrends-content > .panel-layout {
+            flex: 1;
+            min-height: 0;
+            margin-bottom: 0 !important;
+        }
+
+        body.dashboard-fit-view #skutrends-content > .panel-layout > .panel-card {
+            min-height: 0 !important;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.dashboard-fit-view #skutrends-content .cards-wrapper {
+            max-height: none !important;
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            margin-top: 8px !important;
+        }
+
+        body.dashboard-fit-view #skutrends-content > .panel-card:last-child {
+            flex: 0.8;
+            min-height: 0 !important;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.dashboard-fit-view #offline-tab.active {
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+            gap: 6px;
+        }
+
+        body.dashboard-fit-view #offline-tab > div:first-child {
+            flex-shrink: 0;
+            margin-top: 0 !important;
+        }
+
+        body.dashboard-fit-view #offline-overview-panel.offline-sub-panel-view {
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        body.dashboard-fit-view .offline-machine-panel.is-active {
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        body.dashboard-fit-view #offline-overview-panel > .metrics-row,
+        body.dashboard-fit-view #offline-overview-panel > div:first-child {
+            flex-shrink: 0;
+            margin-bottom: 0 !important;
+        }
+
+        body.dashboard-fit-view #offline-overview-panel > .panel-layout {
+            flex: 1;
+            min-height: 0;
+            margin-bottom: 0 !important;
+            gap: 8px !important;
+        }
+
+        body.dashboard-fit-view #offline-overview-panel > .panel-layout:last-child {
+            flex: 0.75;
+        }
+
+        body.dashboard-fit-view #offline-overview-panel .table-wrapper {
+            flex: 1;
+            min-height: 0;
+            max-height: none !important;
+            overflow-y: auto;
+        }
+
+        body.dashboard-fit-view .offline-kpi-card {
+            padding: 6px 8px !important;
+        }
+
+        body.dashboard-fit-view .offline-kpi-card .kpi-3d-icon {
+            display: none;
+        }
+
+        body.dashboard-fit-view .panel-card {
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 10px 12px !important;
+        }
+
+        body.dashboard-fit-view .panel-title {
+            margin-bottom: 6px !important;
+            flex-shrink: 0;
+        }
+
+        body.dashboard-fit-view .chart-container {
+            flex: 1;
+            min-height: 0 !important;
+            height: auto !important;
+            position: relative;
+            width: 100%;
+        }
+
+        body.dashboard-fit-view .table-wrapper,
+        body.dashboard-fit-view .loss-list,
+        body.dashboard-fit-view .param-list {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+        }
+
+        body.dashboard-fit-view .metric-card {
+            padding: 8px 12px !important;
+            min-height: auto !important;
+        }
+
+        body.dashboard-fit-view .metric-card .kpi-3d-icon {
+            transform: scale(0.8);
+            transform-origin: top right;
+        }
+
+        body.dashboard-fit-view .gauges-grid-3,
+        body.dashboard-fit-view .gauges-grid-4 {
+            gap: 6px;
+        }
+
+        body.dashboard-fit-view .gauge-svg-wrap svg {
+            width: 62px;
+            height: 62px;
+        }
+
+        body.dashboard-fit-view .gauge-svg-wrap-small svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        body.dashboard-fit-view #executive-tab.active {
+            gap: 0;
+        }
+
         .panel-card {
             position: relative;
             background: linear-gradient(135deg, rgba(8, 10, 18, 0.7) 0%, rgba(3, 5, 8, 0.9) 100%) !important;
@@ -1404,61 +2311,26 @@
             margin-left: 4px;
         }
 
-        .exec-brief-top .panel-title {
-            display: flex;
-            flex-direction: row;
-            align-items: baseline;
-            justify-content: flex-start;
-            flex-wrap: wrap;
-            gap: 0;
-            margin-bottom: 0;
-            font-size: 14px;
-            padding-left: 10px;
-            border-left-width: 3px;
-            min-width: 0;
-            flex: 1;
-        }
-
-        .exec-brief-top .panel-title-desc {
-            margin-left: 0;
-            padding-left: 0;
-            font-size: 11px;
-            text-transform: none;
-            letter-spacing: 0;
-            font-weight: 400;
-            line-height: 1.4;
-        }
-
-        .exec-brief-top .panel-title-desc::before {
-            content: '·';
-            margin: 0 6px;
-            color: rgba(255, 255, 255, 0.28);
-        }
-
-        @media (min-width: 640px) {
-            .exec-brief-top .panel-title {
-                flex-wrap: nowrap;
-            }
-
-            .exec-brief-top .panel-title-desc {
-                white-space: nowrap;
-            }
-        }
-
-        @media (min-width: 900px) {
-            .exec-brief-badge {
-                padding: 2px 6px;
-                font-size: 0;
-                letter-spacing: 0;
-            }
-        }
-
         /* Chart Canvas Container */
         .chart-container {
             position: relative;
             flex: 1;
             min-height: 240px;
             width: 100%;
+        }
+
+        .losses-waste-chart {
+            height: 220px;
+            min-height: 200px;
+            max-width: none;
+            margin: 0 0 12px 0;
+            flex: 0 0 auto;
+        }
+
+        .losses-dt-chart {
+            height: 260px;
+            min-height: 200px;
+            flex: 0 0 auto;
         }
 
         /* Parameter widget list */
@@ -2034,6 +2906,52 @@
             text-overflow: ellipsis;
         }
         /* Custom segmented toggle for offline tabs */
+        .offline-chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: -2px 0 10px;
+        }
+
+        .offline-leg {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 3px 9px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 650;
+            letter-spacing: 0.2px;
+            color: #d5e0f0;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .offline-leg i {
+            width: 9px;
+            height: 9px;
+            border-radius: 2px;
+            display: inline-block;
+            box-shadow: 0 0 8px currentColor;
+        }
+
+        .offline-leg-ps { color: #8ef0ff; border-color: rgba(0, 229, 255, 0.28); }
+        .offline-leg-ps i { background: #00e5ff; color: #00e5ff; }
+        .offline-leg-ss { color: #ffe08a; border-color: rgba(255, 193, 7, 0.28); }
+        .offline-leg-ss i { background: #ffc107; color: #ffc107; }
+        .offline-leg-met { color: #e0b8ff; border-color: rgba(191, 90, 242, 0.28); }
+        .offline-leg-met i { background: #bf5af2; color: #bf5af2; }
+
+        body.dashboard-fit-view .offline-chart-legend {
+            margin-bottom: 4px;
+            gap: 6px;
+        }
+
+        body.dashboard-fit-view .offline-leg {
+            font-size: 9px;
+            padding: 2px 7px;
+        }
+
         .offline-toggle-group {
             display: flex;
             background: rgba(16, 20, 32, 0.8);
@@ -2069,6 +2987,150 @@
             color: var(--text-dark);
             box-shadow: 0 0 15px rgba(0, 229, 255, 0.35);
             font-weight: 750;
+        }
+
+        /* Offline machine sub-panels (PS / SS / Metallizer) */
+        .offline-machine-panel {
+            display: none;
+            grid-template-rows: auto minmax(0, 1.12fr) minmax(0, 0.88fr);
+            gap: 10px;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .offline-machine-panel.is-active {
+            display: grid;
+        }
+
+        .offline-machine-panel .offline-kpi-row {
+            display: grid;
+            gap: 10px;
+            flex-shrink: 0;
+            margin-bottom: 0 !important;
+        }
+
+        #offline-ps-panel .offline-kpi-row,
+        #offline-ss-panel .offline-kpi-row {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        #offline-met-panel .offline-kpi-row {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .offline-machine-charts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            min-height: 0;
+            margin-bottom: 0 !important;
+        }
+
+        #offline-met-panel .offline-machine-charts {
+            grid-template-columns: 1fr;
+        }
+
+        .offline-machine-ledger {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            min-height: 0;
+            margin-bottom: 0 !important;
+        }
+
+        .offline-machine-panel .panel-card {
+            min-height: 0 !important;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .offline-machine-panel .chart-container {
+            flex: 1;
+            min-height: 0 !important;
+            height: auto !important;
+            position: relative;
+        }
+
+        .offline-machine-panel .table-wrapper {
+            flex: 1;
+            min-height: 0 !important;
+            max-height: none !important;
+            overflow-y: auto;
+        }
+
+        .offline-machine-panel > .offline-machine-charts,
+        .offline-machine-panel > .offline-machine-ledger {
+            min-height: 0;
+        }
+
+        .offline-machine-panel .panel-layout.offline-machine-charts {
+            grid-template-columns: 1fr 1fr !important;
+        }
+
+        .offline-machine-panel .panel-layout.offline-machine-ledger {
+            grid-template-columns: 1fr !important;
+        }
+
+        .offline-sub-panel-view .offline-kpi-card.metric-card {
+            min-height: 92px !important;
+            padding: 10px 12px 8px !important;
+            gap: 3px;
+            justify-content: flex-start;
+        }
+
+        .offline-sub-panel-view .offline-kpi-card.metric-card::after {
+            display: none;
+        }
+
+        .offline-sub-panel-view .offline-kpi-card .kpi-3d-icon {
+            display: none !important;
+        }
+
+        .offline-sub-panel-view .offline-kpi-card .metric-label {
+            margin-bottom: 2px !important;
+        }
+
+        .offline-sub-panel-view .offline-kpi-card .metric-val {
+            font-size: 17px !important;
+            line-height: 1.15 !important;
+            margin-bottom: 0 !important;
+        }
+
+        .offline-sub-panel-view .offline-kpi-card .metric-subtext {
+            font-size: 9px !important;
+            white-space: normal;
+            line-height: 1.25;
+            overflow: visible;
+            text-overflow: unset;
+        }
+
+        .offline-sub-panel-view .offline-kpi-card .mini-progress-bar-container {
+            margin-top: 6px !important;
+        }
+
+        body.dashboard-fit-view .offline-machine-panel.is-active {
+            gap: 6px;
+            grid-template-rows: auto minmax(0, 1.1fr) minmax(0, 0.82fr);
+        }
+
+        body.dashboard-fit-view .offline-machine-panel .offline-kpi-card.metric-card {
+            min-height: 72px !important;
+            padding: 7px 9px 6px !important;
+        }
+
+        body.dashboard-fit-view .offline-machine-panel .offline-kpi-card .metric-val {
+            font-size: 15px !important;
+        }
+
+        body.dashboard-fit-view .offline-machine-panel .panel-title {
+            margin-bottom: 4px !important;
+            font-size: 11px;
+        }
+
+        body.dashboard-fit-view .offline-machine-panel .panel-title-desc {
+            font-size: 8px;
         }
 
         .sku-grid {
@@ -3365,7 +4427,7 @@
                 <li>
                     <a class="nav-item active" data-tab="executive">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M2 17l4-5V8h6v4l4-5v5h6v7H2z"/></svg>
-                        <span>Executive Summary</span>
+                        <span>Plant Overview</span>
                     </a>
                 </li>
                 <li>
@@ -3475,8 +4537,8 @@
         <!-- HEADER -->
         <header class="main-header">
             <div class="header-title-section">
-                <h1 id="header-title">Executive Operations Summary</h1>
-                <p id="header-subtitle">ALL-IN-ONE PERFORMANCE LEDGER</p>
+                <h1 id="header-title">Plant Overview</h1>
+                <p id="header-subtitle">Real-time overview of plant operations and key performance indicators</p>
                 <div class="header-meta-row">
                     <div class="header-context-pill" id="header-period-pill">Period: Loading...</div>
                     <div class="header-context-pill subtle" id="header-coverage-pill">Coverage: Loading...</div>
@@ -3896,7 +4958,7 @@
                             Waste Generation Breakdown
                             <span class="panel-title-desc">Distribution of selected period (Tons)</span>
                         </div>
-                        <div class="chart-container" style="height: 200px; min-height: 200px; max-width: 380px; margin: 0 auto 20px auto;">
+                        <div class="chart-container losses-waste-chart">
                             <canvas id="wasteChart"></canvas>
                         </div>
                         <div id="waste-note-container" style="display: none; font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 12px; justify-content: space-between; align-items: flex-start; gap: 12px;">
@@ -3913,10 +4975,10 @@
                     <div class="panel-card">
                         <div class="panel-title secondary">
                             Downtime Distribution (Hours)
-                            <span class="panel-title-desc">Key loss contributors</span>
+                            <span class="panel-title-desc">Key loss contributors — click a bar for remarks</span>
                         </div>
-                        <div class="loss-list" id="downtime-bars">
-                            <!-- Dynamic Bars Injected by JS -->
+                        <div class="chart-container losses-dt-chart">
+                            <canvas id="downtimeChart"></canvas>
                         </div>
                     </div>
                     <div class="panel-card" style="grid-column: span 2; min-height: auto; margin-top: 16px; display: none !important;" id="downtime-remarks-card">
@@ -3933,267 +4995,143 @@
 
             <!-- TAB 10: EXECUTIVE SUMMARY (ALL-IN-ONE) -->
             <div class="tab-panel active" id="executive-tab">
-                <div class="panel-layout" style="grid-template-columns: 1fr; gap: 20px; margin-top: 0;">
+                <div class="exec-page-layout panel-layout">
 
-                    <div class="panel-card exec-brief-card">
-                        <div class="exec-brief-top">
-                            <div class="panel-title secondary" style="border-left-color: var(--color-secondary); margin-bottom: 0;">
-                                Executive Readout
-                                <span class="panel-title-desc">Instant narrative for the selected period</span>
-                            </div>
-                            <div class="exec-brief-badge">
-                                <span class="exec-brief-dot"></span>
-                                Live Management Summary
-                            </div>
-                        </div>
-                        <p class="exec-brief-text" id="exec-brief-text">
-                            Loading executive highlights...
-                        </p>
-                    </div>
-                    
-                    <!-- Row 1: Scorecards & Key Performance (3 Blocks) -->
-                    <div class="exec-hero-grid">
-                        <!-- Block 1: Production & OEE -->
-                        <div class="panel-card" style="display: flex; flex-direction: column; padding: 16px;">
-                            <div class="panel-title secondary" style="border-left-color: var(--color-primary); margin-bottom: 12px;">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; color: var(--color-primary); display: inline-block; vertical-align: middle; margin-right: 6px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                                Production & Efficiency
-                                <span class="panel-title-desc">Output volume and OEE metrics</span>
-                            </div>
-                            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                                    <div class="metric-card color-cyan" style="padding: 12px 10px 10px 10px; margin: 0; min-height: auto; position: relative; display: flex; flex-direction: column; justify-content: space-between;">
-                                        <!-- 3D Factory Building Icon -->
-                                        <div style="position: absolute; top: 6px; right: 6px; opacity: 0.92;">
-                                            <svg viewBox="0 0 56 50" style="width: 46px; height: 41px; filter: drop-shadow(0 0 7px rgba(0, 229, 255, 0.6));">
-                                                <defs>
-                                                    <linearGradient id="factFront" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#33ccee"/><stop offset="40%" stop-color="#0077bb"/><stop offset="100%" stop-color="#001a33"/></linearGradient>
-                                                    <linearGradient id="factSide" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#002244"/><stop offset="100%" stop-color="#001122"/></linearGradient>
-                                                    <linearGradient id="factRoof" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#66ddff"/><stop offset="100%" stop-color="#005588"/></linearGradient>
-                                                    <linearGradient id="factChim" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#aaaaaa"/><stop offset="50%" stop-color="#666666"/><stop offset="100%" stop-color="#333333"/></linearGradient>
-                                                </defs>
-                                                <!-- Building front face -->
-                                                <rect x="3" y="22" width="36" height="26" fill="url(#factFront)" rx="1"/>
-                                                <!-- Building right side (3D depth) -->
-                                                <polygon points="39,22 51,17 51,44 39,48" fill="url(#factSide)"/>
-                                                <!-- Roof top face -->
-                                                <polygon points="3,22 39,22 51,17 15,17" fill="url(#factRoof)"/>
-                                                <!-- Chimney 1 -->
-                                                <rect x="8" y="5" width="6" height="17" fill="url(#factChim)" rx="1"/>
-                                                <ellipse cx="11" cy="5" rx="3" ry="1.5" fill="#aaaaaa"/>
-                                                <!-- Chimney 2 -->
-                                                <rect x="19" y="10" width="5" height="12" fill="url(#factChim)" rx="1"/>
-                                                <ellipse cx="21.5" cy="10" rx="2.5" ry="1.3" fill="#aaaaaa"/>
-                                                <!-- Smoke -->
-                                                <circle cx="11" cy="2.5" r="2.2" fill="rgba(200,230,255,0.22)"/>
-                                                <circle cx="21.5" cy="7.5" r="1.8" fill="rgba(200,230,255,0.18)"/>
-                                                <!-- Windows -->
-                                                <rect x="7" y="29" width="7" height="6" fill="rgba(0,229,255,0.25)" stroke="#00e5ff" stroke-width="0.4" rx="0.5"/>
-                                                <rect x="18" y="29" width="7" height="6" fill="rgba(0,229,255,0.25)" stroke="#00e5ff" stroke-width="0.4" rx="0.5"/>
-                                                <rect x="29" y="29" width="7" height="6" fill="rgba(0,229,255,0.25)" stroke="#00e5ff" stroke-width="0.4" rx="0.5"/>
-                                                <!-- Door -->
-                                                <rect x="15" y="37" width="8" height="11" fill="rgba(0,180,220,0.18)" stroke="#00e5ff" stroke-width="0.4" rx="0.5"/>
-                                                <!-- Highlight edges -->
-                                                <line x1="3" y1="22" x2="39" y2="22" stroke="#ffffff" stroke-width="0.8" opacity="0.4"/>
-                                            </svg>
-                                        </div>
-                                        <div class="metric-label" style="font-size: 9px; text-transform: uppercase; letter-spacing: 0.3px; color: var(--text-muted); margin-bottom: 4px;">Total Production</div>
-                                        <div class="metric-val cyan" id="exec-val-prod" style="font-size: 19px; font-weight: 700; margin: 4px 0 2px 0;">0 t</div>
-                                        <div class="metric-subtext" style="font-size: 8px;">Output volume</div>
-                                    </div>
-                                    <div class="metric-card color-green" style="padding: 12px 10px 10px 10px; margin: 0; min-height: auto; position: relative; display: flex; flex-direction: column; justify-content: space-between;">
-                                        <!-- 3D Speedometer/Gauge Icon -->
-                                        <div style="position: absolute; top: 6px; right: 6px; opacity: 0.92;">
-                                            <svg viewBox="0 0 50 40" style="width: 44px; height: 35px; filter: drop-shadow(0 0 7px rgba(57, 255, 20, 0.55));">
-                                                <defs>
-                                                    <linearGradient id="gaugeRimG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#88ff44"/><stop offset="50%" stop-color="#33aa00"/><stop offset="100%" stop-color="#1a5500"/></linearGradient>
-                                                    <linearGradient id="gaugeDepthG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#224400"/><stop offset="100%" stop-color="#0d1a00"/></linearGradient>
-                                                </defs>
-                                                <!-- Depth/thickness (3D) -->
-                                                <ellipse cx="25" cy="31" rx="22" ry="7" fill="url(#gaugeDepthG)"/>
-                                                <!-- Outer rim -->
-                                                <path d="M 3 28 A 22 22 0 0 1 47 28" fill="url(#gaugeRimG)"/>
-                                                <!-- Gauge face -->
-                                                <path d="M 5 28 A 20 20 0 0 1 45 28" fill="#050f00"/>
-                                                <!-- Red zone arc -->
-                                                <path d="M 5 28 A 20 20 0 0 1 12.5 12" stroke="#ff3300" stroke-width="3.5" fill="none" opacity="0.85"/>
-                                                <!-- Yellow zone arc -->
-                                                <path d="M 12.5 12 A 20 20 0 0 1 32 7" stroke="#ffcc00" stroke-width="3.5" fill="none" opacity="0.85"/>
-                                                <!-- Green zone arc -->
-                                                <path d="M 32 7 A 20 20 0 0 1 45 28" stroke="#39ff14" stroke-width="3.5" fill="none" opacity="0.9"/>
-                                                <!-- Tick marks -->
-                                                <line x1="7" y1="25" x2="9.5" y2="21.5" stroke="#ffffff" stroke-width="0.8" opacity="0.5"/>
-                                                <line x1="14" y1="12.5" x2="15.8" y2="15.5" stroke="#ffffff" stroke-width="0.8" opacity="0.5"/>
-                                                <line x1="25" y1="8" x2="25" y2="12" stroke="#ffffff" stroke-width="0.8" opacity="0.5"/>
-                                                <line x1="36" y1="12.5" x2="34.2" y2="15.5" stroke="#ffffff" stroke-width="0.8" opacity="0.5"/>
-                                                <line x1="43" y1="25" x2="40.5" y2="21.5" stroke="#ffffff" stroke-width="0.8" opacity="0.5"/>
-                                                <!-- Needle (pointing high OEE ~80%) -->
-                                                <line x1="25" y1="28" x2="39" y2="11" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-                                                <!-- Center pivot -->
-                                                <circle cx="25" cy="28" r="3.5" fill="url(#gaugeRimG)"/>
-                                                <circle cx="25" cy="28" r="1.5" fill="#ffffff"/>
-                                            </svg>
-                                        </div>
-                                        <div class="metric-label" style="font-size: 9px; text-transform: uppercase; letter-spacing: 0.3px; color: var(--text-muted); margin-bottom: 4px;">Average OEE</div>
-                                        <div class="metric-val green" id="exec-val-oee" style="font-size: 19px; font-weight: 700; margin: 4px 0 2px 0;">0.0%</div>
-                                        <div class="metric-subtext" style="font-size: 8px;">Operational efficiency</div>
-                                    </div>
+                    <!-- Row 1: Plant Overview KPI Strip -->
+                    <div class="exec-kpi-strip">
+                        <div class="exec-kpi-card hero accent-cyan">
+                            <div class="exec-kpi-head">
+                                <div class="exec-kpi-copy">
+                                    <div class="exec-kpi-label">Total Production</div>
+                                    <div class="exec-kpi-value" id="exec-val-prod">0 t</div>
                                 </div>
-                            </div>
-                            <div style="display: none !important; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 8px; padding: 10px; font-size: 11px; line-height: 1.4; color: var(--text-muted);">
-                                <strong>OEE Status:</strong> <span id="exec-oee-status" style="color: #ffffff;">Analyzing...</span>
-                            </div>
-                        </div>
-
-                        <!-- Block 2: Waste & Downtime -->
-                        <div class="panel-card" style="display: flex; flex-direction: column; padding: 16px;">
-                            <div class="panel-title secondary" style="border-left-color: var(--color-tertiary); margin-bottom: 12px;">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; color: var(--color-tertiary); display: inline-block; vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                                Waste & Downtime
-                                <span class="panel-title-desc">Material wastage and downtime</span>
-                            </div>
-                            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                                    <div class="metric-card color-amber" style="padding: 12px 10px 10px 10px; margin: 0; min-height: auto; position: relative; display: flex; flex-direction: column; justify-content: space-between;">
-                                        <!-- 3D Industrial Waste Bin Icon -->
-                                        <div style="position: absolute; top: 6px; right: 6px; opacity: 0.92;">
-                                            <svg viewBox="0 0 44 50" style="width: 34px; height: 39px; filter: drop-shadow(0 0 7px rgba(255, 204, 0, 0.6));">
-                                                <defs>
-                                                    <linearGradient id="binBodyW" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffcc44"/><stop offset="50%" stop-color="#cc8800"/><stop offset="100%" stop-color="#4d2900"/></linearGradient>
-                                                    <linearGradient id="binSideW" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4d2900"/><stop offset="100%" stop-color="#2a1400"/></linearGradient>
-                                                    <linearGradient id="binTopW" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffe066"/><stop offset="100%" stop-color="#997700"/></linearGradient>
-                                                    <linearGradient id="binLidSideW" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7a5500"/><stop offset="100%" stop-color="#3a2800"/></linearGradient>
-                                                </defs>
-                                                <!-- Bin body front (slight trapezoid wider at top) -->
-                                                <polygon points="4,16 40,16 36,48 8,48" fill="url(#binBodyW)"/>
-                                                <!-- Bin right side 3D -->
-                                                <polygon points="40,16 44,18 40,50 36,48" fill="url(#binSideW)"/>
-                                                <!-- Lid top face -->
-                                                <rect x="2" y="11" width="40" height="6" fill="url(#binTopW)" rx="1"/>
-                                                <!-- Lid right side -->
-                                                <polygon points="42,11 46,13 46,19 42,17" fill="url(#binLidSideW)"/>
-                                                <!-- Handle -->
-                                                <path d="M 16 7 Q 16 4 22 4 Q 28 4 28 7" stroke="#ffcc44" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                                                <!-- Vertical ribs -->
-                                                <line x1="14" y1="16" x2="12" y2="48" stroke="rgba(0,0,0,0.18)" stroke-width="1"/>
-                                                <line x1="22" y1="16" x2="22" y2="48" stroke="rgba(0,0,0,0.18)" stroke-width="1"/>
-                                                <line x1="30" y1="16" x2="32" y2="48" stroke="rgba(0,0,0,0.18)" stroke-width="1"/>
-                                                <!-- Warning stripes on bin -->
-                                                <line x1="8" y1="26" x2="36" y2="26" stroke="rgba(0,0,0,0.15)" stroke-width="4"/>
-                                                <line x1="8" y1="34" x2="36" y2="34" stroke="rgba(0,0,0,0.15)" stroke-width="4"/>
-                                                <line x1="8" y1="42" x2="36" y2="42" stroke="rgba(0,0,0,0.15)" stroke-width="4"/>
-                                                <!-- Top highlight -->
-                                                <line x1="2" y1="11" x2="42" y2="11" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"/>
-                                            </svg>
-                                        </div>
-                                        <div class="metric-label" style="font-size: 9px; text-transform: uppercase; letter-spacing: 0.3px; color: var(--text-muted); margin-bottom: 4px;">Average Waste</div>
-                                        <div class="metric-val amber" id="exec-val-waste" style="font-size: 19px; font-weight: 700; margin: 4px 0 2px 0;">0.0%</div>
-                                        <div class="metric-subtext" style="font-size: 8px;">Material loss ratio</div>
-                                    </div>
-                                    <div class="metric-card color-red" style="padding: 12px 10px 10px 10px; margin: 0; min-height: auto; position: relative; display: flex; flex-direction: column; justify-content: space-between;">
-                                        <!-- 3D Clock Icon -->
-                                        <div style="position: absolute; top: 6px; right: 6px; opacity: 0.92;">
-                                            <svg viewBox="0 0 50 54" style="width: 38px; height: 41px; filter: drop-shadow(0 0 7px rgba(255, 45, 85, 0.6));">
-                                                <defs>
-                                                    <radialGradient id="clockFaceR" cx="40%" cy="35%" r="65%"><stop offset="0%" stop-color="#3a0011"/><stop offset="60%" stop-color="#1a0008"/><stop offset="100%" stop-color="#080003"/></radialGradient>
-                                                    <linearGradient id="clockRimR" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff6680"/><stop offset="50%" stop-color="#cc0033"/><stop offset="100%" stop-color="#660011"/></linearGradient>
-                                                    <linearGradient id="clockDepthR" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#550022"/><stop offset="100%" stop-color="#220011"/></linearGradient>
-                                                </defs>
-                                                <!-- 3D depth ellipse -->
-                                                <ellipse cx="25" cy="36" rx="22" ry="8" fill="url(#clockDepthR)"/>
-                                                <!-- Outer rim circle -->
-                                                <circle cx="25" cy="27" r="22" fill="url(#clockRimR)"/>
-                                                <!-- Glass face -->
-                                                <circle cx="25" cy="27" r="19" fill="url(#clockFaceR)"/>
-                                                <!-- Hour markers -->
-                                                <line x1="25" y1="10" x2="25" y2="14" stroke="#ff4466" stroke-width="1.8"/>
-                                                <line x1="25" y1="40" x2="25" y2="44" stroke="#ff4466" stroke-width="1.8"/>
-                                                <line x1="8" y1="27" x2="12" y2="27" stroke="#ff4466" stroke-width="1.8"/>
-                                                <line x1="38" y1="27" x2="42" y2="27" stroke="#ff4466" stroke-width="1.8"/>
-                                                <!-- Minor markers -->
-                                                <line x1="17" y1="12.5" x2="18.3" y2="15" stroke="#660022" stroke-width="1"/>
-                                                <line x1="33" y1="12.5" x2="31.7" y2="15" stroke="#660022" stroke-width="1"/>
-                                                <line x1="11" y1="19.5" x2="13.5" y2="21" stroke="#660022" stroke-width="1"/>
-                                                <line x1="39" y1="19.5" x2="36.5" y2="21" stroke="#660022" stroke-width="1"/>
-                                                <!-- Hour hand -->
-                                                <line x1="25" y1="27" x2="35" y2="17" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
-                                                <!-- Minute hand -->
-                                                <line x1="25" y1="27" x2="25" y2="12" stroke="#ff6680" stroke-width="1.6" stroke-linecap="round"/>
-                                                <!-- Center pivot -->
-                                                <circle cx="25" cy="27" r="2.8" fill="#ff2244"/>
-                                                <!-- Crown stem -->
-                                                <rect x="22" y="5" width="6" height="5" rx="1.5" fill="url(#clockRimR)"/>
-                                                <!-- Rim highlight -->
-                                                <path d="M 10 14 A 18 18 0 0 1 40 14" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" fill="none"/>
-                                            </svg>
-                                        </div>
-                                        <div class="metric-label" style="font-size: 9px; text-transform: uppercase; letter-spacing: 0.3px; color: var(--text-muted); margin-bottom: 4px;">Total Downtime</div>
-                                        <div class="metric-val red" id="exec-val-downtime-r1" style="font-size: 19px; font-weight: 700; margin: 4px 0 2px 0;">0.0 h</div>
-                                        <div class="metric-subtext" style="font-size: 8px;">Line stoppage hours</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="display: none !important; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 8px; padding: 10px; font-size: 11px; line-height: 1.4; color: var(--text-muted);">
-                                <strong>Loss Status:</strong> <span id="exec-waste-status" style="color: #ffffff;">Analyzing...</span>
-                            </div>
-                        </div>
-
-                        <!-- Block 3: Top Leading Product SKU Card -->
-                        <div class="panel-card" style="display: flex; flex-direction: column; padding: 16px;">
-                            <div class="panel-title secondary" style="border-left-color: var(--color-secondary); margin-bottom: 12px;">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; color: #ffcc00; display: inline-block; vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="8" r="7"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg>
-                                Leading Product
-                                <span class="panel-title-desc">Highest yielding product</span>
-                            </div>
-                            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
-                                <div style="display: flex; align-items: center; gap: 12px; background: linear-gradient(135deg, rgba(0, 240, 255, 0.08) 0%, rgba(0, 102, 255, 0.03) 100%); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 12px; padding: 10px 12px; box-sizing: border-box;">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="#ffcc00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 36px; height: 36px; filter: drop-shadow(0 0 8px rgba(255, 204, 0, 0.55)); flex-shrink: 0;">
-                                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a6 6 0 0 0-6 6c0 3 2 5.5 5 6.5v.16c0 .55.45 1 1 1s1-.45 1-1v-.16c3-1 5-3.5 5-6.5a6 6 0 0 0-6-6z"/>
-                                    </svg>
-                                    <div style="display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0;">
-                                        <span id="exec-val-top-sku" style="font-family: var(--font-display); font-size: 16px; font-weight: 800; color: #ffffff; letter-spacing: 0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">-</span>
-                                        <span id="exec-val-top-qty" style="font-size: 13px; color: var(--color-secondary); font-weight: 700;">0 kg</span>
-                                        <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                                            <span id="exec-val-top-desc" style="font-size: 8.5px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">-</span>
-                                            <span style="font-size: 8.5px; color: rgba(255,255,255,0.15);">|</span>
-                                            <span style="font-size: 8.5px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Share: <span id="exec-val-top-share" style="color: var(--color-primary); font-weight: 700;">0%</span></span>
-                                        </div>
-                                    </div>
-                                    <!-- High-Fidelity 3D-Shaded BOPET Film Roll -->
-                                    <svg viewBox="0 0 100 60" style="width: 90px; height: 54px; flex-shrink: 0; margin-left: auto; filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.55));">
+                                <div class="exec-kpi-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 40 40" style="filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.45));">
                                         <defs>
-                                            <linearGradient id="filmBodyTLP" x1="0" y1="0" x2="0" y2="1">
+                                            <linearGradient id="execGradProd" x1="0" y1="0" x2="0" y2="1">
                                                 <stop offset="0%" stop-color="#00e5ff"/>
-                                                <stop offset="15%" stop-color="#ffffff"/>
-                                                <stop offset="50%" stop-color="#0088cc"/>
-                                                <stop offset="85%" stop-color="#003366"/>
-                                                <stop offset="100%" stop-color="#001133"/>
+                                                <stop offset="40%" stop-color="#0088cc"/>
+                                                <stop offset="100%" stop-color="#002244"/>
                                             </linearGradient>
-                                            <linearGradient id="metalCoreTLP" x1="0" y1="0" x2="0" y2="1">
-                                                <stop offset="0%" stop-color="#e0e0e0"/>
-                                                <stop offset="50%" stop-color="#888888"/>
-                                                <stop offset="100%" stop-color="#444444"/>
-                                            </linearGradient>
-                                            <linearGradient id="filmSheetTLP" x1="0" y1="0" x2="1" y2="0.5">
-                                                <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.6"/>
-                                                <stop offset="30%" stop-color="#ffffff" stop-opacity="0.3"/>
-                                                <stop offset="100%" stop-color="#00e5ff" stop-opacity="0.02"/>
+                                            <linearGradient id="execGradCore" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="0%" stop-color="#e8e8e8"/>
+                                                <stop offset="100%" stop-color="#666"/>
                                             </linearGradient>
                                         </defs>
-                                        <rect x="5" y="27" width="10" height="6" rx="1.5" fill="url(#metalCoreTLP)"/>
-                                        <ellipse cx="5" cy="30" rx="1.5" ry="3" fill="#666666"/>
-                                        <rect x="75" y="27" width="15" height="6" rx="1.5" fill="url(#metalCoreTLP)"/>
-                                        <ellipse cx="90" cy="30" rx="1.5" ry="3" fill="#ffffff"/>
-                                        <rect x="15" y="12" width="60" height="36" fill="url(#filmBodyTLP)" stroke="rgba(0, 229, 255, 0.4)" stroke-width="0.5"/>
-                                        <ellipse cx="15" cy="30" rx="4" ry="18" fill="#002244" stroke="#00e5ff" stroke-width="1"/>
-                                        <ellipse cx="15" cy="30" rx="2.5" ry="12" fill="#001122" stroke="#00e5ff" stroke-width="0.5" stroke-dasharray="1 1"/>
-                                        <circle cx="15" cy="30" r="3" fill="url(#metalCoreTLP)"/>
-                                        <ellipse cx="75" cy="30" rx="4" ry="18" fill="url(#filmBodyTLP)" stroke="#00e5ff" stroke-width="1"/>
-                                        <ellipse cx="75" cy="30" rx="2.5" ry="12" fill="#003366" stroke="#00e5ff" stroke-width="0.5" stroke-dasharray="1 1"/>
-                                        <circle cx="75" cy="30" r="3" fill="url(#metalCoreTLP)"/>
-                                        <path d="M 15 12 C 35 6, 65 12, 75 12 C 85 12, 95 28, 95 38 C 95 42, 85 45, 75 45 C 65 45, 35 45, 15 45 Z" fill="url(#filmSheetTLP)"/>
-                                        <path d="M 15 12 C 35 6, 65 12, 75 12" stroke="#ffffff" stroke-width="1.5" opacity="0.8"/>
-                                        <path d="M 75 12 C 85 12, 95 28, 95 38" stroke="#00e5ff" stroke-width="1" opacity="0.5"/>
+                                        <rect x="6" y="18" width="28" height="4" rx="1" fill="url(#execGradCore)"/>
+                                        <rect x="12" y="10" width="16" height="20" fill="url(#execGradProd)" stroke="#00e5ff" stroke-width="0.6"/>
+                                        <ellipse cx="12" cy="20" rx="2.5" ry="10" fill="#001a33" stroke="#00e5ff" stroke-width="0.6"/>
+                                        <ellipse cx="28" cy="20" rx="2.5" ry="10" fill="url(#execGradProd)" stroke="#00e5ff" stroke-width="0.6"/>
+                                        <circle cx="12" cy="20" r="1.8" fill="url(#execGradCore)"/>
+                                        <circle cx="28" cy="20" r="1.8" fill="url(#execGradCore)"/>
+                                        <path d="M32 8 L36 10 L32 12" fill="none" stroke="#00e5ff" stroke-width="1.2" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="exec-kpi-card span-2 accent-green">
+                            <div class="exec-kpi-head">
+                                <div class="exec-kpi-copy">
+                                    <div class="exec-kpi-label">Average OEE</div>
+                                    <div class="exec-kpi-value" id="exec-val-oee">0.0%</div>
+                                </div>
+                                <div class="exec-kpi-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 40 40" style="filter: drop-shadow(0 0 5px rgba(57, 255, 20, 0.45));">
+                                        <defs>
+                                            <linearGradient id="execGradOee" x1="0" y1="0" x2="1" y2="1">
+                                                <stop offset="0%" stop-color="#39ff14"/>
+                                                <stop offset="55%" stop-color="#00aa00"/>
+                                                <stop offset="100%" stop-color="#003300"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M8 28 A14 14 0 0 1 32 28" fill="none" stroke="url(#execGradOee)" stroke-width="3" stroke-linecap="round"/>
+                                        <circle cx="20" cy="28" r="2.2" fill="#39ff14"/>
+                                        <line x1="20" y1="28" x2="28" y2="16" stroke="#39ff14" stroke-width="2.2" stroke-linecap="round"/>
+                                        <line x1="11" y1="28" x2="29" y2="28" stroke="rgba(57,255,20,0.25)" stroke-width="1"/>
+                                        <line x1="14" y1="22" x2="16" y2="24" stroke="rgba(57,255,20,0.5)" stroke-width="1.2" stroke-linecap="round"/>
+                                        <line x1="20" y1="19" x2="20" y2="22" stroke="rgba(57,255,20,0.5)" stroke-width="1.2" stroke-linecap="round"/>
+                                        <line x1="26" y1="22" x2="24" y2="24" stroke="rgba(57,255,20,0.5)" stroke-width="1.2" stroke-linecap="round"/>
+                                        <rect x="17" y="30" width="6" height="3" rx="0.8" fill="#1a331a" stroke="#39ff14" stroke-width="0.6"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="exec-kpi-card span-2 accent-amber">
+                            <div class="exec-kpi-head">
+                                <div class="exec-kpi-copy">
+                                    <div class="exec-kpi-label">Average Waste</div>
+                                    <div class="exec-kpi-value" id="exec-val-waste">0.0%</div>
+                                </div>
+                                <div class="exec-kpi-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 40 40" style="filter: drop-shadow(0 0 5px rgba(255, 193, 7, 0.45));">
+                                        <defs>
+                                            <linearGradient id="execGradWaste" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="0%" stop-color="#ffcc00"/>
+                                                <stop offset="50%" stop-color="#d46a00"/>
+                                                <stop offset="100%" stop-color="#661100"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M10 12 L30 12 L26 34 L14 34 Z" fill="url(#execGradWaste)" stroke="#ffcc00" stroke-width="0.8"/>
+                                        <ellipse cx="20" cy="12" rx="10" ry="3" fill="#ffcc00" stroke="#ffaa00" stroke-width="0.5"/>
+                                        <ellipse cx="20" cy="12" rx="7.5" ry="2" fill="#3a1100"/>
+                                        <line x1="15" y1="14" x2="17" y2="32" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+                                        <line x1="20" y1="14" x2="20" y2="32" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+                                        <line x1="25" y1="14" x2="23" y2="32" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+                                        <path d="M16 8 L20 5 L24 8" fill="none" stroke="#ffcc00" stroke-width="1.2" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="exec-kpi-card span-2 accent-red">
+                            <div class="exec-kpi-head">
+                                <div class="exec-kpi-copy">
+                                    <div class="exec-kpi-label">Total Downtime</div>
+                                    <div class="exec-kpi-value" id="exec-val-downtime-r1">0.0 h</div>
+                                </div>
+                                <div class="exec-kpi-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 40 40" style="filter: drop-shadow(0 0 5px rgba(255, 68, 102, 0.45));">
+                                        <defs>
+                                            <linearGradient id="execGradDt" x1="0" y1="0" x2="1" y2="1">
+                                                <stop offset="0%" stop-color="#ff4466"/>
+                                                <stop offset="60%" stop-color="#cc1133"/>
+                                                <stop offset="100%" stop-color="#4a0011"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <circle cx="20" cy="20" r="13" fill="url(#execGradDt)" stroke="#ff4466" stroke-width="1.2"/>
+                                        <circle cx="20" cy="20" r="10" fill="#0d101a"/>
+                                        <rect x="18.5" y="10" width="3" height="10" rx="1" fill="#ff4466"/>
+                                        <line x1="20" y1="20" x2="26" y2="24" stroke="#ff8899" stroke-width="2" stroke-linecap="round"/>
+                                        <circle cx="20" cy="20" r="2" fill="#fff"/>
+                                        <path d="M28 8 L32 8 L30 12 Z" fill="#ff4466"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="exec-kpi-card span-2 accent-purple">
+                            <div class="exec-kpi-head">
+                                <div class="exec-kpi-copy">
+                                    <div class="exec-kpi-label">Leading Product</div>
+                                    <div class="exec-kpi-value sm" id="exec-val-top-sku">—</div>
+                                    <div class="exec-kpi-meta"><span id="exec-val-top-share">0%</span> share · <span id="exec-val-top-qty">0 kg</span></div>
+                                </div>
+                                <div class="exec-kpi-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 40 40" style="filter: drop-shadow(0 0 5px rgba(191, 90, 242, 0.45));">
+                                        <defs>
+                                            <linearGradient id="execGradSku" x1="0" y1="0" x2="1" y2="1">
+                                                <stop offset="0%" stop-color="#bf5af2"/>
+                                                <stop offset="50%" stop-color="#7c3aed"/>
+                                                <stop offset="100%" stop-color="#2d1060"/>
+                                            </linearGradient>
+                                            <linearGradient id="execGradRibbon" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="0%" stop-color="#e0c3ff"/>
+                                                <stop offset="100%" stop-color="#7c3aed"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <circle cx="20" cy="16" r="9" fill="url(#execGradSku)" stroke="#bf5af2" stroke-width="1"/>
+                                        <circle cx="20" cy="16" r="6.5" fill="#140820"/>
+                                        <text x="20" y="19" text-anchor="middle" fill="#bf5af2" font-size="9" font-weight="800" font-family="Inter, sans-serif">#1</text>
+                                        <path d="M14 24 L20 30 L26 24 L23 34 L17 34 Z" fill="url(#execGradRibbon)" stroke="#bf5af2" stroke-width="0.6"/>
+                                        <rect x="17" y="6" width="6" height="3" rx="0.6" fill="#bf5af2" opacity="0.8"/>
                                     </svg>
                                 </div>
                             </div>
@@ -4203,34 +5141,72 @@
                     <!-- Row 2: Operational Graphs (3 Blocks) -->
                     <div class="exec-chart-grid">
                         <!-- Block 1: Production vs. Waste Chart -->
-                        <div class="panel-card exec-card-tight exec-primary-chart">
-                            <div class="panel-title secondary" style="border-left-color: var(--color-secondary); margin-bottom: 10px;">
-                                Monthly Production & Waste
-                                <span class="panel-title-desc">Volume and loss trajectory</span>
+                        <div class="panel-card exec-card-tight exec-primary-chart exec-overview-panel">
+                            <div class="exec-panel-head">
+                                <div class="exec-panel-copy">
+                                    <div class="panel-title secondary" style="border-left-color: var(--color-secondary); margin-bottom: 0;">
+                                        Monthly Production & Waste
+                                        <span class="panel-title-desc">Volume and loss trajectory</span>
+                                    </div>
+                                </div>
+                                <div class="exec-panel-chip">Core Line View</div>
                             </div>
-                            <div class="chart-container" style="position: relative; height: 140px; width: 100%;">
+                            <div class="exec-mini-stats">
+                                <div class="exec-mini-stat">
+                                    <div class="exec-mini-stat-label">Peak Output</div>
+                                    <div class="exec-mini-stat-value" id="exec-prod-peak">-</div>
+                                </div>
+                                <div class="exec-mini-stat">
+                                    <div class="exec-mini-stat-label">Latest Waste</div>
+                                    <div class="exec-mini-stat-value" id="exec-prod-latest-waste">-</div>
+                                </div>
+                            </div>
+                            <div class="chart-container exec-flex-chart">
                                 <canvas id="execProductionChart"></canvas>
                             </div>
                         </div>
 
                         <!-- Block 2: Product Allocation Chart -->
-                        <div class="panel-card exec-card-tight">
-                            <div class="panel-title secondary" style="border-left-color: var(--color-primary); margin-bottom: 10px;">
-                                Product Type Allocation
-                                <span class="panel-title-desc">Volume share by film category</span>
+                        <div class="panel-card exec-card-tight exec-overview-panel">
+                            <div class="exec-panel-head">
+                                <div class="exec-panel-copy">
+                                    <div class="panel-title secondary" style="border-left-color: var(--color-primary); margin-bottom: 0;">
+                                        Product Type Allocation
+                                        <span class="panel-title-desc">Volume share by film category</span>
+                                    </div>
+                                </div>
+                                <div class="exec-panel-chip">Mix Balance</div>
                             </div>
-                            <div class="chart-container" style="position: relative; height: 155px; width: 100%;">
-                                <canvas id="execProductAllocationChart"></canvas>
+                            <div class="exec-allocation-layout">
+                                <div class="chart-container exec-flex-chart">
+                                    <canvas id="execProductAllocationChart"></canvas>
+                                </div>
+                                <div class="exec-allocation-legend" id="exec-allocation-legend"></div>
                             </div>
                         </div>
 
                         <!-- Block 3: Erema Recycling Graph -->
-                        <div class="panel-card exec-card-tight">
-                            <div class="panel-title secondary" style="border-left-color: var(--color-secondary); margin-bottom: 10px;">
-                                Erema Recycling Performance
-                                <span class="panel-title-desc">Reclaimed Pellets: <strong id="exec-val-reclaimed" style="color: var(--color-secondary);">0 kg</strong></span>
+                        <div class="panel-card exec-card-tight exec-overview-panel">
+                            <div class="exec-panel-head">
+                                <div class="exec-panel-copy">
+                                    <div class="panel-title secondary" style="border-left-color: var(--color-secondary); margin-bottom: 0;">
+                                        Erema Recycling Performance
+                                        <span class="panel-title-desc">Reclaimed Pellets: <strong id="exec-val-reclaimed" style="color: var(--color-secondary);">0 kg</strong></span>
+                                    </div>
+                                </div>
+                                <div class="exec-panel-chip">Recovery Loop</div>
                             </div>
-                            <div class="chart-container" style="position: relative; height: 120px; width: 100%;">
+                            <div class="exec-mini-stats">
+                                <div class="exec-mini-stat">
+                                    <div class="exec-mini-stat-label">Peak Month</div>
+                                    <div class="exec-mini-stat-value" id="exec-rec-peak">-</div>
+                                </div>
+                                <div class="exec-mini-stat">
+                                    <div class="exec-mini-stat-label">Average Feed</div>
+                                    <div class="exec-mini-stat-value" id="exec-rec-avg">-</div>
+                                </div>
+                            </div>
+                            <div class="chart-container exec-flex-chart">
                                 <canvas id="execRecyclingChart"></canvas>
                             </div>
                         </div>
@@ -4239,24 +5215,29 @@
                     <!-- Row 3: Rankings & Loss/Energy Trends (3 Blocks) -->
                     <div class="exec-bottom-grid">
                         <!-- Block 1: Product Rankings Ledger -->
-                        <div class="panel-card" style="padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
-                            <div class="panel-title secondary" style="border-left-color: var(--color-tertiary); margin-bottom: 10px;">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; color: var(--color-tertiary); display: inline-block; vertical-align: middle; margin-right: 6px;"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-                                Product Rankings Ledger
-                                <span class="panel-title-desc">Top and bottom performers</span>
+                        <div class="panel-card exec-card-tight exec-overview-panel">
+                            <div class="exec-panel-head">
+                                <div class="exec-panel-copy">
+                                    <div class="panel-title secondary" style="border-left-color: var(--color-tertiary); margin-bottom: 0;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; color: var(--color-tertiary); display: inline-block; vertical-align: middle; margin-right: 6px;"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                                        Product Rankings Ledger
+                                        <span class="panel-title-desc">Top and bottom performers</span>
+                                    </div>
+                                </div>
+                                <div class="exec-panel-chip">Lineup View</div>
                             </div>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex: 1;">
-                                <div>
-                                    <h5 style="font-family: var(--font-display); font-size: 9.5px; color: var(--color-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 4px;">
+                            <div class="exec-rankings-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: 1;">
+                                <div class="exec-rank-group">
+                                    <h5 class="exec-rank-title" style="color: var(--color-secondary);">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 10px; height: 10px;"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a6 6 0 0 0-6 6c0 3 2 5.5 5 6.5v.16c0 .55.45 1 1 1s1-.45 1-1v-.16c3-1 5-3.5 5-6.5a6 6 0 0 0-6-6z"/></svg>
-                                        TOP 3
+                                        TOP PERFORMERS
                                     </h5>
                                     <div id="exec-top-products" style="display: flex; flex-direction: column; gap: 4px;"></div>
                                 </div>
-                                <div>
-                                    <h5 style="font-family: var(--font-display); font-size: 9.5px; color: #ff5722; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 4px;">
+                                <div class="exec-rank-group">
+                                    <h5 class="exec-rank-title" style="color: #ff5722;">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 10px; height: 10px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                                        BOTTOM 3
+                                        BOTTOM PERFORMERS
                                     </h5>
                                     <div id="exec-bottom-products" style="display: flex; flex-direction: column; gap: 4px;"></div>
                                 </div>
@@ -4264,25 +5245,55 @@
                         </div>
 
                         <!-- Block 2: Downtime Analytics Graph -->
-                        <div class="panel-card" style="padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
-                            <div class="panel-title secondary" style="border-left-color: var(--color-tertiary); margin-bottom: 10px;">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; color: var(--color-tertiary); display: inline-block; vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                Line Downtime Analytics
-                                <span class="panel-title-desc">Total downtime: <strong id="exec-val-downtime" style="color: var(--color-tertiary);">0.0 Hrs</strong></span>
+                        <div class="panel-card exec-card-tight exec-overview-panel">
+                            <div class="exec-panel-head">
+                                <div class="exec-panel-copy">
+                                    <div class="panel-title secondary" style="border-left-color: var(--color-tertiary); margin-bottom: 0;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; color: var(--color-tertiary); display: inline-block; vertical-align: middle; margin-right: 6px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                        Line Downtime Analytics
+                                        <span class="panel-title-desc">Total downtime: <strong id="exec-val-downtime" style="color: var(--color-tertiary);">0.0 Hrs</strong></span>
+                                    </div>
+                                </div>
+                                <div class="exec-panel-chip">Loss Mapping</div>
                             </div>
-                            <div class="chart-container" style="position: relative; flex: 1; min-height: 140px; width: 100%;">
+                            <div class="exec-mini-stats">
+                                <div class="exec-mini-stat">
+                                    <div class="exec-mini-stat-label">Worst Month</div>
+                                    <div class="exec-mini-stat-value" id="exec-dt-peak">-</div>
+                                </div>
+                                <div class="exec-mini-stat">
+                                    <div class="exec-mini-stat-label">Average / Month</div>
+                                    <div class="exec-mini-stat-value" id="exec-dt-avg">-</div>
+                                </div>
+                            </div>
+                            <div class="chart-container exec-flex-chart">
                                 <canvas id="execDowntimeChart"></canvas>
                             </div>
                         </div>
 
                         <!-- Block 3: Energy & SEC Graph -->
-                        <div class="panel-card" style="padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
-                            <div class="panel-title secondary" style="border-left-color: var(--color-primary); margin-bottom: 10px;">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; color: var(--color-primary); display: inline-block; vertical-align: middle; margin-right: 6px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                                Specific Energy & Cost (SEC)
-                                <span class="panel-title-desc">Plant Avg: <strong id="exec-val-sec" style="color: var(--color-primary);">0.00 KWh/Kg</strong> | <strong id="exec-val-cost" style="color: var(--color-tertiary);">Rs 0.00/Kg</strong></span>
+                        <div class="panel-card exec-card-tight exec-overview-panel">
+                            <div class="exec-panel-head">
+                                <div class="exec-panel-copy">
+                                    <div class="panel-title secondary" style="border-left-color: var(--color-primary); margin-bottom: 0;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; color: var(--color-primary); display: inline-block; vertical-align: middle; margin-right: 6px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                                        Specific Energy & Cost (SEC)
+                                        <span class="panel-title-desc">Plant Avg: <strong id="exec-val-sec" style="color: var(--color-primary);">0.00 KWh/Kg</strong> | <strong id="exec-val-cost" style="color: var(--color-tertiary);">Rs 0.00/Kg</strong></span>
+                                    </div>
+                                </div>
+                                <div class="exec-panel-chip">Utility Load</div>
                             </div>
-                            <div class="chart-container" style="position: relative; flex: 1; min-height: 140px; width: 100%;">
+                            <div class="exec-mini-stats">
+                                <div class="exec-mini-stat">
+                                    <div class="exec-mini-stat-label">Best SEC</div>
+                                    <div class="exec-mini-stat-value" id="exec-energy-best-sec">-</div>
+                                </div>
+                                <div class="exec-mini-stat">
+                                    <div class="exec-mini-stat-label">Highest Cost</div>
+                                    <div class="exec-mini-stat-value" id="exec-energy-high-cost">-</div>
+                                </div>
+                            </div>
+                            <div class="chart-container exec-flex-chart">
                                 <canvas id="execEnergyChart"></canvas>
                             </div>
                         </div>
@@ -4485,7 +5496,7 @@
                     <div class="panel-card">
                         <div class="panel-title">
                             Recycling Monthly Throughput Trend
-                            <span class="panel-title-desc">Throughput feed (kg)</span>
+                            <span class="panel-title-desc">Throughput feed (kg) · cyan = highest · red = lowest</span>
                         </div>
                         <div class="chart-container">
                             <canvas id="eremaChart"></canvas>
@@ -4657,10 +5668,15 @@
 
                     <!-- Overview Chart -->
                     <div class="panel-layout" style="margin-bottom: 20px; grid-template-columns: 1fr;">
-                        <div class="panel-card" style="width: 100%;">
+                        <div class="panel-card offline-overview-chart-card" style="width: 100%;">
                             <div class="panel-title">
                                 Production Comparison
                                 <span class="panel-title-desc">Primary Slitter vs. Secondary Slitter vs. Metallizer (kg)</span>
+                            </div>
+                            <div class="offline-chart-legend" aria-hidden="true">
+                                <span class="offline-leg offline-leg-ps"><i></i>PS · left axis</span>
+                                <span class="offline-leg offline-leg-ss"><i></i>SS · right axis</span>
+                                <span class="offline-leg offline-leg-met"><i></i>Met · right axis</span>
                             </div>
                             <div class="chart-container" style="height: 380px;">
                                 <canvas id="offlineOverviewChart"></canvas>
@@ -4698,9 +5714,9 @@
                 </div>
 
                 <!-- SUB-PANEL: PRIMARY SLITTER -->
-                <div id="offline-ps-panel" class="offline-sub-panel-view" style="display: none;">
+                <div id="offline-ps-panel" class="offline-sub-panel-view offline-machine-panel">
                     <!-- PS Summary KPI Cards -->
-                    <div class="metrics-row" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 20px;">
+                    <div class="metrics-row offline-kpi-row">
                         <!-- PS Production Card -->
                         <div class="metric-card offline-kpi-card" style="--accent-color: #00e5ff; --shadow-color: rgba(0, 229, 255, 0.08); --shadow-color-hover: rgba(0, 229, 255, 0.2); --glow-color: rgba(0, 229, 255, 0.4);">
                             <div class="kpi-3d-icon">
@@ -4782,7 +5798,7 @@
                     </div>
 
                     <!-- PS Charts Panel -->
-                    <div class="panel-layout" style="margin-bottom: 20px;">
+                    <div class="panel-layout offline-machine-charts">
                         <div class="panel-card">
                             <div class="panel-title">
                                 Primary Slitter Production & Waste Trends
@@ -4804,13 +5820,13 @@
                     </div>
 
                     <!-- PS Ledger Table -->
-                    <div class="panel-layout" style="margin-bottom: 20px; grid-template-columns: 1fr;">
+                    <div class="panel-layout offline-machine-ledger">
                         <div class="panel-card" style="width: 100%;">
                             <div class="panel-title secondary">
                                 Primary Slitter Monthly Performance Ledger
                                 <span class="panel-title-desc">Detailed production, scrap, and downtime logs</span>
                             </div>
-                            <div class="table-wrapper" style="max-height: 300px; overflow-y: auto;">
+                            <div class="table-wrapper">
                                 <table class="ledger-table">
                                     <thead>
                                         <tr>
@@ -4831,9 +5847,9 @@
                 </div>
 
                 <!-- SUB-PANEL: SECONDARY SLITTER -->
-                <div id="offline-ss-panel" class="offline-sub-panel-view" style="display: none;">
+                <div id="offline-ss-panel" class="offline-sub-panel-view offline-machine-panel">
                     <!-- SS Summary KPI Cards -->
-                    <div class="metrics-row" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 20px;">
+                    <div class="metrics-row offline-kpi-row">
                         <!-- SS Production Card -->
                         <div class="metric-card offline-kpi-card" style="--accent-color: #2979ff; --shadow-color: rgba(41, 121, 255, 0.08); --shadow-color-hover: rgba(41, 121, 255, 0.2); --glow-color: rgba(41, 121, 255, 0.4);">
                             <div class="kpi-3d-icon">
@@ -4915,7 +5931,7 @@
                     </div>
 
                     <!-- SS Charts Panel -->
-                    <div class="panel-layout" style="margin-bottom: 20px;">
+                    <div class="panel-layout offline-machine-charts">
                         <div class="panel-card">
                             <div class="panel-title">
                                 Secondary Slitter Production & Waste Trends
@@ -4937,13 +5953,13 @@
                     </div>
 
                     <!-- SS Ledger Table -->
-                    <div class="panel-layout" style="margin-bottom: 20px; grid-template-columns: 1fr;">
+                    <div class="panel-layout offline-machine-ledger">
                         <div class="panel-card" style="width: 100%;">
                             <div class="panel-title secondary">
                                 Secondary Slitter Monthly Performance Ledger
                                 <span class="panel-title-desc">Detailed production, scrap, and downtime logs</span>
                             </div>
-                            <div class="table-wrapper" style="max-height: 300px; overflow-y: auto;">
+                            <div class="table-wrapper">
                                 <table class="ledger-table">
                                     <thead>
                                         <tr>
@@ -4964,9 +5980,9 @@
                 </div>
 
                 <!-- SUB-PANEL: METALLIZER -->
-                <div id="offline-met-panel" class="offline-sub-panel-view" style="display: none;">
+                <div id="offline-met-panel" class="offline-sub-panel-view offline-machine-panel">
                     <!-- Metallizer KPI cards -->
-                    <div class="metrics-row" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 20px;">
+                    <div class="metrics-row offline-kpi-row">
                         <!-- Metallizer Production -->
                         <div class="metric-card offline-kpi-card" style="--accent-color: #00e5ff; --shadow-color: rgba(0, 229, 255, 0.08); --shadow-color-hover: rgba(0, 229, 255, 0.2); --glow-color: rgba(0, 229, 255, 0.4);">
                             <div class="kpi-3d-icon">
@@ -5030,26 +6046,26 @@
                     </div>
 
                     <!-- Metallizer Chart Panel -->
-                    <div class="panel-layout" style="margin-bottom: 20px; grid-template-columns: 1fr;">
+                    <div class="panel-layout offline-machine-charts">
                         <div class="panel-card" style="width: 100%;">
                             <div class="panel-title">
                                 Metallizer Production & Waste Trends
                                 <span class="panel-title-desc">Monthly outputs (kg)</span>
                             </div>
-                            <div class="chart-container" style="height: 350px;">
+                            <div class="chart-container">
                                 <canvas id="offlineMetChart"></canvas>
                             </div>
                         </div>
                     </div>
 
                     <!-- Metallizer Ledger Table -->
-                    <div class="panel-layout" style="margin-bottom: 20px; grid-template-columns: 1fr;">
+                    <div class="panel-layout offline-machine-ledger">
                         <div class="panel-card" style="width: 100%;">
                             <div class="panel-title secondary">
                                 Metallizer Monthly Performance Ledger
                                 <span class="panel-title-desc">Detailed production and metallic coating scrap logs</span>
                             </div>
-                            <div class="table-wrapper" style="max-height: 300px; overflow-y: auto;">
+                            <div class="table-wrapper">
                                 <table class="ledger-table">
                                     <thead>
                                         <tr>
@@ -8942,6 +9958,31 @@
             "Met_Production": 232000,
             "Met_Waste": 10200,
             "Met_Waste_Pct": 4.396551724137931
+          },
+          {
+            "Dates": "2026-07-01",
+            "PS_Production": 1726274,
+            "PS_Waste": 41714,
+            "PS_Waste_Pct": 2.42,
+            "PS_Downtime": 57.45,
+            "SS_Production": 124353,
+            "SS_Waste": 5859,
+            "SS_Waste_Pct": 4.711587175218933,
+            "SS_Downtime": 27,
+            "Offline_Total_Waste": 0.0345,
+            "Offline_Packing_Cost": null,
+            "Offline_Q2_Data": 1169.72,
+            "PS_DT_Mechanical": 2,
+            "PS_DT_Electrical": 12.75,
+            "PS_DT_PowerHouse": 2,
+            "PS_DT_Planning": 40.7,
+            "SS_DT_Mechanical": 3.5,
+            "SS_DT_Electrical": 1.75,
+            "SS_DT_PowerHouse": 1.75,
+            "SS_DT_Planning": 20,
+            "Met_Production": 165000,
+            "Met_Waste": 8000,
+            "Met_Waste_Pct": 4.848484848484849
           }
         ];
 
@@ -8964,11 +10005,11 @@
         Chart.defaults.plugins.tooltip.padding = 10;
         Chart.defaults.plugins.tooltip.cornerRadius = 4;
 
-        // Set global datalabels configuration
+        // Set global datalabels configuration — show values on all charts
         Chart.defaults.plugins.datalabels = {
             color: function(context) {
                 const type = context.chart.config.type;
-                if (type === 'doughnut' || type === 'polarArea') {
+                if (type === 'doughnut' || type === 'polarArea' || type === 'pie') {
                     return '#ffffff';
                 }
                 return context.dataset.borderColor || '#dee2f6';
@@ -8977,37 +10018,35 @@
                 const type = context.chart.config.type;
                 return {
                     family: 'Space Grotesk',
-                    size: (type === 'doughnut' || type === 'polarArea') ? 10 : 9,
+                    size: (type === 'doughnut' || type === 'polarArea' || type === 'pie') ? 10 : 9,
                     weight: '700'
                 };
             },
             align: function(context) {
                 const type = context.chart.config.type;
-                if (type === 'doughnut' || type === 'polarArea') {
+                if (type === 'doughnut' || type === 'polarArea' || type === 'pie') {
                     return 'center';
+                }
+                if (context.chart.options.indexAxis === 'y') {
+                    return 'right';
                 }
                 return 'top';
             },
             anchor: function(context) {
                 const type = context.chart.config.type;
-                if (type === 'doughnut' || type === 'polarArea') {
+                if (type === 'doughnut' || type === 'polarArea' || type === 'pie') {
                     return 'center';
+                }
+                if (context.chart.options.indexAxis === 'y') {
+                    return 'end';
                 }
                 return 'end';
             },
             formatter: function(value, context) {
                 if (value === null || value === undefined) return '';
                 if (value === 0) return '';
-                
-                const type = context.chart.config.type;
-                if (type === 'doughnut' || type === 'polarArea') {
-                    const sum = context.chart.data.datasets[0].data.reduce((a, b) => a + (b || 0), 0);
-                    if (sum === 0) return '';
-                    const pct = (value / sum) * 100;
-                    return pct > 3 ? [`${value.toFixed(1)} t`, `${pct.toFixed(1)}%`] : '';
-                }
 
-                // Get kpiKey from dataset
+                const type = context.chart.config.type;
                 const kpiKey = context.dataset.kpiKey;
                 const units = {
                     prod: ' t',
@@ -9023,17 +10062,32 @@
                     grades: '',
                     microns: '',
                     erema: ' kg',
-                    downtime_cat: ' h'
+                    downtime_cat: ' h',
+                    kg: ' kg',
+                    hrs: ' h',
+                    tons: ' t'
                 };
-                
-                const unit = (kpiKey && units[kpiKey]) ? units[kpiKey] : '';
-                
+                const unit = (kpiKey && units[kpiKey] !== undefined) ? units[kpiKey] : '';
+
+                if (type === 'doughnut' || type === 'polarArea' || type === 'pie') {
+                    const sum = context.chart.data.datasets[0].data.reduce((a, b) => a + (b || 0), 0);
+                    if (sum === 0) return '';
+                    const pct = (value / sum) * 100;
+                    if (pct < 4) return '';
+                    const num = value >= 100
+                        ? Math.round(value).toLocaleString()
+                        : value.toLocaleString(undefined, { maximumFractionDigits: 1 });
+                    return [`${num}${unit}`, `${pct.toFixed(1)}%`];
+                }
+
                 if (typeof value === 'number') {
                     let formatted = '';
-                    if (value >= 1000) {
-                        formatted = value.toLocaleString(undefined, {maximumFractionDigits: 0});
+                    if (Math.abs(value) >= 1000) {
+                        formatted = Math.round(value).toLocaleString();
+                    } else if (Number.isInteger(value) || Math.abs(value) >= 100) {
+                        formatted = value.toLocaleString(undefined, { maximumFractionDigits: 0 });
                     } else {
-                        formatted = value.toLocaleString(undefined, {maximumFractionDigits: 1});
+                        formatted = value.toLocaleString(undefined, { maximumFractionDigits: 1 });
                     }
                     return formatted + unit;
                 }
@@ -9041,7 +10095,12 @@
             },
             offset: 2,
             clip: false,
-            display: 'auto'
+            display: function(context) {
+                const v = context.dataset.data[context.dataIndex];
+                return v !== null && v !== undefined && v !== 0;
+            },
+            textStrokeColor: 'rgba(0,0,0,0.45)',
+            textStrokeWidth: 2
         };
 
         // Active state and selectors
@@ -9059,7 +10118,7 @@
 
         const tabMeta = {
             overview: { title: "Operations Command Deck", subtitle: "MAIN DATA TELEMETRY" },
-            executive: { title: "Executive Operations Summary", subtitle: "ALL-IN-ONE PERFORMANCE LEDGER" },
+            executive: { title: "Plant Overview", subtitle: "Real-time overview of plant operations and key performance indicators" },
             losses: { title: "Loss & Downtime Deep-Dive", subtitle: "INCIDENTS & WASTAGE METRICS" },
             products: { title: "Products Performance", subtitle: "PRODUCTION BY PRODUCT" },
             erema: { title: "Recycling", subtitle: "RECLAIMED MATERIAL THROUGHPUT" },
@@ -9260,6 +10319,7 @@
             setTimeout(() => {
                 if (overviewChart) overviewChart.resize();
                 if (wasteChart) wasteChart.resize();
+                if (downtimeChart) downtimeChart.resize();
                 if (productTypeChart) productTypeChart.resize();
                 if (activeTrendChart) activeTrendChart.resize();
                 if (eremaChart) eremaChart.resize();
@@ -10054,6 +11114,7 @@
         // Chart References
         let overviewChart = null;
         let wasteChart = null;
+        let downtimeChart = null;
         let productTypeChart = null;
         let eremaChart = null;
         let kpiComparisonChart = null;
@@ -10171,6 +11232,19 @@
             if (activeTab === 'executive') {
                 updateExecutiveSummaryTab(mainFiltered, selectedYear, selectedMonth, productFiltered, eremaFiltered);
             }
+
+            scheduleChartResize();
+        }
+
+        function resizeAllCharts() {
+            if (typeof Chart === 'undefined' || !Chart.instances) return;
+            Object.values(Chart.instances).forEach((chart) => {
+                try { chart.resize(); } catch (e) {}
+            });
+        }
+
+        function scheduleChartResize() {
+            requestAnimationFrame(() => setTimeout(resizeAllCharts, 80));
         }
 
         function createEmptyState(h3Text, pText) {
@@ -10205,10 +11279,11 @@
             if (activeBtn) activeBtn.classList.add('active');
             
             // Toggle panel displays
-            document.getElementById('offline-overview-panel').style.display = (subSec === 'overview') ? 'block' : 'none';
-            document.getElementById('offline-ps-panel').style.display = (subSec === 'ps') ? 'block' : 'none';
-            document.getElementById('offline-ss-panel').style.display = (subSec === 'ss') ? 'block' : 'none';
-            document.getElementById('offline-met-panel').style.display = (subSec === 'met') ? 'block' : 'none';
+            document.getElementById('offline-overview-panel').style.display = (subSec === 'overview') ? 'flex' : 'none';
+            ['ps', 'ss', 'met'].forEach(id => {
+                const panel = document.getElementById(`offline-${id}-panel`);
+                if (panel) panel.classList.toggle('is-active', subSec === id);
+            });
             
             // Redraw charts
             updateDashboard();
@@ -10294,43 +11369,147 @@
                     }).join('');
                 }
 
-                // Combined Chart: PS, SS & Met Production
+                // Combined Chart: PS (left axis) vs SS & Met (right axis) — clearer scale & colors
                 const overviewCtx = document.getElementById('offlineOverviewChart').getContext('2d');
                 if (offlineOverviewChart) offlineOverviewChart.destroy();
+
+                const psSeries = data.map(r => r['PS_Production'] || 0);
+                const ssSeries = data.map(r => r['SS_Production'] || 0);
+                const metSeries = data.map(r => r['Met_Production'] || 0);
+                const showOfflineLabels = true;
+
+                const makeBarGradient = (ctx, colorTop, colorBottom) => {
+                    const chartArea = ctx.chart.chartArea;
+                    if (!chartArea) return colorTop;
+                    const g = ctx.chart.ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                    g.addColorStop(0, colorBottom);
+                    g.addColorStop(1, colorTop);
+                    return g;
+                };
+
                 offlineOverviewChart = new Chart(overviewCtx, {
                     type: 'bar',
                     data: {
                         labels: months,
                         datasets: [
                             {
-                                label: 'PS Production (kg)',
-                                data: data.map(r => r['PS_Production'] || 0),
-                                backgroundColor: 'rgba(0, 240, 255, 0.7)',
-                                borderColor: '#00f0ff',
-                                borderWidth: 1
+                                label: 'PS Production',
+                                data: psSeries,
+                                yAxisID: 'y',
+                                backgroundColor: (c) => makeBarGradient(c, 'rgba(0, 229, 255, 0.95)', 'rgba(0, 100, 140, 0.55)'),
+                                borderColor: '#00e5ff',
+                                borderWidth: 1.5,
+                                borderRadius: 5,
+                                borderSkipped: false,
+                                barPercentage: 0.75,
+                                categoryPercentage: 0.7,
+                                order: 2
                             },
                             {
-                                label: 'SS Production (kg)',
-                                data: data.map(r => r['SS_Production'] || 0),
-                                backgroundColor: 'rgba(41, 121, 255, 0.7)',
-                                borderColor: '#2979ff',
-                                borderWidth: 1
+                                label: 'SS Production',
+                                data: ssSeries,
+                                yAxisID: 'y1',
+                                backgroundColor: (c) => makeBarGradient(c, 'rgba(255, 193, 7, 0.95)', 'rgba(180, 90, 0, 0.55)'),
+                                borderColor: '#ffc107',
+                                borderWidth: 1.5,
+                                borderRadius: 5,
+                                borderSkipped: false,
+                                barPercentage: 0.75,
+                                categoryPercentage: 0.7,
+                                order: 1
                             },
                             {
-                                label: 'Met Production (kg)',
-                                data: data.map(r => r['Met_Production'] || 0),
-                                backgroundColor: 'rgba(224, 64, 251, 0.7)',
-                                borderColor: '#e040fb',
-                                borderWidth: 1
+                                label: 'Met Production',
+                                data: metSeries,
+                                yAxisID: 'y1',
+                                backgroundColor: (c) => makeBarGradient(c, 'rgba(191, 90, 242, 0.95)', 'rgba(90, 30, 140, 0.55)'),
+                                borderColor: '#bf5af2',
+                                borderWidth: 1.5,
+                                borderRadius: 5,
+                                borderSkipped: false,
+                                barPercentage: 0.75,
+                                categoryPercentage: 0.7,
+                                order: 1
                             }
                         ]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                                align: 'end',
+                                labels: {
+                                    boxWidth: 10,
+                                    boxHeight: 10,
+                                    padding: 14,
+                                    color: '#c8d4e6',
+                                    font: { size: 11, weight: '600' },
+                                    usePointStyle: true,
+                                    pointStyle: 'rectRounded'
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(8, 12, 20, 0.94)',
+                                borderColor: 'rgba(255,255,255,0.1)',
+                                borderWidth: 1,
+                                titleColor: '#fff',
+                                bodyColor: '#d0dae8',
+                                padding: 10,
+                                callbacks: {
+                                    label: (ctx) => ` ${ctx.dataset.label}: ${(ctx.parsed.y || 0).toLocaleString()} kg`
+                                }
+                            },
+                            datalabels: {
+                                display: showOfflineLabels,
+                                anchor: 'end',
+                                align: 'top',
+                                offset: 2,
+                                color: (ctx) => ctx.dataset.borderColor,
+                                font: { size: 8, weight: '700' },
+                                formatter: (v) => v ? Math.round(v).toLocaleString() : ''
+                            }
+                        },
                         scales: {
-                            x: { grid: { color: 'rgba(255, 255, 255, 0.03)' } },
-                            y: { grid: { color: 'rgba(255, 255, 255, 0.03)' } }
+                            x: {
+                                grid: { color: 'rgba(255, 255, 255, 0.04)', drawBorder: false },
+                                ticks: { color: '#9aa8bc', font: { size: 11, weight: '600' } }
+                            },
+                            y: {
+                                position: 'left',
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'PS (kg)',
+                                    color: '#00e5ff',
+                                    font: { size: 10, weight: '700' }
+                                },
+                                grid: { color: 'rgba(0, 229, 255, 0.06)' },
+                                ticks: {
+                                    color: '#7ec8d6',
+                                    font: { size: 10 },
+                                    callback: (v) => v >= 1e6 ? (v / 1e6).toFixed(1) + 'M' : (v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v)
+                                }
+                            },
+                            y1: {
+                                position: 'right',
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'SS / Met (kg)',
+                                    color: '#c9a0ff',
+                                    font: { size: 10, weight: '700' }
+                                },
+                                grid: { drawOnChartArea: false },
+                                ticks: {
+                                    color: '#b89ad4',
+                                    font: { size: 10 },
+                                    callback: (v) => v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v
+                                }
+                            }
                         }
                     }
                 });
@@ -10366,6 +11545,7 @@
                         datasets: [
                             {
                                 label: 'Production (kg)',
+                                kpiKey: 'kg',
                                 data: data.map(r => r['PS_Production'] || 0),
                                 backgroundColor: 'rgba(0, 240, 255, 0.7)',
                                 borderColor: '#00f0ff',
@@ -10373,6 +11553,7 @@
                             },
                             {
                                 label: 'Waste (kg)',
+                                kpiKey: 'kg',
                                 data: data.map(r => r['PS_Waste'] || 0),
                                 backgroundColor: 'rgba(255, 170, 0, 0.7)',
                                 borderColor: '#ffaA00',
@@ -10383,6 +11564,13 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        plugins: {
+                            datalabels: {
+                                display: true,
+                                font: { size: 8, weight: '700' },
+                                formatter: (v) => v ? Math.round(v).toLocaleString() : ''
+                            }
+                        },
                         scales: {
                             x: { grid: { color: 'rgba(255, 255, 255, 0.03)' } },
                             y: { grid: { color: 'rgba(255, 255, 255, 0.03)' } }
@@ -10404,6 +11592,7 @@
                     data: {
                         labels: ['Mechanical', 'Electrical', 'Power House', 'Planning'],
                         datasets: [{
+                            kpiKey: 'hrs',
                             data: [totalMech, totalElec, totalPower, totalPlan],
                             backgroundColor: [
                                 'rgba(255, 82, 82, 0.8)',
@@ -10419,7 +11608,17 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         plugins: {
-                            legend: { position: 'bottom', labels: { boxWidth: 12, padding: 15 } }
+                            legend: { position: 'bottom', labels: { boxWidth: 12, padding: 15 } },
+                            datalabels: {
+                                display: true,
+                                color: '#fff',
+                                font: { size: 9, weight: '700' },
+                                formatter: (v, ctx) => {
+                                    const sum = ctx.dataset.data.reduce((a, b) => a + b, 0) || 1;
+                                    if (!v || (v / sum) < 0.05) return '';
+                                    return [`${Number(v).toFixed(0)}h`, `${((v / sum) * 100).toFixed(0)}%`];
+                                }
+                            }
                         }
                     }
                 });
@@ -10471,6 +11670,7 @@
                         datasets: [
                             {
                                 label: 'Production (kg)',
+                                kpiKey: 'kg',
                                 data: data.map(r => r['SS_Production'] || 0),
                                 backgroundColor: 'rgba(0, 240, 255, 0.7)',
                                 borderColor: '#00f0ff',
@@ -10478,6 +11678,7 @@
                             },
                             {
                                 label: 'Waste (kg)',
+                                kpiKey: 'kg',
                                 data: data.map(r => r['SS_Waste'] || 0),
                                 backgroundColor: 'rgba(255, 170, 0, 0.7)',
                                 borderColor: '#ffaA00',
@@ -10488,6 +11689,13 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        plugins: {
+                            datalabels: {
+                                display: true,
+                                font: { size: 8, weight: '700' },
+                                formatter: (v) => v ? Math.round(v).toLocaleString() : ''
+                            }
+                        },
                         scales: {
                             x: { grid: { color: 'rgba(255, 255, 255, 0.03)' } },
                             y: { grid: { color: 'rgba(255, 255, 255, 0.03)' } }
@@ -10509,6 +11717,7 @@
                     data: {
                         labels: ['Mechanical', 'Electrical', 'Power House', 'Planning'],
                         datasets: [{
+                            kpiKey: 'hrs',
                             data: [totalMech, totalElec, totalPower, totalPlan],
                             backgroundColor: [
                                 'rgba(255, 82, 82, 0.8)',
@@ -10524,7 +11733,17 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         plugins: {
-                            legend: { position: 'bottom', labels: { boxWidth: 12, padding: 15 } }
+                            legend: { position: 'bottom', labels: { boxWidth: 12, padding: 15 } },
+                            datalabels: {
+                                display: true,
+                                color: '#fff',
+                                font: { size: 9, weight: '700' },
+                                formatter: (v, ctx) => {
+                                    const sum = ctx.dataset.data.reduce((a, b) => a + b, 0) || 1;
+                                    if (!v || (v / sum) < 0.05) return '';
+                                    return [`${Number(v).toFixed(0)}h`, `${((v / sum) * 100).toFixed(0)}%`];
+                                }
+                            }
                         }
                     }
                 });
@@ -10572,6 +11791,7 @@
                         datasets: [
                             {
                                 label: 'Production (kg)',
+                                kpiKey: 'kg',
                                 data: data.map(r => r['Met_Production'] || 0),
                                 backgroundColor: 'rgba(0, 240, 255, 0.7)',
                                 borderColor: '#00f0ff',
@@ -10579,6 +11799,7 @@
                             },
                             {
                                 label: 'Waste (kg)',
+                                kpiKey: 'kg',
                                 data: data.map(r => r['Met_Waste'] || 0),
                                 backgroundColor: 'rgba(255, 170, 0, 0.7)',
                                 borderColor: '#ffaA00',
@@ -10589,6 +11810,13 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        plugins: {
+                            datalabels: {
+                                display: true,
+                                font: { size: 8, weight: '700' },
+                                formatter: (v) => v ? Math.round(v).toLocaleString() : ''
+                            }
+                        },
                         scales: {
                             x: { grid: { color: 'rgba(255, 255, 255, 0.03)' } },
                             y: { grid: { color: 'rgba(255, 255, 255, 0.03)' } }
@@ -11325,6 +12553,12 @@
             if (valSecEl) valSecEl.textContent = `${avgSecVal.toFixed(2)} KWh/Kg`;
             if (valCostEl) valCostEl.textContent = `Rs ${avgCostVal.toFixed(1)}/Kg`;
 
+            // Plant Overview KPI targets kept for chart budget references
+            const monthCount = Math.max(1, mainData.length);
+            const prodTarget = monthCount * 2000; // 2000 t / month planning baseline
+            const dtBudget = monthCount * 150; // 150 h / month budget baseline
+            const setTxt = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+
             // OEE Status Text
             const oeeStatusEl = document.getElementById('exec-oee-status');
             if (oeeStatusEl) {
@@ -11374,20 +12608,17 @@
             const topSKU = sortedSKUs[0];
             const topSkuEl = document.getElementById('exec-val-top-sku');
             const topQtyEl = document.getElementById('exec-val-top-qty');
-            const topDescEl = document.getElementById('exec-val-top-desc');
             const topShareEl = document.getElementById('exec-val-top-share');
-            if (topSkuEl && topQtyEl && topDescEl) {
+            if (topSkuEl) {
                 if (topSKU) {
                     const totalSkuProd = sortedSKUs.reduce((s, r) => s + (r['Production'] || 0), 0);
                     const shareVal = totalSkuProd > 0 ? ((topSKU['Production'] / totalSkuProd) * 100).toFixed(1) : '0.0';
                     topSkuEl.textContent = topSKU['Product'];
-                    topQtyEl.textContent = `${Math.round(topSKU['Production']).toLocaleString()} kg`;
-                    topDescEl.textContent = topSKU['Product Type'] || 'Other';
+                    if (topQtyEl) topQtyEl.textContent = `${Math.round(topSKU['Production']).toLocaleString()} kg`;
                     if (topShareEl) topShareEl.textContent = `${shareVal}%`;
                 } else {
                     topSkuEl.textContent = 'N/A';
-                    topQtyEl.textContent = '0 kg';
-                    topDescEl.textContent = 'No data available';
+                    if (topQtyEl) topQtyEl.textContent = '0 kg';
                     if (topShareEl) topShareEl.textContent = '0%';
                 }
             }
@@ -11398,8 +12629,9 @@
                 topList.innerHTML = '';
                 bottomList.innerHTML = '';
                 
-                const top3 = sortedSKUs.slice(0, 3);
-                const bottom3 = sortedSKUs.slice(-3).reverse();
+                const execRankLimit = document.body.classList.contains('dashboard-fit-view') ? 2 : 3;
+                const top3 = sortedSKUs.slice(0, execRankLimit);
+                const bottom3 = sortedSKUs.slice(-execRankLimit).reverse();
 
                 top3.forEach((item, idx) => {
                     const type = item['Product Type'];
@@ -11441,27 +12673,6 @@
 
             // 3. Recycling & Downtime Numbers
             const totalErema = eremaData.reduce((sum, r) => sum + (r['Production'] || 0), 0);
-            const execBriefEl = document.getElementById('exec-brief-text');
-            if (execBriefEl) {
-                const periodLabel = formatSelectedPeriod(year, month).replace(/^Period:\s*/, '');
-                const topSkuName = topSKU ? topSKU['Product'] : 'no single leading SKU';
-                const topSkuShare = topSKU && sortedSKUs.length
-                    ? ((topSKU['Production'] / Math.max(1, sortedSKUs.reduce((s, r) => s + (r['Production'] || 0), 0))) * 100).toFixed(1)
-                    : '0.0';
-                const performanceTone = avgOee >= 82.5 && avgWaste <= 5
-                    ? 'performed strongly'
-                    : avgOee >= 80
-                        ? 'held a stable operating profile'
-                        : 'needs closer operational attention';
-
-                execBriefEl.innerHTML =
-                    `During <strong>${periodLabel}</strong>, PETPAK <strong>${performanceTone}</strong> with ` +
-                    `<strong>${totalProd.toLocaleString(undefined, { maximumFractionDigits: 0 })} tons</strong> of output, ` +
-                    `<strong>${avgOee.toFixed(1)}% OEE</strong>, <strong>${avgWaste.toFixed(1)}% waste</strong>, ` +
-                    `and <strong>${totalDowntime.toFixed(1)} hours</strong> of downtime. ` +
-                    `<strong>${topSkuName}</strong> led the product mix at <strong>${topSkuShare}% share</strong>, ` +
-                    `while Erema contributed <strong>${Math.round(totalErema).toLocaleString()} kg</strong> of recycled throughput.`;
-            }
 
             const valReclaimedEl = document.getElementById('exec-val-reclaimed');
             const valDowntimeEl = document.getElementById('exec-val-downtime');
@@ -11469,64 +12680,130 @@
             if (valReclaimedEl) valReclaimedEl.textContent = `${totalErema.toLocaleString()} kg`;
             if (valDowntimeEl) valDowntimeEl.textContent = `${totalDowntime.toFixed(1)} Hrs`;
 
-            // Populate Doughnut Center Text
-            const totalProductSum = sortedSKUs.reduce((sum, item) => sum + item['Production'], 0) / 1000; // Convert to tons
-            const doughnutTotalEl = document.getElementById('exec-doughnut-total');
-            if (doughnutTotalEl) {
-                doughnutTotalEl.textContent = `${Math.round(totalProductSum).toLocaleString()} t`;
+            const mainMonths = mainData.map(d => {
+                const pm = parseYearMonth(d['Dates']);
+                return (shortMonths[pm.monthNum - 1] || '') + '-' + pm.year.slice(2);
+            });
+            const prodDataPoints = mainData.map(d => d['Prod. (Tons)'] || 0);
+            const wasteDataPoints = mainData.map(d => d['Waste %'] || 0);
+            const downtimeHrs = mainData.map(d => d['Total Down Time ( hrs.)'] || 0);
+            const secVals = mainData.map(d => d['KWh/Kg Plant'] || 0);
+            const costVals = mainData.map(d => d['Rs/Kg Plant'] || 0);
+            const eremaMonths = eremaData.map(d => {
+                const pm = parseYearMonth(d['Dates']);
+                return (shortMonths[pm.monthNum - 1] || '') + '-' + pm.year.slice(2);
+            });
+            const pellets = eremaData.map(d => d['Production'] || 0);
+
+            const peakProdVal = prodDataPoints.length ? Math.max(...prodDataPoints) : 0;
+            const peakProdIdx = prodDataPoints.indexOf(peakProdVal);
+            setTxt('exec-prod-peak', peakProdVal ? `${mainMonths[peakProdIdx]} · ${Math.round(peakProdVal).toLocaleString()} t` : 'No data');
+            setTxt('exec-prod-latest-waste', wasteDataPoints.length ? `${mainMonths[mainMonths.length - 1]} · ${Number(wasteDataPoints[wasteDataPoints.length - 1] || 0).toFixed(1)}%` : 'No data');
+
+            const peakRecVal = pellets.length ? Math.max(...pellets) : 0;
+            const peakRecIdx = pellets.indexOf(peakRecVal);
+            const avgRecVal = pellets.length ? (pellets.reduce((a, b) => a + b, 0) / pellets.length) : 0;
+            setTxt('exec-rec-peak', peakRecVal ? `${eremaMonths[peakRecIdx]} · ${Math.round(peakRecVal).toLocaleString()} kg` : 'No data');
+            setTxt('exec-rec-avg', avgRecVal ? `${Math.round(avgRecVal).toLocaleString()} kg/mo` : 'No data');
+
+            const peakDtVal = downtimeHrs.length ? Math.max(...downtimeHrs) : 0;
+            const peakDtIdx = downtimeHrs.indexOf(peakDtVal);
+            const avgDtVal = downtimeHrs.length ? (downtimeHrs.reduce((a, b) => a + b, 0) / downtimeHrs.length) : 0;
+            setTxt('exec-dt-peak', peakDtVal ? `${mainMonths[peakDtIdx]} · ${peakDtVal.toFixed(1)} h` : 'No data');
+            setTxt('exec-dt-avg', avgDtVal ? `${avgDtVal.toFixed(1)} h/mo` : 'No data');
+
+            const bestSecVal = secVals.length ? Math.min(...secVals) : 0;
+            const bestSecIdx = secVals.indexOf(bestSecVal);
+            const highCostVal = costVals.length ? Math.max(...costVals) : 0;
+            const highCostIdx = costVals.indexOf(highCostVal);
+            setTxt('exec-energy-best-sec', bestSecVal ? `${mainMonths[bestSecIdx]} · ${bestSecVal.toFixed(2)} KWh/Kg` : 'No data');
+            setTxt('exec-energy-high-cost', highCostVal ? `${mainMonths[highCostIdx]} · Rs ${Math.round(highCostVal)}/Kg` : 'No data');
+
+            const totalProductSumKg = sortedSKUs.reduce((sum, item) => sum + item['Production'], 0);
+            const allocationLegend = document.getElementById('exec-allocation-legend');
+            if (allocationLegend) {
+                const palette = ['#00e5ff', '#bf5af2', '#ff5722', '#ffcc00', '#00ff66'];
+                allocationLegend.innerHTML = Object.entries(typeSums)
+                    .sort((a, b) => b[1] - a[1])
+                    .map(([label, value], idx) => {
+                        const pct = totalProductSumKg > 0 ? ((value / totalProductSumKg) * 100).toFixed(1) : '0.0';
+                        return `
+                            <div class="exec-alloc-row">
+                                <div class="exec-alloc-name">
+                                    <span class="exec-alloc-swatch" style="background:${palette[idx % palette.length]};"></span>
+                                    <span>${label}</span>
+                                </div>
+                                <div class="exec-alloc-meta">${Math.round(value / 1000).toLocaleString()} t · ${pct}%</div>
+                            </div>
+                        `;
+                    }).join('');
             }
 
             // 4. Render Charts
             setTimeout(() => {
+                const execCompact = document.body.classList.contains('dashboard-fit-view');
+                const execShowLabels = true;
+                const execTick = execCompact ? 7 : 9;
+
                 // Chart 1: Production vs. Waste Trend
                 const ctxProd = document.getElementById('execProductionChart')?.getContext('2d');
                 if (ctxProd) {
                     if (execProductionChart instanceof Chart) execProductionChart.destroy();
-                    
-                    const months = mainData.map(d => { const pm = parseYearMonth(d['Dates']); return (shortMonths[pm.monthNum - 1] || '') + '-' + pm.year.slice(2); });
-                    const prodDataPoints = mainData.map(d => d['Prod. (Tons)']);
-                    const wasteDataPoints = mainData.map(d => d['Waste %']);
 
                     execProductionChart = new Chart(ctxProd, {
-                        type: 'bar',
+                        type: 'line',
                         data: {
-                            labels: months,
+                            labels: mainMonths,
                             datasets: [
                                 {
                                     label: 'Production (Tons)',
                                     data: prodDataPoints,
-                                    backgroundColor: 'rgba(0, 229, 255, 0.85)',
+                                    backgroundColor: 'rgba(0, 229, 255, 0.18)',
                                     borderColor: '#00e5ff',
-                                    borderWidth: 1.5,
-                                    borderRadius: 3,
+                                    borderWidth: 2.4,
+                                    pointRadius: 3,
+                                    pointHoverRadius: 4,
+                                    fill: true,
+                                    tension: 0.35,
                                     yAxisID: 'yProd',
+                                    kpiKey: 'prod',
                                     datalabels: {
                                         display: true,
-                                        anchor: 'center',
-                                        align: 'center',
-                                        color: '#ffffff',
-                                        font: { weight: 'bold', size: 8.5 },
-                                        formatter: (v) => Math.round(v)
+                                        anchor: 'end',
+                                        align: 'top',
+                                        color: '#00e5ff',
+                                        font: { weight: 'bold', size: 8 },
+                                        formatter: (v) => v ? Math.round(v).toLocaleString() : ''
                                     }
+                                },
+                                {
+                                    label: 'Target',
+                                    data: prodDataPoints.map(() => prodTarget / monthCount),
+                                    borderColor: 'rgba(255,255,255,0.35)',
+                                    borderWidth: 1,
+                                    borderDash: [4, 4],
+                                    pointRadius: 0,
+                                    fill: false,
+                                    tension: 0,
+                                    yAxisID: 'yProd',
+                                    datalabels: { display: false }
                                 },
                                 {
                                     label: 'Waste %',
                                     data: wasteDataPoints,
-                                    type: 'line',
-                                    borderColor: '#ffcc00',
-                                    borderWidth: 2.5,
-                                    pointRadius: 3.5,
-                                    pointBackgroundColor: '#ffcc00',
-                                    fill: false,
-                                    tension: 0.35,
+                                    type: 'bar',
+                                    backgroundColor: wasteDataPoints.map(v => v <= 5 ? 'rgba(255, 204, 0, 0.72)' : 'rgba(255, 87, 34, 0.82)'),
+                                    borderColor: wasteDataPoints.map(v => v <= 5 ? '#ffcc00' : '#ff5722'),
+                                    borderWidth: 1,
+                                    borderRadius: 4,
                                     yAxisID: 'yWaste',
+                                    kpiKey: 'waste_pct',
                                     datalabels: {
                                         display: true,
                                         anchor: 'end',
-                                        align: 'bottom',
-                                        offset: 4,
-                                        color: '#ffcc00',
-                                        font: { weight: 'bold', size: 8.5 },
+                                        align: 'top',
+                                        color: '#ffffff',
+                                        font: { weight: 'bold', size: 8 },
                                         formatter: (v) => (v !== null && v !== undefined) ? Number(v).toFixed(1) + '%' : '0.0%'
                                     }
                                 }
@@ -11535,23 +12812,23 @@
                         options: {
                             responsive: true,
                             maintainAspectRatio: false,
-                            layout: { padding: { top: 18, right: 6, bottom: 0, left: 0 } },
+                            layout: { padding: { top: 10, right: 4, bottom: 0, left: 0 } },
                             plugins: { 
                                 legend: { display: false },
                                 datalabels: { display: true }
                             },
                             scales: {
-                                x: { grid: { display: false }, ticks: { font: { size: 9 } } },
+                                x: { grid: { display: false }, ticks: { font: { size: execTick } } },
                                 yProd: {
                                     position: 'left',
                                     grid: { color: 'rgba(255,255,255,0.03)' },
-                                    ticks: { font: { size: 9 } },
+                                    ticks: { font: { size: execTick } },
                                     suggestedMax: Math.max(...prodDataPoints) * 1.18
                                 },
                                 yWaste: {
                                     position: 'right',
                                     grid: { display: false },
-                                    ticks: { font: { size: 9 }, callback: (v) => v + '%' },
+                                    ticks: { font: { size: execTick }, callback: (v) => v + '%' },
                                     suggestedMax: Math.max(...wasteDataPoints.filter(v => v != null)) * 1.35
                                 }
                             }
@@ -11568,7 +12845,7 @@
                     const dataset = Object.values(typeSums);
 
                     execProductAllocationChart = new Chart(ctxAlloc, {
-                        type: 'bar',
+                        type: 'doughnut',
                         data: {
                             labels: labels,
                             datasets: [{
@@ -11581,70 +12858,58 @@
                                     'rgba(0, 255, 102, 0.85)'
                                 ],
                                 borderColor: ['#00e5ff', '#bf5af2', '#ff5722', '#ffcc00', '#00ff66'],
-                                borderWidth: 1,
-                                borderRadius: 4,
-                                barThickness: 12
+                                borderWidth: 2,
+                                hoverOffset: 4,
+                                cutout: '62%'
                             }]
                         },
                         options: {
-                            indexAxis: 'y',
                             responsive: true,
                             maintainAspectRatio: false,
                             plugins: { 
                                 legend: { display: false },
                                 datalabels: {
-                                    display: true,
-                                    anchor: 'end',
-                                    align: 'right',
+                                    display: (ctx) => {
+                                        const v = ctx.dataset.data[ctx.dataIndex] || 0;
+                                        return totalProductSumKg > 0 && (v / totalProductSumKg) >= 0.05;
+                                    },
+                                    anchor: 'center',
+                                    align: 'center',
                                     color: '#ffffff',
                                     font: { weight: 'bold', size: 9 },
+                                    textStrokeColor: 'rgba(0,0,0,0.5)',
+                                    textStrokeWidth: 2,
                                     formatter: (value) => {
-                                        const pct = totalProductSum > 0 ? ((value / (totalProductSum * 1000)) * 100).toFixed(1) : 0;
-                                        return `${Math.round(value / 1000).toLocaleString()} t (${pct}%)`;
+                                        const pct = totalProductSumKg > 0 ? ((value / totalProductSumKg) * 100).toFixed(0) : 0;
+                                        return `${pct}%`;
                                     }
                                 }
                             },
-                            scales: {
-                                x: {
-                                    display: false,
-                                    grid: { display: false }
-                                },
-                                y: {
-                                    grid: { display: false },
-                                    ticks: {
-                                        color: '#ffffff',
-                                        font: { weight: '600', size: 10 }
-                                    }
-                                }
-                            },
-                            layout: {
-                                padding: {
-                                    right: 60
-                                }
-                            }
+                            layout: { padding: { right: 4, left: 4, top: 4, bottom: 4 } }
                         }
                     });
                 }
 
-                // Chart 3: Erema Recycling Performance (Bar Chart)
+                // Chart 3: Erema Recycling Performance
                 const ctxRec = document.getElementById('execRecyclingChart')?.getContext('2d');
                 if (ctxRec) {
                     if (execRecyclingChart instanceof Chart) execRecyclingChart.destroy();
 
-                    const months = eremaData.map(d => { const pm = parseYearMonth(d['Dates']); return (shortMonths[pm.monthNum - 1] || '') + '-' + pm.year.slice(2); });
-                    const pellets = eremaData.map(d => d['Production'] || 0);
-
                     execRecyclingChart = new Chart(ctxRec, {
-                        type: 'bar',
+                        type: 'line',
                         data: {
-                            labels: months,
+                            labels: eremaMonths,
                             datasets: [{
                                 label: 'Reclaimed (Kg)',
                                 data: pellets,
-                                backgroundColor: 'rgba(0, 255, 102, 0.85)',
+                                backgroundColor: 'rgba(0, 255, 102, 0.16)',
                                 borderColor: '#00ff66',
-                                borderWidth: 1,
-                                borderRadius: 3
+                                borderWidth: 2.2,
+                                fill: true,
+                                tension: 0.35,
+                                pointRadius: 2.5,
+                                pointHoverRadius: 4,
+                                kpiKey: 'kg'
                             }]
                         },
                         options: {
@@ -11656,111 +12921,169 @@
                                     display: true,
                                     anchor: 'end',
                                     align: 'top',
-                                    color: '#ffffff',
-                                    font: { weight: 'bold', size: 8.5 },
-                                    formatter: (v) => Math.round(v).toLocaleString()
+                                    color: '#00ff66',
+                                    font: { weight: 'bold', size: 7.5 },
+                                    formatter: (v) => v ? Math.round(v).toLocaleString() : ''
                                 }
                             },
                             scales: {
-                                x: { grid: { display: false }, ticks: { font: { size: 8 } } },
-                                y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { font: { size: 8 } } }
+                                x: { grid: { display: false }, ticks: { font: { size: execTick } } },
+                                y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { font: { size: execTick } } }
                             }
                         }
                     });
                 }
 
-                // Chart 4: Downtime Trend (Bar Chart)
+                // Chart 4: Downtime Trend (bars)
                 const ctxDown = document.getElementById('execDowntimeChart')?.getContext('2d');
                 if (ctxDown) {
                     if (execDowntimeChart instanceof Chart) execDowntimeChart.destroy();
 
-                    const months = mainData.map(d => { const pm = parseYearMonth(d['Dates']); return (shortMonths[pm.monthNum - 1] || '') + '-' + pm.year.slice(2); });
-                    const downtimeHrs = mainData.map(d => d['Total Down Time ( hrs.)'] || 0);
+                    const dtMax = downtimeHrs.length ? Math.max(...downtimeHrs) : 0;
+                    const dtMin = downtimeHrs.length ? Math.min(...downtimeHrs.filter(v => v > 0).concat([Infinity])) : 0;
+                    const dtHasRange = dtMax !== dtMin && isFinite(dtMin);
 
                     execDowntimeChart = new Chart(ctxDown, {
                         type: 'bar',
                         data: {
-                            labels: months,
-                            datasets: [{
-                                label: 'Downtime (Hrs)',
-                                data: downtimeHrs,
-                                backgroundColor: 'rgba(255, 45, 85, 0.85)',
-                                borderColor: '#ff2d55',
-                                borderWidth: 1,
-                                borderRadius: 3
-                            }]
+                            labels: mainMonths,
+                            datasets: [
+                                {
+                                    label: 'Downtime (Hrs)',
+                                    data: downtimeHrs,
+                                    backgroundColor: downtimeHrs.map(v => {
+                                        if (dtHasRange && v === dtMax) return 'rgba(255, 82, 82, 0.95)';
+                                        if (dtHasRange && v === dtMin) return 'rgba(0, 229, 255, 0.85)';
+                                        return 'rgba(255, 45, 85, 0.72)';
+                                    }),
+                                    borderColor: downtimeHrs.map(v => {
+                                        if (dtHasRange && v === dtMax) return '#ff5252';
+                                        if (dtHasRange && v === dtMin) return '#00e5ff';
+                                        return '#ff2d55';
+                                    }),
+                                    borderWidth: 1.5,
+                                    borderRadius: 4,
+                                    borderSkipped: false,
+                                    barPercentage: 0.65,
+                                    categoryPercentage: 0.75,
+                                    kpiKey: 'hrs',
+                                    order: 2,
+                                    datalabels: {
+                                        display: true,
+                                        anchor: 'end',
+                                        align: 'top',
+                                        color: '#ffd0d8',
+                                        font: { weight: 'bold', size: 8 },
+                                        formatter: (v) => v ? Number(v).toFixed(1) : ''
+                                    }
+                                },
+                                {
+                                    type: 'line',
+                                    label: 'Budget',
+                                    data: downtimeHrs.map(() => dtBudget / monthCount),
+                                    borderColor: 'rgba(255, 204, 0, 0.85)',
+                                    borderWidth: 1.5,
+                                    borderDash: [4, 4],
+                                    pointRadius: 0,
+                                    fill: false,
+                                    tension: 0,
+                                    order: 1,
+                                    datalabels: { display: false }
+                                }
+                            ]
                         },
                         options: {
                             responsive: true,
                             maintainAspectRatio: false,
-                            plugins: { 
-                                legend: { display: false },
-                                datalabels: {
-                                    display: true,
-                                    anchor: 'end',
-                                    align: 'top',
-                                    color: '#ffffff',
-                                    font: { weight: 'bold', size: 8.5 },
-                                    formatter: (v) => (v !== null && v !== undefined) ? Number(v).toFixed(1) : '0.0'
-                                }
+                            plugins: {
+                                legend: { display: false }
                             },
                             scales: {
-                                x: { grid: { display: false }, ticks: { font: { size: 8 } } },
-                                y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { font: { size: 8 } } }
+                                x: { grid: { display: false }, ticks: { font: { size: execTick } } },
+                                y: {
+                                    beginAtZero: true,
+                                    grid: { color: 'rgba(255,255,255,0.03)' },
+                                    ticks: { font: { size: execTick } }
+                                }
                             }
                         }
                     });
                 }
 
-                // Chart 5: Specific Energy & Cost Trend (Dual-Axis Bar/Line Chart)
+                // Chart 5: Specific Energy & Cost (grouped bars, dual axis)
                 const ctxEnergy = document.getElementById('execEnergyChart')?.getContext('2d');
                 if (ctxEnergy) {
                     if (execEnergyChart instanceof Chart) execEnergyChart.destroy();
 
-                    const months = mainData.map(d => { const pm = parseYearMonth(d['Dates']); return (shortMonths[pm.monthNum - 1] || '') + '-' + pm.year.slice(2); });
-                    const secVals = mainData.map(d => d['KWh/Kg Plant'] || 0);
-                    const costVals = mainData.map(d => d['Rs/Kg Plant'] || 0);
+                    const secMax = secVals.length ? Math.max(...secVals) : 0;
+                    const secMinPos = secVals.filter(v => v > 0);
+                    const secMin = secMinPos.length ? Math.min(...secMinPos) : 0;
+                    const secHasRange = secMax !== secMin && secMinPos.length > 0;
+
+                    const costMax = costVals.length ? Math.max(...costVals) : 0;
+                    const costMinPos = costVals.filter(v => v > 0);
+                    const costMin = costMinPos.length ? Math.min(...costMinPos) : 0;
+                    const costHasRange = costMax !== costMin && costMinPos.length > 0;
 
                     execEnergyChart = new Chart(ctxEnergy, {
                         type: 'bar',
                         data: {
-                            labels: months,
+                            labels: mainMonths,
                             datasets: [
                                 {
                                     label: 'SEC (KWh/Kg)',
                                     data: secVals,
-                                    backgroundColor: 'rgba(0, 229, 255, 0.85)',
-                                    borderColor: '#00e5ff',
-                                    borderWidth: 1,
-                                    borderRadius: 3,
+                                    backgroundColor: secVals.map(v => {
+                                        if (secHasRange && v === secMax) return 'rgba(0, 229, 255, 0.95)';
+                                        if (secHasRange && v === secMin) return 'rgba(255, 82, 82, 0.75)';
+                                        return 'rgba(0, 229, 255, 0.7)';
+                                    }),
+                                    borderColor: secVals.map(v => {
+                                        if (secHasRange && v === secMax) return '#00e5ff';
+                                        if (secHasRange && v === secMin) return '#ff5252';
+                                        return '#00e5ff';
+                                    }),
+                                    borderWidth: 1.5,
+                                    borderRadius: 4,
+                                    borderSkipped: false,
+                                    barPercentage: 0.7,
+                                    categoryPercentage: 0.7,
                                     yAxisID: 'ySEC',
                                     datalabels: {
                                         display: true,
                                         anchor: 'end',
-                                        align: 'bottom',
-                                        color: '#ffffff',
-                                        font: { weight: 'bold', size: 8.5 },
-                                        formatter: (v) => (v !== null && v !== undefined) ? Number(v).toFixed(2) : '0.00'
+                                        align: 'top',
+                                        color: '#8ef0ff',
+                                        font: { weight: 'bold', size: 7.5 },
+                                        formatter: (v) => v > 0 ? Number(v).toFixed(2) : ''
                                     }
                                 },
                                 {
                                     label: 'Cost (PKR/Kg)',
                                     data: costVals,
-                                    type: 'line',
-                                    borderColor: '#ffcc00',
-                                    borderWidth: 2.5,
-                                    pointRadius: 3,
-                                    pointBackgroundColor: '#ffcc00',
-                                    fill: false,
-                                    tension: 0.35,
+                                    backgroundColor: costVals.map(v => {
+                                        if (costHasRange && v === costMax) return 'rgba(255, 204, 0, 0.95)';
+                                        if (costHasRange && v === costMin) return 'rgba(255, 82, 82, 0.7)';
+                                        return 'rgba(255, 204, 0, 0.72)';
+                                    }),
+                                    borderColor: costVals.map(v => {
+                                        if (costHasRange && v === costMax) return '#ffcc00';
+                                        if (costHasRange && v === costMin) return '#ff5252';
+                                        return '#ffcc00';
+                                    }),
+                                    borderWidth: 1.5,
+                                    borderRadius: 4,
+                                    borderSkipped: false,
+                                    barPercentage: 0.7,
+                                    categoryPercentage: 0.7,
                                     yAxisID: 'yCost',
                                     datalabels: {
                                         display: true,
                                         anchor: 'end',
                                         align: 'top',
                                         color: '#ffcc00',
-                                        font: { weight: 'bold', size: 8.5 },
-                                        formatter: (v) => (v !== null && v !== undefined) ? Math.round(v) : '0'
+                                        font: { weight: 'bold', size: 7.5 },
+                                        formatter: (v) => v > 0 ? Math.round(v) : ''
                                     }
                                 }
                             ]
@@ -11768,28 +13091,57 @@
                         options: {
                             responsive: true,
                             maintainAspectRatio: false,
-                            plugins: { 
-                                legend: { display: false },
-                                datalabels: {
-                                    display: true
-                                }
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    position: 'top',
+                                    align: 'end',
+                                    labels: {
+                                        boxWidth: 10,
+                                        boxHeight: 10,
+                                        padding: 10,
+                                        color: '#c8d4e6',
+                                        font: { size: 9, weight: '600' },
+                                        usePointStyle: true,
+                                        pointStyle: 'rectRounded'
+                                    }
+                                },
+                                datalabels: { display: true }
                             },
                             scales: {
-                                x: { grid: { display: false }, ticks: { font: { size: 8 } } },
-                                ySEC: { 
-                                    position: 'left', 
-                                    grid: { color: 'rgba(255,255,255,0.03)' }, 
-                                    ticks: { font: { size: 8 } }
+                                x: { grid: { display: false }, ticks: { font: { size: execTick } } },
+                                ySEC: {
+                                    position: 'left',
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'SEC',
+                                        color: '#00e5ff',
+                                        font: { size: 9, weight: '700' }
+                                    },
+                                    grid: { color: 'rgba(255,255,255,0.03)' },
+                                    ticks: { font: { size: execTick } }
                                 },
-                                yCost: { 
-                                    position: 'right', 
-                                    grid: { display: false }, 
-                                    ticks: { font: { size: 8 } }
+                                yCost: {
+                                    position: 'right',
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'PKR/Kg',
+                                        color: '#ffcc00',
+                                        font: { size: 9, weight: '700' }
+                                    },
+                                    grid: { display: false },
+                                    ticks: { font: { size: execTick } }
                                 }
                             }
                         }
                     });
                 }
+
+                [execProductionChart, execProductAllocationChart, execRecyclingChart, execDowntimeChart, execEnergyChart]
+                    .filter(Boolean)
+                    .forEach(chart => { try { chart.resize(); } catch (e) {} });
             }, 50);
         }
 
@@ -12193,10 +13545,14 @@
                 document.getElementById('m2-downtime').textContent = "0.00 h";
                 document.getElementById('m2-breaks').textContent = "0.00/d";
                 document.getElementById('m2-recovery').textContent = "0.00 m";
+                if (wasteChart) { wasteChart.destroy(); wasteChart = null; }
+                if (downtimeChart) { downtimeChart.destroy(); downtimeChart = null; }
                 contentCard.innerHTML = createEmptyState("No Losses Data", "No monthly wastage logs match the selected filter.");
                 return;
             }
 
+            if (wasteChart) { wasteChart.destroy(); wasteChart = null; }
+            if (downtimeChart) { downtimeChart.destroy(); downtimeChart = null; }
             contentCard.innerHTML = initialLossesContentHTML;
 
             // KPIs
@@ -12223,42 +13579,94 @@
             const wShortages = data.reduce((sum, item) => sum + (item['Waste_Shortages'] || 0), 0);
 
             const wSums = [wProcess, wMechanical, wShortages, wElectrical, wPowerHouse, wPlanning];
-            const wLabels = ['Process', 'Mechanical', 'No. Job Order/Project Upgradation', 'Electrical', 'Power House', 'Planning'];
+            const wLabels = ['Process', 'Mechanical', 'No. Job Order', 'Electrical', 'Power House', 'Planning'];
+            const wColors = [
+                'rgba(0, 229, 255, 0.85)',
+                'rgba(255, 176, 0, 0.85)',
+                'rgba(0, 255, 102, 0.85)',
+                'rgba(255, 59, 48, 0.85)',
+                'rgba(168, 85, 247, 0.85)',
+                'rgba(249, 115, 22, 0.85)'
+            ];
+            const wTotal = wSums.reduce((a, b) => a + b, 0) || 1;
 
-            // Render Donut Chart
+            // Waste breakdown — pie chart with values on slices
             const wasteCtx = document.getElementById('wasteChart').getContext('2d');
             if (wasteChart) wasteChart.destroy();
             wasteChart = new Chart(wasteCtx, {
-                type: 'doughnut',
+                type: 'pie',
                 data: {
                     labels: wLabels,
                     datasets: [{
+                        kpiKey: 'tons',
+                        label: 'Waste (Tons)',
                         data: wSums,
-                        backgroundColor: [
-                            'rgba(0, 229, 255, 0.8)',
-                            'rgba(255, 176, 0, 0.8)',
-                            'rgba(0, 255, 102, 0.8)',
-                            'rgba(255, 59, 48, 0.8)',
-                            'rgba(168, 85, 247, 0.8)',
-                            'rgba(249, 115, 22, 0.8)'
-                        ],
-                        borderColor: '#040406',
-                        borderWidth: 2
+                        backgroundColor: wColors,
+                        borderColor: '#0a0c12',
+                        borderWidth: 2,
+                        hoverOffset: 8
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    layout: { padding: 4 },
                     plugins: {
-                        legend: { position: 'right', labels: { boxWidth: 10, padding: 12 } }
-                    },
-                    cutout: '65%'
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                boxWidth: 10,
+                                boxHeight: 10,
+                                padding: 12,
+                                color: '#c5d0de',
+                                font: { size: 11, weight: '600' },
+                                generateLabels: (chart) => {
+                                    const ds = chart.data.datasets[0];
+                                    return chart.data.labels.map((label, i) => {
+                                        const v = ds.data[i] || 0;
+                                        const pct = ((v / wTotal) * 100).toFixed(1);
+                                        return {
+                                            text: `${label}  ${v.toFixed(1)} t (${pct}%)`,
+                                            fillStyle: ds.backgroundColor[i],
+                                            strokeStyle: ds.backgroundColor[i],
+                                            lineWidth: 0,
+                                            hidden: false,
+                                            index: i
+                                        };
+                                    });
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => {
+                                    const v = ctx.parsed || 0;
+                                    const pct = ((v / wTotal) * 100).toFixed(1);
+                                    return ` ${v.toLocaleString(undefined, { maximumFractionDigits: 1 })} t (${pct}%)`;
+                                }
+                            }
+                        },
+                        datalabels: {
+                            display: (ctx) => {
+                                const v = ctx.dataset.data[ctx.dataIndex] || 0;
+                                return (v / wTotal) >= 0.04;
+                            },
+                            color: '#ffffff',
+                            font: { size: 10, weight: '700' },
+                            textStrokeColor: 'rgba(0,0,0,0.55)',
+                            textStrokeWidth: 3,
+                            formatter: (v) => {
+                                const pct = ((v / wTotal) * 100).toFixed(0);
+                                return [`${Number(v).toFixed(0)} t`, `${pct}%`];
+                            }
+                        }
+                    }
                 }
             });
 
-            // Downtime Progress Bars Injections
+            // Downtime — horizontal bar chart
             const dtCats = [
-                { key: 'Downtime_Shortages', label: 'No. Job Order/Project Upgradation', color: '#00ff66' },
+                { key: 'Downtime_Shortages', label: 'No. Job Order / Upgrade', color: '#00ff66' },
                 { key: 'Downtime_Maintenance', label: 'Planned Maintenance', color: '#3b82f6' },
                 { key: 'Downtime_Process', label: 'Process', color: '#00e5ff' },
                 { key: 'Downtime_Mechanical', label: 'Mechanical', color: '#ffb000' },
@@ -12268,28 +13676,89 @@
                 { key: 'Downtime_RentalPower', label: 'Rental Power', color: '#ec4899' }
             ];
 
-            const barContainer = document.getElementById('downtime-bars');
-            barContainer.innerHTML = '';
+            const dtSums = dtCats.map(cat => data.reduce((sum, item) => sum + (item[cat.key] || 0), 0));
+            const sumAllDT = dtSums.reduce((a, b) => a + b, 0) || 1;
 
-            const sumAllDT = dtCats.reduce((sum, cat) => sum + data.reduce((s, r) => s + (r[cat.key] || 0), 0), 0) || 1;
-
-            dtCats.forEach(cat => {
-                const catSum = data.reduce((sum, item) => sum + (item[cat.key] || 0), 0);
-                const pct = (catSum / sumAllDT) * 100;
-
-                const itemHTML = `
-                    <div class="loss-item" onclick="openDowntimeRemarksModal('${cat.key}', '${cat.label.replace(/'/g, "\\'")}', '${cat.color}')">
-                        <div class="loss-meta">
-                            <span class="loss-name">${cat.label}</span>
-                            <span class="loss-val">${catSum.toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1})} hrs (${pct.toFixed(1)}%)</span>
-                        </div>
-                        <div class="loss-progress-track">
-                            <div class="loss-progress-bar" style="width: ${pct}%; background-color: ${cat.color}; box-shadow: 0 0 10px ${cat.color}44;"></div>
-                        </div>
-                    </div>
-                `;
-                barContainer.insertAdjacentHTML('beforeend', itemHTML);
-            });
+            const dtCanvas = document.getElementById('downtimeChart');
+            if (dtCanvas) {
+                const dtCtx = dtCanvas.getContext('2d');
+                if (downtimeChart) downtimeChart.destroy();
+                downtimeChart = new Chart(dtCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: dtCats.map(c => c.label),
+                        datasets: [{
+                            kpiKey: 'hrs',
+                            label: 'Downtime (hrs)',
+                            data: dtSums,
+                            backgroundColor: dtCats.map(c => c.color + 'd9'),
+                            borderColor: dtCats.map(c => c.color),
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            barPercentage: 0.7,
+                            categoryPercentage: 0.8
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        onClick: (_evt, elements) => {
+                            if (!elements.length) return;
+                            const idx = elements[0].index;
+                            const cat = dtCats[idx];
+                            openDowntimeRemarksModal(cat.key, cat.label, cat.color);
+                        },
+                        onHover: (evt, elements) => {
+                            if (evt.native && evt.native.target) {
+                                evt.native.target.style.cursor = elements.length ? 'pointer' : 'default';
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: (ctx) => {
+                                        const v = ctx.parsed.x || 0;
+                                        const pct = ((v / sumAllDT) * 100).toFixed(1);
+                                        return ` ${v.toLocaleString(undefined, { maximumFractionDigits: 1 })} hrs (${pct}%)`;
+                                    }
+                                }
+                            },
+                            datalabels: {
+                                display: (ctx) => (ctx.dataset.data[ctx.dataIndex] || 0) > 0,
+                                anchor: 'end',
+                                align: 'right',
+                                color: '#e8eef8',
+                                font: { size: 10, weight: '700' },
+                                formatter: (v) => {
+                                    if (!v) return '';
+                                    const pct = ((v / sumAllDT) * 100).toFixed(0);
+                                    return `${Number(v).toFixed(0)}h · ${pct}%`;
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                grid: { color: 'rgba(255,255,255,0.04)' },
+                                ticks: {
+                                    color: '#849396',
+                                    font: { size: 10 },
+                                    callback: (v) => v + ' h'
+                                }
+                            },
+                            y: {
+                                grid: { display: false },
+                                ticks: {
+                                    color: '#c5d0de',
+                                    font: { size: 11, weight: '600' }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
 
             // Populate Department Remarks
             const remarksContainer = document.getElementById('downtime-remarks-list');
@@ -12589,6 +14058,7 @@
                 data: {
                     labels: typeLabels,
                     datasets: [{
+                        kpiKey: 'kg',
                         data: typeData,
                         backgroundColor: [
                             'rgba(0, 229, 255, 0.7)',
@@ -12604,7 +14074,17 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom', labels: { boxWidth: 10, padding: 8 } }
+                        legend: { position: 'bottom', labels: { boxWidth: 10, padding: 8 } },
+                        datalabels: {
+                            display: true,
+                            color: '#fff',
+                            font: { size: 9, weight: '700' },
+                            formatter: (v, ctx) => {
+                                const sum = ctx.dataset.data.reduce((a, b) => a + b, 0) || 1;
+                                if (!v || (v / sum) < 0.04) return '';
+                                return [`${Math.round(v).toLocaleString()}`, `${((v / sum) * 100).toFixed(0)}%`];
+                            }
+                        }
                     },
                     scales: {
                         r: {
@@ -13125,12 +14605,24 @@
                 tableBody.insertAdjacentHTML('beforeend', rowHTML);
             });
 
-            // Render Erema Throughput Chart
+            // Render Erema Throughput Chart — highlight highest & lowest months
             const chartLabels = data.map(item => {
                 const info = parseYearMonth(item['Dates']);
                 return `${monthNames[info.monthNum - 1].slice(0, 3)} ${info.year.slice(2)}`;
             });
-            const yields = data.map(item => item['Production']);
+            const yields = data.map(item => item['Production'] || 0);
+            const maxYield = yields.length ? Math.max(...yields) : 0;
+            const minYield = yields.length ? Math.min(...yields) : 0;
+            const eremaBg = yields.map(v => {
+                if (v === maxYield && maxYield !== minYield) return 'rgba(0, 229, 255, 0.9)';
+                if (v === minYield && maxYield !== minYield) return 'rgba(255, 82, 82, 0.85)';
+                return 'rgba(57, 255, 20, 0.7)';
+            });
+            const eremaBorder = yields.map(v => {
+                if (v === maxYield && maxYield !== minYield) return '#00e5ff';
+                if (v === minYield && maxYield !== minYield) return '#ff5252';
+                return '#39ff14';
+            });
 
             const eremaCtx = document.getElementById('eremaChart').getContext('2d');
             if (eremaChart) eremaChart.destroy();
@@ -13141,17 +14633,47 @@
                     datasets: [{
                         kpiKey: 'erema',
                         data: yields,
-                        backgroundColor: 'rgba(57, 255, 20, 0.75)',
-                        borderColor: '#39ff14',
-                        borderWidth: 1,
-                        hoverBackgroundColor: 'rgba(57, 255, 20, 0.95)',
-                        borderRadius: 3
+                        backgroundColor: eremaBg,
+                        borderColor: eremaBorder,
+                        borderWidth: 1.5,
+                        hoverBackgroundColor: eremaBg.map(c => c.replace(/0\.\d+\)/, '1)')),
+                        borderRadius: 4
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                afterLabel: (ctx) => {
+                                    const v = ctx.parsed.y;
+                                    if (v === maxYield && maxYield !== minYield) return 'Highest month';
+                                    if (v === minYield && maxYield !== minYield) return 'Lowest month';
+                                    return '';
+                                }
+                            }
+                        },
+                        datalabels: {
+                            display: true,
+                            anchor: 'end',
+                            align: 'top',
+                            color: (ctx) => {
+                                const v = ctx.dataset.data[ctx.dataIndex];
+                                if (v === maxYield && maxYield !== minYield) return '#00e5ff';
+                                if (v === minYield && maxYield !== minYield) return '#ff8a80';
+                                return '#39ff14';
+                            },
+                            font: { size: 9, weight: '700' },
+                            formatter: (v, ctx) => {
+                                if (!v) return '';
+                                const tag = (v === maxYield && maxYield !== minYield) ? ' HIGH'
+                                    : (v === minYield && maxYield !== minYield) ? ' LOW' : '';
+                                return Math.round(v).toLocaleString() + ' kg' + tag;
+                            }
+                        }
+                    },
                     scales: {
                         x: { grid: { color: 'rgba(255, 255, 255, 0.03)' } },
                         y: { grid: { color: 'rgba(255, 255, 255, 0.03)' } }
@@ -13283,6 +14805,13 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    plugins: {
+                        datalabels: {
+                            display: true,
+                            font: { size: 8, weight: '700' },
+                            clamp: true
+                        }
+                    },
                     scales: {
                         x: {
                             grid: { color: 'rgba(255, 255, 255, 0.035)', borderDash: [3, 3] },
@@ -13403,6 +14932,11 @@
                                 color: '#dee2f6',
                                 font: { family: 'Inter' }
                             }
+                        },
+                        datalabels: {
+                            display: true,
+                            font: { size: 8, weight: '700' },
+                            formatter: (v) => v ? Number(v).toFixed(1) : ''
                         }
                     }
                 }
@@ -13872,6 +15406,10 @@
                 // Toggle tabs
                 tabPanels.forEach(panel => panel.classList.remove('active'));
                 document.getElementById(`${targetTab}-tab`).classList.add('active');
+                document.body.classList.toggle(
+                    'dashboard-fit-view',
+                    targetTab === 'executive' || targetTab === 'offline' || targetTab === 'losses' || targetTab === 'erema'
+                );
 
                 // Update headers
                 headerTitle.textContent = tabMeta[targetTab].title;
@@ -13924,6 +15462,7 @@
 
         rebuildKPICards();
         window.isDashboardInitialized = true;
+        document.body.classList.add('dashboard-fit-view');
         updateDashboard();
 
         // Digital Clock ticking function
