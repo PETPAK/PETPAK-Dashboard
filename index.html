@@ -1500,10 +1500,103 @@
             display: flex;
             flex-direction: column;
             min-height: 0;
-            padding: 8px;
+            min-width: 0;
+            height: 100%;
+            padding: 6px;
             border-radius: 10px;
             background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .exec-rank-group > div:last-child,
+        #exec-top-products,
+        #exec-bottom-products {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+            align-items: stretch;
+            justify-content: stretch;
+        }
+
+        #executive-tab .product-performer-row {
+            display: grid !important;
+            grid-template-columns: 28px minmax(0, 1fr) auto;
+            align-items: center;
+            width: 100% !important;
+            max-width: none !important;
+            align-self: stretch;
+            flex: 1 1 0;
+            min-height: 36px;
+            margin: 0 !important;
+            padding: 8px 12px !important;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.04) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: 8px !important;
+            box-sizing: border-box;
+        }
+
+        #executive-tab .product-performer-row .exec-rank-num {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        #executive-tab .product-performer-row .exec-rank-info {
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        #executive-tab .product-performer-row .exec-rank-name {
+            font-family: var(--font-display);
+            font-weight: 650;
+            font-size: 12px;
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        #executive-tab .product-performer-row .exec-rank-type {
+            display: block;
+            font-size: 9px;
+            color: var(--text-muted);
+            margin-top: 1px;
+        }
+
+        #executive-tab .product-performer-row .exec-rank-qty {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 750;
+            white-space: nowrap;
+            text-align: right;
+            background: none !important;
+            border: none !important;
+            padding: 0 !important;
+            min-width: 0 !important;
+            box-shadow: none !important;
+        }
+
+        #executive-tab .product-performer-row .exec-rank-qty.top {
+            color: #00e676;
+        }
+
+        #executive-tab .product-performer-row .exec-rank-qty.bottom {
+            color: #ff5722;
+        }
+
+        #executive-tab .product-performer-row .param-value-badge {
+            background: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            min-width: 0 !important;
+            margin: 0 !important;
         }
 
         .exec-rank-title {
@@ -1517,8 +1610,14 @@
             gap: 4px;
         }
 
-        .exec-hero-grid {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+        .exec-rankings-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+            align-items: stretch;
         }
 
         .exec-chart-grid {
@@ -1740,31 +1839,40 @@
 
         body.dashboard-fit-view #executive-tab #exec-top-products,
         body.dashboard-fit-view #executive-tab #exec-bottom-products {
-            overflow-y: auto;
-            max-height: 100%;
+            overflow: hidden;
+            max-height: none;
+            gap: 4px;
         }
 
         body.dashboard-fit-view #executive-tab .exec-rank-group {
-            padding: 5px;
+            padding: 4px;
+            flex: 1;
+            min-height: 0;
         }
 
         body.dashboard-fit-view #executive-tab .exec-rank-title {
             font-size: 8px;
             margin-bottom: 4px;
+            flex-shrink: 0;
         }
 
         body.dashboard-fit-view #executive-tab .product-performer-row {
-            padding: 3px 6px !important;
-            margin-bottom: 2px !important;
+            padding: 4px 8px !important;
+            gap: 6px;
+            min-height: 0;
+            flex: 1 1 0;
         }
 
-        body.dashboard-fit-view #executive-tab .product-performer-row span {
-            font-size: 10px !important;
+        body.dashboard-fit-view #executive-tab .product-performer-row .exec-rank-name {
+            font-size: 10px;
         }
 
-        body.dashboard-fit-view #executive-tab .product-performer-row .param-value-badge {
-            font-size: 9px !important;
-            padding: 1px 4px !important;
+        body.dashboard-fit-view #executive-tab .product-performer-row .exec-rank-qty {
+            font-size: 10px;
+        }
+
+        body.dashboard-fit-view #executive-tab .product-performer-row .exec-rank-type {
+            font-size: 8px;
         }
 
         /* --- Global tab viewport rules --- */
@@ -5226,20 +5334,20 @@
                                 </div>
                                 <div class="exec-panel-chip">Lineup View</div>
                             </div>
-                            <div class="exec-rankings-body" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: 1;">
+                            <div class="exec-rankings-body">
                                 <div class="exec-rank-group">
                                     <h5 class="exec-rank-title" style="color: var(--color-secondary);">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 10px; height: 10px;"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a6 6 0 0 0-6 6c0 3 2 5.5 5 6.5v.16c0 .55.45 1 1 1s1-.45 1-1v-.16c3-1 5-3.5 5-6.5a6 6 0 0 0-6-6z"/></svg>
                                         TOP PERFORMERS
                                     </h5>
-                                    <div id="exec-top-products" style="display: flex; flex-direction: column; gap: 4px;"></div>
+                                    <div id="exec-top-products"></div>
                                 </div>
                                 <div class="exec-rank-group">
                                     <h5 class="exec-rank-title" style="color: #ff5722;">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 10px; height: 10px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                                         BOTTOM PERFORMERS
                                     </h5>
-                                    <div id="exec-bottom-products" style="display: flex; flex-direction: column; gap: 4px;"></div>
+                                    <div id="exec-bottom-products"></div>
                                 </div>
                             </div>
                         </div>
@@ -5768,7 +5876,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <div class="metric-label">Avg. Waste %</div>
+                                <div class="metric-label">Waste %</div>
                                 <div class="metric-val" id="offline-ps-kpi-waste-pct" style="color: var(--accent-color);">0.00%</div>
                             </div>
                             <div class="metric-subtext" id="offline-ps-kpi-waste-pct-sub">Waste ratio</div>
@@ -5901,7 +6009,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <div class="metric-label">Avg. Waste %</div>
+                                <div class="metric-label">Waste %</div>
                                 <div class="metric-val" id="offline-ss-kpi-waste-pct" style="color: var(--accent-color);">0.00%</div>
                             </div>
                             <div class="metric-subtext" id="offline-ss-kpi-waste-pct-sub">Waste ratio</div>
@@ -6034,7 +6142,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <div class="metric-label">Avg. Waste %</div>
+                                <div class="metric-label">Waste %</div>
                                 <div class="metric-val" id="offline-met-kpi-waste-pct" style="color: var(--accent-color);">0.00%</div>
                             </div>
                             <div class="metric-subtext" id="offline-met-kpi-waste-pct-sub">Waste ratio</div>
@@ -8156,10 +8264,10 @@
             "Waste %": 3.1,
             "Grade Changes": 8,
             "Micron Changes": 12,
-            "KWh/Kg Line": null,
-            "KWh/Kg Plant": null,
-            "Rs/Kg Line": null,
-            "Rs/Kg Plant": null,
+            "KWh/Kg Line": 0.44,
+            "KWh/Kg Plant": 0.81,
+            "Rs/Kg Line": 20.17,
+            "Rs/Kg Plant": 36.77,
             "Dispatches": null,
             "Used Time": 408.1,
             "Availability Loss": 13.5,
@@ -9970,7 +10078,7 @@
             "SS_Waste_Pct": 4.711587175218933,
             "SS_Downtime": 27,
             "Offline_Total_Waste": 0.0345,
-            "Offline_Packing_Cost": null,
+            "Offline_Packing_Cost": 12.03,
             "Offline_Q2_Data": 1169.72,
             "PS_DT_Mechanical": 2,
             "PS_DT_Electrical": 12.75,
@@ -12629,7 +12737,7 @@
                 topList.innerHTML = '';
                 bottomList.innerHTML = '';
                 
-                const execRankLimit = document.body.classList.contains('dashboard-fit-view') ? 2 : 3;
+                const execRankLimit = document.body.classList.contains('dashboard-fit-view') ? 5 : 5;
                 const top3 = sortedSKUs.slice(0, execRankLimit);
                 const bottom3 = sortedSKUs.slice(-execRankLimit).reverse();
 
@@ -12637,16 +12745,13 @@
                     const type = item['Product Type'];
                     const shortType = getNormalizedProductType(type);
                     topList.insertAdjacentHTML('beforeend', `
-                        <div class="product-performer-row" style="padding: 6px 10px; margin-bottom: 4px;">
-                            <div style="display: flex; flex-direction: column; gap: 1px;">
-                                <span style="font-family: var(--font-display); font-weight: 600; font-size: 11px; color: #ffffff;">
-                                    <span style="color: var(--text-muted); font-size: 9px; margin-right: 4px;">#${idx + 1}</span>${item['Product']}
-                                </span>
-                                <span style="font-size: 8.5px; color: var(--text-muted);">${shortType}</span>
+                        <div class="product-performer-row">
+                            <div class="exec-rank-num">#${idx + 1}</div>
+                            <div class="exec-rank-info">
+                                <div class="exec-rank-name">${item['Product']}</div>
+                                <span class="exec-rank-type">${shortType}</span>
                             </div>
-                            <div class="param-value-badge" style="background: rgba(0, 255, 102, 0.06); border-color: rgba(0, 255, 102, 0.15); color: #00e676; font-size: 10.5px; padding: 1px 5px; min-width: auto; font-weight: 600;">
-                                ${Math.round(item['Production']).toLocaleString()} kg
-                            </div>
+                            <div class="exec-rank-qty top">${Math.round(item['Production']).toLocaleString()} kg</div>
                         </div>
                     `);
                 });
@@ -12656,16 +12761,13 @@
                     const type = item['Product Type'];
                     const shortType = getNormalizedProductType(type);
                     bottomList.insertAdjacentHTML('beforeend', `
-                        <div class="product-performer-row" style="padding: 6px 10px; margin-bottom: 4px;">
-                            <div style="display: flex; flex-direction: column; gap: 1px;">
-                                <span style="font-family: var(--font-display); font-weight: 600; font-size: 11px; color: #ffffff;">
-                                    <span style="color: var(--text-muted); font-size: 9px; margin-right: 4px;">#${rank}</span>${item['Product']}
-                                </span>
-                                <span style="font-size: 8.5px; color: var(--text-muted);">${shortType}</span>
+                        <div class="product-performer-row">
+                            <div class="exec-rank-num">#${rank}</div>
+                            <div class="exec-rank-info">
+                                <div class="exec-rank-name">${item['Product']}</div>
+                                <span class="exec-rank-type">${shortType}</span>
                             </div>
-                            <div class="param-value-badge" style="background: rgba(255, 87, 34, 0.06); border-color: rgba(255, 87, 34, 0.15); color: #ff5722; font-size: 10.5px; padding: 1px 5px; min-width: auto; font-weight: 600;">
-                                ${Math.round(item['Production']).toLocaleString()} kg
-                            </div>
+                            <div class="exec-rank-qty bottom">${Math.round(item['Production']).toLocaleString()} kg</div>
                         </div>
                     `);
                 });
