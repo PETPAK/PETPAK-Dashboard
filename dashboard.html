@@ -4514,6 +4514,147 @@
                 inset 0 1px 2px rgba(255, 255, 255, 0.25),
                 0 15px 35px rgba(0, 0, 0, 0.85) !important;
         }
+
+        /* Presentation / wall mode — same dashboard views, timed rotation */
+        .presentation-start-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 240, 255, 0.35);
+            background: rgba(0, 240, 255, 0.08);
+            color: var(--color-primary);
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .presentation-start-btn:hover {
+            background: rgba(0, 240, 255, 0.16);
+            border-color: rgba(0, 240, 255, 0.6);
+            box-shadow: 0 0 14px rgba(0, 240, 255, 0.2);
+        }
+        .presentation-start-btn svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        body.presentation-mode .presentation-start-btn {
+            display: none;
+        }
+        body.presentation-mode .controls-panel .filter-group {
+            display: none;
+        }
+        body.presentation-mode .controls-panel .status-badge {
+            margin-left: auto;
+        }
+
+        .presentation-bar {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1200;
+            display: none;
+            pointer-events: none;
+            visibility: hidden;
+            opacity: 0;
+        }
+        /* Bar stays hidden — timing & controls run in background; use keyboard only */
+        body.presentation-mode .presentation-bar {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+        .presentation-bar-inner {
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 8px 18px;
+            background: rgba(8, 10, 16, 0.92);
+            border-top: 1px solid rgba(0, 240, 255, 0.25);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.45);
+        }
+        .presentation-slide-label {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-primary);
+            letter-spacing: 0.5px;
+            min-width: 160px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .presentation-slide-counter {
+            font-family: var(--font-mono, monospace);
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.55);
+            min-width: 48px;
+        }
+        .presentation-progress-wrap {
+            flex: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 2px;
+            overflow: hidden;
+            min-width: 80px;
+        }
+        .presentation-progress {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            border-radius: 2px;
+            transition: width 0.08s linear;
+        }
+        body.presentation-paused .presentation-progress {
+            opacity: 0.45;
+        }
+        .presentation-controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .presentation-controls button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 34px;
+            height: 30px;
+            padding: 0 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.85);
+            font-family: var(--font-display);
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .presentation-controls button:hover {
+            border-color: rgba(0, 240, 255, 0.45);
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--color-primary);
+        }
+        .presentation-controls #presentation-exit {
+            min-width: auto;
+            padding: 0 12px;
+            border-color: rgba(255, 80, 80, 0.35);
+            color: rgba(255, 140, 140, 0.95);
+        }
+        .presentation-controls #presentation-exit:hover {
+            border-color: rgba(255, 80, 80, 0.65);
+            background: rgba(255, 80, 80, 0.12);
+            color: #ff9090;
+        }
     </style>
 </head>
 <body>
@@ -4692,6 +4833,11 @@
                         <option value="12">December</option>
                     </select>
                 </div>
+
+                <button type="button" id="presentation-start-btn" class="presentation-start-btn" onclick="startPresentationMode()" title="Wall presentation — 20s per view, auto + manual">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M10 8l6 4-6 4V8z"/></svg>
+                    Present
+                </button>
 
                 <div class="status-badge" style="gap: 6px; padding: 3px 10px; font-size: 11px;">
                     <div id="header-clock" style="font-family: var(--font-display); border-right: 1px solid rgba(57, 255, 20, 0.3); padding-right: 6px; font-weight: 700; letter-spacing: 0.5px;">00:00:00</div>
@@ -6772,6 +6918,22 @@
 
         </section>
     </main>
+
+    <div id="presentation-bar" class="presentation-bar" aria-hidden="true">
+        <div class="presentation-bar-inner">
+            <span class="presentation-slide-label" id="presentation-slide-label">Plant Overview</span>
+            <span class="presentation-slide-counter" id="presentation-slide-counter">1 / 12</span>
+            <div class="presentation-progress-wrap" aria-hidden="true">
+                <div class="presentation-progress" id="presentation-progress"></div>
+            </div>
+            <div class="presentation-controls">
+                <button type="button" id="presentation-prev" title="Previous (←)">◀</button>
+                <button type="button" id="presentation-pause" title="Pause (Space)">⏸</button>
+                <button type="button" id="presentation-next" title="Next (→)">▶</button>
+                <button type="button" id="presentation-exit" title="Exit (Esc)">✕ Exit</button>
+            </div>
+        </div>
+    </div>
 
     <!-- KPI SELECTOR MODAL -->
     <div class="modal-backdrop" id="kpiModal">
@@ -10423,7 +10585,10 @@
                 btn.innerHTML = '◀';
                 try { localStorage.setItem('petpak_sidebar_collapsed', 'false'); } catch(e) {}
             }
-            // Trigger chart resize after transition finishes
+            resizeDashboardCharts();
+        };
+
+        function resizeDashboardCharts() {
             setTimeout(() => {
                 if (overviewChart) overviewChart.resize();
                 if (wasteChart) wasteChart.resize();
@@ -10434,8 +10599,14 @@
                 if (kpiComparisonChart) kpiComparisonChart.resize();
                 if (downtimeComparisonChart) downtimeComparisonChart.resize();
                 if (window.forecastChart) window.forecastChart.resize();
+                if (offlineOverviewChart) offlineOverviewChart.resize();
+                if (offlinePSChart) offlinePSChart.resize();
+                if (offlinePSDtChart) offlinePSDtChart.resize();
+                if (offlineSSChart) offlineSSChart.resize();
+                if (offlineSSDtChart) offlineSSDtChart.resize();
+                if (offlineMetChart) offlineMetChart.resize();
             }, 310);
-        };
+        }
 
         // Initialize Sidebar collapsible state from localStorage
         try {
@@ -15492,6 +15663,265 @@
         }
 
         // ==========================================
+        // PRESENTATION / WALL MODE (same views, timed rotation)
+        // ==========================================
+        const PRESENTATION_INTERVAL_MS = 20000;
+        const OFFLINE_PRESENTATION_SUBS = [
+            { offlineSub: 'overview', label: 'Offline Overview' },
+            { offlineSub: 'ps', label: 'Primary Slitter (PS)' },
+            { offlineSub: 'ss', label: 'Secondary Slitter (SS)' },
+            { offlineSub: 'met', label: 'Metallizer' }
+        ];
+
+        function buildPresentationSlides() {
+            const slides = [];
+            document.querySelectorAll('.nav-list .nav-item[data-tab]').forEach(nav => {
+                const li = nav.closest('li');
+                if (li && li.style.display === 'none') return;
+
+                const tab = nav.getAttribute('data-tab');
+                const navLabel = nav.querySelector('span')?.textContent?.trim() || tabMeta[tab]?.title || tab;
+
+                if (tab === 'offline') {
+                    OFFLINE_PRESENTATION_SUBS.forEach(sub => {
+                        slides.push({ tab: 'offline', offlineSub: sub.offlineSub, label: sub.label });
+                    });
+                } else {
+                    slides.push({ tab, label: navLabel });
+                }
+            });
+            return slides;
+        }
+
+        const PRESENTATION_SLIDES = buildPresentationSlides();
+
+        let presentationActive = false;
+        let presentationIndex = 0;
+        let presentationPaused = false;
+        let presentationTimer = null;
+        let presentationProgressRaf = null;
+        let presentationSlideStart = 0;
+        let presentationSidebarWasCollapsed = false;
+        let presentationEnteredFullscreen = false;
+
+        function activateTab(targetTab) {
+            activeTab = targetTab;
+
+            navItems.forEach(nav => {
+                nav.classList.toggle('active', nav.getAttribute('data-tab') === targetTab);
+            });
+
+            tabPanels.forEach(panel => panel.classList.remove('active'));
+            const panel = document.getElementById(`${targetTab}-tab`);
+            if (panel) panel.classList.add('active');
+
+            document.body.classList.toggle(
+                'dashboard-fit-view',
+                targetTab === 'executive' || targetTab === 'offline' || targetTab === 'losses' || targetTab === 'erema'
+            );
+
+            if (headerTitle && tabMeta[targetTab]) {
+                headerTitle.textContent = tabMeta[targetTab].title;
+                headerSubtitle.textContent = tabMeta[targetTab].subtitle;
+            }
+
+            updateDashboard();
+        }
+
+        function findPresentationIndexForCurrentView() {
+            const idx = PRESENTATION_SLIDES.findIndex(slide => {
+                if (slide.tab !== activeTab) return false;
+                if (slide.tab === 'offline') {
+                    return (slide.offlineSub || 'overview') === activeOfflineSubSection;
+                }
+                return true;
+            });
+            return idx >= 0 ? idx : 0;
+        }
+
+        function updatePresentationUI() {
+            const slide = PRESENTATION_SLIDES[presentationIndex];
+            if (!slide) return;
+            const labelEl = document.getElementById('presentation-slide-label');
+            const counterEl = document.getElementById('presentation-slide-counter');
+            const pauseBtn = document.getElementById('presentation-pause');
+            if (labelEl) labelEl.textContent = slide.label;
+            if (counterEl) counterEl.textContent = `${presentationIndex + 1} / ${PRESENTATION_SLIDES.length}`;
+            if (pauseBtn) pauseBtn.textContent = presentationPaused ? '▶' : '⏸';
+            if (pauseBtn) pauseBtn.title = presentationPaused ? 'Resume (Space)' : 'Pause (Space)';
+        }
+
+        function updatePresentationProgress() {
+            if (!presentationActive || presentationPaused) return;
+            const progressEl = document.getElementById('presentation-progress');
+            if (!progressEl) return;
+            const elapsed = Date.now() - presentationSlideStart;
+            const pct = Math.min(100, (elapsed / PRESENTATION_INTERVAL_MS) * 100);
+            progressEl.style.width = `${pct}%`;
+            if (pct < 100) {
+                presentationProgressRaf = requestAnimationFrame(updatePresentationProgress);
+            }
+        }
+
+        function clearPresentationTimers() {
+            if (presentationTimer) {
+                clearTimeout(presentationTimer);
+                presentationTimer = null;
+            }
+            if (presentationProgressRaf) {
+                cancelAnimationFrame(presentationProgressRaf);
+                presentationProgressRaf = null;
+            }
+        }
+
+        function resetPresentationTimer() {
+            clearPresentationTimers();
+            presentationSlideStart = Date.now();
+            const progressEl = document.getElementById('presentation-progress');
+            if (progressEl) progressEl.style.width = '0%';
+            if (!presentationActive || presentationPaused) return;
+            presentationProgressRaf = requestAnimationFrame(updatePresentationProgress);
+            presentationTimer = setTimeout(() => {
+                nextPresentationSlide(true);
+            }, PRESENTATION_INTERVAL_MS);
+        }
+
+        function goToPresentationSlide(index) {
+            const total = PRESENTATION_SLIDES.length;
+            presentationIndex = ((index % total) + total) % total;
+            const slide = PRESENTATION_SLIDES[presentationIndex];
+
+            activateTab(slide.tab);
+            if (slide.tab === 'offline' && slide.offlineSub) {
+                setOfflineSubSection(slide.offlineSub);
+            }
+
+            updatePresentationUI();
+            resetPresentationTimer();
+            resizeDashboardCharts();
+        }
+
+        window.nextPresentationSlide = function(fromAuto) {
+            if (!presentationActive) return;
+            goToPresentationSlide(presentationIndex + 1);
+        };
+
+        window.prevPresentationSlide = function() {
+            if (!presentationActive) return;
+            goToPresentationSlide(presentationIndex - 1);
+        };
+
+        window.togglePresentationPause = function() {
+            if (!presentationActive) return;
+            presentationPaused = !presentationPaused;
+            document.body.classList.toggle('presentation-paused', presentationPaused);
+            updatePresentationUI();
+            if (presentationPaused) {
+                clearPresentationTimers();
+            } else {
+                const elapsed = Date.now() - presentationSlideStart;
+                const remaining = Math.max(500, PRESENTATION_INTERVAL_MS - elapsed);
+                presentationProgressRaf = requestAnimationFrame(updatePresentationProgress);
+                presentationTimer = setTimeout(() => nextPresentationSlide(true), remaining);
+            }
+        };
+
+        window.startPresentationMode = function() {
+            if (presentationActive) return;
+
+            presentationActive = true;
+            presentationPaused = false;
+            presentationSidebarWasCollapsed = document.body.classList.contains('sidebar-collapsed');
+
+            if (!presentationSidebarWasCollapsed) {
+                document.body.classList.add('sidebar-collapsed');
+                const btn = document.getElementById('sidebar-toggle');
+                if (btn) btn.innerHTML = '▶';
+            }
+
+            document.body.classList.add('presentation-mode');
+            document.body.classList.remove('presentation-paused');
+
+            const bar = document.getElementById('presentation-bar');
+            if (bar) bar.setAttribute('aria-hidden', 'false');
+
+            goToPresentationSlide(0);
+
+            const docEl = document.documentElement;
+            if (docEl.requestFullscreen && !document.fullscreenElement) {
+                docEl.requestFullscreen().then(() => {
+                    presentationEnteredFullscreen = true;
+                }).catch(() => {
+                    presentationEnteredFullscreen = false;
+                });
+            }
+        };
+
+        window.stopPresentationMode = function() {
+            if (!presentationActive) return;
+
+            presentationActive = false;
+            presentationPaused = false;
+            clearPresentationTimers();
+
+            document.body.classList.remove('presentation-mode', 'presentation-paused');
+
+            const bar = document.getElementById('presentation-bar');
+            if (bar) bar.setAttribute('aria-hidden', 'true');
+
+            const progressEl = document.getElementById('presentation-progress');
+            if (progressEl) progressEl.style.width = '0%';
+
+            if (presentationEnteredFullscreen && document.fullscreenElement) {
+                document.exitFullscreen().catch(() => {});
+            }
+            presentationEnteredFullscreen = false;
+
+            if (!presentationSidebarWasCollapsed) {
+                document.body.classList.remove('sidebar-collapsed');
+                const btn = document.getElementById('sidebar-toggle');
+                if (btn) btn.innerHTML = '◀';
+            }
+
+            resizeDashboardCharts();
+        };
+
+        function initPresentationControls() {
+            const prevBtn = document.getElementById('presentation-prev');
+            const pauseBtn = document.getElementById('presentation-pause');
+            const nextBtn = document.getElementById('presentation-next');
+            const exitBtn = document.getElementById('presentation-exit');
+
+            if (prevBtn) prevBtn.addEventListener('click', () => prevPresentationSlide());
+            if (pauseBtn) pauseBtn.addEventListener('click', () => togglePresentationPause());
+            if (nextBtn) nextBtn.addEventListener('click', () => nextPresentationSlide());
+            if (exitBtn) exitBtn.addEventListener('click', () => stopPresentationMode());
+
+            document.addEventListener('keydown', (e) => {
+                if (!presentationActive) return;
+                if (e.key === 'Escape') {
+                    e.preventDefault();
+                    stopPresentationMode();
+                } else if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+                    e.preventDefault();
+                    nextPresentationSlide();
+                } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                    e.preventDefault();
+                    prevPresentationSlide();
+                } else if (e.key === ' ' || e.code === 'Space') {
+                    e.preventDefault();
+                    togglePresentationPause();
+                }
+            });
+
+            document.addEventListener('fullscreenchange', () => {
+                if (presentationActive && !document.fullscreenElement) {
+                    presentationEnteredFullscreen = false;
+                }
+            });
+        }
+
+        // ==========================================
         // INIT & LISTENERS
         // ==========================================
         
@@ -15499,26 +15929,7 @@
         navItems.forEach(item => {
             item.addEventListener('click', () => {
                 const targetTab = item.getAttribute('data-tab');
-                activeTab = targetTab;
-                
-                // Toggle nav active class
-                navItems.forEach(nav => nav.classList.remove('active'));
-                item.classList.add('active');
-
-                // Toggle tabs
-                tabPanels.forEach(panel => panel.classList.remove('active'));
-                document.getElementById(`${targetTab}-tab`).classList.add('active');
-                document.body.classList.toggle(
-                    'dashboard-fit-view',
-                    targetTab === 'executive' || targetTab === 'offline' || targetTab === 'losses' || targetTab === 'erema'
-                );
-
-                // Update headers
-                headerTitle.textContent = tabMeta[targetTab].title;
-                headerSubtitle.textContent = tabMeta[targetTab].subtitle;
-                
-                // Redraw to ensure correct layout sizing
-                updateDashboard();
+                activateTab(targetTab);
             });
         });
 
@@ -15565,6 +15976,7 @@
         rebuildKPICards();
         window.isDashboardInitialized = true;
         document.body.classList.add('dashboard-fit-view');
+        initPresentationControls();
         updateDashboard();
 
         // Digital Clock ticking function
