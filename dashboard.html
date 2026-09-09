@@ -1237,6 +1237,645 @@
             display: none;
         }
 
+        /* ── Line Ops command deck: hero · health · energy ── */
+        .exec-line-deck {
+            display: grid;
+            grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr) minmax(0, 1fr);
+            gap: 12px;
+            align-items: stretch;
+            min-height: 0;
+        }
+
+        .exec-deck-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 0;
+            min-height: 0;
+        }
+
+        .exec-deck-eyebrow {
+            font-family: var(--font-display);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: #6b7c90;
+            padding: 0 2px;
+        }
+
+        .exec-hero-card .exec-deck-eyebrow {
+            color: color-mix(in srgb, var(--exec-kpi-accent) 70%, #9fb0c4);
+            margin-bottom: 4px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .exec-deck-stack {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 8px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .exec-deck-stack.energy-pair {
+            grid-template-rows: 1fr 1fr;
+        }
+
+        .exec-kpi-card.exec-hero-card {
+            min-height: 118px;
+            padding: 16px 18px 18px;
+            justify-content: flex-end;
+            background:
+                radial-gradient(90% 120% at 100% 0%, color-mix(in srgb, var(--exec-kpi-accent) 22%, transparent) 0%, transparent 52%),
+                radial-gradient(60% 80% at 0% 100%, rgba(0, 229, 255, 0.08), transparent 55%),
+                linear-gradient(155deg, rgba(14, 22, 36, 0.98) 0%, rgba(6, 8, 14, 0.99) 100%);
+            border-color: color-mix(in srgb, var(--exec-kpi-accent) 42%, rgba(255, 255, 255, 0.08));
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.08),
+                0 16px 40px rgba(0, 0, 0, 0.5),
+                0 0 0 1px color-mix(in srgb, var(--exec-kpi-accent) 12%, transparent);
+        }
+
+        .exec-kpi-card.exec-hero-card .exec-kpi-value {
+            font-size: clamp(28px, 3.2vw, 42px);
+            letter-spacing: -1px;
+            text-shadow: 0 0 28px color-mix(in srgb, var(--exec-kpi-accent) 35%, transparent);
+        }
+
+        .exec-kpi-card.exec-hero-card .exec-kpi-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            right: 8px;
+        }
+
+        .exec-kpi-card.exec-hero-card .exec-kpi-icon svg {
+            width: 34px;
+            height: 34px;
+        }
+
+        .exec-kpi-card.exec-hero-card .exec-kpi-copy {
+            max-width: calc(100% - 72px);
+            gap: 6px;
+        }
+
+        .exec-hero-orbit {
+            position: absolute;
+            right: -18%;
+            top: -35%;
+            width: 70%;
+            height: 140%;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                conic-gradient(from 210deg,
+                    transparent 0deg,
+                    color-mix(in srgb, var(--exec-kpi-accent) 18%, transparent) 55deg,
+                    transparent 120deg,
+                    color-mix(in srgb, var(--exec-kpi-accent) 10%, transparent) 200deg,
+                    transparent 280deg);
+            mask-image: radial-gradient(circle at center, transparent 42%, #000 58%, transparent 78%);
+            -webkit-mask-image: radial-gradient(circle at center, transparent 42%, #000 58%, transparent 78%);
+            animation: execOrbitDrift 14s linear infinite;
+            opacity: 0.85;
+        }
+
+        @keyframes execOrbitDrift {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .exec-deck-group .exec-kpi-card {
+            min-height: 0;
+            height: 100%;
+            padding: 10px 12px 12px;
+        }
+
+
+        .exec-kpi-card.exec-hero-card {
+            justify-content: flex-start;
+            gap: 10px;
+        }
+
+        .exec-hero-viz {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            height: 42px;
+            margin-top: 2px;
+            border-radius: 10px;
+            overflow: hidden;
+            background:
+                linear-gradient(180deg, rgba(0, 229, 255, 0.06), rgba(0, 229, 255, 0.01));
+            border: 1px solid rgba(0, 229, 255, 0.12);
+        }
+
+        .exec-hero-viz svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .exec-hero-stats {
+            position: relative;
+            z-index: 3;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+            margin-top: 2px;
+        }
+
+        .exec-hero-stat {
+            padding: 7px 8px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            min-width: 0;
+        }
+
+        .exec-hero-stat span {
+            display: block;
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+            color: #7e8b9b;
+            margin-bottom: 3px;
+        }
+
+        .exec-hero-stat strong {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 750;
+            color: #f0f6ff;
+            letter-spacing: -0.2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+        }
+
+        .exec-rich-card {
+            gap: 8px !important;
+            justify-content: space-between !important;
+        }
+
+        .exec-rich-card .exec-kpi-head {
+            width: 100%;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .exec-rich-card .exec-kpi-copy {
+            max-width: calc(100% - 54px);
+            padding-left: 6px;
+        }
+
+        .exec-ring {
+            width: 46px;
+            height: 46px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .exec-ring svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .exec-ring-track {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.08);
+            stroke-width: 3.2;
+        }
+
+        .exec-ring-fill {
+            fill: none;
+            stroke: var(--exec-kpi-accent);
+            stroke-width: 3.2;
+            stroke-linecap: round;
+            stroke-dasharray: 0 88;
+            transition: stroke-dasharray 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+            filter: drop-shadow(0 0 6px color-mix(in srgb, var(--exec-kpi-accent) 45%, transparent));
+        }
+
+        .exec-meter {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            height: 5px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+        }
+
+        .exec-meter-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: inherit;
+            background: linear-gradient(90deg,
+                color-mix(in srgb, var(--exec-kpi-accent) 55%, transparent),
+                var(--exec-kpi-accent));
+            box-shadow: 0 0 12px color-mix(in srgb, var(--exec-kpi-accent) 35%, transparent);
+            transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .exec-cost-badge {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-family: var(--font-display);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.4px;
+            color: var(--exec-kpi-accent);
+            border: 1px solid color-mix(in srgb, var(--exec-kpi-accent) 35%, transparent);
+            background:
+                radial-gradient(circle at 40% 35%, color-mix(in srgb, var(--exec-kpi-accent) 20%, transparent), transparent 70%),
+                rgba(0, 0, 0, 0.25);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .exec-flow-card {
+            gap: 8px;
+        }
+
+        .exec-flow-foot {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding-left: 6px;
+            margin-top: auto;
+        }
+
+        .exec-flow-share {
+            width: 100%;
+            height: 4px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+        }
+
+        .exec-flow-share-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: inherit;
+            background: linear-gradient(90deg,
+                color-mix(in srgb, var(--machine-accent) 40%, transparent),
+                var(--machine-accent));
+            box-shadow: 0 0 10px color-mix(in srgb, var(--machine-accent) 35%, transparent);
+            transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .exec-flow-share-label {
+            font-size: 8px;
+            font-weight: 650;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #7e8b9b;
+        }
+
+        .exec-flow-center {
+            display: none;
+        }
+
+        .presentation-month-detail .exec-flow-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            flex: 1 1 auto;
+            min-height: 0;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            padding: 4px 0;
+            margin: 0;
+        }
+
+        .presentation-month-detail .exec-flow-ring-wrap {
+            position: relative;
+            width: min(150px, 85%);
+            height: auto;
+            aspect-ratio: 1;
+            max-height: 100%;
+            flex: 0 1 auto;
+        }
+
+        .presentation-month-detail .exec-flow-ring-wrap svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+            overflow: visible;
+            display: block;
+        }
+
+        .presentation-month-detail .exec-flow-ring-wrap .exec-ring-track {
+            stroke: rgba(255, 255, 255, 0.12);
+            stroke-width: 2.8;
+        }
+
+        .presentation-month-detail .exec-flow-ring-wrap .exec-ring-fill {
+            stroke: var(--machine-accent);
+            stroke-width: 2.8;
+            filter: drop-shadow(0 0 10px color-mix(in srgb, var(--machine-accent) 45%, transparent));
+        }
+
+        .presentation-month-detail .exec-flow-ring-wrap strong {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: clamp(20px, 2.2vw, 28px);
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .presentation-month-detail .exec-flow-center > span {
+            display: none;
+        }
+
+        .presentation-month-detail .exec-flow-card {
+            display: flex !important;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 10px;
+            overflow: hidden;
+            padding-top: 14px;
+        }
+
+        .presentation-month-detail .exec-flow-card .exec-machine-top {
+            flex: 0 0 auto;
+            position: relative;
+            z-index: 6;
+            margin: 0;
+            padding: 0 36px 0 2px;
+            min-height: 18px;
+        }
+
+        .presentation-month-detail .exec-flow-stage {
+            z-index: 7;
+        }
+
+        .presentation-month-detail .exec-flow-body {
+            flex: 0 0 auto !important;
+            align-items: center;
+            margin: 0;
+            padding: 0 2px;
+            position: relative;
+            z-index: 3;
+            border-top: none;
+        }
+
+        .presentation-month-detail .exec-flow-foot {
+            display: none !important;
+        }
+
+        .presentation-month-detail .exec-flow-share {
+            height: 4px;
+        }
+
+        .presentation-month-detail .exec-flow-cost .exec-flow-body {
+            display: flex !important;
+        }
+
+        .presentation-month-detail .exec-flow-cost .exec-flow-center > span {
+            display: none;
+        }
+
+
+        .exec-deck-group .exec-kpi-icon {
+            display: none;
+        }
+
+        .exec-deck-group .exec-kpi-copy {
+            max-width: 100%;
+            padding-left: 6px;
+        }
+
+        .exec-deck-group .exec-kpi-head {
+            min-height: 0;
+        }
+
+        .exec-deck-group.health .exec-kpi-card.accent-amber {
+            --exec-kpi-accent: #ffb000;
+        }
+
+        .exec-deck-group.health .exec-kpi-card.accent-green .exec-kpi-value {
+            color: #b8ff9a;
+        }
+
+        .exec-deck-group.energy .exec-kpi-card.accent-teal {
+            --exec-kpi-accent: #2dd4bf;
+            --exec-kpi-glow: rgba(45, 212, 191, 0.28);
+        }
+
+        /* ── Offline Ops process lane ── */
+        .exec-flow-lane {
+            display: grid;
+            grid-template-columns:
+                minmax(0, 1fr) 18px
+                minmax(0, 1fr) 18px
+                minmax(0, 1fr) 18px
+                minmax(0, 0.95fr);
+            gap: 0;
+            align-items: stretch;
+            min-height: 0;
+        }
+
+        .exec-flow-card {
+            position: relative;
+            min-height: 112px;
+            padding: 14px 14px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .exec-flow-stage {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-family: var(--font-display);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: color-mix(in srgb, var(--machine-accent) 55%, #6b7c90);
+            opacity: 0.9;
+            z-index: 2;
+        }
+
+        .exec-flow-card .exec-machine-top {
+            margin-bottom: 0;
+            padding-right: 36px;
+        }
+
+        .exec-flow-card .exec-machine-badge {
+            display: none;
+        }
+
+        .exec-flow-body {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 10px;
+            flex: 1;
+            min-height: 0;
+            padding-left: 6px;
+        }
+
+        .exec-flow-body .exec-machine-metric {
+            flex: 1;
+            min-width: 0;
+            padding: 0;
+            border: none;
+            background: transparent;
+            border-radius: 0;
+        }
+
+        .exec-flow-body .exec-machine-metric-label {
+            margin-bottom: 6px;
+            color: #8a97a8;
+        }
+
+        .exec-flow-body .exec-machine-metric-value {
+            font-size: clamp(18px, 1.8vw, 26px);
+            letter-spacing: -0.5px;
+        }
+
+        .exec-waste-chip {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 4px;
+            padding: 8px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 68, 102, 0.28);
+            background:
+                linear-gradient(160deg, rgba(255, 68, 102, 0.14), rgba(255, 68, 102, 0.04));
+            flex-shrink: 0;
+            min-width: 72px;
+        }
+
+        .exec-waste-chip span {
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: #ff8aa0;
+        }
+
+        .exec-waste-chip strong {
+            font-family: var(--font-display);
+            font-size: clamp(14px, 1.35vw, 18px);
+            font-weight: 800;
+            color: #ffb3c0;
+            letter-spacing: -0.3px;
+            line-height: 1;
+        }
+
+        .exec-flow-body.cost {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .exec-flow-body.cost .exec-machine-metric {
+            text-align: center;
+            width: 100%;
+        }
+
+        .exec-flow-body.cost .exec-machine-metric-label,
+        .exec-flow-body.cost .exec-machine-metric-value {
+            text-align: center;
+            width: 100%;
+        }
+
+        .exec-flow-cost .exec-machine-metric-value {
+            font-size: clamp(20px, 2vw, 28px) !important;
+            color: #7dd3fc;
+        }
+
+        .exec-flow-connector {
+            position: relative;
+            align-self: center;
+            height: 2px;
+            margin: 0 2px;
+            background: linear-gradient(90deg,
+                color-mix(in srgb, #2dd4bf 55%, transparent),
+                color-mix(in srgb, #ffb000 55%, transparent));
+            border-radius: 999px;
+            opacity: 0.85;
+        }
+
+        .exec-flow-connector::after {
+            content: '';
+            position: absolute;
+            right: -1px;
+            top: 50%;
+            width: 7px;
+            height: 7px;
+            border-top: 2px solid #ffb000;
+            border-right: 2px solid #ffb000;
+            transform: translateY(-50%) rotate(45deg);
+            opacity: 0.9;
+        }
+
+        .exec-flow-connector.pack {
+            background: linear-gradient(90deg,
+                color-mix(in srgb, #bf5af2 55%, transparent),
+                color-mix(in srgb, #38bdf8 55%, transparent));
+        }
+
+        .exec-flow-connector.pack::after {
+            border-color: #38bdf8;
+        }
+
+        @media (max-width: 1180px) {
+            .exec-line-deck {
+                grid-template-columns: 1fr;
+            }
+
+            .exec-deck-stack,
+            .exec-deck-stack.energy-pair {
+                grid-template-rows: none;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .exec-flow-lane {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .exec-flow-connector {
+                display: none;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .exec-deck-stack,
+            .exec-deck-stack.energy-pair {
+                grid-template-columns: 1fr;
+            }
+
+            .exec-flow-lane {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .exec-machine-grid {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1255,6 +1894,7 @@
             border: 1px solid color-mix(in srgb, var(--machine-accent) 30%, rgba(255, 255, 255, 0.06));
             background:
                 radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--machine-accent) 18%, transparent) 0%, transparent 55%),
+                radial-gradient(80% 70% at 0% 100%, color-mix(in srgb, var(--machine-accent) 8%, transparent) 0%, transparent 50%),
                 linear-gradient(155deg, rgba(18, 24, 38, 0.96) 0%, rgba(8, 10, 16, 0.98) 100%);
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 10px 28px rgba(0, 0, 0, 0.45);
             transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
@@ -1267,7 +1907,42 @@
             width: 3px;
             background: var(--machine-accent);
             box-shadow: 0 0 12px color-mix(in srgb, var(--machine-accent) 55%, transparent);
+            z-index: 2;
         }
+
+        .exec-machine-card::after {
+            content: '';
+            position: absolute;
+            inset: -20%;
+            pointer-events: none;
+            z-index: 0;
+            border-radius: inherit;
+            background:
+                radial-gradient(circle at 20% 30%, color-mix(in srgb, var(--machine-accent) 20%, transparent) 0%, transparent 42%),
+                radial-gradient(circle at 85% 75%, color-mix(in srgb, var(--machine-accent) 12%, transparent) 0%, transparent 38%);
+            opacity: 0.45;
+            animation: execAuraDrift 14s ease-in-out infinite alternate;
+            mix-blend-mode: screen;
+        }
+
+        .exec-machine-card > *:not(.exec-flow-stage) {
+            position: relative;
+            z-index: 2;
+        }
+
+        .exec-machine-card > .exec-flow-stage {
+            position: absolute;
+            z-index: 8;
+        }
+
+        .exec-machine-card.machine-ps { --machine-accent: #2dd4bf; }
+        .exec-machine-card.machine-ps::after { animation-delay: 0s; }
+        .exec-machine-card.machine-ss { --machine-accent: #ffb000; }
+        .exec-machine-card.machine-ss::after { animation-delay: -3.5s; }
+        .exec-machine-card.machine-met { --machine-accent: #bf5af2; }
+        .exec-machine-card.machine-met::after { animation-delay: -7s; }
+        .exec-machine-card.machine-pack { --machine-accent: #38bdf8; }
+        .exec-machine-card.machine-pack::after { animation-delay: -10.5s; }
 
         .exec-machine-card:hover {
             transform: translateY(-3px);
@@ -1278,10 +1953,10 @@
                 0 0 24px color-mix(in srgb, var(--machine-accent) 14%, transparent);
         }
 
-        .exec-machine-card.machine-ps { --machine-accent: #2dd4bf; }
-        .exec-machine-card.machine-ss { --machine-accent: #ffb000; }
-        .exec-machine-card.machine-met { --machine-accent: #bf5af2; }
-        .exec-machine-card.machine-pack { --machine-accent: #38bdf8; }
+        .exec-machine-card:hover::after {
+            opacity: 0.85;
+            animation-duration: 8s;
+        }
 
         .exec-machine-top {
             display: flex;
@@ -1466,7 +2141,83 @@
         }
 
         .exec-kpi-card::after {
-            content: none;
+            content: '';
+            position: absolute;
+            inset: -25%;
+            pointer-events: none;
+            z-index: 0;
+            border-radius: inherit;
+            background:
+                radial-gradient(circle at 78% 18%, color-mix(in srgb, var(--exec-kpi-accent) 28%, transparent) 0%, transparent 36%),
+                radial-gradient(circle at 18% 88%, color-mix(in srgb, var(--exec-kpi-accent) 16%, transparent) 0%, transparent 40%),
+                linear-gradient(
+                    115deg,
+                    transparent 0%,
+                    color-mix(in srgb, var(--exec-kpi-accent) 8%, transparent) 42%,
+                    transparent 58%
+                );
+            opacity: 0.5;
+            animation: execAuraDrift 16s ease-in-out infinite alternate, execSheenSweep 9s linear infinite;
+            mix-blend-mode: screen;
+        }
+
+        .exec-kpi-card > *:not(.exec-hero-orbit) {
+            position: relative;
+            z-index: 2;
+        }
+
+        .exec-kpi-card > .exec-hero-orbit {
+            position: absolute;
+            z-index: 0;
+        }
+
+        .exec-deck-stack .exec-kpi-card:nth-child(1)::after { animation-delay: 0s, 0s; }
+        .exec-deck-stack .exec-kpi-card:nth-child(2)::after { animation-delay: -4s, -2s; }
+        .exec-deck-group.energy .exec-kpi-card:nth-child(1)::after { animation-delay: -2s, -1s; }
+        .exec-deck-group.energy .exec-kpi-card:nth-child(2)::after { animation-delay: -6s, -3.5s; }
+        .exec-kpi-card.exec-hero-card::after {
+            opacity: 0.65;
+            animation-duration: 18s, 11s;
+        }
+
+        .exec-kpi-card:hover::after {
+            opacity: 0.9;
+        }
+
+        @keyframes execAuraDrift {
+            0% { transform: translate3d(-2%, -1%, 0) scale(1); }
+            50% { transform: translate3d(3%, 2%, 0) scale(1.04); }
+            100% { transform: translate3d(1%, -3%, 0) scale(1.02); }
+        }
+
+        @keyframes execSheenSweep {
+            0% { filter: hue-rotate(0deg) brightness(0.95); }
+            50% { filter: hue-rotate(8deg) brightness(1.08); }
+            100% { filter: hue-rotate(0deg) brightness(0.95); }
+        }
+
+        @keyframes execMeshPulse {
+            0%, 100% { opacity: 0.35; }
+            50% { opacity: 0.7; }
+        }
+
+        .presentation-month-detail .exec-flow-card::after,
+        .presentation-month-detail .exec-kpi-card::after {
+            opacity: 0.72;
+            animation-duration: 12s, 8s;
+        }
+
+        .presentation-month-detail .exec-flow-card::before {
+            animation: execMeshPulse 4.5s ease-in-out infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .exec-kpi-card::after,
+            .exec-machine-card::after,
+            .exec-hero-orbit,
+            .presentation-month-detail .exec-flow-card::before {
+                animation: none !important;
+            }
         }
 
         .exec-kpi-card:hover {
@@ -1975,7 +2726,7 @@
 
         #executive-tab .exec-page-layout {
             display: grid;
-            grid-template-rows: auto auto auto minmax(0, 1.15fr);
+            grid-template-rows: auto auto minmax(0, 1fr);
             grid-template-columns: 1fr;
             gap: 10px;
             height: 100%;
@@ -1986,6 +2737,16 @@
             border-radius: 0;
             background: transparent;
             box-shadow: none;
+        }
+
+        #executive-tab .exec-chart-grid,
+        #executive-tab .exec-bottom-grid {
+            display: none !important;
+        }
+
+        #executive-tab .exec-monthly-wrap {
+            flex: 1 1 auto;
+            min-height: 0;
         }
 
         /* Dark Plant Overview local tokens */
@@ -2178,11 +2939,248 @@
             align-items: stretch;
             justify-content: stretch;
             padding: 14px 16px 14px;
+            background: #01050a;
+            isolation: isolate;
+        }
+
+        .pres-backdrop {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .pres-backdrop-base {
+            position: absolute;
+            inset: 0;
             background:
-                radial-gradient(ellipse at 18% 0%, rgba(0, 229, 255, 0.14), transparent 45%),
-                radial-gradient(ellipse at 82% 100%, rgba(57, 255, 20, 0.08), transparent 42%),
-                linear-gradient(180deg, rgba(4, 10, 18, 0.97), rgba(2, 6, 12, 0.98));
-            backdrop-filter: blur(10px);
+                radial-gradient(ellipse 100% 70% at 50% -20%, rgba(0, 140, 180, 0.35), transparent 58%),
+                radial-gradient(ellipse 60% 50% at 100% 0%, rgba(0, 229, 255, 0.12), transparent 50%),
+                radial-gradient(ellipse 55% 45% at 0% 100%, rgba(57, 255, 20, 0.1), transparent 48%),
+                radial-gradient(ellipse 80% 40% at 50% 100%, rgba(0, 60, 90, 0.45), transparent 55%),
+                linear-gradient(165deg, #030b14 0%, #01060c 42%, #021018 100%);
+        }
+
+        .pres-backdrop-aurora {
+            position: absolute;
+            inset: -30%;
+            background:
+                conic-gradient(
+                    from 180deg at 40% 45%,
+                    transparent 0deg,
+                    rgba(0, 229, 255, 0.22) 40deg,
+                    transparent 90deg,
+                    rgba(57, 255, 20, 0.14) 150deg,
+                    transparent 210deg,
+                    rgba(0, 190, 255, 0.18) 280deg,
+                    transparent 360deg
+                );
+            filter: blur(56px) saturate(1.25);
+            opacity: 0.9;
+            animation: presAuroraSpin 32s linear infinite;
+        }
+
+        .pres-backdrop-aurora.alt {
+            inset: -40%;
+            background:
+                conic-gradient(
+                    from 40deg at 65% 55%,
+                    transparent 0deg,
+                    rgba(0, 200, 255, 0.14) 70deg,
+                    transparent 140deg,
+                    rgba(120, 255, 80, 0.1) 220deg,
+                    transparent 300deg
+                );
+            filter: blur(72px);
+            opacity: 0.55;
+            animation: presAuroraSpin 48s linear infinite reverse;
+            mix-blend-mode: screen;
+        }
+
+        .pres-backdrop-beams {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(115deg, transparent 38%, rgba(0, 229, 255, 0.04) 49%, transparent 58%),
+                linear-gradient(250deg, transparent 42%, rgba(57, 255, 20, 0.03) 52%, transparent 62%);
+            animation: presBeamPulse 10s ease-in-out infinite alternate;
+            mix-blend-mode: screen;
+        }
+
+        .pres-backdrop-orbs {
+            position: absolute;
+            inset: 0;
+        }
+
+        .pres-backdrop-orbs span {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(1px);
+            opacity: 0.6;
+            animation: presOrbFloat 18s ease-in-out infinite alternate;
+        }
+
+        .pres-backdrop-orbs span:nth-child(1) {
+            width: min(48vw, 580px);
+            height: min(48vw, 580px);
+            left: -12%;
+            top: -18%;
+            background: radial-gradient(circle, rgba(0, 229, 255, 0.42) 0%, rgba(0, 229, 255, 0.08) 38%, transparent 68%);
+            animation-duration: 22s;
+        }
+
+        .pres-backdrop-orbs span:nth-child(2) {
+            width: min(40vw, 480px);
+            height: min(40vw, 480px);
+            right: -10%;
+            bottom: -14%;
+            background: radial-gradient(circle, rgba(57, 255, 20, 0.28) 0%, transparent 68%);
+            animation-duration: 26s;
+            animation-delay: -6s;
+        }
+
+        .pres-backdrop-orbs span:nth-child(3) {
+            width: min(30vw, 360px);
+            height: min(30vw, 360px);
+            left: 38%;
+            top: 42%;
+            background: radial-gradient(circle, rgba(0, 180, 255, 0.22) 0%, transparent 70%);
+            animation-duration: 20s;
+            animation-delay: -11s;
+        }
+
+        .pres-backdrop-orbs span:nth-child(4) {
+            width: min(22vw, 260px);
+            height: min(22vw, 260px);
+            right: 18%;
+            top: 12%;
+            background: radial-gradient(circle, rgba(0, 255, 200, 0.18) 0%, transparent 70%);
+            animation-duration: 17s;
+            animation-delay: -4s;
+        }
+
+        .pres-backdrop-rings {
+            position: absolute;
+            left: 50%;
+            top: 48%;
+            width: min(90vw, 1100px);
+            height: min(90vw, 1100px);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 1px solid rgba(0, 229, 255, 0.08);
+            box-shadow:
+                0 0 0 80px rgba(0, 229, 255, 0.015),
+                0 0 0 160px rgba(57, 255, 20, 0.012),
+                inset 0 0 60px rgba(0, 229, 255, 0.04);
+            animation: presRingPulse 14s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        .pres-backdrop-rings::before,
+        .pres-backdrop-rings::after {
+            content: '';
+            position: absolute;
+            inset: 12%;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 229, 255, 0.06);
+        }
+
+        .pres-backdrop-rings::after {
+            inset: 28%;
+            border-color: rgba(57, 255, 20, 0.07);
+            animation: presRingPulse 10s ease-in-out infinite reverse;
+        }
+
+        .pres-backdrop-hex {
+            position: absolute;
+            inset: 0;
+            opacity: 0.22;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(0, 229, 255, 0.35) 0 1px, transparent 2px),
+                radial-gradient(circle at 70% 60%, rgba(57, 255, 20, 0.3) 0 1px, transparent 2px),
+                linear-gradient(60deg, transparent 48%, rgba(0, 229, 255, 0.05) 49.5%, transparent 51%),
+                linear-gradient(-60deg, transparent 48%, rgba(0, 229, 255, 0.04) 49.5%, transparent 51%);
+            background-size: 90px 90px, 110px 110px, 70px 120px, 70px 120px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+            animation: presHexDrift 40s linear infinite;
+        }
+
+        .pres-backdrop-grid {
+            position: absolute;
+            inset: 35% -10% -15%;
+            background-image:
+                linear-gradient(rgba(0, 229, 255, 0.09) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, 0.07) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.75) 28%, rgba(0,0,0,0.35) 70%, transparent 100%);
+            -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.75) 28%, rgba(0,0,0,0.35) 70%, transparent 100%);
+            transform: perspective(900px) rotateX(62deg);
+            transform-origin: center top;
+            animation: presGridDrift 18s linear infinite;
+            opacity: 0.85;
+        }
+
+        .pres-backdrop-horizon {
+            position: absolute;
+            left: -10%;
+            right: -10%;
+            bottom: 18%;
+            height: 2px;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(0, 229, 255, 0.15) 20%,
+                rgba(57, 255, 20, 0.35) 50%,
+                rgba(0, 229, 255, 0.15) 80%,
+                transparent);
+            filter: blur(0.5px);
+            box-shadow: 0 0 40px 8px rgba(0, 229, 255, 0.12);
+            animation: presHorizonGlow 6s ease-in-out infinite alternate;
+        }
+
+        .pres-backdrop-particles {
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(1.5px 1.5px at 8% 18%, rgba(255,255,255,0.7), transparent),
+                radial-gradient(2px 2px at 18% 72%, rgba(0,229,255,0.85), transparent),
+                radial-gradient(1px 1px at 28% 34%, rgba(255,255,255,0.45), transparent),
+                radial-gradient(1.5px 1.5px at 42% 12%, rgba(57,255,20,0.65), transparent),
+                radial-gradient(1px 1px at 55% 58%, rgba(0,229,255,0.55), transparent),
+                radial-gradient(2px 2px at 68% 28%, rgba(255,255,255,0.5), transparent),
+                radial-gradient(1.5px 1.5px at 78% 78%, rgba(0,229,255,0.7), transparent),
+                radial-gradient(1px 1px at 88% 42%, rgba(57,255,20,0.5), transparent),
+                radial-gradient(1.5px 1.5px at 12% 48%, rgba(0,200,255,0.55), transparent),
+                radial-gradient(1px 1px at 92% 14%, rgba(255,255,255,0.4), transparent),
+                radial-gradient(1.5px 1.5px at 48% 88%, rgba(0,229,255,0.45), transparent),
+                radial-gradient(1px 1px at 33% 64%, rgba(255,255,255,0.35), transparent);
+            animation: presParticleDrift 14s ease-in-out infinite alternate;
+            opacity: 0.8;
+        }
+
+        .pres-backdrop-scan {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                transparent 0%,
+                rgba(0, 229, 255, 0.045) 46%,
+                rgba(57, 255, 20, 0.03) 50%,
+                transparent 54%
+            );
+            background-size: 100% 240%;
+            animation: presScanSweep 8s ease-in-out infinite;
+            mix-blend-mode: screen;
+            opacity: 0.75;
+        }
+
+        .pres-backdrop-vignette {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 72% 68% at 50% 42%, transparent 30%, rgba(0, 3, 8, 0.78) 100%);
+            box-shadow: inset 0 0 140px rgba(0, 0, 0, 0.65);
         }
 
         body.presentation-mode.presentation-monthly-open .presentation-monthly-overlay {
@@ -2200,25 +3198,89 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes presAuroraSpin {
+            from { transform: rotate(0deg) scale(1.08); }
+            to { transform: rotate(360deg) scale(1.08); }
+        }
+
+        @keyframes presOrbFloat {
+            from { transform: translate3d(0, 0, 0) scale(1); }
+            to { transform: translate3d(5%, 7%, 0) scale(1.1); }
+        }
+
+        @keyframes presGridDrift {
+            from { background-position: 0 0; }
+            to { background-position: 0 48px; }
+        }
+
+        @keyframes presParticleDrift {
+            from { transform: translate3d(0, 0, 0); opacity: 0.5; }
+            to { transform: translate3d(0, -22px, 0); opacity: 0.9; }
+        }
+
+        @keyframes presScanSweep {
+            0%, 100% { background-position: 0 -50%; }
+            50% { background-position: 0 150%; }
+        }
+
+        @keyframes presBeamPulse {
+            from { opacity: 0.35; }
+            to { opacity: 0.85; }
+        }
+
+        @keyframes presRingPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.55; }
+            50% { transform: translate(-50%, -50%) scale(1.04); opacity: 0.85; }
+        }
+
+        @keyframes presHexDrift {
+            from { background-position: 0 0, 0 0, 0 0, 0 0; }
+            to { background-position: 90px 90px, -110px 55px, 70px 0, -70px 60px; }
+        }
+
+        @keyframes presHorizonGlow {
+            from { opacity: 0.45; filter: blur(0.5px) brightness(0.9); }
+            to { opacity: 1; filter: blur(0.5px) brightness(1.35); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .pres-backdrop-aurora,
+            .pres-backdrop-orbs span,
+            .pres-backdrop-grid,
+            .pres-backdrop-particles,
+            .pres-backdrop-scan,
+            .pres-backdrop-beams,
+            .pres-backdrop-rings,
+            .pres-backdrop-rings::after,
+            .pres-backdrop-hex,
+            .pres-backdrop-horizon {
+                animation: none !important;
+            }
+        }
+
         .presentation-month-detail {
             width: 100%;
             height: 100%;
             max-height: none;
             display: grid;
-            grid-template-rows: auto minmax(0, 1.05fr) minmax(0, 1fr);
+            grid-template-rows: auto minmax(0, 1fr) minmax(0, 1fr);
             gap: 14px;
-            padding: 18px 20px 16px;
+            padding: 16px 18px 14px;
             border-radius: 18px;
-            border: 1px solid rgba(0, 229, 255, 0.28);
+            border: 1px solid rgba(0, 229, 255, 0.32);
             background:
-                linear-gradient(165deg, rgba(10, 18, 30, 0.94) 0%, rgba(5, 10, 18, 0.97) 100%);
+                linear-gradient(165deg, rgba(6, 14, 24, 0.72) 0%, rgba(3, 8, 16, 0.82) 100%);
             box-shadow:
                 0 0 0 1px rgba(255,255,255,0.04),
                 0 20px 50px rgba(0,0,0,0.5),
-                inset 0 1px 0 rgba(255,255,255,0.05);
+                0 0 60px rgba(0, 229, 255, 0.08),
+                inset 0 1px 0 rgba(255,255,255,0.06);
             animation: presPanelIn 0.35s ease-out;
             position: relative;
+            z-index: 1;
             overflow: hidden;
+            backdrop-filter: blur(18px) saturate(1.2);
+            -webkit-backdrop-filter: blur(18px) saturate(1.2);
         }
 
         .presentation-month-detail::before {
@@ -2228,6 +3290,24 @@
             height: 2px;
             background: linear-gradient(90deg, transparent, #00e5ff, #39ff14, transparent);
             opacity: 0.95;
+            z-index: 2;
+        }
+
+        .presentation-month-detail::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 80% 50% at 15% 0%, rgba(0, 229, 255, 0.08), transparent 55%),
+                radial-gradient(ellipse 70% 45% at 90% 100%, rgba(57, 255, 20, 0.05), transparent 50%);
+        }
+
+        .presentation-month-detail > * {
+            position: relative;
+            z-index: 1;
+            min-height: 0;
         }
 
         .presentation-month-detail-head {
@@ -2235,14 +3315,14 @@
             align-items: center;
             justify-content: space-between;
             gap: 16px;
-            padding: 2px 4px 10px;
+            padding: 0 4px 8px;
             flex-shrink: 0;
             border-bottom: 1px solid rgba(255,255,255,0.06);
         }
 
         .presentation-month-detail-title {
             font-family: 'Outfit', sans-serif;
-            font-size: clamp(34px, 4.2vw, 56px);
+            font-size: clamp(28px, 3.6vw, 44px);
             font-weight: 800;
             letter-spacing: 1px;
             color: #f4f8ff;
@@ -2252,21 +3332,21 @@
         }
 
         .presentation-month-detail-sub {
-            margin: 8px 0 0;
-            font-size: 13px;
-            letter-spacing: 1.6px;
+            margin: 4px 0 0;
+            font-size: 12px;
+            letter-spacing: 1.4px;
             text-transform: uppercase;
             color: #7e8b9b;
         }
 
         .presentation-monthly-year {
             font-family: 'Outfit', sans-serif;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             letter-spacing: 1.4px;
             text-transform: uppercase;
             color: #00e5ff;
-            padding: 10px 18px;
+            padding: 8px 16px;
             border-radius: 999px;
             border: 1px solid rgba(0, 229, 255, 0.45);
             background: rgba(0, 229, 255, 0.12);
@@ -2279,290 +3359,419 @@
             height: 100%;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
+            overflow: hidden;
         }
 
         .presentation-month-detail .exec-block-title {
-            font-size: 14px;
+            font-size: 12px;
             flex-shrink: 0;
-            letter-spacing: 1.5px;
-            padding: 0 4px;
+            letter-spacing: 1.4px;
+            padding: 0 2px;
         }
 
         .presentation-month-detail .exec-block-title em {
-            font-size: 12px;
+            font-size: 11px;
         }
 
-        /* ── Line Ops: balanced wall cards ── */
-        .presentation-month-detail .exec-kpi-strip {
+        /* ── Line Ops ── */
+        .presentation-month-detail .exec-line-deck {
             flex: 1;
             min-height: 0;
-            display: grid;
-            grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 12px;
+            grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr) minmax(0, 1fr);
             align-items: stretch;
         }
 
-        .presentation-month-detail .exec-kpi-card {
+        .presentation-month-detail .exec-deck-eyebrow {
+            font-size: 10px;
+            letter-spacing: 1.4px;
+            color: #7e8b9b;
+        }
+
+        .presentation-month-detail .exec-kpi-card.exec-hero-card {
             height: 100%;
             min-height: 0;
-            min-width: 0;
-            padding: 26px 22px;
+            padding: 16px 18px 16px;
+            border-radius: 18px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: stretch;
-            border-radius: 18px;
+            justify-content: flex-start;
+            gap: 12px;
             overflow: hidden;
-            box-sizing: border-box;
         }
 
-        .presentation-month-detail .exec-kpi-head {
+        .presentation-month-detail .exec-hero-card .exec-deck-eyebrow {
+            font-size: 10px;
+            margin-bottom: 0;
+            flex: 0 0 auto;
+        }
+
+        .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-head {
             display: grid;
             grid-template-columns: minmax(0, 1fr) auto;
             align-items: center;
-            column-gap: 18px;
+            column-gap: 12px;
+            flex: 0 0 auto;
             width: 100%;
-            height: auto;
-            min-height: 0;
-            padding: 0 6px;
-            box-sizing: border-box;
+            position: relative;
+            z-index: 3;
         }
 
-        .presentation-month-detail .exec-kpi-copy {
-            min-width: 0;
+        .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-copy {
+            max-width: none;
+            gap: 4px;
+            padding-left: 2px;
+        }
+
+        .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-label {
+            font-size: 11px;
+            letter-spacing: 1.2px;
+        }
+
+        .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-value {
+            font-size: clamp(36px, 4vw, 56px);
+            line-height: 0.95;
+            letter-spacing: -1.5px;
+        }
+
+        .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-meta {
+            display: none;
+        }
+
+        .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-icon {
+            position: relative;
+            right: auto;
+            top: auto;
+            transform: none;
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            display: flex !important;
+            flex-shrink: 0;
+        }
+
+        .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-icon svg {
+            width: 48%;
+            height: 48%;
+        }
+
+        /* Sparkline grows to fill the empty middle of the hero card */
+        .presentation-month-detail .exec-hero-viz {
+            flex: 1 1 auto;
+            min-height: 72px;
+            height: auto;
+            border-radius: 14px;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: stretch;
+        }
+
+        .presentation-month-detail .exec-hero-viz svg {
+            width: 100%;
+            height: 100%;
+            min-height: 72px;
+        }
+
+        .presentation-month-detail .exec-hero-stats {
+            display: grid !important;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            flex: 0 0 auto;
+            margin-top: 0;
+        }
+
+        .presentation-month-detail .exec-hero-stat {
+            padding: 12px 10px;
+            border-radius: 12px;
+            min-height: 56px;
             display: flex;
             flex-direction: column;
+            align-items: center;
             justify-content: center;
-            gap: 12px;
-            padding: 4px 4px 4px 8px;
+            text-align: center;
+            background: rgba(0, 229, 255, 0.06);
+            border: 1px solid rgba(0, 229, 255, 0.14);
         }
 
-        .presentation-month-detail .exec-kpi-label {
-            font-size: 12px;
+        .presentation-month-detail .exec-hero-stat span {
+            font-size: 9px;
+            margin-bottom: 4px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .presentation-month-detail .exec-hero-stat strong {
+            font-size: 16px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .presentation-month-detail .exec-ring {
+            width: 52px;
+            height: 52px;
+        }
+
+        .presentation-month-detail .exec-meter {
+            height: 6px;
+            margin-top: 10px;
+        }
+
+        .presentation-month-detail .exec-cost-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            font-size: 11px;
+        }
+
+        .presentation-month-detail .exec-deck-group {
+            gap: 8px;
+            height: 100%;
+            min-height: 0;
+        }
+
+        .presentation-month-detail .exec-deck-stack {
+            gap: 10px;
+            height: 100%;
+            min-height: 0;
+        }
+
+        .presentation-month-detail .exec-deck-group .exec-kpi-card {
+            height: 100%;
+            min-height: 0;
+            padding: 14px 16px;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 8px;
+            overflow: hidden;
+        }
+
+        .presentation-month-detail .exec-deck-group .exec-kpi-head {
+            min-height: 0;
+            flex: 1 1 auto;
+            align-items: center;
+        }
+
+        .presentation-month-detail .exec-deck-group .exec-kpi-copy {
+            gap: 4px;
+            padding-left: 6px;
+        }
+
+        .presentation-month-detail .exec-deck-group .exec-kpi-label {
+            font-size: 11px;
+            letter-spacing: 1.1px;
+        }
+
+        .presentation-month-detail .exec-deck-group .exec-kpi-value {
+            font-size: clamp(28px, 3.2vw, 40px);
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+
+        .presentation-month-detail .exec-deck-group .exec-kpi-meta {
+            font-size: 11px;
+            opacity: 0.85;
+        }
+
+        /* ── Offline Ops: packed process cards (no empty voids) ── */
+        .presentation-month-detail .exec-flow-lane {
+            flex: 1;
+            min-height: 0;
+            grid-template-columns:
+                minmax(0, 1fr) 22px
+                minmax(0, 1fr) 22px
+                minmax(0, 1fr) 22px
+                minmax(0, 1fr);
+            align-items: stretch;
+        }
+
+        .presentation-month-detail .exec-flow-card {
+            height: 100%;
+            min-height: 0;
+            padding: 14px 14px 12px;
+            border-radius: 16px;
+            gap: 10px;
+            display: flex !important;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow: hidden;
+        }
+
+        .presentation-month-detail .exec-flow-stage {
+            position: absolute !important;
+            top: 12px;
+            right: 12px;
+            font-size: 10px;
             letter-spacing: 1.2px;
-            font-weight: 700;
+            z-index: 9 !important;
+            pointer-events: none;
+        }
+
+        .presentation-month-detail .exec-flow-card .exec-machine-top {
+            flex: 0 0 auto !important;
+            padding: 0 36px 0 2px !important;
+            margin: 0 !important;
+            z-index: 6;
+            min-height: 18px;
+            overflow: visible;
+        }
+
+        .presentation-month-detail .exec-machine-name {
+            font-size: 11px;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 6;
             line-height: 1.2;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-        .presentation-month-detail .exec-kpi-value {
-            font-size: clamp(38px, 4.4vw, 62px);
-            line-height: 0.98;
-            letter-spacing: -1px;
-            font-weight: 800;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100%;
-        }
-
-        .presentation-month-detail .exec-kpi-meta {
-            font-size: 13px;
-            opacity: 0.88;
-            font-weight: 500;
-            line-height: 1.25;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .presentation-month-detail .exec-kpi-icon {
+        .presentation-month-detail .exec-flow-center {
             display: flex !important;
-            width: clamp(88px, 8.8vw, 118px);
-            height: clamp(88px, 8.8vw, 118px);
-            border-radius: 22px;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-            margin-right: 2px;
-            border: 1px solid color-mix(in srgb, var(--exec-kpi-accent) 50%, transparent);
-            background: color-mix(in srgb, var(--exec-kpi-accent) 14%, transparent);
-            box-shadow: 0 0 30px color-mix(in srgb, var(--exec-kpi-accent) 26%, transparent);
-            color: var(--exec-kpi-accent);
-        }
-
-        .presentation-month-detail .exec-kpi-icon svg {
-            width: 56%;
-            height: 56%;
-            filter: drop-shadow(0 0 12px color-mix(in srgb, var(--exec-kpi-accent) 55%, transparent));
-        }
-
-        /* ── Offline Ops: Prod | Waste | Sign — equal fill ── */
-        .presentation-month-detail .exec-machine-grid {
-            flex: 1;
+            flex: 1 1 auto !important;
             min-height: 0;
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 12px;
-            align-items: stretch;
-        }
-
-        .presentation-month-detail .exec-machine-card {
-            height: 100%;
-            min-height: 0;
-            min-width: 0;
-            padding: 18px 16px 18px;
-            display: flex;
-            flex-direction: column;
-            justify-content: stretch;
-            border-radius: 18px;
             overflow: hidden;
-            box-sizing: border-box;
+            padding: 4px 0;
+            margin: 0;
+            z-index: 1;
         }
 
-        .presentation-month-detail .exec-machine-top {
-            flex-shrink: 0;
-            margin-bottom: 12px;
-            padding: 0 4px;
+        .presentation-month-detail .exec-flow-center > span {
+            display: none;
         }
 
-        .presentation-month-detail .exec-machine-name {
-            font-size: 13px;
-            letter-spacing: 1px;
-            font-weight: 800;
-            min-width: 0;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .presentation-month-detail .exec-machine-badge {
-            display: inline-flex;
-            font-size: 10px;
-            padding: 3px 8px;
-            flex-shrink: 0;
-        }
-
-        .presentation-month-detail .exec-machine-body {
-            flex: 1;
-            min-height: 0;
-            min-width: 0;
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) clamp(78px, 7.5vw, 104px);
-            gap: 10px;
-            align-items: stretch;
-            padding: 0 2px;
-        }
-
-        /* Lift metric cells into the body grid as equal columns */
-        .presentation-month-detail .exec-machine-metrics {
-            display: contents;
-            padding-left: 0;
+        .presentation-month-detail .exec-flow-ring-wrap {
+            width: min(150px, 85%);
             height: auto;
-            flex: unset;
-            grid-template-columns: unset;
-            grid-template-rows: unset;
+            aspect-ratio: 1;
+            max-height: 100%;
+            flex: 0 1 auto;
+            position: relative;
         }
 
-        .presentation-month-detail .exec-machine-metric {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        .presentation-month-detail .exec-flow-ring-wrap svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+            transform: rotate(-90deg);
+        }
+
+        .presentation-month-detail .exec-flow-ring-wrap .exec-ring-track {
+            stroke: rgba(255, 255, 255, 0.12);
+            stroke-width: 2.8;
+        }
+
+        .presentation-month-detail .exec-flow-ring-wrap .exec-ring-fill {
+            stroke: var(--machine-accent);
+            stroke-width: 2.8;
+            filter: drop-shadow(0 0 10px color-mix(in srgb, var(--machine-accent) 45%, transparent));
+        }
+
+        .presentation-month-detail .exec-flow-ring-wrap strong {
+            font-size: clamp(20px, 2.2vw, 28px);
+        }
+
+        .presentation-month-detail .exec-flow-body {
+            display: flex !important;
             align-items: center;
-            text-align: center;
+            justify-content: space-between;
             gap: 8px;
-            padding: 14px 12px;
-            border-radius: 14px;
-            min-width: 0;
+            padding: 2px 2px 0 !important;
+            margin: 0 !important;
+            flex: 0 0 auto !important;
             min-height: 0;
-            height: 100%;
-            overflow: hidden;
-            box-sizing: border-box;
+            position: relative;
+            z-index: 3;
+            background: transparent;
+            border-top: none !important;
         }
 
-        .presentation-month-detail .exec-machine-metric-label {
-            font-size: 11px;
-            margin: 0;
-            letter-spacing: 1px;
-            font-weight: 700;
-            opacity: 0.9;
-            width: 100%;
-            text-align: center;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        .presentation-month-detail .exec-flow-foot {
+            display: none !important;
         }
 
-        .presentation-month-detail .exec-machine-metric-value {
-            font-size: clamp(24px, 2.8vw, 40px);
-            line-height: 1.05;
-            letter-spacing: -0.6px;
-            font-weight: 800;
-            width: 100%;
-            text-align: center;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100%;
+        .presentation-month-detail .exec-flow-cost .exec-flow-body {
+            display: flex !important;
         }
 
-        .presentation-month-detail .exec-machine-sign {
-            width: 100%;
-            height: 100%;
-            min-height: 0;
-            max-height: none;
-            align-self: stretch;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid color-mix(in srgb, var(--machine-accent) 45%, transparent);
-            background: color-mix(in srgb, var(--machine-accent) 14%, transparent);
-            box-shadow: 0 0 26px color-mix(in srgb, var(--machine-accent) 20%, transparent);
-            color: var(--machine-accent);
-            flex-shrink: 0;
-            box-sizing: border-box;
+        .presentation-month-detail .exec-flow-cost .exec-flow-center > span {
+            display: none;
         }
 
-        .presentation-month-detail .exec-machine-sign svg {
-            width: 52%;
-            height: 52%;
-            filter: drop-shadow(0 0 12px color-mix(in srgb, var(--machine-accent) 50%, transparent));
+        .presentation-month-detail .exec-flow-cost .exec-flow-ring-wrap .exec-ring-track {
+            stroke: color-mix(in srgb, var(--machine-accent) 28%, rgba(255, 255, 255, 0.08));
         }
 
-        /* Packing: one centered metric + sign as a middle group */
-        .presentation-month-detail .exec-machine-card.machine-pack .exec-machine-body {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 18px;
-            grid-template-columns: unset;
-            width: 100%;
-            padding: 4px 8px;
+        .presentation-month-detail .exec-flow-cost .exec-flow-ring-wrap .exec-ring-fill {
+            stroke-width: 2.8;
         }
 
-        .presentation-month-detail .exec-machine-card.machine-pack .exec-machine-metrics {
-            display: flex;
-            flex: 0 1 260px;
-            width: min(100%, 260px);
-            max-width: 260px;
-            height: auto;
-            margin: 0;
-            padding: 0;
+        .presentation-month-detail .exec-cost-chip {
+            border-color: color-mix(in srgb, var(--machine-accent) 40%, transparent);
+            background:
+                linear-gradient(160deg,
+                    color-mix(in srgb, var(--machine-accent) 18%, transparent),
+                    color-mix(in srgb, var(--machine-accent) 5%, transparent));
         }
 
-        .presentation-month-detail .exec-machine-card.machine-pack .exec-machine-metric {
-            width: 100%;
-            flex: 1;
-            padding: 18px 20px;
-            align-items: center;
-            text-align: center;
+        .presentation-month-detail .exec-cost-chip span {
+            color: color-mix(in srgb, var(--machine-accent) 75%, #9fb0c4);
         }
 
-        .presentation-month-detail .exec-machine-card.machine-pack .exec-machine-metric-value {
-            font-size: clamp(28px, 3.2vw, 44px);
+        .presentation-month-detail .exec-cost-chip strong {
             color: #7dd3fc;
         }
 
-        .presentation-month-detail .exec-machine-card.machine-pack .exec-machine-sign {
-            width: clamp(88px, 8.5vw, 112px);
-            height: clamp(88px, 8.5vw, 112px);
-            flex: 0 0 auto;
+        .presentation-month-detail .exec-flow-body .exec-machine-metric-label {
+            font-size: 9px;
+            letter-spacing: 1px;
+            margin-bottom: 3px;
+            line-height: 1.2;
+        }
+
+        .presentation-month-detail .exec-flow-body .exec-machine-metric-value {
+            font-size: clamp(18px, 2vw, 26px);
+            letter-spacing: -0.6px;
+            line-height: 1.1;
+        }
+
+        .presentation-month-detail .exec-waste-chip {
+            min-width: 68px;
+            padding: 8px 10px;
+            border-radius: 10px;
+            gap: 3px;
             align-self: center;
+        }
+
+        .presentation-month-detail .exec-waste-chip span {
+            font-size: 8px;
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .presentation-month-detail .exec-waste-chip strong {
+            font-size: clamp(14px, 1.5vw, 18px);
+            line-height: 1.1;
+        }
+
+        .presentation-month-detail .exec-flow-connector {
+            height: 2px;
+            margin: 0;
+            align-self: center;
+        }
+
+        .presentation-month-detail .exec-flow-connector::after {
+            width: 8px;
+            height: 8px;
         }
 
         @media (max-width: 1200px) {
@@ -2570,62 +3779,183 @@
                 grid-template-rows: auto auto auto;
                 overflow: auto;
             }
-            .presentation-month-detail .exec-kpi-strip {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
+            .presentation-month-detail .exec-line-deck {
+                grid-template-columns: 1fr;
             }
-            .presentation-month-detail .exec-machine-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+            .presentation-month-detail .exec-deck-stack {
+                grid-template-rows: none;
+                grid-template-columns: 1fr 1fr;
+            }
+            .presentation-month-detail .exec-flow-lane {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .presentation-month-detail .exec-flow-connector {
+                display: none;
             }
         }
 
         body.dashboard-fit-view #executive-tab .exec-page-layout {
-            grid-template-rows: auto auto auto minmax(0, 1.2fr);
-            gap: 6px;
+            grid-template-rows: auto auto minmax(0, 1fr);
+            gap: 10px;
             padding: 0;
             border-radius: 0;
+        }
+
+        body.dashboard-fit-view #executive-tab .exec-monthly-wrap {
+            max-height: none;
+            min-height: 0;
+            height: 100%;
+        }
+
+        body.dashboard-fit-view #executive-tab .exec-month-card {
+            min-height: 88px;
+            padding: 10px 12px !important;
+        }
+
+        body.dashboard-fit-view #executive-tab .exec-line-deck,
+        body.dashboard-fit-view #executive-tab .exec-flow-lane {
+            min-height: 0;
+        }
+
+        body.dashboard-fit-view #executive-tab .exec-block:not(.exec-monthly-wrap) {
+            flex: 0 0 auto;
         }
 
         body.dashboard-fit-view .exec-kpi-strip.exec-offline-strip {
             display: none;
         }
 
-        body.dashboard-fit-view .exec-machine-grid {
-            grid-template-columns: repeat(4, minmax(0, 1fr));
+        body.dashboard-fit-view .exec-line-deck {
+            gap: 8px;
+        }
+
+        body.dashboard-fit-view .exec-deck-eyebrow {
+            font-size: 8px;
+            letter-spacing: 1px;
+        }
+
+        body.dashboard-fit-view .exec-deck-stack {
             gap: 6px;
         }
 
-        body.dashboard-fit-view .exec-machine-card {
-            min-height: 84px;
-            padding: 8px 10px 10px;
-            border-radius: 12px;
+        body.dashboard-fit-view .exec-kpi-card.exec-hero-card {
+            min-height: 130px;
+            padding: 14px 16px 16px;
+            gap: 8px;
         }
 
-        body.dashboard-fit-view .exec-machine-top {
-            margin-bottom: 6px;
+        body.dashboard-fit-view .exec-hero-viz {
+            height: 36px;
+        }
+
+        body.dashboard-fit-view .exec-hero-stats {
+            gap: 6px;
+        }
+
+        body.dashboard-fit-view .exec-hero-stat {
+            padding: 5px 6px;
+        }
+
+        body.dashboard-fit-view .exec-hero-stat strong {
+            font-size: 11px;
+        }
+
+        body.dashboard-fit-view .exec-ring {
+            width: 38px;
+            height: 38px;
+        }
+
+        body.dashboard-fit-view .exec-cost-badge {
+            width: 34px;
+            height: 34px;
+            font-size: 8px;
+            border-radius: 10px;
+        }
+
+        body.dashboard-fit-view .exec-flow-foot {
+            gap: 4px;
+        }
+
+        body.dashboard-fit-view .exec-kpi-card.exec-hero-card .exec-kpi-value {
+            font-size: clamp(24px, 2.6vw, 34px);
+        }
+
+        body.dashboard-fit-view .exec-kpi-card.exec-hero-card .exec-kpi-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+        }
+
+        body.dashboard-fit-view .exec-deck-group .exec-kpi-card {
+            padding: 8px 10px 10px;
+            min-height: 0;
+        }
+
+        body.dashboard-fit-view .exec-deck-group .exec-kpi-value {
+            font-size: 18px;
+        }
+
+        body.dashboard-fit-view .exec-deck-group .exec-kpi-meta {
+            font-size: 9px;
+        }
+
+        body.dashboard-fit-view .exec-flow-lane {
+            grid-template-columns:
+                minmax(0, 1fr) 14px
+                minmax(0, 1fr) 14px
+                minmax(0, 1fr) 14px
+                minmax(0, 0.92fr);
+        }
+
+        body.dashboard-fit-view .exec-flow-card {
+            min-height: 120px;
+            padding: 12px 14px 14px;
+            border-radius: 12px;
+            gap: 10px;
+        }
+
+        body.dashboard-fit-view .exec-flow-stage {
+            font-size: 8px;
+            top: 8px;
+            right: 10px;
+        }
+
+        body.dashboard-fit-view .exec-flow-card .exec-machine-top {
+            margin-bottom: 0;
+            padding-right: 28px;
         }
 
         body.dashboard-fit-view .exec-machine-name {
             font-size: 9px;
         }
 
-        body.dashboard-fit-view .exec-machine-badge {
-            display: none;
+        body.dashboard-fit-view .exec-flow-body .exec-machine-metric-value {
+            font-size: 15px;
         }
 
-        body.dashboard-fit-view .exec-machine-metric {
-            padding: 5px 7px;
+        body.dashboard-fit-view .exec-waste-chip {
+            min-width: 62px;
+            padding: 6px 8px;
+            border-radius: 10px;
         }
 
-        body.dashboard-fit-view .exec-machine-metric-value {
-            font-size: 14px;
+        body.dashboard-fit-view .exec-waste-chip strong {
+            font-size: 13px;
         }
 
-        body.dashboard-fit-view .exec-machine-card.machine-pack .exec-machine-metric-value {
-            font-size: 16px;
+        body.dashboard-fit-view .exec-flow-cost .exec-machine-metric-value {
+            font-size: 16px !important;
         }
 
         body.dashboard-fit-view .exec-monthly-grid {
-            gap: 6px;
+            gap: 8px;
+            height: 100%;
+            align-content: stretch;
+        }
+
+        body.dashboard-fit-view .exec-monthly-grid .exec-month-card {
+            height: 100%;
         }
 
         body.dashboard-fit-view .exec-month-prod {
@@ -2641,42 +3971,18 @@
             font-size: 9px;
         }
 
-        body.dashboard-fit-view .exec-kpi-strip {
-            grid-template-columns: repeat(5, minmax(0, 1fr));
-            gap: 6px;
-        }
-
         body.dashboard-fit-view .exec-kpi-card.hero,
         body.dashboard-fit-view .exec-kpi-card.span-2 {
             grid-column: span 1;
         }
 
         body.dashboard-fit-view .exec-kpi-card {
-            min-height: 82px;
-            padding: 10px 12px 12px;
+            min-height: 0;
             border-radius: 13px;
         }
 
         body.dashboard-fit-view .exec-kpi-head {
-            min-height: 58px;
-        }
-
-        body.dashboard-fit-view .exec-kpi-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
-            right: 4px;
-        }
-
-        body.dashboard-fit-view .exec-kpi-icon svg {
-            width: 32px;
-            height: 32px;
-        }
-
-        body.dashboard-fit-view .exec-kpi-copy {
-            max-width: calc(100% - 52px);
-            gap: 2px;
-            padding-left: 4px;
+            min-height: 0;
         }
 
         body.dashboard-fit-view .exec-kpi-label {
@@ -2687,19 +3993,6 @@
         body.dashboard-fit-view .exec-kpi-label::before {
             width: 5px;
             height: 5px;
-        }
-
-        body.dashboard-fit-view .exec-kpi-value {
-            font-size: 21px;
-        }
-
-        body.dashboard-fit-view .exec-kpi-value.sm {
-            font-size: 14px;
-            line-height: 1.1;
-        }
-
-        body.dashboard-fit-view .exec-kpi-meta {
-            font-size: 9px;
         }
 
         body.dashboard-fit-view .exec-chart-grid {
@@ -5963,9 +7256,18 @@
             height: 100%;
             max-height: 100%;
             display: grid;
-            grid-template-rows: auto auto auto minmax(0, 1fr);
-            gap: 8px !important;
+            grid-template-rows: auto auto minmax(0, 1fr);
+            gap: 12px !important;
             align-content: stretch;
+        }
+
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-monthly-wrap {
+            min-height: 0;
+            height: 100%;
+        }
+
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-month-card {
+            min-height: 96px;
         }
 
         body.presentation-mode.dashboard-fit-view #executive-tab .exec-block {
@@ -5979,10 +7281,39 @@
             letter-spacing: 1.2px;
         }
 
-        body.presentation-mode.dashboard-fit-view #executive-tab .exec-kpi-strip,
-        body.presentation-mode.dashboard-fit-view #executive-tab .exec-machine-grid,
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-line-deck,
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-flow-lane,
         body.presentation-mode.dashboard-fit-view #executive-tab .exec-monthly-grid {
             gap: 8px !important;
+        }
+
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-flow-lane {
+            grid-template-columns:
+                minmax(0, 1fr) 18px
+                minmax(0, 1fr) 18px
+                minmax(0, 1fr) 18px
+                minmax(0, 0.95fr) !important;
+        }
+
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-kpi-card.exec-hero-card {
+            min-height: 110px;
+            padding: 14px 16px 16px !important;
+        }
+
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-kpi-card.exec-hero-card .exec-kpi-value {
+            font-size: clamp(30px, 3vw, 44px) !important;
+        }
+
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-deck-eyebrow {
+            font-size: 10px;
+        }
+
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-waste-chip strong {
+            font-size: 16px;
+        }
+
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-flow-body .exec-machine-metric-value {
+            font-size: clamp(18px, 1.8vw, 26px) !important;
         }
 
         body.presentation-mode.dashboard-fit-view #executive-tab .exec-kpi-card {
@@ -6028,12 +7359,31 @@
         }
 
         body.presentation-mode.dashboard-fit-view #executive-tab .exec-machine-badge {
-            display: inline-flex !important;
-            font-size: 9px;
+            display: none !important;
+        }
+
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-flow-card {
+            min-height: 120px;
+            padding: 14px 14px 14px !important;
+            gap: 10px !important;
+        }
+
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-flow-share {
+            height: 6px;
+        }
+
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-flow-share-label {
+            font-size: 10px;
+        }
+
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-hero-viz {
+            height: 36px;
         }
 
         body.presentation-mode.dashboard-fit-view #executive-tab .exec-machine-metric {
-            padding: 8px 10px !important;
+            padding: 0 !important;
+            border: none !important;
+            background: transparent !important;
         }
 
         body.presentation-mode.dashboard-fit-view #executive-tab .exec-machine-metric-label {
@@ -6883,135 +8233,201 @@
             <div class="tab-panel active" id="executive-tab">
                 <div class="exec-page-layout panel-layout">
 
-                    <!-- Block A: Line Ops -->
+                    <!-- Block A: Line Ops — hero + health + cost -->
                     <div class="exec-block">
-                        <div class="exec-block-title"><span>Line Ops</span><em>Production · Waste · OEE · Energy</em></div>
-                        <div class="exec-kpi-strip">
-                            <div class="exec-kpi-card accent-cyan">
+                        <div class="exec-block-title"><span>Line Ops</span><em>Output first · then health · then cost</em></div>
+                        <div class="exec-line-deck">
+                            <div class="exec-kpi-card exec-hero-card accent-cyan">
+                                <div class="exec-deck-eyebrow">Primary output</div>
                                 <div class="exec-kpi-head">
                                     <div class="exec-kpi-copy">
                                         <div class="exec-kpi-label">Line Production</div>
                                         <div class="exec-kpi-value" id="exec-val-prod">0 t</div>
-                                        <div class="exec-kpi-meta">BOPET line output</div>
+                                        <div class="exec-kpi-meta">BOPET line output for selected period</div>
                                     </div>
                                     <div class="exec-kpi-icon" aria-hidden="true">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="exec-kpi-card accent-amber">
-                                <div class="exec-kpi-head">
-                                    <div class="exec-kpi-copy">
-                                        <div class="exec-kpi-label">Line Waste %</div>
-                                        <div class="exec-kpi-value" id="exec-val-waste">0.0%</div>
-                                        <div class="exec-kpi-meta">Average scrap rate</div>
+                                <div class="exec-hero-viz" aria-hidden="true">
+                                    <svg id="exec-spark-prod" viewBox="0 0 100 28" preserveAspectRatio="none"></svg>
+                                </div>
+                                <div class="exec-hero-stats">
+                                    <div class="exec-hero-stat">
+                                        <span>Months</span>
+                                        <strong id="exec-stat-months">—</strong>
                                     </div>
-                                    <div class="exec-kpi-icon" aria-hidden="true">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                                    <div class="exec-hero-stat">
+                                        <span>Avg / mo</span>
+                                        <strong id="exec-stat-avg">—</strong>
+                                    </div>
+                                    <div class="exec-hero-stat">
+                                        <span>vs last mo</span>
+                                        <strong id="exec-stat-trend">—</strong>
+                                    </div>
+                                </div>
+                                <div class="exec-hero-orbit" aria-hidden="true"></div>
+                            </div>
+                            <div class="exec-deck-group health">
+                                <div class="exec-deck-eyebrow">Line health</div>
+                                <div class="exec-deck-stack">
+                                    <div class="exec-kpi-card accent-amber exec-rich-card">
+                                        <div class="exec-kpi-head">
+                                            <div class="exec-kpi-copy">
+                                                <div class="exec-kpi-label">Line Waste %</div>
+                                                <div class="exec-kpi-value" id="exec-val-waste">0.0%</div>
+                                                <div class="exec-kpi-meta">Scrap rate</div>
+                                            </div>
+                                            <div class="exec-ring" aria-hidden="true">
+                                                <svg viewBox="0 0 36 36">
+                                                    <circle class="exec-ring-track" cx="18" cy="18" r="14"></circle>
+                                                    <circle class="exec-ring-fill" id="exec-ring-waste" cx="18" cy="18" r="14"></circle>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="exec-meter" title="Relative to 10% scale">
+                                            <div class="exec-meter-fill" id="exec-meter-waste"></div>
+                                        </div>
+                                    </div>
+                                    <div class="exec-kpi-card accent-green exec-rich-card">
+                                        <div class="exec-kpi-head">
+                                            <div class="exec-kpi-copy">
+                                                <div class="exec-kpi-label">Average OEE</div>
+                                                <div class="exec-kpi-value" id="exec-val-oee">0.0%</div>
+                                                <div class="exec-kpi-meta">Equipment effectiveness</div>
+                                            </div>
+                                            <div class="exec-ring" aria-hidden="true">
+                                                <svg viewBox="0 0 36 36">
+                                                    <circle class="exec-ring-track" cx="18" cy="18" r="14"></circle>
+                                                    <circle class="exec-ring-fill" id="exec-ring-oee" cx="18" cy="18" r="14"></circle>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="exec-meter" title="OEE fill">
+                                            <div class="exec-meter-fill" id="exec-meter-oee"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="exec-kpi-card accent-green">
-                                <div class="exec-kpi-head">
-                                    <div class="exec-kpi-copy">
-                                        <div class="exec-kpi-label">Average OEE</div>
-                                        <div class="exec-kpi-value" id="exec-val-oee">0.0%</div>
-                                        <div class="exec-kpi-meta">Overall equipment effectiveness</div>
+                            <div class="exec-deck-group energy">
+                                <div class="exec-deck-eyebrow">Specific cost</div>
+                                <div class="exec-deck-stack energy-pair">
+                                    <div class="exec-kpi-card accent-blue exec-rich-card">
+                                        <div class="exec-kpi-head">
+                                            <div class="exec-kpi-copy">
+                                                <div class="exec-kpi-label">Line Rs/Kg</div>
+                                                <div class="exec-kpi-value" id="exec-val-rs-line">0.00</div>
+                                                <div class="exec-kpi-meta">Line energy cost</div>
+                                            </div>
+                                            <div class="exec-cost-badge" aria-hidden="true">PKR</div>
+                                        </div>
+                                        <div class="exec-meter">
+                                            <div class="exec-meter-fill" id="exec-meter-rs-line"></div>
+                                        </div>
                                     </div>
-                                    <div class="exec-kpi-icon" aria-hidden="true">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="exec-kpi-card accent-blue">
-                                <div class="exec-kpi-head">
-                                    <div class="exec-kpi-copy">
-                                        <div class="exec-kpi-label">Line KWh/Kg</div>
-                                        <div class="exec-kpi-value" id="exec-val-kwh-line">0.00</div>
-                                        <div class="exec-kpi-meta">Line specific energy</div>
-                                    </div>
-                                    <div class="exec-kpi-icon" aria-hidden="true">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="exec-kpi-card accent-cyan">
-                                <div class="exec-kpi-head">
-                                    <div class="exec-kpi-copy">
-                                        <div class="exec-kpi-label">Plant KWh/Kg</div>
-                                        <div class="exec-kpi-value" id="exec-val-kwh-plant">0.00</div>
-                                        <div class="exec-kpi-meta">Whole-plant SEC</div>
-                                    </div>
-                                    <div class="exec-kpi-icon" aria-hidden="true">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                                    <div class="exec-kpi-card accent-teal exec-rich-card">
+                                        <div class="exec-kpi-head">
+                                            <div class="exec-kpi-copy">
+                                                <div class="exec-kpi-label">Plant Rs/Kg</div>
+                                                <div class="exec-kpi-value" id="exec-val-rs-plant">0.00</div>
+                                                <div class="exec-kpi-meta">Whole-plant energy cost</div>
+                                            </div>
+                                            <div class="exec-cost-badge" aria-hidden="true">PKR</div>
+                                        </div>
+                                        <div class="exec-meter">
+                                            <div class="exec-meter-fill" id="exec-meter-rs-plant"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Block B: Offline Ops -->
+                    <!-- Block B: Offline Ops — process lane -->
                     <div class="exec-block">
-                        <div class="exec-block-title"><span>Offline Ops</span><em>PS · SS · Metallizer · Packing</em></div>
-                        <div class="exec-machine-grid">
-                            <div class="exec-machine-card machine-ps">
+                        <div class="exec-block-title"><span>Offline Ops</span><em>Process flow · PS → SS → Metallizer → Pack</em></div>
+                        <div class="exec-flow-lane">
+                            <div class="exec-machine-card machine-ps exec-flow-card">
+                                <div class="exec-flow-stage">01</div>
                                 <div class="exec-machine-top">
                                     <div class="exec-machine-name">Primary Slitter</div>
                                     <div class="exec-machine-badge">PS</div>
                                 </div>
-                                <div class="exec-machine-metrics">
+                                <div class="exec-flow-body">
                                     <div class="exec-machine-metric">
                                         <div class="exec-machine-metric-label">Production</div>
                                         <div class="exec-machine-metric-value" id="exec-val-ps-prod">0 kg</div>
                                     </div>
-                                    <div class="exec-machine-metric waste">
-                                        <div class="exec-machine-metric-label">Waste %</div>
-                                        <div class="exec-machine-metric-value" id="exec-val-ps-waste">0.0%</div>
+                                    <div class="exec-waste-chip">
+                                        <span>Waste</span>
+                                        <strong id="exec-val-ps-waste">0.0%</strong>
                                     </div>
                                 </div>
+                                <div class="exec-flow-foot">
+                                    <div class="exec-flow-share"><div class="exec-flow-share-fill" id="exec-yield-ps"></div></div>
+                                    <span class="exec-flow-share-label" id="exec-yield-ps-lbl">Yield —</span>
+                                </div>
                             </div>
-                            <div class="exec-machine-card machine-ss">
+                            <div class="exec-flow-connector" aria-hidden="true"></div>
+                            <div class="exec-machine-card machine-ss exec-flow-card">
+                                <div class="exec-flow-stage">02</div>
                                 <div class="exec-machine-top">
                                     <div class="exec-machine-name">Secondary Slitter</div>
                                     <div class="exec-machine-badge">SS</div>
                                 </div>
-                                <div class="exec-machine-metrics">
+                                <div class="exec-flow-body">
                                     <div class="exec-machine-metric">
                                         <div class="exec-machine-metric-label">Production</div>
                                         <div class="exec-machine-metric-value" id="exec-val-ss-prod">0 kg</div>
                                     </div>
-                                    <div class="exec-machine-metric waste">
-                                        <div class="exec-machine-metric-label">Waste %</div>
-                                        <div class="exec-machine-metric-value" id="exec-val-ss-waste">0.0%</div>
+                                    <div class="exec-waste-chip">
+                                        <span>Waste</span>
+                                        <strong id="exec-val-ss-waste">0.0%</strong>
                                     </div>
                                 </div>
+                                <div class="exec-flow-foot">
+                                    <div class="exec-flow-share"><div class="exec-flow-share-fill" id="exec-yield-ss"></div></div>
+                                    <span class="exec-flow-share-label" id="exec-yield-ss-lbl">Yield —</span>
+                                </div>
                             </div>
-                            <div class="exec-machine-card machine-met">
+                            <div class="exec-flow-connector" aria-hidden="true"></div>
+                            <div class="exec-machine-card machine-met exec-flow-card">
+                                <div class="exec-flow-stage">03</div>
                                 <div class="exec-machine-top">
                                     <div class="exec-machine-name">Metallizer</div>
                                     <div class="exec-machine-badge">MET</div>
                                 </div>
-                                <div class="exec-machine-metrics">
+                                <div class="exec-flow-body">
                                     <div class="exec-machine-metric">
                                         <div class="exec-machine-metric-label">Production</div>
                                         <div class="exec-machine-metric-value" id="exec-val-met-prod">0 kg</div>
                                     </div>
-                                    <div class="exec-machine-metric waste">
-                                        <div class="exec-machine-metric-label">Waste %</div>
-                                        <div class="exec-machine-metric-value" id="exec-val-met-waste">0.0%</div>
+                                    <div class="exec-waste-chip">
+                                        <span>Waste</span>
+                                        <strong id="exec-val-met-waste">0.0%</strong>
                                     </div>
                                 </div>
+                                <div class="exec-flow-foot">
+                                    <div class="exec-flow-share"><div class="exec-flow-share-fill" id="exec-yield-met"></div></div>
+                                    <span class="exec-flow-share-label" id="exec-yield-met-lbl">Yield —</span>
+                                </div>
                             </div>
-                            <div class="exec-machine-card machine-pack">
+                            <div class="exec-flow-connector pack" aria-hidden="true"></div>
+                            <div class="exec-machine-card machine-pack exec-flow-card exec-flow-cost">
+                                <div class="exec-flow-stage">Cost</div>
                                 <div class="exec-machine-top">
                                     <div class="exec-machine-name">Packing Cost</div>
                                     <div class="exec-machine-badge">PKR</div>
                                 </div>
-                                <div class="exec-machine-metrics">
+                                <div class="exec-flow-body cost">
                                     <div class="exec-machine-metric">
                                         <div class="exec-machine-metric-label">Average Factor</div>
                                         <div class="exec-machine-metric-value" id="exec-val-packing">PKR 0</div>
                                     </div>
+                                </div>
+                                <div class="exec-flow-foot">
+                                    <div class="exec-flow-share"><div class="exec-flow-share-fill" id="exec-yield-pack"></div></div>
+                                    <span class="exec-flow-share-label" id="exec-yield-pack-lbl">Factor band —</span>
                                 </div>
                             </div>
                         </div>
@@ -7028,8 +8444,8 @@
                         </div>
                     </div>
 
-                    <!-- Charts row -->
-                    <div class="exec-chart-grid">
+                    <!-- Charts row (hidden — space given to KPI blocks) -->
+                    <div class="exec-chart-grid" hidden aria-hidden="true">
                         <div class="panel-card exec-card-tight exec-primary-chart exec-overview-panel">
                             <div class="exec-panel-head">
                                 <div class="exec-panel-copy">
@@ -8441,6 +9857,22 @@
     </div>
 
     <div id="presentation-monthly-overlay" class="presentation-monthly-overlay" aria-hidden="true">
+        <div class="pres-backdrop" aria-hidden="true">
+            <div class="pres-backdrop-base"></div>
+            <div class="pres-backdrop-aurora"></div>
+            <div class="pres-backdrop-aurora alt"></div>
+            <div class="pres-backdrop-beams"></div>
+            <div class="pres-backdrop-rings"></div>
+            <div class="pres-backdrop-hex"></div>
+            <div class="pres-backdrop-orbs">
+                <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="pres-backdrop-grid"></div>
+            <div class="pres-backdrop-horizon"></div>
+            <div class="pres-backdrop-particles"></div>
+            <div class="pres-backdrop-scan"></div>
+            <div class="pres-backdrop-vignette"></div>
+        </div>
         <div class="presentation-month-detail">
             <div class="presentation-month-detail-head">
                 <div>
@@ -8451,65 +9883,100 @@
             </div>
 
                         <div class="exec-block">
-                <div class="exec-block-title"><span>Line Ops</span><em>Production · Waste · OEE · Energy</em></div>
-                <div class="exec-kpi-strip pres-month-kpi-strip">
-                    <div class="exec-kpi-card accent-cyan">
+                <div class="exec-block-title"><span>Line Ops</span><em>Output first · then health · then cost</em></div>
+                <div class="exec-line-deck">
+                    <div class="exec-kpi-card exec-hero-card accent-cyan">
+                        <div class="exec-deck-eyebrow">Primary output</div>
                         <div class="exec-kpi-head">
                             <div class="exec-kpi-copy">
                                 <div class="exec-kpi-label">Line Production</div>
                                 <div class="exec-kpi-value" id="pres-val-prod">0 t</div>
-                                <div class="exec-kpi-meta">BOPET line output</div>
+                                <div class="exec-kpi-meta">BOPET line output for this month</div>
                             </div>
                             <div class="exec-kpi-icon" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>
                             </div>
                         </div>
-                    </div>
-                    <div class="exec-kpi-card accent-amber">
-                        <div class="exec-kpi-head">
-                            <div class="exec-kpi-copy">
-                                <div class="exec-kpi-label">Line Waste %</div>
-                                <div class="exec-kpi-value" id="pres-val-waste">0.0%</div>
-                                <div class="exec-kpi-meta">Scrap rate</div>
+                        <div class="exec-hero-viz" aria-hidden="true">
+                            <svg id="pres-spark-prod" viewBox="0 0 100 28" preserveAspectRatio="none"></svg>
+                        </div>
+                        <div class="exec-hero-stats">
+                            <div class="exec-hero-stat">
+                                <span>Waste</span>
+                                <strong id="pres-stat-waste">—</strong>
                             </div>
-                            <div class="exec-kpi-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                            <div class="exec-hero-stat">
+                                <span>OEE</span>
+                                <strong id="pres-stat-oee">—</strong>
+                            </div>
+                            <div class="exec-hero-stat">
+                                <span>Plant Rs</span>
+                                <strong id="pres-stat-rs">—</strong>
+                            </div>
+                        </div>
+                        <div class="exec-hero-orbit" aria-hidden="true"></div>
+                    </div>
+                    <div class="exec-deck-group health">
+                        <div class="exec-deck-eyebrow">Line health</div>
+                        <div class="exec-deck-stack">
+                            <div class="exec-kpi-card accent-amber exec-rich-card">
+                                <div class="exec-kpi-head">
+                                    <div class="exec-kpi-copy">
+                                        <div class="exec-kpi-label">Line Waste %</div>
+                                        <div class="exec-kpi-value" id="pres-val-waste">0.0%</div>
+                                        <div class="exec-kpi-meta">Scrap rate</div>
+                                    </div>
+                                    <div class="exec-ring" aria-hidden="true">
+                                        <svg viewBox="0 0 36 36">
+                                            <circle class="exec-ring-track" cx="18" cy="18" r="14"></circle>
+                                            <circle class="exec-ring-fill" id="pres-ring-waste" cx="18" cy="18" r="14"></circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="exec-meter"><div class="exec-meter-fill" id="pres-meter-waste"></div></div>
+                            </div>
+                            <div class="exec-kpi-card accent-green exec-rich-card">
+                                <div class="exec-kpi-head">
+                                    <div class="exec-kpi-copy">
+                                        <div class="exec-kpi-label">Average OEE</div>
+                                        <div class="exec-kpi-value" id="pres-val-oee">0.0%</div>
+                                        <div class="exec-kpi-meta">Equipment effectiveness</div>
+                                    </div>
+                                    <div class="exec-ring" aria-hidden="true">
+                                        <svg viewBox="0 0 36 36">
+                                            <circle class="exec-ring-track" cx="18" cy="18" r="14"></circle>
+                                            <circle class="exec-ring-fill" id="pres-ring-oee" cx="18" cy="18" r="14"></circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="exec-meter"><div class="exec-meter-fill" id="pres-meter-oee"></div></div>
                             </div>
                         </div>
                     </div>
-                    <div class="exec-kpi-card accent-green">
-                        <div class="exec-kpi-head">
-                            <div class="exec-kpi-copy">
-                                <div class="exec-kpi-label">Average OEE</div>
-                                <div class="exec-kpi-value" id="pres-val-oee">0.0%</div>
-                                <div class="exec-kpi-meta">Equipment effectiveness</div>
+                    <div class="exec-deck-group energy">
+                        <div class="exec-deck-eyebrow">Specific cost</div>
+                        <div class="exec-deck-stack energy-pair">
+                            <div class="exec-kpi-card accent-blue exec-rich-card">
+                                <div class="exec-kpi-head">
+                                    <div class="exec-kpi-copy">
+                                        <div class="exec-kpi-label">Line Rs/Kg</div>
+                                        <div class="exec-kpi-value" id="pres-val-rs-line">0.00</div>
+                                        <div class="exec-kpi-meta">Line energy cost</div>
+                                    </div>
+                                    <div class="exec-cost-badge" aria-hidden="true">PKR</div>
+                                </div>
+                                <div class="exec-meter"><div class="exec-meter-fill" id="pres-meter-rs-line"></div></div>
                             </div>
-                            <div class="exec-kpi-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="exec-kpi-card accent-blue">
-                        <div class="exec-kpi-head">
-                            <div class="exec-kpi-copy">
-                                <div class="exec-kpi-label">Line KWh/Kg</div>
-                                <div class="exec-kpi-value" id="pres-val-kwh-line">0.00</div>
-                                <div class="exec-kpi-meta">Line specific energy</div>
-                            </div>
-                            <div class="exec-kpi-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="exec-kpi-card accent-cyan">
-                        <div class="exec-kpi-head">
-                            <div class="exec-kpi-copy">
-                                <div class="exec-kpi-label">Plant KWh/Kg</div>
-                                <div class="exec-kpi-value" id="pres-val-kwh-plant">0.00</div>
-                                <div class="exec-kpi-meta">Whole-plant SEC</div>
-                            </div>
-                            <div class="exec-kpi-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                            <div class="exec-kpi-card accent-teal exec-rich-card">
+                                <div class="exec-kpi-head">
+                                    <div class="exec-kpi-copy">
+                                        <div class="exec-kpi-label">Plant Rs/Kg</div>
+                                        <div class="exec-kpi-value" id="pres-val-rs-plant">0.00</div>
+                                        <div class="exec-kpi-meta">Whole-plant energy cost</div>
+                                    </div>
+                                    <div class="exec-cost-badge" aria-hidden="true">PKR</div>
+                                </div>
+                                <div class="exec-meter"><div class="exec-meter-fill" id="pres-meter-rs-plant"></div></div>
                             </div>
                         </div>
                     </div>
@@ -8517,86 +9984,133 @@
             </div>
 
             <div class="exec-block">
-                <div class="exec-block-title"><span>Offline Ops</span><em>PS · SS · Metallizer · Packing</em></div>
-                <div class="exec-machine-grid">
-                    <div class="exec-machine-card machine-ps">
+                <div class="exec-block-title"><span>Offline Ops</span><em>Process flow · PS → SS → Metallizer → Pack</em></div>
+                <div class="exec-flow-lane">
+                    <div class="exec-machine-card machine-ps exec-flow-card">
+                        <div class="exec-flow-stage">01</div>
                         <div class="exec-machine-top">
                             <div class="exec-machine-name">Primary Slitter</div>
                             <div class="exec-machine-badge">PS</div>
                         </div>
-                        <div class="exec-machine-body">
-                            <div class="exec-machine-metrics">
-                                <div class="exec-machine-metric">
-                                    <div class="exec-machine-metric-label">Prod</div>
-                                    <div class="exec-machine-metric-value" id="pres-val-ps-prod">0 kg</div>
-                                </div>
-                                <div class="exec-machine-metric waste">
-                                    <div class="exec-machine-metric-label">Waste</div>
-                                    <div class="exec-machine-metric-value" id="pres-val-ps-waste">0.0%</div>
-                                </div>
+                        <div class="exec-flow-center" aria-hidden="true">
+                            <div class="exec-flow-ring-wrap">
+                                <svg viewBox="0 0 36 36">
+                                    <circle class="exec-ring-track" cx="18" cy="18" r="14"></circle>
+                                    <circle class="exec-ring-fill" id="pres-flow-ring-ps" cx="18" cy="18" r="14"></circle>
+                                </svg>
+                                <strong id="pres-yield-ps-num">—</strong>
                             </div>
-                            <div class="exec-machine-sign" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 10h18M8 14h2M14 14h2"/></svg>
+                            <span>Yield</span>
+                        </div>
+                        <div class="exec-flow-body">
+                            <div class="exec-machine-metric">
+                                <div class="exec-machine-metric-label">Production</div>
+                                <div class="exec-machine-metric-value" id="pres-val-ps-prod">0 kg</div>
+                            </div>
+                            <div class="exec-waste-chip">
+                                <span>Waste</span>
+                                <strong id="pres-val-ps-waste">0.0%</strong>
                             </div>
                         </div>
+                        <div class="exec-flow-foot">
+                            <div class="exec-flow-share"><div class="exec-flow-share-fill" id="pres-yield-ps"></div></div>
+                            <span class="exec-flow-share-label" id="pres-yield-ps-lbl">Yield —</span>
+                        </div>
                     </div>
-                    <div class="exec-machine-card machine-ss">
+                    <div class="exec-flow-connector" aria-hidden="true"></div>
+                    <div class="exec-machine-card machine-ss exec-flow-card">
+                        <div class="exec-flow-stage">02</div>
                         <div class="exec-machine-top">
                             <div class="exec-machine-name">Secondary Slitter</div>
                             <div class="exec-machine-badge">SS</div>
                         </div>
-                        <div class="exec-machine-body">
-                            <div class="exec-machine-metrics">
-                                <div class="exec-machine-metric">
-                                    <div class="exec-machine-metric-label">Prod</div>
-                                    <div class="exec-machine-metric-value" id="pres-val-ss-prod">0 kg</div>
-                                </div>
-                                <div class="exec-machine-metric waste">
-                                    <div class="exec-machine-metric-label">Waste</div>
-                                    <div class="exec-machine-metric-value" id="pres-val-ss-waste">0.0%</div>
-                                </div>
+                        <div class="exec-flow-center" aria-hidden="true">
+                            <div class="exec-flow-ring-wrap">
+                                <svg viewBox="0 0 36 36">
+                                    <circle class="exec-ring-track" cx="18" cy="18" r="14"></circle>
+                                    <circle class="exec-ring-fill" id="pres-flow-ring-ss" cx="18" cy="18" r="14"></circle>
+                                </svg>
+                                <strong id="pres-yield-ss-num">—</strong>
                             </div>
-                            <div class="exec-machine-sign" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="18" cy="17" r="2"/></svg>
+                            <span>Yield</span>
+                        </div>
+                        <div class="exec-flow-body">
+                            <div class="exec-machine-metric">
+                                <div class="exec-machine-metric-label">Production</div>
+                                <div class="exec-machine-metric-value" id="pres-val-ss-prod">0 kg</div>
+                            </div>
+                            <div class="exec-waste-chip">
+                                <span>Waste</span>
+                                <strong id="pres-val-ss-waste">0.0%</strong>
                             </div>
                         </div>
+                        <div class="exec-flow-foot">
+                            <div class="exec-flow-share"><div class="exec-flow-share-fill" id="pres-yield-ss"></div></div>
+                            <span class="exec-flow-share-label" id="pres-yield-ss-lbl">Yield —</span>
+                        </div>
                     </div>
-                    <div class="exec-machine-card machine-met">
+                    <div class="exec-flow-connector" aria-hidden="true"></div>
+                    <div class="exec-machine-card machine-met exec-flow-card">
+                        <div class="exec-flow-stage">03</div>
                         <div class="exec-machine-top">
                             <div class="exec-machine-name">Metallizer</div>
                             <div class="exec-machine-badge">MET</div>
                         </div>
-                        <div class="exec-machine-body">
-                            <div class="exec-machine-metrics">
-                                <div class="exec-machine-metric">
-                                    <div class="exec-machine-metric-label">Prod</div>
-                                    <div class="exec-machine-metric-value" id="pres-val-met-prod">0 kg</div>
-                                </div>
-                                <div class="exec-machine-metric waste">
-                                    <div class="exec-machine-metric-label">Waste</div>
-                                    <div class="exec-machine-metric-value" id="pres-val-met-waste">0.0%</div>
-                                </div>
+                        <div class="exec-flow-center" aria-hidden="true">
+                            <div class="exec-flow-ring-wrap">
+                                <svg viewBox="0 0 36 36">
+                                    <circle class="exec-ring-track" cx="18" cy="18" r="14"></circle>
+                                    <circle class="exec-ring-fill" id="pres-flow-ring-met" cx="18" cy="18" r="14"></circle>
+                                </svg>
+                                <strong id="pres-yield-met-num">—</strong>
                             </div>
-                            <div class="exec-machine-sign" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v4M8 7h8l1 4H7l1-4z"/><rect x="5" y="11" width="14" height="8" rx="1"/><path d="M9 19v2M15 19v2"/></svg>
+                            <span>Yield</span>
+                        </div>
+                        <div class="exec-flow-body">
+                            <div class="exec-machine-metric">
+                                <div class="exec-machine-metric-label">Production</div>
+                                <div class="exec-machine-metric-value" id="pres-val-met-prod">0 kg</div>
+                            </div>
+                            <div class="exec-waste-chip">
+                                <span>Waste</span>
+                                <strong id="pres-val-met-waste">0.0%</strong>
                             </div>
                         </div>
+                        <div class="exec-flow-foot">
+                            <div class="exec-flow-share"><div class="exec-flow-share-fill" id="pres-yield-met"></div></div>
+                            <span class="exec-flow-share-label" id="pres-yield-met-lbl">Yield —</span>
+                        </div>
                     </div>
-                    <div class="exec-machine-card machine-pack">
+                    <div class="exec-flow-connector pack" aria-hidden="true"></div>
+                    <div class="exec-machine-card machine-pack exec-flow-card exec-flow-cost">
+                        <div class="exec-flow-stage">Cost</div>
                         <div class="exec-machine-top">
                             <div class="exec-machine-name">Packing Cost</div>
                             <div class="exec-machine-badge">PKR</div>
                         </div>
-                        <div class="exec-machine-body">
-                            <div class="exec-machine-metrics">
-                                <div class="exec-machine-metric">
-                                    <div class="exec-machine-metric-label">Avg Factor</div>
-                                    <div class="exec-machine-metric-value" id="pres-val-packing">PKR 0</div>
-                                </div>
+                        <div class="exec-flow-center pack" aria-hidden="true">
+                            <div class="exec-flow-ring-wrap">
+                                <svg viewBox="0 0 36 36">
+                                    <circle class="exec-ring-track" cx="18" cy="18" r="14"></circle>
+                                    <circle class="exec-ring-fill" id="pres-flow-ring-pack" cx="18" cy="18" r="14"></circle>
+                                </svg>
+                                <strong id="pres-yield-pack-num">—</strong>
                             </div>
-                            <div class="exec-machine-sign" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7 12 12l8.7-5M12 22V12"/></svg>
+                            <span>Avg Factor (PKR)</span>
+                        </div>
+                        <div class="exec-flow-body">
+                            <div class="exec-machine-metric">
+                                <div class="exec-machine-metric-label">Packing Factor</div>
+                                <div class="exec-machine-metric-value" id="pres-val-packing">PKR 0</div>
                             </div>
+                            <div class="exec-waste-chip exec-cost-chip">
+                                <span>Status</span>
+                                <strong id="pres-pack-status">—</strong>
+                            </div>
+                        </div>
+                        <div class="exec-flow-foot">
+                            <div class="exec-flow-share"><div class="exec-flow-share-fill" id="pres-yield-pack"></div></div>
+                            <span class="exec-flow-share-label" id="pres-yield-pack-lbl">Factor band —</span>
                         </div>
                     </div>
                 </div>
@@ -14645,8 +16159,8 @@
             const totalProd = mainData.reduce((sum, r) => sum + (r['Prod. (Tons)'] || 0), 0);
             const avgWaste = kpiDef.waste_pct.calculate(mainData);
             const avgOee = kpiDef.oee.calculate(mainData);
-            const avgKwhLine = kpiDef.kwh_line.calculate(mainData);
-            const avgKwhPlant = kpiDef.kwh_plant.calculate(mainData);
+            const avgRsLine = kpiDef.rs_line.calculate(mainData);
+            const avgRsPlant = kpiDef.rs_plant.calculate(mainData);
 
             // --- Offline KPIs (per machine) ---
             const psProd = offlineData.reduce((sum, r) => sum + (r['PS_Production'] || 0), 0);
@@ -14678,8 +16192,8 @@
             setTxt('exec-val-prod', `${totalProd.toLocaleString(undefined, { maximumFractionDigits: 0 })} t`);
             setTxt('exec-val-waste', `${avgWaste.toFixed(1)}%`);
             setTxt('exec-val-oee', `${avgOee.toFixed(1)}%`);
-            setTxt('exec-val-kwh-line', avgKwhLine ? avgKwhLine.toFixed(3) : '0.00');
-            setTxt('exec-val-kwh-plant', avgKwhPlant ? avgKwhPlant.toFixed(3) : '0.00');
+            setTxt('exec-val-rs-line', avgRsLine ? avgRsLine.toFixed(2) : '0.00');
+            setTxt('exec-val-rs-plant', avgRsPlant ? avgRsPlant.toFixed(2) : '0.00');
 
             setTxt('exec-val-ps-prod', formatMass(psProd));
             setTxt('exec-val-ps-waste', `${psWastePct.toFixed(2)}%`);
@@ -14688,6 +16202,59 @@
             setTxt('exec-val-met-prod', formatMass(metProd));
             setTxt('exec-val-met-waste', `${metWastePct.toFixed(2)}%`);
             setTxt('exec-val-packing', `PKR ${avgPacking.toFixed(2)}`);
+
+            const setMeter = (id, pct) => {
+                const el = document.getElementById(id);
+                if (el) el.style.width = `${Math.max(0, Math.min(100, pct || 0))}%`;
+            };
+            const setRing = (id, pct) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                const c = 2 * Math.PI * 14;
+                const p = Math.max(0, Math.min(100, pct || 0)) / 100;
+                el.style.strokeDasharray = `${(p * c).toFixed(2)} ${c.toFixed(2)}`;
+            };
+
+            const sparkRows = (mainData || []).filter(r => r['Prod. (Tons)'] !== null && r['Prod. (Tons)'] !== undefined)
+                .slice()
+                .sort((a, b) => new Date(a['Dates']) - new Date(b['Dates']));
+            updateSparkline('exec-spark-prod', sparkRows, 'Prod. (Tons)', '#00e5ff');
+
+            const monthCount = sparkRows.length || 0;
+            const avgMo = monthCount ? totalProd / monthCount : 0;
+            setTxt('exec-stat-months', monthCount ? String(monthCount) : '—');
+            setTxt('exec-stat-avg', monthCount ? `${Math.round(avgMo).toLocaleString()} t` : '—');
+            let trend = '—';
+            if (sparkRows.length >= 2) {
+                const last = sparkRows[sparkRows.length - 1]['Prod. (Tons)'] || 0;
+                const prev = sparkRows[sparkRows.length - 2]['Prod. (Tons)'] || 0;
+                if (prev > 0) {
+                    const delta = ((last - prev) / prev) * 100;
+                    trend = `${delta >= 0 ? '+' : ''}${delta.toFixed(1)}%`;
+                }
+            }
+            setTxt('exec-stat-trend', trend);
+
+            setRing('exec-ring-waste', Math.min(100, (avgWaste / 10) * 100));
+            setRing('exec-ring-oee', avgOee);
+            setMeter('exec-meter-waste', Math.min(100, (avgWaste / 10) * 100));
+            setMeter('exec-meter-oee', avgOee);
+
+            const rsMax = Math.max(avgRsLine || 0, avgRsPlant || 0, 1) * 1.15;
+            setMeter('exec-meter-rs-line', ((avgRsLine || 0) / rsMax) * 100);
+            setMeter('exec-meter-rs-plant', ((avgRsPlant || 0) / rsMax) * 100);
+
+            const setYield = (id, lbl, wastePct) => {
+                const yieldPct = Math.max(0, Math.min(100, 100 - (Number(wastePct) || 0)));
+                setMeter(id, yieldPct);
+                setTxt(lbl, `Yield ${yieldPct.toFixed(1)}%`);
+            };
+            setYield('exec-yield-ps', 'exec-yield-ps-lbl', psWastePct);
+            setYield('exec-yield-ss', 'exec-yield-ss-lbl', ssWastePct);
+            setYield('exec-yield-met', 'exec-yield-met-lbl', metWastePct);
+            const packBand = Math.min(100, Math.max(0, 100 - ((avgPacking || 0) / 20) * 100));
+            setMeter('exec-yield-pack', packBand);
+            setTxt('exec-yield-pack-lbl', avgPacking ? `Lower cost · PKR ${avgPacking.toFixed(1)}` : 'Factor band —');
 
             // --- Monthly cards (full selected/latest year — not month-filtered) ---
             const monthlyHost = document.getElementById('exec-monthly-cards');
@@ -17437,12 +19004,12 @@
             const avgOee = typeof kpiDef !== 'undefined' && kpiDef.oee
                 ? kpiDef.oee.calculate(mainRows)
                 : avgField(mainRows, 'OEE %');
-            const avgKwhLine = typeof kpiDef !== 'undefined' && kpiDef.kwh_line
-                ? kpiDef.kwh_line.calculate(mainRows)
-                : avgField(mainRows, 'KWh/Kg Line');
-            const avgKwhPlant = typeof kpiDef !== 'undefined' && kpiDef.kwh_plant
-                ? kpiDef.kwh_plant.calculate(mainRows)
-                : avgField(mainRows, 'KWh/Kg Plant');
+            const avgRsLine = typeof kpiDef !== 'undefined' && kpiDef.rs_line
+                ? kpiDef.rs_line.calculate(mainRows)
+                : avgField(mainRows, 'Rs/Kg Line');
+            const avgRsPlant = typeof kpiDef !== 'undefined' && kpiDef.rs_plant
+                ? kpiDef.rs_plant.calculate(mainRows)
+                : avgField(mainRows, 'Rs/Kg Plant');
 
             const psProd = offRows.reduce((sum, r) => sum + (r['PS_Production'] || 0), 0);
             const ssProd = offRows.reduce((sum, r) => sum + (r['SS_Production'] || 0), 0);
@@ -17472,8 +19039,8 @@
             setTxt('pres-val-prod', `${Math.round(totalProd).toLocaleString()} t`);
             setTxt('pres-val-waste', `${Number(avgWaste || 0).toFixed(1)}%`);
             setTxt('pres-val-oee', `${Number(avgOee || 0).toFixed(1)}%`);
-            setTxt('pres-val-kwh-line', avgKwhLine ? Number(avgKwhLine).toFixed(3) : '0.00');
-            setTxt('pres-val-kwh-plant', avgKwhPlant ? Number(avgKwhPlant).toFixed(3) : '0.00');
+            setTxt('pres-val-rs-line', avgRsLine ? Number(avgRsLine).toFixed(2) : '0.00');
+            setTxt('pres-val-rs-plant', avgRsPlant ? Number(avgRsPlant).toFixed(2) : '0.00');
             setTxt('pres-val-ps-prod', formatMass(psProd));
             setTxt('pres-val-ps-waste', `${Number(psWastePct || 0).toFixed(2)}%`);
             setTxt('pres-val-ss-prod', formatMass(ssProd));
@@ -17481,6 +19048,60 @@
             setTxt('pres-val-met-prod', formatMass(metProd));
             setTxt('pres-val-met-waste', `${Number(metWastePct || 0).toFixed(2)}%`);
             setTxt('pres-val-packing', `PKR ${Number(avgPacking || 0).toFixed(2)}`);
+
+            const setMeter = (id, pct) => {
+                const el = document.getElementById(id);
+                if (el) el.style.width = `${Math.max(0, Math.min(100, pct || 0))}%`;
+            };
+            const setRing = (id, pct) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                const c = 2 * Math.PI * 14;
+                const p = Math.max(0, Math.min(100, pct || 0)) / 100;
+                el.style.strokeDasharray = `${(p * c).toFixed(2)} ${c.toFixed(2)}`;
+            };
+
+            // Year sparkline context for the selected month
+            const yearRows = mainDataRaw.filter(r => {
+                const info = parseYearMonth(r['Dates']);
+                return info.year === String(year) && r['Prod. (Tons)'] !== null;
+            }).slice().sort((a, b) => new Date(a['Dates']) - new Date(b['Dates']));
+            updateSparkline('pres-spark-prod', yearRows, 'Prod. (Tons)', '#00e5ff');
+
+            setTxt('pres-stat-waste', `${Number(avgWaste || 0).toFixed(1)}%`);
+            setTxt('pres-stat-oee', `${Number(avgOee || 0).toFixed(1)}%`);
+            setTxt('pres-stat-rs', avgRsPlant ? Number(avgRsPlant).toFixed(1) : '—');
+
+            setRing('pres-ring-waste', Math.min(100, (Number(avgWaste || 0) / 10) * 100));
+            setRing('pres-ring-oee', Number(avgOee || 0));
+            setMeter('pres-meter-waste', Math.min(100, (Number(avgWaste || 0) / 10) * 100));
+            setMeter('pres-meter-oee', Number(avgOee || 0));
+
+            const rsMax = Math.max(Number(avgRsLine || 0), Number(avgRsPlant || 0), 1) * 1.15;
+            setMeter('pres-meter-rs-line', (Number(avgRsLine || 0) / rsMax) * 100);
+            setMeter('pres-meter-rs-plant', (Number(avgRsPlant || 0) / rsMax) * 100);
+
+            const setYield = (id, lbl, wastePct, ringId, numId) => {
+                const yieldPct = Math.max(0, Math.min(100, 100 - (Number(wastePct) || 0)));
+                setMeter(id, yieldPct);
+                setTxt(lbl, `Yield ${yieldPct.toFixed(1)}%`);
+                if (ringId) setRing(ringId, yieldPct);
+                if (numId) setTxt(numId, `${yieldPct.toFixed(1)}%`);
+            };
+            setYield('pres-yield-ps', 'pres-yield-ps-lbl', psWastePct, 'pres-flow-ring-ps', 'pres-yield-ps-num');
+            setYield('pres-yield-ss', 'pres-yield-ss-lbl', ssWastePct, 'pres-flow-ring-ss', 'pres-yield-ss-num');
+            setYield('pres-yield-met', 'pres-yield-met-lbl', metWastePct, 'pres-flow-ring-met', 'pres-yield-met-num');
+            const packBand = Math.min(100, Math.max(0, 100 - (Number(avgPacking || 0) / 20) * 100));
+            setMeter('pres-yield-pack', packBand);
+            // Full ring frame — factor is a value badge, not a sparse progress arc
+            setRing('pres-flow-ring-pack', avgPacking ? 100 : 0);
+            setTxt('pres-yield-pack-num', avgPacking ? Number(avgPacking).toFixed(1) : '—');
+            setTxt('pres-yield-pack-lbl', avgPacking ? `Lower cost · PKR ${Number(avgPacking).toFixed(1)}` : 'Factor band —');
+            const packStatus = !avgPacking ? '—'
+                : Number(avgPacking) <= 12 ? 'Low'
+                : Number(avgPacking) <= 16 ? 'Fair'
+                : 'High';
+            setTxt('pres-pack-status', packStatus);
         }
 
         let presentationActive = false;
