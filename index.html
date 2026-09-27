@@ -3258,13 +3258,585 @@
             }
         }
 
+        /* PRESENTATION MONTH — clean collision-free layout */
+        .presentation-month-detail {
+            gap: 10px !important;
+            padding: 12px 14px 10px !important;
+            grid-template-rows: auto minmax(0, 1fr) minmax(210px, 1.05fr) minmax(190px, 1.05fr);
+        }
+
+        .presentation-month-detail-title {
+            font-size: clamp(22px, 2.6vw, 34px) !important;
+        }
+
+        .presentation-month-detail-sub {
+            font-size: 10px !important;
+            margin-top: 2px !important;
+        }
+
+        .presentation-month-detail-head {
+            padding-bottom: 6px !important;
+            margin-bottom: 0 !important;
+        }
+
+        .presentation-month-detail > .exec-block {
+            gap: 6px !important;
+            min-height: 0 !important;
+            overflow: hidden !important;
+        }
+
+        .presentation-month-detail .exec-block-title {
+            font-size: 11px !important;
+            letter-spacing: 1.4px !important;
+            margin: 0 0 2px !important;
+            flex-shrink: 0 !important;
+            display: flex !important;
+            align-items: baseline !important;
+            justify-content: space-between !important;
+            gap: 12px !important;
+        }
+
+        .presentation-month-detail .exec-block-title em {
+            font-size: 10px !important;
+            opacity: 0.75 !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            max-width: 55% !important;
+        }
+
+        /* Line Ops */
+        .presentation-month-detail .exec-line-deck { gap: 10px !important; }
+        .presentation-month-detail .exec-deck-eyebrow {
+            font-size: 9px !important;
+            margin-bottom: 3px !important;
+        }
+        .presentation-month-detail .exec-kpi-card.exec-hero-card {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 8px !important;
+            padding: 12px 14px !important;
+            overflow: hidden !important;
+            min-height: 0 !important;
+            height: 100% !important;
+        }
+        .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-head { flex: 0 0 auto !important; }
+        .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-value {
+            font-size: clamp(28px, 3.2vw, 42px) !important;
+            line-height: 1 !important;
+        }
+        .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-icon {
+            width: 44px !important; height: 44px !important;
+        }
+        .presentation-month-detail .exec-hero-viz {
+            flex: 1 1 auto !important;
+            min-height: 44px !important;
+        }
+        .presentation-month-detail .exec-hero-viz svg { min-height: 44px !important; height: 100% !important; }
+        .presentation-month-detail .exec-hero-stats {
+            display: grid !important;
+            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+            gap: 6px !important;
+            flex: 0 0 auto !important;
+            width: 100% !important;
+        }
+        .presentation-month-detail .exec-hero-stat {
+            padding: 7px 5px !important;
+            min-height: 44px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        .presentation-month-detail .exec-hero-stat span { font-size: 8px !important; margin-bottom: 2px !important; }
+        .presentation-month-detail .exec-hero-stat strong { font-size: 13px !important; }
+
+        .presentation-month-detail .exec-deck-stack { gap: 8px !important; }
+        .presentation-month-detail .exec-deck-group .exec-kpi-card {
+            padding: 10px 12px !important;
+            gap: 6px !important;
+            justify-content: center !important;
+            overflow: hidden !important;
+        }
+        .presentation-month-detail .exec-deck-group .exec-kpi-meta { display: none !important; }
+        .presentation-month-detail .exec-deck-group .exec-kpi-label {
+            font-size: 10px !important; line-height: 1.2 !important;
+        }
+        .presentation-month-detail .exec-deck-group .exec-kpi-value {
+            font-size: clamp(22px, 2.5vw, 32px) !important; line-height: 1.05 !important;
+        }
+        .presentation-month-detail .exec-ring { width: 40px !important; height: 40px !important; flex-shrink: 0 !important; }
+        .presentation-month-detail .exec-meter { height: 5px !important; margin-top: 4px !important; }
+        .presentation-month-detail .exec-cost-badge { width: 38px !important; height: 38px !important; font-size: 9px !important; }
+
+        /* Offline — larger equal rings + breathing room */
+        .presentation-month-detail .exec-flow-card {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            padding: 12px !important;
+            gap: 8px !important;
+            overflow: hidden !important;
+            height: 100% !important;
+            min-height: 0 !important;
+        }
+        .presentation-month-detail .exec-flow-card .exec-machine-top {
+            flex: 0 0 auto !important;
+            z-index: 8 !important;
+            padding: 0 32px 0 2px !important;
+            min-height: 18px !important;
+        }
+        .presentation-month-detail .exec-machine-name {
+            font-size: 11px !important; letter-spacing: 0.8px !important;
+        }
+        .presentation-month-detail .exec-flow-stage {
+            top: 10px !important; right: 10px !important; font-size: 9px !important;
+        }
+        .presentation-month-detail .exec-flow-center {
+            display: flex !important;
+            flex: 1 1 auto !important;
+            align-items: center !important;
+            justify-content: center !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            overflow: hidden !important;
+            padding: 4px 0 !important;
+        }
+        .presentation-month-detail .exec-flow-center > span { display: none !important; }
+        .presentation-month-detail .exec-flow-ring-wrap,
+        .presentation-month-detail .exec-flow-cost .exec-flow-ring-wrap {
+            width: min(108px, 72%) !important;
+            max-width: 108px !important;
+            max-height: 108px !important;
+            aspect-ratio: 1 !important;
+            flex: 0 0 auto !important;
+        }
+        .presentation-month-detail .exec-flow-ring-wrap strong,
+        .presentation-month-detail .exec-flow-cost .exec-flow-ring-wrap strong {
+            font-size: clamp(17px, 1.8vw, 24px) !important;
+        }
+        .presentation-month-detail .exec-flow-body,
+        .presentation-month-detail .exec-flow-cost .exec-flow-body {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 8px !important;
+            flex: 0 0 auto !important;
+            min-height: 34px !important;
+            padding: 2px 2px 0 !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            overflow: visible !important;
+            z-index: 5 !important;
+        }
+        .presentation-month-detail .exec-flow-body .exec-machine-metric-label { font-size: 9px !important; }
+        .presentation-month-detail .exec-flow-body .exec-machine-metric-value {
+            font-size: 13px !important; font-weight: 800 !important; line-height: 1.1 !important;
+        }
+        .presentation-month-detail .exec-waste-chip,
+        .presentation-month-detail .exec-cost-chip {
+            padding: 4px 8px !important; flex-shrink: 0 !important;
+        }
+        .presentation-month-detail .exec-waste-chip span,
+        .presentation-month-detail .exec-cost-chip span { font-size: 8px !important; }
+        .presentation-month-detail .exec-waste-chip strong,
+        .presentation-month-detail .exec-cost-chip strong { font-size: 11px !important; }
+        .presentation-month-detail .exec-flow-foot { display: none !important; }
+        .presentation-month-detail .exec-flow-cost .exec-flow-center {
+            flex: 1 1 auto !important; min-height: 0 !important;
+        }
+
+        /* Month Highlights — header chip + list only (no overlapping hero) */
+        .pres-hl-lane {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            flex: 1;
+            min-height: 0;
+            height: 100%;
+        }
+        .pres-hl-tile {
+            --hl-accent: #00e5ff;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-height: 0;
+            height: 100%;
+            padding: 10px 12px;
+            border-radius: 14px;
+            border: 1px solid color-mix(in srgb, var(--hl-accent) 36%, rgba(255,255,255,0.08));
+            background:
+                radial-gradient(90% 70% at 100% 0%, color-mix(in srgb, var(--hl-accent) 16%, transparent), transparent 55%),
+                linear-gradient(165deg, rgba(10, 20, 32, 0.96), rgba(4, 9, 16, 0.98));
+            overflow: hidden;
+        }
+        .pres-hl-tile.accent-green { --hl-accent: #39ff14; }
+        .pres-hl-tile.accent-amber { --hl-accent: #ffb000; }
+        .pres-hl-tile.accent-blue { --hl-accent: #38bdf8; }
+
+        .pres-hl-tile-top {
+            display: grid;
+            grid-template-columns: 28px minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+        .pres-hl-tile-stage {
+            width: 28px; height: 28px; border-radius: 8px;
+            display: grid; place-items: center;
+            font-size: 11px; font-weight: 800; color: #031018;
+            background: linear-gradient(135deg, var(--hl-accent), color-mix(in srgb, var(--hl-accent) 55%, #fff));
+        }
+        .pres-hl-tile-copy { min-width: 0; }
+        .pres-hl-tile-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 11px; font-weight: 700; letter-spacing: 0.7px;
+            text-transform: uppercase; color: #eef5ff;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .pres-hl-tile-sub {
+            margin-top: 2px; font-size: 10px; color: #7e8b9b;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .pres-hl-chip {
+            max-width: 42%;
+            padding: 5px 8px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 800;
+            line-height: 1.2;
+            text-align: right;
+            color: #f4f8ff;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid color-mix(in srgb, var(--hl-accent) 28%, transparent);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .pres-hl-chip.up { color: #39ff14; border-color: rgba(57,255,20,0.3); }
+        .pres-hl-chip.warn { color: #ffb000; border-color: rgba(255,176,0,0.3); }
+
+        .pres-hl-tile-list {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+        }
+        .pres-hl-item {
+            display: grid;
+            grid-template-columns: 18px minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.04);
+            flex: 0 0 auto;
+            min-width: 0;
+        }
+        .pres-hl-item.top, .pres-hl-item.up {
+            border-color: color-mix(in srgb, var(--hl-accent) 30%, transparent);
+            background: color-mix(in srgb, var(--hl-accent) 8%, rgba(255,255,255,0.02));
+        }
+        .pres-hl-item-idx {
+            width: 18px; height: 18px; border-radius: 5px;
+            display: grid; place-items: center;
+            font-size: 9px; font-weight: 800; color: #031018;
+            background: color-mix(in srgb, var(--hl-accent) 85%, #fff);
+        }
+        .pres-hl-item-name {
+            font-size: 12px; font-weight: 700; color: #f2f7ff;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .pres-hl-item-meta {
+            font-size: 10px; color: #8b98a8;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .pres-hl-item-val {
+            font-size: 11px; font-weight: 800; color: var(--hl-accent);
+            white-space: nowrap; text-align: right; flex-shrink: 0;
+        }
+        .pres-hl-item-val .up { color: #39ff14; }
+        .pres-hl-item-val .down { color: #ff6b63; }
+        .pres-hl-item-val .flat { color: #8b98a8; }
+
+        .pres-hl-bar-item {
+            display: grid;
+            grid-template-columns: minmax(78px, 96px) minmax(0, 1fr) 58px;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 2px;
+            flex: 0 0 auto;
+            min-width: 0;
+        }
+        .pres-hl-bar-item.top .pres-hl-bar-label {
+            color: var(--hl-accent); font-weight: 800;
+        }
+        .pres-hl-bar-label {
+            font-size: 11px; font-weight: 650; color: #d7e2f0;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .pres-hl-bar-track {
+            height: 7px; border-radius: 999px;
+            background: rgba(255,255,255,0.06); overflow: hidden;
+        }
+        .pres-hl-bar-fill {
+            height: 100%; border-radius: 999px; width: 0%;
+            background: linear-gradient(90deg, var(--hl-accent), color-mix(in srgb, var(--hl-accent) 55%, #fff));
+        }
+        .pres-hl-bar-val {
+            font-size: 11px; font-weight: 700; color: #e8eef8;
+            text-align: right; white-space: nowrap;
+        }
+        .presentation-month-detail .pres-highlights-block .pres-empty-note {
+            padding: 8px; font-size: 11px; text-align: center; color: #8b98a8;
+        }
+        @media (max-width: 1100px) {
+            .pres-hl-lane { grid-template-columns: 1fr; }
+        }
+
+
+        .pres-rank-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            min-height: 0;
+            height: 100%;
+        }
+
+        .pres-rank-card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-height: 0;
+            padding: 14px 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(0, 229, 255, 0.18);
+            background: linear-gradient(160deg, rgba(8, 18, 30, 0.88), rgba(4, 10, 18, 0.92));
+            overflow: hidden;
+        }
+
+        .pres-rank-card.full {
+            grid-column: 1 / -1;
+        }
+
+        .pres-rank-card.highlight {
+            border-color: rgba(57, 255, 20, 0.45);
+            box-shadow: 0 0 28px rgba(57, 255, 20, 0.08);
+        }
+
+        .pres-rank-card.alert {
+            border-color: rgba(255, 176, 0, 0.45);
+            box-shadow: 0 0 28px rgba(255, 176, 0, 0.08);
+        }
+
+        .pres-rank-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .pres-rank-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(15px, 1.5vw, 20px);
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            color: #eef5ff;
+            text-transform: uppercase;
+        }
+
+        .pres-rank-sub {
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #7e8b9b;
+        }
+
+        .pres-rank-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow: auto;
+            min-height: 0;
+            flex: 1;
+            padding-right: 4px;
+        }
+
+        .pres-rank-row {
+            display: grid;
+            grid-template-columns: 28px minmax(0, 1.4fr) minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .pres-rank-row.top {
+            background: rgba(0, 229, 255, 0.08);
+            border-color: rgba(0, 229, 255, 0.28);
+        }
+
+        .pres-rank-row.up {
+            background: rgba(57, 255, 20, 0.07);
+            border-color: rgba(57, 255, 20, 0.22);
+        }
+
+        .pres-rank-row.down {
+            background: rgba(255, 59, 48, 0.07);
+            border-color: rgba(255, 59, 48, 0.2);
+        }
+
+        .pres-rank-idx {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            font-size: 12px;
+            font-weight: 800;
+            color: #031018;
+            background: linear-gradient(135deg, #00e5ff, #39ff14);
+        }
+
+        .pres-rank-name {
+            font-weight: 700;
+            color: #f2f7ff;
+            font-size: clamp(13px, 1.15vw, 16px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .pres-rank-meta {
+            color: #8b98a8;
+            font-size: 11px;
+            letter-spacing: 0.4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .pres-rank-val {
+            text-align: right;
+            font-weight: 800;
+            color: #00e5ff;
+            font-size: clamp(13px, 1.2vw, 16px);
+            white-space: nowrap;
+        }
+
+        .pres-rank-delta {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-left: 8px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .pres-rank-delta.up { color: #39ff14; }
+        .pres-rank-delta.down { color: #ff6b63; }
+        .pres-rank-delta.flat { color: #8b98a8; }
+
+        .pres-hero-strip {
+            display: grid;
+            grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .pres-hero-strip .exec-kpi-card {
+            min-height: 0;
+        }
+
+        .pres-dept-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow: auto;
+            min-height: 0;
+            flex: 1;
+        }
+
+        .pres-dept-bar-row {
+            display: grid;
+            grid-template-columns: minmax(90px, 120px) minmax(0, 1fr) 88px;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .pres-dept-bar-row.top .pres-dept-label {
+            color: #00e5ff;
+            font-weight: 800;
+        }
+
+        .pres-dept-label {
+            font-size: 12px;
+            font-weight: 650;
+            color: #d7e2f0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .pres-dept-track {
+            height: 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+        }
+
+        .pres-dept-fill {
+            height: 100%;
+            border-radius: 999px;
+            width: 0%;
+            background: linear-gradient(90deg, #00e5ff, #39ff14);
+        }
+
+        .pres-dept-fill.warn {
+            background: linear-gradient(90deg, #ffb000, #ff3b30);
+        }
+
+        .pres-dept-val {
+            text-align: right;
+            font-size: 12px;
+            font-weight: 700;
+            color: #e8eef8;
+            white-space: nowrap;
+        }
+
+        .pres-empty-note {
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px dashed rgba(255,255,255,0.12);
+            color: #8b98a8;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        @media (max-width: 1100px) {
+            .pres-hero-strip {
+                grid-template-columns: 1fr 1fr;
+            }
+            .pres-rank-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .presentation-month-detail {
             width: 100%;
             height: 100%;
             max-height: none;
             display: grid;
-            grid-template-rows: auto minmax(0, 1fr) minmax(0, 1fr);
-            gap: 14px;
+            grid-template-rows: auto minmax(0, 1fr) minmax(168px, 0.9fr) minmax(170px, 1.1fr);
+            gap: 12px;
             padding: 16px 18px 14px;
             border-radius: 18px;
             border: 1px solid rgba(0, 229, 255, 0.32);
@@ -9877,7 +10449,7 @@
             <div class="presentation-month-detail-head">
                 <div>
                     <div class="presentation-month-detail-title" id="pres-month-title">January 2026</div>
-                    <p class="presentation-month-detail-sub" id="pres-month-sub">Line &amp; Offline Ops · Single Month</p>
+                    <p class="presentation-month-detail-sub" id="pres-month-sub">Line · Offline · Products · Waste · Downtime</p>
                 </div>
                 <div class="presentation-monthly-year" id="presentation-monthly-year">Year —</div>
             </div>
@@ -10112,6 +10684,47 @@
                             <div class="exec-flow-share"><div class="exec-flow-share-fill" id="pres-yield-pack"></div></div>
                             <span class="exec-flow-share-label" id="pres-yield-pack-lbl">Factor band —</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exec-block pres-highlights-block">
+                <div class="exec-block-title"><span>Month Highlights</span><em>Products rising · Waste · Downtime</em></div>
+                <div class="pres-hl-lane">
+                    <div class="pres-hl-tile accent-green">
+                        <div class="pres-hl-tile-top">
+                            <div class="pres-hl-tile-stage">01</div>
+                            <div class="pres-hl-tile-copy">
+                                <div class="pres-hl-tile-label">Products Rising</div>
+                                <div class="pres-hl-tile-sub" id="pres-hl-prod-sub">vs prior month</div>
+                            </div>
+                            <div class="pres-hl-chip up" id="pres-hl-prod-chip">—</div>
+                        </div>
+                        <div class="pres-hl-tile-list" id="pres-uni-product-list"></div>
+                    </div>
+
+                    <div class="pres-hl-tile accent-amber">
+                        <div class="pres-hl-tile-top">
+                            <div class="pres-hl-tile-stage">02</div>
+                            <div class="pres-hl-tile-copy">
+                                <div class="pres-hl-tile-label">Waste by Dept</div>
+                                <div class="pres-hl-tile-sub" id="pres-uni-waste-total">Tons</div>
+                            </div>
+                            <div class="pres-hl-chip warn" id="pres-hl-waste-chip">—</div>
+                        </div>
+                        <div class="pres-hl-tile-list" id="pres-uni-waste-bars"></div>
+                    </div>
+
+                    <div class="pres-hl-tile accent-blue">
+                        <div class="pres-hl-tile-top">
+                            <div class="pres-hl-tile-stage">03</div>
+                            <div class="pres-hl-tile-copy">
+                                <div class="pres-hl-tile-label">Downtime by Dept</div>
+                                <div class="pres-hl-tile-sub" id="pres-uni-dt-total">Hours</div>
+                            </div>
+                            <div class="pres-hl-chip warn" id="pres-hl-dt-chip">—</div>
+                        </div>
+                        <div class="pres-hl-tile-list" id="pres-uni-dt-bars"></div>
                     </div>
                 </div>
             </div>
@@ -18908,14 +19521,30 @@
             return targetYear;
         }
 
-        function getPresentationYearMonths() {
+        function getPresentationYearMonths(source = 'main') {
             const targetYear = getPresentationTargetYear();
             if (!targetYear) return [];
-            return mainDataRaw
-                .filter(r => {
+
+            let rows = [];
+            if (source === 'products') {
+                rows = productDataRaw.filter(r => {
+                    const info = parseYearMonth(r['Dates']);
+                    return info.year === String(targetYear) && r['Production'] !== null && r['Production'] !== undefined;
+                });
+            } else if (source === 'offline') {
+                rows = offlineDataRaw.filter(r => {
+                    const info = parseYearMonth(r['Dates']);
+                    return info.year === String(targetYear);
+                });
+            } else {
+                rows = mainDataRaw.filter(r => {
                     const info = parseYearMonth(r['Dates']);
                     return info.year === String(targetYear) && r['Prod. (Tons)'] !== null;
-                })
+                });
+            }
+
+            const seen = new Set();
+            return rows
                 .slice()
                 .sort((a, b) => new Date(a['Dates']) - new Date(b['Dates']))
                 .map(r => {
@@ -18927,7 +19556,27 @@
                         fullName: fullMonthNames[pm.monthNum - 1] || shortMonths[pm.monthNum - 1],
                         label: `${fullMonthNames[pm.monthNum - 1] || ''} ${pm.year}`
                     };
+                })
+                .filter(m => {
+                    const key = `${m.year}-${m.month}`;
+                    if (seen.has(key)) return false;
+                    seen.add(key);
+                    return true;
                 });
+        }
+
+        function pushMonthlyOverlaySlides(slides, tab, source, labelPrefix, overlayKind) {
+            getPresentationYearMonths(source).forEach(m => {
+                slides.push({
+                    tab,
+                    overlay: 'month-detail',
+                    overlayKind,
+                    year: m.year,
+                    month: m.month,
+                    monthNum: m.monthNum,
+                    label: `${labelPrefix} · ${m.label}`
+                });
+            });
         }
 
         function buildPresentationSlides() {
@@ -18961,13 +19610,51 @@
             });
             return slides;
         }
-
         let PRESENTATION_SLIDES = buildPresentationSlides();
 
         function setPresentationMonthlyOverlay(open) {
             document.body.classList.toggle('presentation-monthly-open', !!open);
             const overlay = document.getElementById('presentation-monthly-overlay');
             if (overlay) overlay.setAttribute('aria-hidden', open ? 'false' : 'true');
+        }
+
+        function formatPresMass(kg) {
+            const n = Number(kg) || 0;
+            if (Math.abs(n) >= 1000) return `${Math.round(n / 1000).toLocaleString()} t`;
+            return `${Math.round(n).toLocaleString()} kg`;
+        }
+
+        function formatPresDelta(curr, prev) {
+            if (prev === null || prev === undefined || isNaN(prev)) return { text: 'new', cls: 'flat' };
+            const d = (Number(curr) || 0) - (Number(prev) || 0);
+            if (Math.abs(d) < 0.0001) return { text: 'flat', cls: 'flat' };
+            const pct = prev ? (d / Math.abs(prev)) * 100 : 0;
+            const arrow = d > 0 ? '▲' : '▼';
+            return {
+                text: `${arrow} ${Math.abs(d) >= 1000 ? formatPresMass(Math.abs(d)) : Math.abs(d).toLocaleString(undefined, { maximumFractionDigits: 0 })} (${Math.abs(pct).toFixed(0)}%)`,
+                cls: d > 0 ? 'up' : 'down',
+                delta: d,
+                pct
+            };
+        }
+
+        function renderPresDeptBars(elId, items, unit, warn) {
+            const el = document.getElementById(elId);
+            if (!el) return;
+            const max = Math.max(...items.map(i => i.value), 0.0001);
+            const nonempty = items.filter(i => i.value > 0);
+            if (!nonempty.length) {
+                el.innerHTML = '<div class="pres-empty-note">No department data this month.</div>';
+                return;
+            }
+            el.innerHTML = items.map((item, i) => {
+                const pct = Math.max(0, Math.min(100, (item.value / max) * 100));
+                return `<div class="pres-dept-bar-row ${i === 0 && item.value ? 'top' : ''}">
+                    <div class="pres-dept-label">${item.label}</div>
+                    <div class="pres-dept-track"><div class="pres-dept-fill ${warn ? 'warn' : ''}" style="width:${pct.toFixed(1)}%"></div></div>
+                    <div class="pres-dept-val">${item.value.toFixed(1)} ${unit}</div>
+                </div>`;
+            }).join('');
         }
 
         function fillPresentationMonthDetail(year, month) {
@@ -18979,7 +19666,7 @@
             const monthNum = parseInt(month, 10);
             const fullName = fullMonthNames[monthNum - 1] || shortMonths[monthNum - 1] || month;
             if (titleEl) titleEl.textContent = `${fullName} ${year}`;
-            if (subEl) subEl.textContent = 'Line & Offline Ops · Single Month';
+            if (subEl) subEl.textContent = 'Line · Offline · Products · Waste · Downtime';
             if (yearEl) yearEl.textContent = `Year ${year}`;
 
             const mainRows = mainDataRaw.filter(r => {
@@ -19102,8 +19789,181 @@
                 : Number(avgPacking) <= 16 ? 'Fair'
                 : 'High';
             setTxt('pres-pack-status', packStatus);
-        }
+        
 
+            // ---- Month highlights: rising products + waste/downtime by dept ----
+            const setHl = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+            const monthPad = String(month).padStart(2, '0');
+            let prevYear = Number(year);
+            let prevMonthNum = monthNum - 1;
+            if (prevMonthNum < 1) { prevMonthNum = 12; prevYear -= 1; }
+            const prevPad = String(prevMonthNum).padStart(2, '0');
+
+            const formatPresMass = (kg) => {
+                const n = Number(kg) || 0;
+                if (Math.abs(n) >= 1000) return `${Math.round(n / 1000).toLocaleString()} t`;
+                return `${Math.round(n).toLocaleString()} kg`;
+            };
+            const formatPresDelta = (curr, prev) => {
+                if (prev === null || prev === undefined || isNaN(prev)) return { text: 'new', cls: 'flat' };
+                const d = (Number(curr) || 0) - (Number(prev) || 0);
+                if (Math.abs(d) < 0.0001) return { text: 'flat', cls: 'flat' };
+                const pct = prev ? (d / Math.abs(prev)) * 100 : 0;
+                const arrow = d > 0 ? '▲' : '▼';
+                return {
+                    text: `${arrow} ${Math.abs(d) >= 1000 ? formatPresMass(Math.abs(d)) : Math.abs(d).toLocaleString(undefined, { maximumFractionDigits: 0 })} (${Math.abs(pct).toFixed(0)}%)`,
+                    cls: d > 0 ? 'up' : 'down'
+                };
+            };
+
+            const currProdRows = (typeof productDataRaw !== 'undefined' ? productDataRaw : []).filter(r => {
+                const info = parseYearMonth(r['Dates']);
+                return info.year === String(year) && info.month === monthPad;
+            });
+            const prevProdRows = (typeof productDataRaw !== 'undefined' ? productDataRaw : []).filter(r => {
+                const info = parseYearMonth(r['Dates']);
+                return info.year === String(prevYear) && info.month === prevPad;
+            });
+            const agg = (rows) => {
+                const map = {};
+                rows.forEach(item => {
+                    const code = item['Product'];
+                    if (!code) return;
+                    if (!map[code]) map[code] = { Product: code, 'Product Type': item['Product Type'] || 'Other', Production: 0 };
+                    map[code].Production += (item['Production'] || 0);
+                });
+                return map;
+            };
+            const currMap = agg(currProdRows);
+            const prevMap = agg(prevProdRows);
+            const currList = Object.values(currMap).sort((a, b) => b.Production - a.Production);
+            const risers = currList
+                .map(item => ({ ...item, prev: prevMap[item.Product]?.Production, delta: (item.Production || 0) - (prevMap[item.Product]?.Production || 0) }))
+                .filter(item => item.prev !== undefined && item.delta > 0)
+                .sort((a, b) => b.delta - a.delta);
+
+            const best = risers[0];
+            const lead = currList[0];
+            const bestDelta = best ? formatPresDelta(best.Production, best.prev) : { text: lead ? formatPresMass(lead.Production) : '—', cls: 'flat' };
+            const prodChip = document.getElementById('pres-hl-prod-chip');
+            if (prodChip) {
+                prodChip.textContent = best
+                    ? `${best.Product} ${bestDelta.text}`
+                    : (lead ? `${lead.Product} ${formatPresMass(lead.Production)}` : '—');
+                prodChip.className = `pres-hl-chip ${best ? 'up' : 'flat'}`;
+            }
+            setHl('pres-hl-prod-sub', best
+                ? `Top gainer · now ${formatPresMass(best.Production)}`
+                : (lead ? `Highest output · ${formatPresMass(lead.Production)}` : 'No product data'));
+
+            const prodList = document.getElementById('pres-uni-product-list');
+            if (prodList) {
+                // Prefer risers; fill remaining slots with top producers so the card never looks empty
+                const seen = new Set();
+                const rows = [];
+                risers.forEach(item => {
+                    if (rows.length >= 4) return;
+                    seen.add(item.Product);
+                    rows.push({ ...item, showDelta: true });
+                });
+                currList.forEach(item => {
+                    if (rows.length >= 4 || seen.has(item.Product)) return;
+                    seen.add(item.Product);
+                    rows.push({ ...item, prev: prevMap[item.Product]?.Production, showDelta: false });
+                });
+                if (!rows.length) {
+                    prodList.innerHTML = '<div class="pres-empty-note">No product data.</div>';
+                } else {
+                    prodList.innerHTML = rows.map((item, i) => {
+                        const d = formatPresDelta(item.Production, item.prev);
+                        const type = (typeof getNormalizedProductType === 'function') ? getNormalizedProductType(item['Product Type']) : item['Product Type'];
+                        const showDelta = !!item.showDelta;
+                        return `<div class="pres-hl-item ${showDelta ? 'up' : (i === 0 ? 'top' : '')}">
+                            <div class="pres-hl-item-idx">${i + 1}</div>
+                            <div>
+                                <div class="pres-hl-item-name">${item.Product}</div>
+                                <div class="pres-hl-item-meta">${type} · ${formatPresMass(item.Production)}</div>
+                            </div>
+                            <div class="pres-hl-item-val"><span class="${showDelta ? d.cls : 'flat'}">${showDelta ? d.text : formatPresMass(item.Production)}</span></div>
+                        </div>`;
+                    }).join('');
+                }
+            }
+
+            const mainRow = (mainDataRaw || []).find(r => {
+                const info = parseYearMonth(r['Dates']);
+                return info.year === String(year) && info.month === monthPad && r['Prod. (Tons)'] !== null;
+            }) || {};
+            const wasteTons = Number(mainRow['Waste ( Tons)'] || 0);
+            const wastePct = Number(mainRow['Waste %'] || 0);
+            const totalDt = Number(mainRow['Total Down Time ( hrs.)'] || 0);
+            const wasteCats = [
+                { key: 'Waste_Process', label: 'Process' },
+                { key: 'Waste_Mechanical', label: 'Mechanical' },
+                { key: 'Waste_Shortages', label: 'No. Job Order' },
+                { key: 'Waste_Electrical', label: 'Electrical' },
+                { key: 'Waste_PowerHouse', label: 'Power House' },
+                { key: 'Waste_Planning', label: 'Planning' }
+            ];
+            const dtCats = [
+                { key: 'Downtime_Process', label: 'Process' },
+                { key: 'Downtime_Mechanical', label: 'Mechanical' },
+                { key: 'Downtime_Shortages', label: 'No. Job Order' },
+                { key: 'Downtime_Electrical', label: 'Electrical' },
+                { key: 'Downtime_PowerHouse', label: 'Power House' },
+                { key: 'Downtime_Planning', label: 'Planning' },
+                { key: 'Downtime_Maintenance', label: 'Planned Maint.' },
+                { key: 'Downtime_RentalPower', label: 'Rental Power' }
+            ];
+            // Exclude Process so Month Highlights focuses on other departments
+            const wasteItems = wasteCats
+                .filter(c => c.label !== 'Process')
+                .map(c => ({ label: c.label, value: Number(mainRow[c.key] || 0) }))
+                .sort((a, b) => b.value - a.value);
+            const dtItems = dtCats
+                .filter(c => c.label !== 'Process')
+                .map(c => ({ label: c.label, value: Number(mainRow[c.key] || 0) }))
+                .sort((a, b) => b.value - a.value);
+            const topW = wasteItems.find(i => i.value > 0) || wasteItems[0];
+            const topD = dtItems.find(i => i.value > 0) || dtItems[0];
+            const wasteChip = document.getElementById('pres-hl-waste-chip');
+            if (wasteChip) {
+                wasteChip.textContent = topW && topW.value ? `${topW.label} ${topW.value.toFixed(1)} t` : '—';
+                wasteChip.className = 'pres-hl-chip warn';
+            }
+            const dtChip = document.getElementById('pres-hl-dt-chip');
+            if (dtChip) {
+                dtChip.textContent = topD && topD.value ? `${topD.label} ${topD.value.toFixed(1)} h` : '—';
+                dtChip.className = 'pres-hl-chip warn';
+            }
+            const otherWasteTotal = wasteItems.reduce((s, i) => s + (i.value || 0), 0);
+            const otherDtTotal = dtItems.reduce((s, i) => s + (i.value || 0), 0);
+            setHl('pres-uni-waste-total', `Other depts ${otherWasteTotal.toFixed(1)} t · plant ${wastePct.toFixed(1)}%`);
+            setHl('pres-uni-dt-total', `Other depts ${otherDtTotal.toFixed(1)} h · plant ${totalDt.toFixed(1)} h`);
+
+            const renderBars = (elId, items, unit) => {
+                const el = document.getElementById(elId);
+                if (!el) return;
+                const positive = items.filter(i => i.value > 0);
+                const shown = (positive.length ? positive : items).slice(0, 4);
+                const max = Math.max(...shown.map(i => i.value), 0.0001);
+                if (!shown.length || shown.every(i => !i.value)) {
+                    el.innerHTML = '<div class="pres-empty-note">No other-department data.</div>';
+                    return;
+                }
+                el.innerHTML = shown.map((item, i) => {
+                    const pct = Math.max(0, Math.min(100, (item.value / max) * 100));
+                    return `<div class="pres-hl-bar-item ${i === 0 && item.value ? 'top' : ''}">
+                        <div class="pres-hl-bar-label">${item.label}</div>
+                        <div class="pres-hl-bar-track"><div class="pres-hl-bar-fill" style="width:${pct.toFixed(1)}%"></div></div>
+                        <div class="pres-hl-bar-val">${item.value.toFixed(1)} ${unit}</div>
+                    </div>`;
+                }).join('');
+            };
+            renderBars('pres-uni-waste-bars', wasteItems, 't');
+            renderBars('pres-uni-dt-bars', dtItems, 'h');
+
+        }
         let presentationActive = false;
         let presentationIndex = 0;
         let presentationPaused = false;
