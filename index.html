@@ -3268,7 +3268,7 @@
         .presentation-month-detail {
             gap: 12px !important;
             padding: 16px 18px 14px !important;
-            grid-template-rows: auto minmax(0, 1.05fr) minmax(200px, 1fr) minmax(200px, 1.1fr) !important;
+            grid-template-rows: auto minmax(240px, 1.2fr) minmax(180px, 0.95fr) minmax(190px, 1.05fr) !important;
             height: auto !important;
             max-height: 100% !important;
             flex: 1 1 auto !important;
@@ -3329,23 +3329,50 @@
             flex-shrink: 1 !important;
         }
 
-        /* Line Ops — protect footer stats */
-        .presentation-month-detail .exec-line-deck { gap: 10px !important; }
-        .presentation-month-detail .exec-deck-eyebrow {
-            font-size: 9px !important;
-            margin-bottom: 4px !important;
+        /* Line Ops — labels fully visible, no clip, meters below values */
+        .presentation-month-detail .exec-line-deck {
+            gap: 12px !important;
+            min-height: 0 !important;
+            height: 100% !important;
+            align-items: stretch !important;
         }
+        .presentation-month-detail .exec-deck-group {
+            gap: 6px !important;
+            height: 100% !important;
+            min-height: 0 !important;
+            overflow: visible !important;
+        }
+        .presentation-month-detail .exec-deck-eyebrow {
+            font-size: 10px !important;
+            margin: 0 0 2px !important;
+            padding: 0 2px !important;
+            line-height: 1.2 !important;
+            flex-shrink: 0 !important;
+            overflow: visible !important;
+        }
+        .presentation-month-detail .exec-deck-stack {
+            gap: 10px !important;
+            flex: 1 1 auto !important;
+            min-height: 0 !important;
+            height: auto !important;
+            grid-template-rows: 1fr 1fr !important;
+        }
+
         .presentation-month-detail .exec-kpi-card.exec-hero-card {
             display: flex !important;
             flex-direction: column !important;
             gap: 8px !important;
-            padding: 12px 14px 12px !important;
+            padding: 14px 16px 12px !important;
             overflow: hidden !important;
             min-height: 0 !important;
             height: 100% !important;
+            justify-content: flex-start !important;
+            animation: none !important;
         }
         .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-head {
             flex: 0 0 auto !important;
+            min-height: 0 !important;
+            align-items: flex-start !important;
         }
         .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-value {
             font-size: clamp(26px, 3vw, 38px) !important;
@@ -3354,6 +3381,10 @@
         .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-icon {
             width: 42px !important;
             height: 42px !important;
+            position: relative !important;
+            right: auto !important;
+            top: auto !important;
+            transform: none !important;
         }
         .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-meta {
             display: none !important;
@@ -3361,12 +3392,12 @@
         .presentation-month-detail .exec-hero-viz {
             flex: 1 1 auto !important;
             min-height: 28px !important;
-            max-height: 48px !important;
+            max-height: 52px !important;
             margin: 0 !important;
         }
         .presentation-month-detail .exec-hero-viz svg {
             min-height: 28px !important;
-            max-height: 48px !important;
+            max-height: 52px !important;
             height: 100% !important;
         }
         .presentation-month-detail .exec-hero-stats {
@@ -3400,35 +3431,125 @@
             text-overflow: clip !important;
         }
 
-        .presentation-month-detail .exec-deck-stack { gap: 8px !important; }
-        .presentation-month-detail .exec-deck-group .exec-kpi-card {
-            padding: 10px 12px !important;
+        /* Health + Cost cards — explicit stack so labels never clip */
+        .presentation-month-detail .exec-deck-group .exec-kpi-card,
+        .presentation-month-detail .exec-deck-group .exec-kpi-card.exec-rich-card {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: flex-start !important;
+            align-items: stretch !important;
+            gap: 0 !important;
+            padding: 14px 14px 12px !important;
+            margin: 0 !important;
+            height: 100% !important;
+            min-height: 96px !important;
+            max-height: none !important;
+            overflow: visible !important;
+            box-sizing: border-box !important;
+            animation: none !important;
+            transform: none !important;
+        }
+        .presentation-month-detail .exec-deck-group .exec-kpi-card::after {
+            opacity: 0.35 !important;
+            animation: none !important;
+        }
+        .presentation-month-detail .exec-deck-group .exec-kpi-meta {
+            display: none !important;
+        }
+        .presentation-month-detail .exec-deck-group .exec-kpi-head,
+        .presentation-month-detail .exec-deck-group .exec-rich-card .exec-kpi-head {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: flex-start !important;
+            justify-content: space-between !important;
+            gap: 10px !important;
+            flex: 0 0 auto !important;
+            min-height: 0 !important;
+            height: auto !important;
+            max-height: none !important;
+            margin: 0 0 8px !important;
+            padding: 0 !important;
+            overflow: visible !important;
+            width: 100% !important;
+        }
+        .presentation-month-detail .exec-deck-group .exec-kpi-copy,
+        .presentation-month-detail .exec-deck-group .exec-rich-card .exec-kpi-copy {
+            display: flex !important;
+            flex-direction: column !important;
             gap: 6px !important;
-            justify-content: center !important;
-            overflow: hidden !important;
+            flex: 1 1 auto !important;
+            min-width: 0 !important;
+            max-width: none !important;
+            padding: 0 0 0 8px !important;
+            margin: 0 !important;
+            overflow: visible !important;
         }
-        .presentation-month-detail .exec-deck-group .exec-kpi-meta { display: none !important; }
-        .presentation-month-detail .exec-deck-group .exec-kpi-label {
-            font-size: 10px !important;
-            line-height: 1.2 !important;
+        .presentation-month-detail .exec-deck-group .exec-kpi-label,
+        body.dashboard-fit-view .presentation-month-detail .exec-deck-group .exec-kpi-label {
+            display: block !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.8px !important;
+            line-height: 1.35 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: visible !important;
+            white-space: nowrap !important;
+            text-overflow: ellipsis !important;
+            max-width: 100% !important;
+            position: relative !important;
+            z-index: 4 !important;
         }
-        .presentation-month-detail .exec-deck-group .exec-kpi-value {
-            font-size: clamp(20px, 2.3vw, 30px) !important;
-            line-height: 1.05 !important;
+        .presentation-month-detail .exec-deck-group .exec-kpi-label::before {
+            display: inline-block !important;
+            vertical-align: middle !important;
+            margin-right: 6px !important;
+            width: 5px !important;
+            height: 5px !important;
+        }
+        .presentation-month-detail .exec-deck-group .exec-kpi-value,
+        body.dashboard-fit-view .presentation-month-detail .exec-deck-group .exec-kpi-value {
+            display: block !important;
+            font-size: clamp(22px, 2.4vw, 32px) !important;
+            line-height: 1.1 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: visible !important;
+            position: relative !important;
+            z-index: 4 !important;
+        }
+        .presentation-month-detail .exec-deck-group .exec-ring,
+        .presentation-month-detail .exec-deck-group .exec-cost-badge {
+            flex-shrink: 0 !important;
+            align-self: center !important;
+            margin: 0 !important;
+            position: relative !important;
+            z-index: 4 !important;
         }
         .presentation-month-detail .exec-ring {
-            width: 40px !important;
-            height: 40px !important;
-            flex-shrink: 0 !important;
-        }
-        .presentation-month-detail .exec-meter {
-            height: 5px !important;
-            margin-top: 4px !important;
+            width: 44px !important;
+            height: 44px !important;
         }
         .presentation-month-detail .exec-cost-badge {
-            width: 36px !important;
-            height: 36px !important;
+            width: 40px !important;
+            height: 40px !important;
             font-size: 9px !important;
+            display: grid !important;
+            place-items: center !important;
+        }
+        .presentation-month-detail .exec-deck-group .exec-meter,
+        .presentation-month-detail .exec-meter {
+            display: block !important;
+            height: 5px !important;
+            margin: auto 0 0 !important;
+            padding: 0 !important;
+            flex: 0 0 auto !important;
+            width: 100% !important;
+            position: relative !important;
+            z-index: 4 !important;
+            overflow: hidden !important;
+            border-radius: 999px !important;
+            align-self: stretch !important;
         }
 
         /* Offline — room for waste chips */
@@ -4185,7 +4306,7 @@
         }
 
         .presentation-month-detail .exec-deck-group {
-            gap: 8px;
+            gap: 6px;
             height: 100%;
             min-height: 0;
         }
@@ -4196,43 +4317,44 @@
             min-height: 0;
         }
 
+        /* Non-!important fallbacks — primary rules live in PRESENTATION MONTH block above */
         .presentation-month-detail .exec-deck-group .exec-kpi-card {
             height: 100%;
-            min-height: 0;
-            padding: 14px 16px;
+            min-height: 96px;
+            padding: 14px 14px 12px;
             border-radius: 16px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            gap: 8px;
-            overflow: hidden;
+            justify-content: flex-start;
+            gap: 0;
+            overflow: visible;
         }
 
         .presentation-month-detail .exec-deck-group .exec-kpi-head {
             min-height: 0;
-            flex: 1 1 auto;
-            align-items: center;
+            flex: 0 0 auto;
+            align-items: flex-start;
         }
 
         .presentation-month-detail .exec-deck-group .exec-kpi-copy {
-            gap: 4px;
-            padding-left: 6px;
+            gap: 6px;
+            padding-left: 8px;
         }
 
         .presentation-month-detail .exec-deck-group .exec-kpi-label {
             font-size: 11px;
-            letter-spacing: 1.1px;
+            letter-spacing: 0.8px;
+            line-height: 1.35;
         }
 
         .presentation-month-detail .exec-deck-group .exec-kpi-value {
-            font-size: clamp(28px, 3.2vw, 40px);
-            line-height: 1;
-            letter-spacing: -1px;
+            font-size: clamp(22px, 2.4vw, 32px);
+            line-height: 1.1;
+            letter-spacing: -0.5px;
         }
 
         .presentation-month-detail .exec-deck-group .exec-kpi-meta {
-            font-size: 11px;
-            opacity: 0.85;
+            display: none;
         }
 
         /* ── Offline Ops: packed process cards (no empty voids) ── */
