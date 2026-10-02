@@ -3266,9 +3266,9 @@
         }
 
         .presentation-month-detail {
-            gap: 14px !important;
-            padding: 16px 18px 14px !important;
-            grid-template-rows: minmax(min-content, auto) minmax(240px, 1.2fr) minmax(180px, 0.95fr) minmax(190px, 1.05fr) !important;
+            gap: 10px !important;
+            padding: 14px 16px 12px !important;
+            grid-template-rows: auto minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.15fr) !important;
             height: auto !important;
             max-height: 100% !important;
             flex: 1 1 auto !important;
@@ -3283,49 +3283,64 @@
             align-items: center !important;
             justify-content: space-between !important;
             gap: 16px !important;
-            padding: 8px 8px 14px !important;
-            margin: 0 0 4px !important;
+            padding: 4px 6px 10px !important;
+            margin: 0 !important;
             flex-shrink: 0 !important;
             flex-grow: 0 !important;
             min-height: auto !important;
             height: auto !important;
             max-height: none !important;
             overflow: visible !important;
-            align-self: start !important;
+            align-self: stretch !important;
             position: relative !important;
             z-index: 5 !important;
             border-bottom: 1px solid rgba(255,255,255,0.08) !important;
             box-sizing: border-box !important;
         }
 
+        .presentation-month-detail-brand {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: baseline !important;
+            flex-wrap: wrap !important;
+            gap: 10px 18px !important;
+            min-width: 0 !important;
+            flex: 1 1 auto !important;
+            overflow: visible !important;
+        }
+
         .presentation-month-detail-head > div:first-child {
             min-width: 0 !important;
             overflow: visible !important;
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 6px !important;
         }
 
         .presentation-month-detail-title {
             font-size: clamp(22px, 2.4vw, 30px) !important;
-            line-height: 1.15 !important;
+            line-height: 1.1 !important;
             padding: 0 !important;
             margin: 0 !important;
             overflow: visible !important;
             position: relative !important;
             z-index: 1 !important;
+            white-space: nowrap !important;
+            flex: 0 0 auto !important;
         }
 
         .presentation-month-detail-sub {
             font-size: 11px !important;
             margin: 0 !important;
             padding: 0 !important;
-            letter-spacing: 1.2px !important;
-            line-height: 1.4 !important;
-            white-space: normal !important;
-            overflow: visible !important;
+            letter-spacing: 1.1px !important;
+            line-height: 1.2 !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
             position: relative !important;
             z-index: 1 !important;
+            flex: 1 1 auto !important;
+            min-width: 0 !important;
+            align-self: center !important;
+            opacity: 0.85 !important;
         }
 
         .presentation-monthly-year {
@@ -3335,22 +3350,22 @@
         }
 
         .presentation-month-detail > .exec-block {
-            gap: 8px !important;
+            gap: 6px !important;
             min-height: 0 !important;
             overflow: hidden !important;
             margin-top: 0 !important;
-            padding-top: 2px !important;
+            padding-top: 0 !important;
         }
 
         .presentation-month-detail > .exec-block:first-of-type {
-            margin-top: 2px !important;
+            margin-top: 0 !important;
         }
 
         .presentation-month-detail .exec-block-title {
             font-size: 11px !important;
             letter-spacing: 1.4px !important;
-            margin: 0 0 6px !important;
-            padding: 2px 2px 0 !important;
+            margin: 0 0 4px !important;
+            padding: 0 2px !important;
             flex-shrink: 0 !important;
             display: flex !important;
             align-items: baseline !important;
@@ -3434,13 +3449,13 @@
         }
         .presentation-month-detail .exec-hero-viz {
             flex: 1 1 auto !important;
-            min-height: 28px !important;
-            max-height: 52px !important;
+            min-height: 20px !important;
+            max-height: 40px !important;
             margin: 0 !important;
         }
         .presentation-month-detail .exec-hero-viz svg {
-            min-height: 28px !important;
-            max-height: 52px !important;
+            min-height: 20px !important;
+            max-height: 40px !important;
             height: 100% !important;
         }
         .presentation-month-detail .exec-hero-stats {
@@ -3636,9 +3651,9 @@
         .presentation-month-detail .exec-flow-center > span { display: none !important; }
         .presentation-month-detail .exec-flow-ring-wrap,
         .presentation-month-detail .exec-flow-cost .exec-flow-ring-wrap {
-            width: min(92px, 68%) !important;
-            max-width: 92px !important;
-            max-height: 92px !important;
+            width: min(78px, 62%) !important;
+            max-width: 78px !important;
+            max-height: 78px !important;
             aspect-ratio: 1 !important;
             flex: 0 0 auto !important;
         }
@@ -4085,7 +4100,7 @@
             height: 100%;
             max-height: none;
             display: grid;
-            grid-template-rows: auto minmax(0, 1fr) minmax(168px, 0.9fr) minmax(170px, 1.1fr);
+            grid-template-rows: auto minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.15fr);
             gap: 12px;
             padding: 16px 18px 14px;
             border-radius: 18px;
@@ -4144,9 +4159,19 @@
             align-items: center;
             justify-content: space-between;
             gap: 16px;
-            padding: 8px 8px 14px;
+            padding: 4px 6px 10px;
             flex-shrink: 0;
             border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .presentation-month-detail-brand {
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 10px 18px;
+            min-width: 0;
+            flex: 1 1 auto;
         }
 
         .presentation-month-detail-title {
@@ -4157,16 +4182,22 @@
             color: #f4f8ff;
             text-transform: uppercase;
             text-shadow: 0 0 36px rgba(0, 229, 255, 0.28);
-            line-height: 1.15;
+            line-height: 1.1;
+            white-space: nowrap;
         }
 
         .presentation-month-detail-sub {
-            margin: 6px 0 0;
+            margin: 0;
             font-size: 11px;
-            letter-spacing: 1.2px;
+            letter-spacing: 1.1px;
             text-transform: uppercase;
             color: #7e8b9b;
-            line-height: 1.4;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;
+            align-self: center;
         }
 
         .presentation-monthly-year {
@@ -10706,7 +10737,7 @@
         </div>
         <div class="presentation-month-detail">
             <div class="presentation-month-detail-head">
-                <div>
+                <div class="presentation-month-detail-brand">
                     <div class="presentation-month-detail-title" id="pres-month-title">January 2026</div>
                     <p class="presentation-month-detail-sub" id="pres-month-sub">Line · Offline · Products · Waste · Downtime</p>
                 </div>
