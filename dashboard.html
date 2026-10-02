@@ -3258,29 +3258,51 @@
             }
         }
 
-        /* PRESENTATION MONTH — clean collision-free layout */
+        /* PRESENTATION MONTH — readable, no clipping */
+        .presentation-monthly-overlay {
+            padding: 18px 18px 16px !important;
+            box-sizing: border-box !important;
+            flex-direction: column !important;
+        }
+
         .presentation-month-detail {
-            gap: 10px !important;
-            padding: 12px 14px 10px !important;
-            grid-template-rows: auto minmax(0, 1fr) minmax(210px, 1.05fr) minmax(190px, 1.05fr);
-        }
-
-        .presentation-month-detail-title {
-            font-size: clamp(22px, 2.6vw, 34px) !important;
-        }
-
-        .presentation-month-detail-sub {
-            font-size: 10px !important;
-            margin-top: 2px !important;
+            gap: 12px !important;
+            padding: 16px 18px 14px !important;
+            grid-template-rows: auto minmax(0, 1.05fr) minmax(200px, 1fr) minmax(200px, 1.1fr) !important;
+            height: auto !important;
+            max-height: 100% !important;
+            flex: 1 1 auto !important;
+            min-height: 0 !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            overflow: hidden !important;
         }
 
         .presentation-month-detail-head {
-            padding-bottom: 6px !important;
-            margin-bottom: 0 !important;
+            padding: 4px 6px 10px !important;
+            margin: 0 !important;
+            align-items: flex-start !important;
+            flex-shrink: 0 !important;
+            overflow: visible !important;
+        }
+
+        .presentation-month-detail-title {
+            font-size: clamp(22px, 2.5vw, 32px) !important;
+            line-height: 1.1 !important;
+            padding-top: 2px !important;
+        }
+
+        .presentation-month-detail-sub {
+            font-size: 11px !important;
+            margin-top: 4px !important;
+            letter-spacing: 1.2px !important;
+            line-height: 1.35 !important;
+            white-space: normal !important;
+            overflow: visible !important;
         }
 
         .presentation-month-detail > .exec-block {
-            gap: 6px !important;
+            gap: 8px !important;
             min-height: 0 !important;
             overflow: hidden !important;
         }
@@ -3288,12 +3310,13 @@
         .presentation-month-detail .exec-block-title {
             font-size: 11px !important;
             letter-spacing: 1.4px !important;
-            margin: 0 0 2px !important;
+            margin: 0 0 4px !important;
             flex-shrink: 0 !important;
             display: flex !important;
             align-items: baseline !important;
             justify-content: space-between !important;
             gap: 12px !important;
+            overflow: visible !important;
         }
 
         .presentation-month-detail .exec-block-title em {
@@ -3302,54 +3325,80 @@
             white-space: nowrap !important;
             overflow: hidden !important;
             text-overflow: ellipsis !important;
-            max-width: 55% !important;
+            max-width: 52% !important;
+            flex-shrink: 1 !important;
         }
 
-        /* Line Ops */
+        /* Line Ops — protect footer stats */
         .presentation-month-detail .exec-line-deck { gap: 10px !important; }
         .presentation-month-detail .exec-deck-eyebrow {
             font-size: 9px !important;
-            margin-bottom: 3px !important;
+            margin-bottom: 4px !important;
         }
         .presentation-month-detail .exec-kpi-card.exec-hero-card {
             display: flex !important;
             flex-direction: column !important;
             gap: 8px !important;
-            padding: 12px 14px !important;
+            padding: 12px 14px 12px !important;
             overflow: hidden !important;
             min-height: 0 !important;
             height: 100% !important;
         }
-        .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-head { flex: 0 0 auto !important; }
+        .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-head {
+            flex: 0 0 auto !important;
+        }
         .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-value {
-            font-size: clamp(28px, 3.2vw, 42px) !important;
+            font-size: clamp(26px, 3vw, 38px) !important;
             line-height: 1 !important;
         }
         .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-icon {
-            width: 44px !important; height: 44px !important;
+            width: 42px !important;
+            height: 42px !important;
+        }
+        .presentation-month-detail .exec-kpi-card.exec-hero-card .exec-kpi-meta {
+            display: none !important;
         }
         .presentation-month-detail .exec-hero-viz {
             flex: 1 1 auto !important;
-            min-height: 44px !important;
+            min-height: 28px !important;
+            max-height: 48px !important;
+            margin: 0 !important;
         }
-        .presentation-month-detail .exec-hero-viz svg { min-height: 44px !important; height: 100% !important; }
+        .presentation-month-detail .exec-hero-viz svg {
+            min-height: 28px !important;
+            max-height: 48px !important;
+            height: 100% !important;
+        }
         .presentation-month-detail .exec-hero-stats {
             display: grid !important;
             grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-            gap: 6px !important;
+            gap: 8px !important;
             flex: 0 0 auto !important;
             width: 100% !important;
+            margin-top: 2px !important;
+            position: relative !important;
+            z-index: 5 !important;
         }
         .presentation-month-detail .exec-hero-stat {
-            padding: 7px 5px !important;
-            min-height: 44px !important;
+            padding: 8px 6px !important;
+            min-height: 48px !important;
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
             justify-content: center !important;
+            box-sizing: border-box !important;
         }
-        .presentation-month-detail .exec-hero-stat span { font-size: 8px !important; margin-bottom: 2px !important; }
-        .presentation-month-detail .exec-hero-stat strong { font-size: 13px !important; }
+        .presentation-month-detail .exec-hero-stat span {
+            font-size: 9px !important;
+            margin-bottom: 3px !important;
+            line-height: 1.2 !important;
+        }
+        .presentation-month-detail .exec-hero-stat strong {
+            font-size: 14px !important;
+            line-height: 1.15 !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+        }
 
         .presentation-month-detail .exec-deck-stack { gap: 8px !important; }
         .presentation-month-detail .exec-deck-group .exec-kpi-card {
@@ -3360,37 +3409,55 @@
         }
         .presentation-month-detail .exec-deck-group .exec-kpi-meta { display: none !important; }
         .presentation-month-detail .exec-deck-group .exec-kpi-label {
-            font-size: 10px !important; line-height: 1.2 !important;
+            font-size: 10px !important;
+            line-height: 1.2 !important;
         }
         .presentation-month-detail .exec-deck-group .exec-kpi-value {
-            font-size: clamp(22px, 2.5vw, 32px) !important; line-height: 1.05 !important;
+            font-size: clamp(20px, 2.3vw, 30px) !important;
+            line-height: 1.05 !important;
         }
-        .presentation-month-detail .exec-ring { width: 40px !important; height: 40px !important; flex-shrink: 0 !important; }
-        .presentation-month-detail .exec-meter { height: 5px !important; margin-top: 4px !important; }
-        .presentation-month-detail .exec-cost-badge { width: 38px !important; height: 38px !important; font-size: 9px !important; }
+        .presentation-month-detail .exec-ring {
+            width: 40px !important;
+            height: 40px !important;
+            flex-shrink: 0 !important;
+        }
+        .presentation-month-detail .exec-meter {
+            height: 5px !important;
+            margin-top: 4px !important;
+        }
+        .presentation-month-detail .exec-cost-badge {
+            width: 36px !important;
+            height: 36px !important;
+            font-size: 9px !important;
+        }
 
-        /* Offline — larger equal rings + breathing room */
+        /* Offline — room for waste chips */
         .presentation-month-detail .exec-flow-card {
             display: flex !important;
             flex-direction: column !important;
             justify-content: space-between !important;
-            padding: 12px !important;
-            gap: 8px !important;
+            padding: 12px 12px 10px !important;
+            gap: 6px !important;
             overflow: hidden !important;
             height: 100% !important;
             min-height: 0 !important;
+            box-sizing: border-box !important;
         }
         .presentation-month-detail .exec-flow-card .exec-machine-top {
             flex: 0 0 auto !important;
             z-index: 8 !important;
-            padding: 0 32px 0 2px !important;
+            padding: 0 36px 0 2px !important;
             min-height: 18px !important;
+            overflow: visible !important;
         }
         .presentation-month-detail .exec-machine-name {
-            font-size: 11px !important; letter-spacing: 0.8px !important;
+            font-size: 11px !important;
+            letter-spacing: 0.8px !important;
         }
         .presentation-month-detail .exec-flow-stage {
-            top: 10px !important; right: 10px !important; font-size: 9px !important;
+            top: 10px !important;
+            right: 10px !important;
+            font-size: 9px !important;
         }
         .presentation-month-detail .exec-flow-center {
             display: flex !important;
@@ -3400,20 +3467,20 @@
             min-height: 0 !important;
             max-height: none !important;
             overflow: hidden !important;
-            padding: 4px 0 !important;
+            padding: 2px 0 !important;
         }
         .presentation-month-detail .exec-flow-center > span { display: none !important; }
         .presentation-month-detail .exec-flow-ring-wrap,
         .presentation-month-detail .exec-flow-cost .exec-flow-ring-wrap {
-            width: min(108px, 72%) !important;
-            max-width: 108px !important;
-            max-height: 108px !important;
+            width: min(92px, 68%) !important;
+            max-width: 92px !important;
+            max-height: 92px !important;
             aspect-ratio: 1 !important;
             flex: 0 0 auto !important;
         }
         .presentation-month-detail .exec-flow-ring-wrap strong,
         .presentation-month-detail .exec-flow-cost .exec-flow-ring-wrap strong {
-            font-size: clamp(17px, 1.8vw, 24px) !important;
+            font-size: clamp(15px, 1.6vw, 20px) !important;
         }
         .presentation-month-detail .exec-flow-body,
         .presentation-month-detail .exec-flow-cost .exec-flow-body {
@@ -3423,31 +3490,57 @@
             justify-content: space-between !important;
             gap: 8px !important;
             flex: 0 0 auto !important;
-            min-height: 34px !important;
-            padding: 2px 2px 0 !important;
+            min-height: 42px !important;
+            padding: 4px 2px 2px !important;
+            margin: 0 !important;
             width: 100% !important;
             box-sizing: border-box !important;
             overflow: visible !important;
-            z-index: 5 !important;
+            z-index: 6 !important;
+            position: relative !important;
         }
-        .presentation-month-detail .exec-flow-body .exec-machine-metric-label { font-size: 9px !important; }
+        .presentation-month-detail .exec-flow-body .exec-machine-metric {
+            min-width: 0 !important;
+            overflow: hidden !important;
+        }
+        .presentation-month-detail .exec-flow-body .exec-machine-metric-label {
+            font-size: 9px !important;
+            margin-bottom: 2px !important;
+        }
         .presentation-month-detail .exec-flow-body .exec-machine-metric-value {
-            font-size: 13px !important; font-weight: 800 !important; line-height: 1.1 !important;
+            font-size: 13px !important;
+            font-weight: 800 !important;
+            line-height: 1.15 !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
         }
         .presentation-month-detail .exec-waste-chip,
         .presentation-month-detail .exec-cost-chip {
-            padding: 4px 8px !important; flex-shrink: 0 !important;
+            padding: 6px 9px !important;
+            flex-shrink: 0 !important;
+            min-width: 64px !important;
+            margin: 0 !important;
+            align-self: center !important;
+            box-sizing: border-box !important;
         }
         .presentation-month-detail .exec-waste-chip span,
-        .presentation-month-detail .exec-cost-chip span { font-size: 8px !important; }
+        .presentation-month-detail .exec-cost-chip span {
+            font-size: 8px !important;
+            line-height: 1.2 !important;
+        }
         .presentation-month-detail .exec-waste-chip strong,
-        .presentation-month-detail .exec-cost-chip strong { font-size: 11px !important; }
+        .presentation-month-detail .exec-cost-chip strong {
+            font-size: 12px !important;
+            line-height: 1.15 !important;
+        }
         .presentation-month-detail .exec-flow-foot { display: none !important; }
         .presentation-month-detail .exec-flow-cost .exec-flow-center {
-            flex: 1 1 auto !important; min-height: 0 !important;
+            flex: 1 1 auto !important;
+            min-height: 0 !important;
         }
 
-        /* Month Highlights — header chip + list only (no overlapping hero) */
+        /* Month Highlights — no truncated header chips */
         .pres-hl-lane {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -3463,13 +3556,14 @@
             gap: 8px;
             min-height: 0;
             height: 100%;
-            padding: 10px 12px;
+            padding: 12px 12px 10px;
             border-radius: 14px;
             border: 1px solid color-mix(in srgb, var(--hl-accent) 36%, rgba(255,255,255,0.08));
             background:
                 radial-gradient(90% 70% at 100% 0%, color-mix(in srgb, var(--hl-accent) 16%, transparent), transparent 55%),
                 linear-gradient(165deg, rgba(10, 20, 32, 0.96), rgba(4, 9, 16, 0.98));
             overflow: hidden;
+            box-sizing: border-box;
         }
         .pres-hl-tile.accent-green { --hl-accent: #39ff14; }
         .pres-hl-tile.accent-amber { --hl-accent: #ffb000; }
@@ -3477,8 +3571,8 @@
 
         .pres-hl-tile-top {
             display: grid;
-            grid-template-columns: 28px minmax(0, 1fr) auto;
-            align-items: center;
+            grid-template-columns: 28px minmax(0, 1fr);
+            align-items: start;
             gap: 8px;
             flex-shrink: 0;
             padding-bottom: 8px;
@@ -3489,50 +3583,39 @@
             display: grid; place-items: center;
             font-size: 11px; font-weight: 800; color: #031018;
             background: linear-gradient(135deg, var(--hl-accent), color-mix(in srgb, var(--hl-accent) 55%, #fff));
+            flex-shrink: 0;
         }
-        .pres-hl-tile-copy { min-width: 0; }
+        .pres-hl-tile-copy { min-width: 0; overflow: visible; }
         .pres-hl-tile-label {
             font-family: 'Outfit', sans-serif;
-            font-size: 11px; font-weight: 700; letter-spacing: 0.7px;
+            font-size: 12px; font-weight: 700; letter-spacing: 0.7px;
             text-transform: uppercase; color: #eef5ff;
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            line-height: 1.2;
         }
         .pres-hl-tile-sub {
-            margin-top: 2px; font-size: 10px; color: #7e8b9b;
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            margin-top: 3px; font-size: 10px; color: #7e8b9b;
+            line-height: 1.35;
+            white-space: normal;
+            overflow: visible;
         }
-        .pres-hl-chip {
-            max-width: 42%;
-            padding: 5px 8px;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: 800;
-            line-height: 1.2;
-            text-align: right;
-            color: #f4f8ff;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid color-mix(in srgb, var(--hl-accent) 28%, transparent);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .pres-hl-chip.up { color: #39ff14; border-color: rgba(57,255,20,0.3); }
-        .pres-hl-chip.warn { color: #ffb000; border-color: rgba(255,176,0,0.3); }
+        .pres-hl-chip { display: none !important; }
 
         .pres-hl-tile-list {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 6px;
             flex: 1;
             min-height: 0;
             overflow: hidden;
+            justify-content: flex-start;
         }
         .pres-hl-item {
             display: grid;
-            grid-template-columns: 18px minmax(0, 1fr) auto;
+            grid-template-columns: 20px minmax(0, 1fr) auto;
             align-items: center;
             gap: 8px;
-            padding: 6px 8px;
+            padding: 7px 8px;
             border-radius: 8px;
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.04);
@@ -3560,6 +3643,9 @@
         .pres-hl-item-val {
             font-size: 11px; font-weight: 800; color: var(--hl-accent);
             white-space: nowrap; text-align: right; flex-shrink: 0;
+            max-width: 46%;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .pres-hl-item-val .up { color: #39ff14; }
         .pres-hl-item-val .down { color: #ff6b63; }
@@ -3567,10 +3653,10 @@
 
         .pres-hl-bar-item {
             display: grid;
-            grid-template-columns: minmax(78px, 96px) minmax(0, 1fr) 58px;
+            grid-template-columns: minmax(88px, 108px) minmax(0, 1fr) 54px;
             align-items: center;
             gap: 8px;
-            padding: 5px 2px;
+            padding: 6px 2px;
             flex: 0 0 auto;
             min-width: 0;
         }
@@ -10698,7 +10784,6 @@
                                 <div class="pres-hl-tile-label">Products Rising</div>
                                 <div class="pres-hl-tile-sub" id="pres-hl-prod-sub">vs prior month</div>
                             </div>
-                            <div class="pres-hl-chip up" id="pres-hl-prod-chip">—</div>
                         </div>
                         <div class="pres-hl-tile-list" id="pres-uni-product-list"></div>
                     </div>
@@ -10710,7 +10795,6 @@
                                 <div class="pres-hl-tile-label">Waste by Dept</div>
                                 <div class="pres-hl-tile-sub" id="pres-uni-waste-total">Tons</div>
                             </div>
-                            <div class="pres-hl-chip warn" id="pres-hl-waste-chip">—</div>
                         </div>
                         <div class="pres-hl-tile-list" id="pres-uni-waste-bars"></div>
                     </div>
@@ -10722,7 +10806,6 @@
                                 <div class="pres-hl-tile-label">Downtime by Dept</div>
                                 <div class="pres-hl-tile-sub" id="pres-uni-dt-total">Hours</div>
                             </div>
-                            <div class="pres-hl-chip warn" id="pres-hl-dt-chip">—</div>
                         </div>
                         <div class="pres-hl-tile-list" id="pres-uni-dt-bars"></div>
                     </div>
@@ -19988,16 +20071,9 @@
             const best = risers[0];
             const lead = currList[0];
             const bestDelta = best ? formatPresDelta(best.Production, best.prev) : { text: lead ? formatPresMass(lead.Production) : '—', cls: 'flat' };
-            const prodChip = document.getElementById('pres-hl-prod-chip');
-            if (prodChip) {
-                prodChip.textContent = best
-                    ? `${best.Product} ${bestDelta.text}`
-                    : (lead ? `${lead.Product} ${formatPresMass(lead.Production)}` : '—');
-                prodChip.className = `pres-hl-chip ${best ? 'up' : 'flat'}`;
-            }
             setHl('pres-hl-prod-sub', best
-                ? `Top gainer · now ${formatPresMass(best.Production)}`
-                : (lead ? `Highest output · ${formatPresMass(lead.Production)}` : 'No product data'));
+                ? `Top · ${best.Product} · ${bestDelta.text}`
+                : (lead ? `Lead · ${lead.Product} · ${formatPresMass(lead.Production)}` : 'No product data'));
 
             const prodList = document.getElementById('pres-uni-product-list');
             if (prodList) {
@@ -20005,12 +20081,12 @@
                 const seen = new Set();
                 const rows = [];
                 risers.forEach(item => {
-                    if (rows.length >= 4) return;
+                    if (rows.length >= 3) return;
                     seen.add(item.Product);
                     rows.push({ ...item, showDelta: true });
                 });
                 currList.forEach(item => {
-                    if (rows.length >= 4 || seen.has(item.Product)) return;
+                    if (rows.length >= 3 || seen.has(item.Product)) return;
                     seen.add(item.Product);
                     rows.push({ ...item, prev: prevMap[item.Product]?.Production, showDelta: false });
                 });
@@ -20069,26 +20145,20 @@
                 .sort((a, b) => b.value - a.value);
             const topW = wasteItems.find(i => i.value > 0) || wasteItems[0];
             const topD = dtItems.find(i => i.value > 0) || dtItems[0];
-            const wasteChip = document.getElementById('pres-hl-waste-chip');
-            if (wasteChip) {
-                wasteChip.textContent = topW && topW.value ? `${topW.label} ${topW.value.toFixed(1)} t` : '—';
-                wasteChip.className = 'pres-hl-chip warn';
-            }
-            const dtChip = document.getElementById('pres-hl-dt-chip');
-            if (dtChip) {
-                dtChip.textContent = topD && topD.value ? `${topD.label} ${topD.value.toFixed(1)} h` : '—';
-                dtChip.className = 'pres-hl-chip warn';
-            }
             const otherWasteTotal = wasteItems.reduce((s, i) => s + (i.value || 0), 0);
             const otherDtTotal = dtItems.reduce((s, i) => s + (i.value || 0), 0);
-            setHl('pres-uni-waste-total', `Other depts ${otherWasteTotal.toFixed(1)} t · plant ${wastePct.toFixed(1)}%`);
-            setHl('pres-uni-dt-total', `Other depts ${otherDtTotal.toFixed(1)} h · plant ${totalDt.toFixed(1)} h`);
+            setHl('pres-uni-waste-total', topW && topW.value
+                ? `Lead ${topW.label} ${topW.value.toFixed(1)} t · plant ${wastePct.toFixed(1)}%`
+                : `Other depts ${otherWasteTotal.toFixed(1)} t · plant ${wastePct.toFixed(1)}%`);
+            setHl('pres-uni-dt-total', topD && topD.value
+                ? `Lead ${topD.label} ${topD.value.toFixed(1)} h · plant ${totalDt.toFixed(1)} h`
+                : `Other depts ${otherDtTotal.toFixed(1)} h · plant ${totalDt.toFixed(1)} h`);
 
             const renderBars = (elId, items, unit) => {
                 const el = document.getElementById(elId);
                 if (!el) return;
                 const positive = items.filter(i => i.value > 0);
-                const shown = (positive.length ? positive : items).slice(0, 4);
+                const shown = (positive.length ? positive : items).slice(0, 3);
                 const max = Math.max(...shown.map(i => i.value), 0.0001);
                 if (!shown.length || shown.every(i => !i.value)) {
                     el.innerHTML = '<div class="pres-empty-note">No other-department data.</div>';
