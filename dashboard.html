@@ -1996,6 +1996,94 @@
         .exec-machine-card.machine-pack { --machine-accent: #38bdf8; }
         .exec-machine-card.machine-pack::after { animation-delay: -10.5s; }
 
+        /* Packing cost: lower is better */
+        .exec-machine-card.machine-pack.pack-tone-good {
+            --machine-accent: #39ff14;
+        }
+        .exec-machine-card.machine-pack.pack-tone-fair {
+            --machine-accent: #ffb000;
+        }
+        .exec-machine-card.machine-pack.pack-tone-high {
+            --machine-accent: #ff4466;
+        }
+        .exec-machine-card.machine-pack .exec-machine-metric-value {
+            transition: color 0.25s ease, text-shadow 0.25s ease;
+        }
+        .exec-machine-card.machine-pack.pack-tone-good .exec-machine-metric-value {
+            color: #39ff14;
+            text-shadow: 0 0 22px rgba(57, 255, 20, 0.35);
+        }
+        .exec-machine-card.machine-pack.pack-tone-fair .exec-machine-metric-value {
+            color: #ffb000;
+            text-shadow: 0 0 22px rgba(255, 176, 0, 0.3);
+        }
+        .exec-machine-card.machine-pack.pack-tone-high .exec-machine-metric-value {
+            color: #ff6688;
+            text-shadow: 0 0 22px rgba(255, 68, 102, 0.35);
+        }
+        .presentation-month-detail .exec-machine-card.machine-pack .exec-cost-chip.pack-tone-good {
+            border-color: rgba(57, 255, 20, 0.45);
+            background: linear-gradient(160deg, rgba(57, 255, 20, 0.18), rgba(57, 255, 20, 0.05));
+        }
+        .presentation-month-detail .exec-machine-card.machine-pack .exec-cost-chip.pack-tone-good span { color: #8dff7a; }
+        .presentation-month-detail .exec-machine-card.machine-pack .exec-cost-chip.pack-tone-good strong { color: #39ff14; }
+        .presentation-month-detail .exec-machine-card.machine-pack .exec-cost-chip.pack-tone-fair {
+            border-color: rgba(255, 176, 0, 0.45);
+            background: linear-gradient(160deg, rgba(255, 176, 0, 0.18), rgba(255, 176, 0, 0.05));
+        }
+        .presentation-month-detail .exec-machine-card.machine-pack .exec-cost-chip.pack-tone-fair span { color: #ffd27a; }
+        .presentation-month-detail .exec-machine-card.machine-pack .exec-cost-chip.pack-tone-fair strong { color: #ffb000; }
+        .presentation-month-detail .exec-machine-card.machine-pack .exec-cost-chip.pack-tone-high {
+            border-color: rgba(255, 68, 102, 0.45);
+            background: linear-gradient(160deg, rgba(255, 68, 102, 0.18), rgba(255, 68, 102, 0.05));
+        }
+        .presentation-month-detail .exec-machine-card.machine-pack .exec-cost-chip.pack-tone-high span { color: #ff9aab; }
+        .presentation-month-detail .exec-machine-card.machine-pack .exec-cost-chip.pack-tone-high strong { color: #ff6688; }
+
+        /* Highest machine production (PS / SS / Metallizer) */
+        .exec-machine-card.is-prod-peak {
+            border-color: rgba(255, 214, 10, 0.7) !important;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.08),
+                0 0 0 1px rgba(255, 214, 10, 0.28),
+                0 12px 30px rgba(0, 0, 0, 0.45),
+                0 0 34px rgba(255, 214, 10, 0.24) !important;
+            background:
+                radial-gradient(ellipse 90% 70% at 50% 25%, rgba(255, 214, 10, 0.14), transparent 70%),
+                linear-gradient(165deg, rgba(22, 20, 10, 0.96) 0%, rgba(8, 10, 14, 0.98) 100%);
+        }
+        .exec-machine-card.is-prod-peak .exec-machine-metric-value {
+            color: #ffd60a !important;
+            text-shadow: 0 0 22px rgba(255, 214, 10, 0.4);
+        }
+        .exec-machine-card.is-prod-peak .exec-machine-name {
+            color: #ffe566;
+        }
+        .exec-machine-card.is-prod-peak .exec-machine-name::after {
+            content: 'TOP';
+            display: inline-flex;
+            align-items: center;
+            margin-left: 8px;
+            padding: 2px 7px;
+            border-radius: 999px;
+            font-size: 8px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #1a1500;
+            background: linear-gradient(135deg, #ffe566, #ffd60a);
+            box-shadow: 0 0 12px rgba(255, 214, 10, 0.45);
+            vertical-align: middle;
+        }
+        .exec-machine-card.is-prod-peak .exec-flow-stage {
+            color: #ffd60a;
+            opacity: 1;
+        }
+        .exec-machine-card.is-prod-peak .exec-machine-sign {
+            border-color: rgba(255, 214, 10, 0.55);
+            color: #ffd60a;
+            box-shadow: 0 0 14px rgba(255, 214, 10, 0.28);
+        }
+
         .exec-machine-card:hover {
             transform: translateY(-3px);
             border-color: color-mix(in srgb, var(--machine-accent) 55%, rgba(255, 255, 255, 0.1));
@@ -9293,13 +9381,13 @@
                                 </div>
                                 <div class="exec-flow-body cost">
                                     <div class="exec-machine-metric">
-                                        <div class="exec-machine-metric-label">Average Factor</div>
+                                        <div class="exec-machine-metric-label">Lower is better</div>
                                         <div class="exec-machine-metric-value" id="exec-val-packing">PKR 0</div>
                                     </div>
                                 </div>
                                 <div class="exec-flow-foot">
                                     <div class="exec-flow-share"><div class="exec-flow-share-fill" id="exec-yield-pack"></div></div>
-                                    <span class="exec-flow-share-label" id="exec-yield-pack-lbl">Factor band —</span>
+                                    <span class="exec-flow-share-label" id="exec-yield-pack-lbl">Rating —</span>
                                 </div>
                             </div>
                         </div>
@@ -10937,17 +11025,17 @@
                         </div>
                                                 <div class="exec-flow-body">
                             <div class="exec-machine-metric">
-                                <div class="exec-machine-metric-label">Packing Factor</div>
+                                <div class="exec-machine-metric-label">Lower is better</div>
                                 <div class="exec-machine-metric-value" id="pres-val-packing">PKR 0</div>
                             </div>
-                            <div class="exec-waste-chip exec-cost-chip">
-                                <span>Status</span>
+                            <div class="exec-waste-chip exec-cost-chip" id="pres-pack-chip">
+                                <span>Rating</span>
                                 <strong id="pres-pack-status">—</strong>
                             </div>
                         </div>
                         <div class="exec-flow-foot">
                             <div class="exec-flow-share"><div class="exec-flow-share-fill" id="pres-yield-pack"></div></div>
-                            <span class="exec-flow-share-label" id="pres-yield-pack-lbl">Factor band —</span>
+                            <span class="exec-flow-share-label" id="pres-yield-pack-lbl">Lower cost is better</span>
                         </div>
                     </div>
                 </div>
@@ -17189,6 +17277,27 @@
             svg.appendChild(path);
         }
 
+        function markHighestMachineProd(rootSelector, psProd, ssProd, metProd) {
+            const root = document.querySelector(rootSelector);
+            if (!root) return;
+            const cards = {
+                ps: root.querySelector('.exec-machine-card.machine-ps'),
+                ss: root.querySelector('.exec-machine-card.machine-ss'),
+                met: root.querySelector('.exec-machine-card.machine-met')
+            };
+            Object.values(cards).forEach((card) => card && card.classList.remove('is-prod-peak'));
+            const vals = [
+                { key: 'ps', v: Number(psProd) || 0 },
+                { key: 'ss', v: Number(ssProd) || 0 },
+                { key: 'met', v: Number(metProd) || 0 }
+            ];
+            const max = Math.max(...vals.map((x) => x.v));
+            if (max <= 0) return;
+            vals.forEach((x) => {
+                if (x.v === max && cards[x.key]) cards[x.key].classList.add('is-prod-peak');
+            });
+        }
+
         function updateExecutiveSummaryTab(mainData, year, month, productData, eremaData, offlineData) {
             offlineData = offlineData || [];
 
@@ -17244,7 +17353,17 @@
             setTxt('exec-val-ss-waste', `${ssWastePct.toFixed(2)}%`);
             setTxt('exec-val-met-prod', formatMass(metProd));
             setTxt('exec-val-met-waste', `${metWastePct.toFixed(2)}%`);
+            markHighestMachineProd('#executive-tab', psProd, ssProd, metProd);
             setTxt('exec-val-packing', `PKR ${avgPacking.toFixed(2)}`);
+            const packToneExec = !avgPacking ? ''
+                : avgPacking <= 12 ? 'pack-tone-good'
+                : avgPacking <= 16 ? 'pack-tone-fair'
+                : 'pack-tone-high';
+            const packCardExec = document.querySelector('#executive-tab .exec-machine-card.machine-pack');
+            if (packCardExec) {
+                packCardExec.classList.remove('pack-tone-good', 'pack-tone-fair', 'pack-tone-high');
+                if (packToneExec) packCardExec.classList.add(packToneExec);
+            }
 
             const setMeter = (id, pct) => {
                 const el = document.getElementById(id);
@@ -17297,7 +17416,11 @@
             setYield('exec-yield-met', 'exec-yield-met-lbl', metWastePct);
             const packBand = Math.min(100, Math.max(0, 100 - ((avgPacking || 0) / 20) * 100));
             setMeter('exec-yield-pack', packBand);
-            setTxt('exec-yield-pack-lbl', avgPacking ? `Lower cost · PKR ${avgPacking.toFixed(1)}` : 'Factor band —');
+            const packRatingExec = !avgPacking ? '—'
+                : avgPacking <= 12 ? 'Good · lower is better'
+                : avgPacking <= 16 ? 'Fair · watch cost'
+                : 'High · reduce cost';
+            setTxt('exec-yield-pack-lbl', avgPacking ? packRatingExec : 'Rating —');
 
             // --- Monthly cards (full selected/latest year — not month-filtered) ---
             const monthlyHost = document.getElementById('exec-monthly-cards');
@@ -20219,7 +20342,22 @@
             setTxt('pres-val-ss-waste', `${Number(ssWastePct || 0).toFixed(2)}%`);
             setTxt('pres-val-met-prod', formatMass(metProd));
             setTxt('pres-val-met-waste', `${Number(metWastePct || 0).toFixed(2)}%`);
+            markHighestMachineProd('#presentation-monthly-overlay .presentation-month-detail', psProd, ssProd, metProd);
             setTxt('pres-val-packing', `PKR ${Number(avgPacking || 0).toFixed(2)}`);
+            const packTonePres = !avgPacking ? ''
+                : Number(avgPacking) <= 12 ? 'pack-tone-good'
+                : Number(avgPacking) <= 16 ? 'pack-tone-fair'
+                : 'pack-tone-high';
+            const packCardPres = document.querySelector('#presentation-monthly-overlay .exec-machine-card.machine-pack');
+            if (packCardPres) {
+                packCardPres.classList.remove('pack-tone-good', 'pack-tone-fair', 'pack-tone-high');
+                if (packTonePres) packCardPres.classList.add(packTonePres);
+            }
+            const packChipPres = document.getElementById('pres-pack-chip');
+            if (packChipPres) {
+                packChipPres.classList.remove('pack-tone-good', 'pack-tone-fair', 'pack-tone-high');
+                if (packTonePres) packChipPres.classList.add(packTonePres);
+            }
 
             const setMeter = (id, pct) => {
                 const el = document.getElementById(id);
@@ -20268,9 +20406,9 @@
             // Full ring frame — factor is a value badge, not a sparse progress arc
             setRing('pres-flow-ring-pack', avgPacking ? 100 : 0);
             setTxt('pres-yield-pack-num', avgPacking ? Number(avgPacking).toFixed(1) : '—');
-            setTxt('pres-yield-pack-lbl', avgPacking ? `Lower cost · PKR ${Number(avgPacking).toFixed(1)}` : 'Factor band —');
+            setTxt('pres-yield-pack-lbl', 'Lower cost is better');
             const packStatus = !avgPacking ? '—'
-                : Number(avgPacking) <= 12 ? 'Low'
+                : Number(avgPacking) <= 12 ? 'Good'
                 : Number(avgPacking) <= 16 ? 'Fair'
                 : 'High';
             setTxt('pres-pack-status', packStatus);
