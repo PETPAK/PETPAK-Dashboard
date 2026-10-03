@@ -2803,7 +2803,10 @@
             padding: 0 2px;
         }
 
-        .exec-block-title span {
+        .exec-block-title > span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             color: #e8eef8;
         }
 
@@ -2814,6 +2817,157 @@
             letter-spacing: 0.8px;
             color: #6b7c90;
             text-transform: uppercase;
+        }
+
+        /* Industrial safety / plant signs */
+        .exec-ind-sign {
+            --sign-accent: #00e5ff;
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+            display: inline-grid;
+            place-items: center;
+            border-radius: 5px;
+            border: 1px solid color-mix(in srgb, var(--sign-accent) 55%, transparent);
+            background:
+                linear-gradient(160deg, color-mix(in srgb, var(--sign-accent) 22%, transparent), rgba(0,0,0,0.35));
+            box-shadow:
+                inset 0 0 0 1px rgba(255,255,255,0.06),
+                0 0 12px color-mix(in srgb, var(--sign-accent) 25%, transparent);
+            color: var(--sign-accent);
+        }
+
+        .exec-ind-sign svg {
+            width: 13px;
+            height: 13px;
+            display: block;
+        }
+
+        .exec-ind-sign.sign-amber { --sign-accent: #ffb000; }
+        .exec-ind-sign.sign-green { --sign-accent: #39ff14; }
+        .exec-ind-sign.sign-gold { --sign-accent: #ffd60a; }
+        .exec-ind-sign.sign-purple { --sign-accent: #bf5af2; }
+        .exec-ind-sign.sign-blue { --sign-accent: #38bdf8; }
+        .exec-ind-sign.sign-red { --sign-accent: #ff4466; }
+
+        .exec-ind-sign.diamond {
+            border-radius: 3px;
+            transform: rotate(45deg);
+        }
+
+        .exec-ind-sign.diamond svg {
+            transform: rotate(-45deg);
+        }
+
+        .exec-machine-sign {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            border: 1px solid color-mix(in srgb, var(--machine-accent) 45%, transparent);
+            background: rgba(0, 0, 0, 0.35);
+            color: var(--machine-accent);
+            box-shadow: 0 0 12px color-mix(in srgb, var(--machine-accent) 22%, transparent);
+        }
+
+        .exec-machine-sign svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .exec-flow-card .exec-machine-top {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .exec-deck-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .exec-deck-eyebrow .exec-ind-sign {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .exec-deck-eyebrow .exec-ind-sign svg {
+            width: 10px;
+            height: 10px;
+        }
+
+        .exec-page-layout {
+            position: relative;
+        }
+
+        .exec-plant-signs {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .exec-plant-signs .exec-wall-sign {
+            position: absolute;
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: 8px;
+            opacity: 0.22;
+            border: 1px solid rgba(0, 229, 255, 0.35);
+            background: rgba(0, 20, 30, 0.4);
+            color: #00e5ff;
+            filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.25));
+        }
+
+        .exec-plant-signs .exec-wall-sign svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .exec-plant-signs .exec-wall-sign.s1 { top: 8%; right: 3%; --c:#00e5ff; color: var(--c); border-color: color-mix(in srgb, var(--c) 40%, transparent); }
+        .exec-plant-signs .exec-wall-sign.s2 { top: 42%; right: 1.5%; color: #ffb000; border-color: rgba(255,176,0,0.35); transform: rotate(8deg); }
+        .exec-plant-signs .exec-wall-sign.s3 { bottom: 18%; right: 4%; color: #39ff14; border-color: rgba(57,255,20,0.35); transform: rotate(-6deg); }
+        .exec-plant-signs .exec-wall-sign.s4 { top: 22%; left: 1%; color: #bf5af2; border-color: rgba(191,90,242,0.35); transform: rotate(-10deg); }
+
+        #executive-tab .exec-page-layout > .exec-block {
+            position: relative;
+            z-index: 1;
+        }
+
+        .exec-month-card.is-peak .exec-month-badge::before {
+            content: none;
+        }
+
+        .exec-month-card.is-peak .exec-month-badge {
+            gap: 5px;
+        }
+
+        .exec-month-card.is-peak .exec-month-badge .exec-ind-sign {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            background: rgba(0,0,0,0.2);
+            border-color: rgba(26,18,0,0.35);
+            color: #1a1200;
+            box-shadow: none;
+        }
+
+        .exec-month-card.is-peak .exec-month-badge .exec-ind-sign svg {
+            width: 8px;
+            height: 8px;
+        }
+
+        .presentation-month-detail .exec-block-title > span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .exec-monthly-wrap {
@@ -3841,6 +3995,111 @@
             white-space: nowrap;
             margin: 0;
             flex: 0 0 auto;
+        }
+
+        .pres-month-peak-badge {
+            display: none;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+            color: #1a1200;
+            background: linear-gradient(135deg, #ffe566, #ffb000);
+            box-shadow: 0 0 18px rgba(255, 214, 10, 0.5);
+            white-space: nowrap;
+            flex-shrink: 0;
+            align-self: center;
+        }
+
+        /* Peak month slide — gold pulse matching Plant Overview cards */
+        .presentation-month-detail.is-peak {
+            border-color: rgba(255, 214, 10, 0.55);
+            box-shadow:
+                0 0 0 1px rgba(255, 214, 10, 0.2),
+                0 20px 50px rgba(0,0,0,0.5),
+                0 0 50px rgba(255, 214, 10, 0.18),
+                inset 0 1px 0 rgba(255, 240, 180, 0.1);
+            animation: presPeakFrame 2.8s ease-in-out infinite;
+        }
+
+        .presentation-month-detail.is-peak::before {
+            background: linear-gradient(90deg, transparent, #ffd60a, #ff9f0a, transparent);
+            height: 3px;
+            box-shadow: 0 0 16px rgba(255, 214, 10, 0.65);
+        }
+
+        .presentation-month-detail.is-peak .presentation-month-detail-title {
+            color: #fff8d6;
+            text-shadow: 0 0 28px rgba(255, 214, 10, 0.55);
+        }
+
+        .presentation-month-detail.is-peak .pres-month-peak-badge {
+            display: inline-flex;
+            animation: execPeakBadge 1.8s ease-in-out infinite;
+        }
+
+        .presentation-month-detail.is-peak .presentation-monthly-year {
+            color: #ffd60a;
+            border-color: rgba(255, 214, 10, 0.55);
+            background: rgba(255, 214, 10, 0.12);
+            box-shadow: 0 0 24px rgba(255, 214, 10, 0.22);
+        }
+
+        .presentation-month-detail.is-peak .exec-kpi-card.exec-hero-card {
+            --exec-kpi-accent: #ffd60a;
+            border-color: rgba(255, 214, 10, 0.55);
+            background:
+                radial-gradient(120% 90% at 100% 0%, rgba(255, 214, 10, 0.2), transparent 55%),
+                radial-gradient(80% 70% at 0% 100%, rgba(255, 176, 0, 0.1), transparent 50%),
+                linear-gradient(155deg, rgba(28, 24, 10, 0.98) 0%, rgba(8, 10, 16, 0.99) 100%);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 240, 180, 0.12),
+                0 0 0 1px rgba(255, 214, 10, 0.2),
+                0 0 36px rgba(255, 214, 10, 0.22);
+            animation: execPeakPulse 2.8s ease-in-out infinite;
+        }
+
+        .presentation-month-detail.is-peak .exec-kpi-card.exec-hero-card .exec-kpi-value {
+            color: #fff8d6;
+            text-shadow: 0 0 22px rgba(255, 214, 10, 0.45);
+        }
+
+        .presentation-month-detail.is-peak .exec-kpi-card.exec-hero-card .exec-kpi-label {
+            color: #ffe566;
+        }
+
+        .presentation-month-detail.is-peak .exec-hero-stat {
+            border-color: rgba(255, 214, 10, 0.28);
+            background: rgba(255, 214, 10, 0.08);
+        }
+
+        @keyframes presPeakFrame {
+            0%, 100% {
+                box-shadow:
+                    0 0 0 1px rgba(255, 214, 10, 0.18),
+                    0 20px 50px rgba(0,0,0,0.5),
+                    0 0 40px rgba(255, 214, 10, 0.14),
+                    inset 0 1px 0 rgba(255, 240, 180, 0.08);
+            }
+            50% {
+                box-shadow:
+                    0 0 0 1px rgba(255, 214, 10, 0.4),
+                    0 20px 50px rgba(0,0,0,0.5),
+                    0 0 70px rgba(255, 214, 10, 0.3),
+                    inset 0 1px 0 rgba(255, 240, 180, 0.14);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .presentation-month-detail.is-peak,
+            .presentation-month-detail.is-peak .pres-month-peak-badge,
+            .presentation-month-detail.is-peak .exec-kpi-card.exec-hero-card {
+                animation: none !important;
+            }
         }
 
         .presentation-month-detail-sub {
@@ -8771,13 +9030,19 @@
             <!-- TAB 10: EXECUTIVE SUMMARY (ALL-IN-ONE) -->
             <div class="tab-panel active" id="executive-tab">
                 <div class="exec-page-layout panel-layout">
+                    <div class="exec-plant-signs" aria-hidden="true">
+                        <div class="exec-wall-sign s1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 20V10l5 3V8l5 3V6l8 4v10H3z"/><path d="M7 20v-3h3v3M14 20v-3h3v3"/></svg></div>
+                        <div class="exec-wall-sign s2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v4M12 17h.01"/></svg></div>
+                        <div class="exec-wall-sign s3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></div>
+                        <div class="exec-wall-sign s4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+                    </div>
 
                     <!-- Block A: Line Ops — hero + health + cost -->
                     <div class="exec-block">
-                        <div class="exec-block-title"><span>Line Ops</span><em>Output first · then health · then cost</em></div>
+                        <div class="exec-block-title"><span><span class="exec-ind-sign" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 20V10l5 3V8l5 3V6l8 4v10H3z"/><path d="M7 20v-3h3v3M14 20v-3h3v3"/></svg></span>Line Ops</span><em>Output first · then health · then cost</em></div>
                         <div class="exec-line-deck">
                             <div class="exec-kpi-card exec-hero-card accent-cyan">
-                                <div class="exec-deck-eyebrow">Primary output</div>
+                                <div class="exec-deck-eyebrow"><span class="exec-ind-sign" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h16M8 7l-2 5 2 5M16 7l2 5-2 5"/><circle cx="12" cy="12" r="2"/></svg></span>Primary output</div>
                                 <div class="exec-kpi-head">
                                     <div class="exec-kpi-copy">
                                         <div class="exec-kpi-label">Line Production</div>
@@ -8808,7 +9073,7 @@
                                 <div class="exec-hero-orbit" aria-hidden="true"></div>
                             </div>
                             <div class="exec-deck-group health">
-                                <div class="exec-deck-eyebrow">Line health</div>
+                                <div class="exec-deck-eyebrow"><span class="exec-ind-sign sign-amber" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v4M12 17h.01"/></svg></span>Line health</div>
                                 <div class="exec-deck-stack">
                                     <div class="exec-kpi-card accent-amber exec-rich-card">
                                         <div class="exec-kpi-head">
@@ -8849,7 +9114,7 @@
                                 </div>
                             </div>
                             <div class="exec-deck-group energy">
-                                <div class="exec-deck-eyebrow">Specific cost</div>
+                                <div class="exec-deck-eyebrow"><span class="exec-ind-sign sign-blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>Specific cost</div>
                                 <div class="exec-deck-stack energy-pair">
                                     <div class="exec-kpi-card accent-blue exec-rich-card">
                                         <div class="exec-kpi-head">
@@ -8884,11 +9149,12 @@
 
                     <!-- Block B: Offline Ops — process lane -->
                     <div class="exec-block">
-                        <div class="exec-block-title"><span>Offline Ops</span><em>Process flow · PS → SS → Metallizer → Pack</em></div>
+                        <div class="exec-block-title"><span><span class="exec-ind-sign sign-green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></span>Offline Ops</span><em>Process flow · PS → SS → Metallizer → Pack</em></div>
                         <div class="exec-flow-lane">
                             <div class="exec-machine-card machine-ps exec-flow-card">
                                 <div class="exec-flow-stage">01</div>
                                 <div class="exec-machine-top">
+                                    <div class="exec-machine-sign" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h16M8 7l-2 5 2 5M16 7l2 5-2 5"/><circle cx="12" cy="12" r="2"/></svg></div>
                                     <div class="exec-machine-name">Primary Slitter</div>
                                     <div class="exec-machine-badge">PS</div>
                                 </div>
@@ -8911,6 +9177,7 @@
                             <div class="exec-machine-card machine-ss exec-flow-card">
                                 <div class="exec-flow-stage">02</div>
                                 <div class="exec-machine-top">
+                                    <div class="exec-machine-sign" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h16M8 7l-2 5 2 5M16 7l2 5-2 5"/><circle cx="12" cy="12" r="2"/></svg></div>
                                     <div class="exec-machine-name">Secondary Slitter</div>
                                     <div class="exec-machine-badge">SS</div>
                                 </div>
@@ -8933,6 +9200,7 @@
                             <div class="exec-machine-card machine-met exec-flow-card">
                                 <div class="exec-flow-stage">03</div>
                                 <div class="exec-machine-top">
+                                    <div class="exec-machine-sign" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="8" cy="12" rx="3" ry="6"/><path d="M8 6h9c1.7 0 3 2.7 3 6s-1.3 6-3 6H8"/><path d="M11 9h6M11 12h7M11 15h6"/></svg></div>
                                     <div class="exec-machine-name">Metallizer</div>
                                     <div class="exec-machine-badge">MET</div>
                                 </div>
@@ -8955,6 +9223,7 @@
                             <div class="exec-machine-card machine-pack exec-flow-card exec-flow-cost">
                                 <div class="exec-flow-stage">Cost</div>
                                 <div class="exec-machine-top">
+                                    <div class="exec-machine-sign" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8l9-4 9 4v10l-9 4-9-4V8z"/><path d="M12 4v16M3 8l9 4 9-4"/></svg></div>
                                     <div class="exec-machine-name">Packing Cost</div>
                                     <div class="exec-machine-badge">PKR</div>
                                 </div>
@@ -8975,7 +9244,7 @@
                     <!-- Block C: Monthly cards (latest year) -->
                     <div class="exec-block exec-monthly-wrap">
                         <div class="exec-block-title">
-                            <span>Monthly Line Performance</span>
+                            <span><span class="exec-ind-sign sign-gold" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>Monthly Line Performance</span>
                             <em id="exec-monthly-year-label">Latest year</em>
                         </div>
                         <div class="exec-monthly-grid" id="exec-monthly-cards">
@@ -10416,13 +10685,14 @@
             <div class="presentation-month-detail-head">
                 <div class="presentation-month-detail-brand">
                     <div class="presentation-month-detail-title" id="pres-month-title">January 2026</div>
+                    <div class="pres-month-peak-badge" id="pres-month-peak-badge" hidden>★ Peak production</div>
                     <p class="presentation-month-detail-sub" id="pres-month-sub">Line · Offline · Products · Waste · Downtime</p>
                 </div>
                 <div class="presentation-monthly-year" id="presentation-monthly-year">Year —</div>
             </div>
 
                         <div class="exec-block">
-                <div class="exec-block-title"><span>Line Ops</span><em>Output first · then health · then cost</em></div>
+                <div class="exec-block-title"><span><span class="exec-ind-sign" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 20V10l5 3V8l5 3V6l8 4v10H3z"/><path d="M7 20v-3h3v3M14 20v-3h3v3"/></svg></span>Line Ops</span><em>Output first · then health · then cost</em></div>
                 <div class="exec-line-deck">
                     <div class="exec-kpi-card exec-hero-card accent-cyan">
                         <div class="exec-deck-eyebrow">Primary output</div>
@@ -10523,11 +10793,12 @@
             </div>
 
             <div class="exec-block">
-                <div class="exec-block-title"><span>Offline Ops</span><em>Process flow · PS → SS → Metallizer → Pack</em></div>
+                <div class="exec-block-title"><span><span class="exec-ind-sign sign-green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></span>Offline Ops</span><em>Process flow · PS → SS → Metallizer → Pack</em></div>
                 <div class="exec-flow-lane">
                     <div class="exec-machine-card machine-ps exec-flow-card">
                         <div class="exec-flow-stage">01</div>
                         <div class="exec-machine-top">
+                            <div class="exec-machine-sign" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h16M8 7l-2 5 2 5M16 7l2 5-2 5"/><circle cx="12" cy="12" r="2"/></svg></div>
                             <div class="exec-machine-name">Primary Slitter</div>
                             <div class="exec-machine-badge">PS</div>
                         </div>
@@ -10560,6 +10831,7 @@
                     <div class="exec-machine-card machine-ss exec-flow-card">
                         <div class="exec-flow-stage">02</div>
                         <div class="exec-machine-top">
+                            <div class="exec-machine-sign" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h16M8 7l-2 5 2 5M16 7l2 5-2 5"/><circle cx="12" cy="12" r="2"/></svg></div>
                             <div class="exec-machine-name">Secondary Slitter</div>
                             <div class="exec-machine-badge">SS</div>
                         </div>
@@ -10592,6 +10864,7 @@
                     <div class="exec-machine-card machine-met exec-flow-card">
                         <div class="exec-flow-stage">03</div>
                         <div class="exec-machine-top">
+                            <div class="exec-machine-sign" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="8" cy="12" rx="3" ry="6"/><path d="M8 6h9c1.7 0 3 2.7 3 6s-1.3 6-3 6H8"/><path d="M11 9h6M11 12h7M11 15h6"/></svg></div>
                             <div class="exec-machine-name">Metallizer</div>
                             <div class="exec-machine-badge">MET</div>
                         </div>
@@ -10624,6 +10897,7 @@
                     <div class="exec-machine-card machine-pack exec-flow-card exec-flow-cost">
                         <div class="exec-flow-stage">Cost</div>
                         <div class="exec-machine-top">
+                            <div class="exec-machine-sign" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8l9-4 9 4v10l-9 4-9-4V8z"/><path d="M12 4v16M3 8l9 4 9-4"/></svg></div>
                             <div class="exec-machine-name">Packing Cost</div>
                             <div class="exec-machine-badge">PKR</div>
                         </div>
@@ -10656,7 +10930,7 @@
             </div>
 
             <div class="exec-block pres-highlights-block">
-                <div class="exec-block-title"><span>Month Highlights</span><em>Products rising · Waste · Downtime</em></div>
+                <div class="exec-block-title"><span><span class="exec-ind-sign sign-gold" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/></svg></span>Month Highlights</span><em>Products rising · Waste · Downtime</em></div>
                 <div class="pres-hl-lane">
                     <div class="pres-hl-tile accent-green">
                         <div class="pres-hl-tile-top">
@@ -17053,7 +17327,7 @@
                                 <div class="exec-month-shine" aria-hidden="true"></div>
                                 <div class="exec-month-label">${label}</div>
                                 <div class="exec-month-prod">${Math.round(prod).toLocaleString()}<span>t</span></div>
-                                <div class="exec-month-badge">Peak month</div>
+                                <div class="exec-month-badge"><span class="exec-ind-sign" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/></svg></span>Peak month</div>
                                 <div class="exec-month-meta">
                                     <span>Waste <strong>${Number(waste).toFixed(1)}%</strong></span>
                                     <span>OEE <strong>${Number(oee).toFixed(1)}%</strong></span>
@@ -19846,6 +20120,32 @@
             };
 
             const totalProd = mainRows.reduce((sum, r) => sum + (r['Prod. (Tons)'] || 0), 0);
+
+            // Peak month of the year — same visuals as Plant Overview month cards
+            const yearProdRows = mainDataRaw.filter(r => {
+                const info = parseYearMonth(r['Dates']);
+                return info.year === String(year) && r['Prod. (Tons)'] !== null;
+            });
+            let peakMonthPad = '';
+            let peakProdVal = 0;
+            yearProdRows.forEach(r => {
+                const p = Number(r['Prod. (Tons)'] || 0);
+                if (p > peakProdVal) {
+                    peakProdVal = p;
+                    peakMonthPad = parseYearMonth(r['Dates']).month;
+                }
+            });
+            const isPeakMonth = peakProdVal > 0 && String(month).padStart(2, '0') === String(peakMonthPad).padStart(2, '0');
+            const detailRoot = document.querySelector('#presentation-monthly-overlay .presentation-month-detail');
+            if (detailRoot) detailRoot.classList.toggle('is-peak', isPeakMonth);
+            const peakBadge = document.getElementById('pres-month-peak-badge');
+            if (peakBadge) {
+                peakBadge.hidden = !isPeakMonth;
+                if (isPeakMonth) {
+                    peakBadge.textContent = `★ Peak · ${Math.round(peakProdVal).toLocaleString()} t`;
+                }
+            }
+
             const avgWaste = typeof kpiDef !== 'undefined' && kpiDef.waste_pct
                 ? kpiDef.waste_pct.calculate(mainRows)
                 : avgField(mainRows, 'Waste %');
