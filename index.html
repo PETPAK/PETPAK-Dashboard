@@ -1601,9 +1601,10 @@
             display: flex !important;
             flex-direction: column;
             justify-content: flex-start;
-            gap: 8px;
+            gap: 6px;
             overflow: hidden;
-            padding: 12px 14px 14px;
+            padding: 14px 16px 16px;
+            border-radius: 16px;
         }
 
         .presentation-month-detail .exec-flow-card .exec-machine-top {
@@ -1611,22 +1612,30 @@
             position: relative;
             z-index: 6;
             margin: 0;
-            padding: 0 36px 0 2px;
-            min-height: 18px;
+            padding: 0 34px 0 0;
+            min-height: 22px;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .presentation-month-detail .exec-flow-card .exec-machine-badge {
+            display: none;
         }
 
         .presentation-month-detail .exec-flow-stage {
             z-index: 7;
+            opacity: 0.55;
         }
 
         .presentation-month-detail .exec-flow-body {
             flex: 1 1 auto !important;
             display: flex !important;
+            flex-direction: column !important;
             align-items: center;
             justify-content: center;
-            gap: 14px;
+            gap: 12px;
             margin: 0 !important;
-            padding: 0 4px;
+            padding: 4px 6px 2px;
             position: relative;
             z-index: 3;
             border-top: none;
@@ -1637,16 +1646,48 @@
 
         .presentation-month-detail .exec-flow-body .exec-machine-metric {
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
         }
 
         .presentation-month-detail .exec-flow-body .exec-machine-metric-label {
             text-align: center;
-            margin-bottom: 4px;
+            margin-bottom: 0;
+            font-size: 10px !important;
+            letter-spacing: 1.4px !important;
+            color: #8fa0b4;
         }
 
         .presentation-month-detail .exec-flow-body .exec-machine-metric-value {
-            font-size: clamp(20px, 2.2vw, 28px) !important;
+            font-size: clamp(24px, 2.6vw, 34px) !important;
             text-align: center;
+            line-height: 1 !important;
+            letter-spacing: -0.6px !important;
+            text-shadow: 0 0 24px color-mix(in srgb, var(--machine-accent) 35%, transparent);
+        }
+
+        .presentation-month-detail .exec-waste-chip,
+        .presentation-month-detail .exec-cost-chip {
+            min-width: 78px;
+            padding: 7px 12px !important;
+            border-radius: 999px !important;
+            gap: 2px;
+            align-self: center !important;
+            text-align: center;
+            box-shadow: 0 0 18px color-mix(in srgb, var(--machine-accent) 12%, transparent);
+        }
+
+        .presentation-month-detail .exec-waste-chip span,
+        .presentation-month-detail .exec-cost-chip span {
+            font-size: 8px !important;
+            letter-spacing: 1px;
+        }
+
+        .presentation-month-detail .exec-waste-chip strong,
+        .presentation-month-detail .exec-cost-chip strong {
+            font-size: 13px !important;
         }
 
         .presentation-month-detail .exec-flow-foot {
@@ -1659,6 +1700,7 @@
 
         .presentation-month-detail .exec-flow-cost .exec-flow-body {
             display: flex !important;
+            flex-direction: column !important;
         }
 
         .presentation-month-detail .exec-flow-cost .exec-flow-center > span {
@@ -4397,55 +4439,78 @@
             width: 100%;
         }
 
-        /* Offline Ops */
+        /* Offline Ops — Present month cards */
         .presentation-month-detail .exec-flow-lane {
             flex: 1;
             min-height: 0;
             grid-template-columns:
-                minmax(0, 1fr) 18px
-                minmax(0, 1fr) 18px
-                minmax(0, 1fr) 18px
+                minmax(0, 1fr) 28px
+                minmax(0, 1fr) 28px
+                minmax(0, 1fr) 28px
                 minmax(0, 1fr);
             align-items: stretch;
+            gap: 0 2px;
         }
 
         .presentation-month-detail .exec-flow-card {
             height: 100%;
             min-height: 0;
-            padding: 12px 14px 14px;
-            border-radius: 14px;
-            gap: 8px;
+            padding: 14px 16px 16px;
+            border-radius: 16px;
+            gap: 6px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             overflow: hidden;
             box-sizing: border-box;
+            background:
+                radial-gradient(ellipse 90% 70% at 50% 30%, color-mix(in srgb, var(--machine-accent) 14%, transparent), transparent 70%),
+                linear-gradient(165deg, rgba(14, 22, 36, 0.96) 0%, rgba(6, 10, 18, 0.98) 100%);
+            border: 1px solid color-mix(in srgb, var(--machine-accent) 38%, transparent);
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,0.07),
+                0 10px 28px rgba(0,0,0,0.4),
+                0 0 28px color-mix(in srgb, var(--machine-accent) 14%, transparent);
         }
 
         .presentation-month-detail .exec-flow-stage {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 12px;
+            right: 12px;
             font-size: 9px;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
             z-index: 9;
             pointer-events: none;
+            opacity: 0.55;
         }
 
         .presentation-month-detail .exec-flow-card .exec-machine-top {
             flex: 0 0 auto;
-            padding: 0 34px 0 2px;
+            padding: 0 28px 0 0;
             margin: 0;
             z-index: 6;
-            min-height: 16px;
+            min-height: 22px;
+            justify-content: center;
         }
 
         .presentation-month-detail .exec-machine-name {
             font-size: 11px;
-            letter-spacing: 0.8px;
+            letter-spacing: 1px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            text-align: center;
+        }
+
+        .presentation-month-detail .exec-machine-sign {
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+        }
+
+        .presentation-month-detail .exec-machine-sign svg {
+            width: 14px;
+            height: 14px;
         }
 
         .presentation-month-detail .exec-flow-center {
@@ -4456,42 +4521,13 @@
             display: none;
         }
 
-        .presentation-month-detail .exec-flow-ring-wrap {
-            width: min(80px, 70%);
-            max-width: 80px;
-            max-height: 80px;
-            aspect-ratio: 1;
-            flex: 0 0 auto;
-            position: relative;
-        }
-
-        .presentation-month-detail .exec-flow-ring-wrap svg {
-            display: block;
-            width: 100%;
-            height: 100%;
-            transform: rotate(-90deg);
-        }
-
-        .presentation-month-detail .exec-flow-ring-wrap .exec-ring-track {
-            stroke: rgba(255, 255, 255, 0.12);
-            stroke-width: 2.8;
-        }
-
-        .presentation-month-detail .exec-flow-ring-wrap .exec-ring-fill {
-            stroke: var(--machine-accent);
-            stroke-width: 2.8;
-        }
-
-        .presentation-month-detail .exec-flow-ring-wrap strong {
-            font-size: clamp(14px, 1.5vw, 20px);
-        }
-
         .presentation-month-detail .exec-flow-body {
             display: flex !important;
+            flex-direction: column !important;
             align-items: center;
             justify-content: center;
-            gap: 14px;
-            padding: 0 4px;
+            gap: 12px;
+            padding: 4px 6px 2px;
             margin: 0 !important;
             flex: 1 1 auto !important;
             min-height: 0;
@@ -4507,63 +4543,65 @@
 
         .presentation-month-detail .exec-flow-body .exec-machine-metric {
             min-width: 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
         }
 
         .presentation-month-detail .exec-flow-body .exec-machine-metric-label {
-            font-size: 9px;
-            letter-spacing: 0.8px;
-            margin-bottom: 2px;
+            font-size: 10px;
+            letter-spacing: 1.4px;
+            margin-bottom: 0;
             line-height: 1.2;
+            text-align: center;
+            color: #8fa0b4;
         }
 
         .presentation-month-detail .exec-flow-body .exec-machine-metric-value {
-            font-size: clamp(20px, 2.2vw, 28px);
+            font-size: clamp(24px, 2.6vw, 34px);
             font-weight: 800;
-            letter-spacing: -0.4px;
-            line-height: 1.1;
+            letter-spacing: -0.6px;
+            line-height: 1;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             text-align: center;
-        }
-
-        .presentation-month-detail .exec-flow-body .exec-machine-metric {
-            text-align: center;
-        }
-
-        .presentation-month-detail .exec-flow-body .exec-machine-metric-label {
-            text-align: center;
-            margin-bottom: 4px;
+            text-shadow: 0 0 24px color-mix(in srgb, var(--machine-accent) 35%, transparent);
         }
 
         .presentation-month-detail .exec-waste-chip,
         .presentation-month-detail .exec-cost-chip {
-            min-width: 60px;
-            padding: 5px 8px;
-            border-radius: 10px;
+            min-width: 78px;
+            padding: 7px 12px;
+            border-radius: 999px;
             gap: 2px;
             align-self: center;
             flex-shrink: 0;
+            text-align: center;
+            box-shadow: 0 0 18px color-mix(in srgb, var(--machine-accent) 12%, transparent);
         }
 
         .presentation-month-detail .exec-waste-chip span,
         .presentation-month-detail .exec-cost-chip span {
             font-size: 8px;
             line-height: 1.2;
+            letter-spacing: 1px;
         }
 
         .presentation-month-detail .exec-waste-chip strong,
         .presentation-month-detail .exec-cost-chip strong {
-            font-size: 12px;
+            font-size: 13px;
             line-height: 1.15;
         }
 
         .presentation-month-detail .exec-cost-chip {
-            border-color: color-mix(in srgb, var(--machine-accent) 40%, transparent);
+            border-color: color-mix(in srgb, var(--machine-accent) 45%, transparent);
             background:
                 linear-gradient(160deg,
-                    color-mix(in srgb, var(--machine-accent) 18%, transparent),
-                    color-mix(in srgb, var(--machine-accent) 5%, transparent));
+                    color-mix(in srgb, var(--machine-accent) 22%, transparent),
+                    color-mix(in srgb, var(--machine-accent) 6%, transparent));
         }
 
         .presentation-month-detail .exec-cost-chip span {
@@ -4578,11 +4616,12 @@
             height: 2px;
             margin: 0;
             align-self: center;
+            opacity: 0.9;
         }
 
         .presentation-month-detail .exec-flow-connector::after {
-            width: 7px;
-            height: 7px;
+            width: 8px;
+            height: 8px;
         }
 
         @media (max-width: 1200px) {
