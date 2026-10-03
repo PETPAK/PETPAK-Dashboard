@@ -2060,7 +2060,7 @@
             color: #ffe566;
         }
         .exec-machine-card.is-prod-peak .exec-machine-name::after {
-            content: 'TOP';
+            content: 'PEAK';
             display: inline-flex;
             align-items: center;
             margin-left: 8px;
@@ -3133,7 +3133,7 @@
                 linear-gradient(165deg, rgba(18, 28, 44, 0.95) 0%, rgba(8, 12, 20, 0.98) 100%);
             border: 1px solid color-mix(in srgb, var(--month-accent) 28%, transparent);
             border-radius: 12px;
-            padding: 11px 12px 12px;
+            padding: 10px 12px 14px;
             position: relative;
             overflow: hidden;
             box-shadow:
@@ -3144,8 +3144,10 @@
             transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
             display: flex;
             flex-direction: column;
+            justify-content: flex-start;
             gap: 5px;
             min-width: 0;
+            box-sizing: border-box;
         }
 
         .exec-month-card::before {
@@ -3230,8 +3232,9 @@
             align-items: center;
             gap: 4px;
             align-self: flex-start;
-            margin-top: 1px;
-            padding: 2px 7px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            padding: 3px 8px;
             border-radius: 999px;
             font-size: 8px;
             font-weight: 800;
@@ -3241,6 +3244,12 @@
             background: linear-gradient(135deg, #ffe566, #ffb000);
             box-shadow: 0 0 14px rgba(255, 214, 10, 0.45);
             animation: execPeakBadge 1.8s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        /* Peak badge replaces waste/OEE line so bottom stays clear */
+        .exec-month-card.is-peak .exec-month-meta {
+            display: none;
         }
 
         .exec-month-card.is-peak .exec-month-badge::before {
@@ -3346,6 +3355,8 @@
             font-size: 10px;
             color: #8a97a8;
             line-height: 1.25;
+            flex-shrink: 0;
+            padding-bottom: 1px;
         }
 
         .exec-month-meta strong {
@@ -4734,15 +4745,17 @@
         }
 
 
-        /* Soft monthly fit — keep cards inside without fighting layout */
+        /* Soft monthly fit — keep bottom text/badge inside cards */
         body.dashboard-fit-view #executive-tab .exec-monthly-grid {
             align-content: stretch;
+            padding-bottom: 4px;
+            box-sizing: border-box;
         }
         body.dashboard-fit-view #executive-tab .exec-month-card {
-            min-height: 0;
+            min-height: 0 !important;
         }
         body.presentation-mode.dashboard-fit-view #executive-tab .exec-month-card {
-            min-height: 0;
+            min-height: 0 !important;
         }
 
         body.dashboard-fit-view #executive-tab .exec-page-layout {
@@ -4756,11 +4769,16 @@
             max-height: none;
             min-height: 0;
             height: 100%;
+            overflow: visible;
+            padding-bottom: 6px;
+            box-sizing: border-box;
         }
 
         body.dashboard-fit-view #executive-tab .exec-month-card {
-            min-height: 88px;
-            padding: 10px 12px !important;
+            min-height: 0 !important;
+            padding: 8px 11px 13px !important;
+            gap: 4px;
+            justify-content: flex-start;
         }
 
         body.dashboard-fit-view #executive-tab .exec-line-deck,
@@ -4899,13 +4917,16 @@
         }
 
         body.dashboard-fit-view .exec-monthly-grid {
-            gap: 8px;
+            gap: 6px;
             height: 100%;
             align-content: stretch;
+            overflow: visible;
         }
 
         body.dashboard-fit-view .exec-monthly-grid .exec-month-card {
             height: 100%;
+            min-height: 0;
+            overflow: hidden;
         }
 
         body.dashboard-fit-view .exec-month-prod {
@@ -4915,6 +4936,7 @@
         body.dashboard-fit-view .exec-month-meta {
             font-size: 9px;
             gap: 4px 8px;
+            padding-bottom: 2px;
         }
 
         body.dashboard-fit-view .exec-block-title {
@@ -8357,10 +8379,10 @@
         }
 
         body.presentation-mode.dashboard-fit-view #executive-tab .exec-month-card {
-            padding: 12px 12px 13px !important;
-            gap: 6px;
-            min-height: 88px;
-            justify-content: center;
+            padding: 10px 12px 14px !important;
+            gap: 5px;
+            min-height: 0 !important;
+            justify-content: flex-start;
         }
 
         body.presentation-mode.dashboard-fit-view #executive-tab .exec-month-label {
@@ -8368,13 +8390,19 @@
         }
 
         body.presentation-mode.dashboard-fit-view #executive-tab .exec-month-prod {
-            font-size: clamp(20px, 2vw, 28px) !important;
+            font-size: clamp(18px, 1.8vw, 26px) !important;
             line-height: 1.05;
         }
 
         body.presentation-mode.dashboard-fit-view #executive-tab .exec-month-meta {
-            font-size: 11px !important;
-            gap: 6px 10px;
+            font-size: 10px !important;
+            gap: 5px 8px;
+            padding-bottom: 2px;
+        }
+
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-monthly-wrap {
+            padding-bottom: 8px;
+            overflow: visible;
         }
 
         body.presentation-mode.dashboard-fit-view #executive-tab .exec-chart-grid {
@@ -17277,7 +17305,9 @@
             svg.appendChild(path);
         }
 
-        function markHighestMachineProd(rootSelector, psProd, ssProd, metProd) {
+        // TOP only on a month slide when that machine hits its own peak for the year
+        // (never compare PS vs SS vs Met absolute tons — PS would always win)
+        function markMachineYearPeakMonth(rootSelector, year, month) {
             const root = document.querySelector(rootSelector);
             if (!root) return;
             const cards = {
@@ -17286,15 +17316,50 @@
                 met: root.querySelector('.exec-machine-card.machine-met')
             };
             Object.values(cards).forEach((card) => card && card.classList.remove('is-prod-peak'));
-            const vals = [
-                { key: 'ps', v: Number(psProd) || 0 },
-                { key: 'ss', v: Number(ssProd) || 0 },
-                { key: 'met', v: Number(metProd) || 0 }
-            ];
-            const max = Math.max(...vals.map((x) => x.v));
-            if (max <= 0) return;
-            vals.forEach((x) => {
-                if (x.v === max && cards[x.key]) cards[x.key].classList.add('is-prod-peak');
+
+            const monthPad = String(month).padStart(2, '0');
+            const yearRows = (typeof offlineDataRaw !== 'undefined' ? offlineDataRaw : [])
+                .filter((r) => parseYearMonth(r['Dates']).year === String(year));
+            if (!yearRows.length) return;
+
+            const byMonth = {};
+            yearRows.forEach((r) => {
+                const m = parseYearMonth(r['Dates']).month;
+                if (!m) return;
+                if (!byMonth[m]) byMonth[m] = { ps: 0, ss: 0, met: 0 };
+                byMonth[m].ps += Number(r['PS_Production'] || 0);
+                byMonth[m].ss += Number(r['SS_Production'] || 0);
+                byMonth[m].met += Number(r['Met_Production'] || 0);
+            });
+
+            const peakOf = (key) => {
+                let best = 0;
+                let bestMonths = [];
+                Object.keys(byMonth).forEach((m) => {
+                    const v = byMonth[m][key] || 0;
+                    if (v > best) {
+                        best = v;
+                        bestMonths = [m];
+                    } else if (v > 0 && v === best) {
+                        bestMonths.push(m);
+                    }
+                });
+                return { best, bestMonths };
+            };
+
+            ['ps', 'ss', 'met'].forEach((key) => {
+                const { best, bestMonths } = peakOf(key);
+                if (best > 0 && bestMonths.includes(monthPad) && cards[key]) {
+                    cards[key].classList.add('is-prod-peak');
+                }
+            });
+        }
+
+        function clearMachineProdPeak(rootSelector) {
+            const root = document.querySelector(rootSelector);
+            if (!root) return;
+            root.querySelectorAll('.exec-machine-card.is-prod-peak').forEach((card) => {
+                card.classList.remove('is-prod-peak');
             });
         }
 
@@ -17353,7 +17418,8 @@
             setTxt('exec-val-ss-waste', `${ssWastePct.toFixed(2)}%`);
             setTxt('exec-val-met-prod', formatMass(metProd));
             setTxt('exec-val-met-waste', `${metWastePct.toFixed(2)}%`);
-            markHighestMachineProd('#executive-tab', psProd, ssProd, metProd);
+            // No TOP badge on year / multi-month Plant Overview
+            clearMachineProdPeak('#executive-tab');
             setTxt('exec-val-packing', `PKR ${avgPacking.toFixed(2)}`);
             const packToneExec = !avgPacking ? ''
                 : avgPacking <= 12 ? 'pack-tone-good'
@@ -20342,7 +20408,8 @@
             setTxt('pres-val-ss-waste', `${Number(ssWastePct || 0).toFixed(2)}%`);
             setTxt('pres-val-met-prod', formatMass(metProd));
             setTxt('pres-val-met-waste', `${Number(metWastePct || 0).toFixed(2)}%`);
-            markHighestMachineProd('#presentation-monthly-overlay .presentation-month-detail', psProd, ssProd, metProd);
+            // TOP only if this month is that machine's best month in the year
+            markMachineYearPeakMonth('#presentation-monthly-overlay .presentation-month-detail', year, month);
             setTxt('pres-val-packing', `PKR ${Number(avgPacking || 0).toFixed(2)}`);
             const packTonePres = !avgPacking ? ''
                 : Number(avgPacking) <= 12 ? 'pack-tone-good'
