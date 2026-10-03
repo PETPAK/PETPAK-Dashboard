@@ -1547,19 +1547,9 @@
             display: none;
         }
 
+        /* Center yield ring removed — Production + Waste are enough */
         .presentation-month-detail .exec-flow-center {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0;
-            flex: 1 1 auto;
-            min-height: 0;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-            padding: 4px 0;
-            margin: 0;
+            display: none !important;
         }
 
         .presentation-month-detail .exec-flow-ring-wrap {
@@ -1610,10 +1600,11 @@
         .presentation-month-detail .exec-flow-card {
             display: flex !important;
             flex-direction: column;
-            justify-content: flex-start;
-            gap: 10px;
+            justify-content: space-between;
+            gap: 12px;
             overflow: hidden;
-            padding-top: 14px;
+            padding: 14px 14px 16px;
+            min-height: 0;
         }
 
         .presentation-month-detail .exec-flow-card .exec-machine-top {
@@ -1630,17 +1621,32 @@
         }
 
         .presentation-month-detail .exec-flow-body {
-            flex: 0 0 auto !important;
+            flex: 1 1 auto !important;
             align-items: center;
             margin: 0;
-            padding: 0 2px;
+            padding: 8px 2px 0;
             position: relative;
             z-index: 3;
-            border-top: none;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            min-height: 0;
         }
 
         .presentation-month-detail .exec-flow-foot {
-            display: none !important;
+            display: flex !important;
+            flex-direction: column;
+            gap: 4px;
+            flex: 0 0 auto;
+            margin-top: 0;
+            padding-top: 0;
+        }
+        .presentation-month-detail .exec-flow-share {
+            height: 4px;
+            border-radius: 999px;
+        }
+        .presentation-month-detail .exec-flow-share-label {
+            font-size: 10px;
+            letter-spacing: 0.4px;
+            color: #8fa0b4;
         }
 
         .presentation-month-detail .exec-flow-share {
@@ -2969,6 +2975,36 @@
             align-items: center;
             gap: 8px;
         }
+        .presentation-month-detail .exec-ind-sign {
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+        }
+        .presentation-month-detail .exec-ind-sign svg {
+            width: 15px;
+            height: 15px;
+        }
+        .presentation-month-detail .exec-machine-sign {
+            width: 24px;
+            height: 24px;
+        }
+        .presentation-month-detail .exec-machine-sign svg {
+            width: 14px;
+            height: 14px;
+        }
+        .presentation-month-detail .pres-month-signs {
+            z-index: 0;
+        }
+        .presentation-month-detail .pres-month-signs .exec-wall-sign {
+            width: 40px;
+            height: 40px;
+            opacity: 0.85;
+        }
+        .presentation-month-detail .exec-deck-eyebrow .exec-ind-sign {
+            width: 18px;
+            height: 18px;
+        }
+
 
         .exec-monthly-wrap {
             display: flex;
@@ -3908,7 +3944,7 @@
             max-height: 100%;
             display: grid;
             /* head · line · offline · highlights — all share viewport, none crushed */
-            grid-template-rows: auto minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1.2fr);
+            grid-template-rows: auto minmax(0, 1.05fr) minmax(0, 1.1fr) minmax(0, 1.15fr);
             gap: 10px;
             padding: 14px 16px 12px;
             border-radius: 18px;
@@ -4439,14 +4475,7 @@
         }
 
         .presentation-month-detail .exec-flow-center {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex: 1 1 auto;
-            min-height: 0;
-            overflow: hidden;
-            padding: 2px 0;
+            display: none !important;
         }
 
         .presentation-month-detail .exec-flow-center > span {
@@ -4499,7 +4528,21 @@
         }
 
         .presentation-month-detail .exec-flow-foot {
-            display: none !important;
+            display: flex !important;
+            flex-direction: column;
+            gap: 4px;
+            flex: 0 0 auto;
+            margin-top: 0;
+            padding-top: 0;
+        }
+        .presentation-month-detail .exec-flow-share {
+            height: 4px;
+            border-radius: 999px;
+        }
+        .presentation-month-detail .exec-flow-share-label {
+            font-size: 10px;
+            letter-spacing: 0.4px;
+            color: #8fa0b4;
         }
 
         .presentation-month-detail .exec-flow-body .exec-machine-metric {
@@ -4514,10 +4557,10 @@
         }
 
         .presentation-month-detail .exec-flow-body .exec-machine-metric-value {
-            font-size: 13px;
+            font-size: clamp(18px, 2vw, 26px);
             font-weight: 800;
-            letter-spacing: -0.3px;
-            line-height: 1.15;
+            letter-spacing: -0.4px;
+            line-height: 1.1;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -4591,6 +4634,59 @@
             .presentation-month-detail .exec-flow-connector {
                 display: none;
             }
+        }
+
+
+        /* Monthly cards — never clip bottom row */
+        body.dashboard-fit-view #executive-tab .exec-monthly-wrap {
+            max-height: none !important;
+            min-height: 0 !important;
+            height: auto !important;
+            flex: 1 1 auto !important;
+            overflow: visible !important;
+        }
+        body.dashboard-fit-view #executive-tab .exec-monthly-grid {
+            height: auto !important;
+            max-height: none !important;
+            align-content: start !important;
+            gap: 6px !important;
+            overflow: visible !important;
+        }
+        body.dashboard-fit-view #executive-tab .exec-month-card,
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-month-card {
+            min-height: 0 !important;
+            height: auto !important;
+            padding: 8px 10px 9px !important;
+            gap: 4px !important;
+        }
+        body.dashboard-fit-view #executive-tab .exec-month-prod,
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-month-prod {
+            font-size: clamp(14px, 1.35vw, 20px) !important;
+            line-height: 1.05 !important;
+        }
+        body.dashboard-fit-view #executive-tab .exec-month-meta,
+        body.presentation-mode.dashboard-fit-view #executive-tab .exec-month-meta {
+            font-size: 9px !important;
+            gap: 3px 8px !important;
+        }
+        body.dashboard-fit-view #executive-tab .exec-month-card.is-peak .exec-month-badge {
+            font-size: 8px !important;
+            padding: 3px 7px !important;
+        }
+        body.dashboard-fit-view #executive-tab .exec-page-layout {
+            overflow: hidden;
+            grid-template-rows: minmax(0, 1.05fr) minmax(0, 0.95fr) minmax(0, 1.15fr) !important;
+            gap: 8px !important;
+        }
+        body.dashboard-fit-view #executive-tab .exec-block:not(.exec-monthly-wrap) {
+            min-height: 0 !important;
+            overflow: hidden;
+        }
+        body.dashboard-fit-view #executive-tab .exec-kpi-card.exec-hero-card {
+            min-height: 0 !important;
+        }
+        body.dashboard-fit-view #executive-tab .exec-flow-card {
+            min-height: 0 !important;
         }
 
         body.dashboard-fit-view #executive-tab .exec-page-layout {
@@ -10682,6 +10778,12 @@
             <div class="pres-backdrop-vignette"></div>
         </div>
         <div class="presentation-month-detail">
+            <div class="exec-plant-signs pres-month-signs" aria-hidden="true">
+                <div class="exec-wall-sign s1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 20V10l5 3V8l5 3V6l8 4v10H3z"/><path d="M7 20v-3h3v3M14 20v-3h3v3"/></svg></div>
+                <div class="exec-wall-sign s2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v4M12 17h.01"/></svg></div>
+                <div class="exec-wall-sign s3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M5 19l1.5-1.5M17.5 6.5 19 5"/></svg></div>
+                <div class="exec-wall-sign s4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+            </div>
             <div class="presentation-month-detail-head">
                 <div class="presentation-month-detail-brand">
                     <div class="presentation-month-detail-title" id="pres-month-title">January 2026</div>
@@ -10695,7 +10797,7 @@
                 <div class="exec-block-title"><span><span class="exec-ind-sign" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 20V10l5 3V8l5 3V6l8 4v10H3z"/><path d="M7 20v-3h3v3M14 20v-3h3v3"/></svg></span>Line Ops</span><em>Output first · then health · then cost</em></div>
                 <div class="exec-line-deck">
                     <div class="exec-kpi-card exec-hero-card accent-cyan">
-                        <div class="exec-deck-eyebrow">Primary output</div>
+                        <div class="exec-deck-eyebrow"><span class="exec-ind-sign" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h16M8 7l-2 5 2 5M16 7l2 5-2 5"/><circle cx="12" cy="12" r="2"/></svg></span>Primary output</div>
                         <div class="exec-kpi-head">
                             <div class="exec-kpi-copy">
                                 <div class="exec-kpi-label">Line Production</div>
@@ -10726,7 +10828,7 @@
                         <div class="exec-hero-orbit" aria-hidden="true"></div>
                     </div>
                     <div class="exec-deck-group health">
-                        <div class="exec-deck-eyebrow">Line health</div>
+                        <div class="exec-deck-eyebrow"><span class="exec-ind-sign sign-amber" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v4M12 17h.01"/></svg></span>Line health</div>
                         <div class="exec-deck-stack">
                             <div class="exec-kpi-card accent-amber exec-rich-card">
                                 <div class="exec-kpi-head">
@@ -10763,7 +10865,7 @@
                         </div>
                     </div>
                     <div class="exec-deck-group energy">
-                        <div class="exec-deck-eyebrow">Specific cost</div>
+                        <div class="exec-deck-eyebrow"><span class="exec-ind-sign sign-blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>Specific cost</div>
                         <div class="exec-deck-stack energy-pair">
                             <div class="exec-kpi-card accent-blue exec-rich-card">
                                 <div class="exec-kpi-head">
