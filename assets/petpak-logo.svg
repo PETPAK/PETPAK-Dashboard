@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 160" fill="none" role="img" aria-label="PETPAK">
+  <defs>
+    <linearGradient id="pkFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff9458"/>
+      <stop offset="50%" stop-color="#ee723b"/>
+      <stop offset="100%" stop-color="#c44718"/>
+    </linearGradient>
+  </defs>
+  <!-- Wordmark -->
+  <g fill="url(#pkFill)" transform="translate(0 8)">
+    <path d="M28 20h58c30 0 50 16 50 44 0 28-20 44-50 44H58v36H28V20zm30 24v40h26c15 0 24-8 24-20s-9-20-24-20H58z"/>
+    <path d="M154 20h96v24H184v20h56v24h-56v20h70v24h-100V20z"/>
+    <path d="M270 20h100v24h-36v100h-28V44h-36V20z"/>
+    <path d="M388 20h58c30 0 50 16 50 44 0 28-20 44-50 44H418v36h-30V20zm30 24v40h26c15 0 24-8 24-20s-9-20-24-20h-26z"/>
+    <!-- Open A -->
+    <path d="M508 144h-32l-12-32h-48l-12 32h-32l64-124h40l64 124zm-68-56h40l-20-52-20 52z"/>
+    <path d="M568 20h30v52l44-52h36l-54 60 60 64h-36l-50-54v54h-30V20z"/>
+  </g>
+  <!-- Trailing diamond mark -->
+  <g transform="translate(630 80)">
+    <polygon points="0,-52 34,0 0,52 -34,0" fill="#ee723b" opacity="0.28"/>
+    <polygon points="22,-52 56,0 22,52 -12,0" fill="#ee723b" opacity="0.55"/>
+    <polygon points="44,-52 78,0 44,52 10,0" fill="url(#pkFill)"/>
+  </g>
+</svg>
