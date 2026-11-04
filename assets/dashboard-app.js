@@ -2787,8 +2787,38 @@
             const totalProd = mainData.reduce((sum, r) => sum + (r['Prod. (Tons)'] || 0), 0);
             const avgWaste = kpiDef.waste_pct.calculate(mainData);
             const avgOee = kpiDef.oee.calculate(mainData);
-            const avgRsLine = kpiDef.rs_line.calculate(mainData);
             const avgRsPlant = kpiDef.rs_plant.calculate(mainData);
+
+            // --- Dispatch KPIs ---
+            const dispatchRows = (typeof dispatchDataRaw !== 'undefined' ? dispatchDataRaw : []).filter(item => {
+                const info = parseYearMonth(item['Dates']);
+                const matchY = year === 'All' || info.year === String(year);
+                const matchM = month === 'All' || info.month === String(month).padStart(2, '0');
+                return matchY && matchM;
+            });
+            const dispatchTotal = dispatchRows.reduce((sum, r) => sum + (Number(r['Total']) || 0), 0);
+            const dispatchExport = dispatchRows.reduce((sum, r) => sum + (Number(r['Export']) || 0), 0);
+            const dispatchLocal = dispatchRows.reduce((sum, r) => sum + (Number(r['Local']) || 0), 0);
+            const dispatchExportShare = dispatchTotal > 0 ? (dispatchExport / dispatchTotal) * 100 : 0;
+
+            // Golden highlight when selected month is the year's highest dispatch
+            let isDispatchPeak = false;
+            if (year !== 'All' && month !== 'All') {
+                const yearDispatch = (typeof dispatchDataRaw !== 'undefined' ? dispatchDataRaw : []).filter(item => {
+                    const info = parseYearMonth(item['Dates']);
+                    return info.year === String(year);
+                });
+                let peakDispatch = 0;
+                let peakMonthPad = '';
+                yearDispatch.forEach(r => {
+                    const t = Number(r['Total']) || 0;
+                    if (t > peakDispatch) {
+                        peakDispatch = t;
+                        peakMonthPad = parseYearMonth(r['Dates']).month;
+                    }
+                });
+                isDispatchPeak = peakDispatch > 0 && String(month).padStart(2, '0') === String(peakMonthPad).padStart(2, '0');
+            }
 
             // --- Offline KPIs (per machine) ---
             const psProd = offlineData.reduce((sum, r) => sum + (r['PS_Production'] || 0), 0);
@@ -2820,7 +2850,12 @@
             setTxt('exec-val-prod', `${totalProd.toLocaleString(undefined, { maximumFractionDigits: 0 })} t`);
             setTxt('exec-val-waste', `${avgWaste.toFixed(1)}%`);
             setTxt('exec-val-oee', `${avgOee.toFixed(1)}%`);
-            setTxt('exec-val-rs-line', avgRsLine ? avgRsLine.toFixed(2) : '0.00');
+            setTxt('exec-val-dispatch', `${dispatchTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} t`);
+            setTxt('exec-meta-dispatch', `Local ${dispatchLocal.toLocaleString(undefined, { maximumFractionDigits: 1 })} t · Export ${dispatchExport.toLocaleString(undefined, { maximumFractionDigits: 1 })} t`);
+            const execDispatchCard = document.getElementById('exec-card-dispatch');
+            if (execDispatchCard) execDispatchCard.classList.toggle('is-dispatch-peak', isDispatchPeak);
+            const execDispatchBadge = document.getElementById('exec-badge-dispatch');
+            if (execDispatchBadge) execDispatchBadge.textContent = isDispatchPeak ? 'PEAK' : 't';
             setTxt('exec-val-rs-plant', avgRsPlant ? avgRsPlant.toFixed(2) : '0.00');
 
             setTxt('exec-val-ps-prod', formatMass(psProd));
@@ -2879,8 +2914,8 @@
             setMeter('exec-meter-waste', Math.min(100, (avgWaste / 10) * 100));
             setMeter('exec-meter-oee', avgOee);
 
-            const rsMax = Math.max(avgRsLine || 0, avgRsPlant || 0, 1) * 1.15;
-            setMeter('exec-meter-rs-line', ((avgRsLine || 0) / rsMax) * 100);
+            setMeter('exec-meter-dispatch', dispatchExportShare || (dispatchTotal > 0 ? 100 : 0));
+            const rsMax = Math.max(avgRsPlant || 0, 1) * 1.15;
             setMeter('exec-meter-rs-plant', ((avgRsPlant || 0) / rsMax) * 100);
 
             const setYield = (id, lbl, wastePct) => {
@@ -4602,6 +4637,15 @@
             const exportSeries = data.map(r => Number(r['Export']) || 0);
             const localSeries = data.map(r => Number(r['Local']) || 0);
             const q2Series = data.map(r => Number(r['Q2 Dispatched']) || 0);
+            const totalSeries = data.map(r => Number(r['Total']) || ((Number(r['Export']) || 0) + (Number(r['Local']) || 0)));
+            const maxTotal = totalSeries.length ? Math.max(...totalSeries) : 0;
+            const isPeakIdx = (i) => maxTotal > 0 && totalSeries[i] === maxTotal
+                && totalSeries.filter(v => v === maxTotal).length < totalSeries.length;
+
+            const exportColors = exportSeries.map((_, i) => isPeakIdx(i) ? 'rgba(255, 214, 10, 0.88)' : 'rgba(41, 121, 255, 0.75)');
+            const exportBorders = exportSeries.map((_, i) => isPeakIdx(i) ? '#ffd60a' : '#2979ff');
+            const localColors = localSeries.map((_, i) => isPeakIdx(i) ? 'rgba(255, 196, 0, 0.72)' : 'rgba(57, 255, 20, 0.65)');
+            const localBorders = localSeries.map((_, i) => isPeakIdx(i) ? '#ffc400' : '#39ff14');
 
             const chartCanvas = document.getElementById('dispatchChart');
             if (!chartCanvas) return;
@@ -4616,8 +4660,8 @@
                             label: 'Export',
                             kpiKey: 'dispatch',
                             data: exportSeries,
-                            backgroundColor: 'rgba(41, 121, 255, 0.75)',
-                            borderColor: '#2979ff',
+                            backgroundColor: exportColors,
+                            borderColor: exportBorders,
                             borderWidth: 1.5,
                             borderRadius: 4,
                             stack: 'dispatch',
@@ -4627,8 +4671,8 @@
                             label: 'Local',
                             kpiKey: 'dispatch',
                             data: localSeries,
-                            backgroundColor: 'rgba(57, 255, 20, 0.65)',
-                            borderColor: '#39ff14',
+                            backgroundColor: localColors,
+                            borderColor: localBorders,
                             borderWidth: 1.5,
                             borderRadius: 4,
                             stack: 'dispatch',
@@ -4642,9 +4686,9 @@
                             borderColor: '#ffc107',
                             backgroundColor: 'rgba(255, 193, 7, 0.15)',
                             borderWidth: 2.5,
-                            pointRadius: 4,
+                            pointRadius: q2Series.map((_, i) => isPeakIdx(i) ? 6 : 4),
                             pointHoverRadius: 6,
-                            pointBackgroundColor: '#ffc107',
+                            pointBackgroundColor: q2Series.map((_, i) => isPeakIdx(i) ? '#ffd60a' : '#ffc107'),
                             tension: 0.25,
                             yAxisID: 'y1',
                             order: 1
@@ -4665,17 +4709,23 @@
                         tooltip: {
                             callbacks: {
                                 footer: (items) => {
+                                    const idx = items[0]?.dataIndex ?? 0;
                                     const exportVal = items.find(i => i.dataset.label === 'Export')?.parsed?.y || 0;
                                     const localVal = items.find(i => i.dataset.label === 'Local')?.parsed?.y || 0;
-                                    return `Total: ${(exportVal + localVal).toLocaleString(undefined, { maximumFractionDigits: 2 })} t`;
+                                    const peakTag = isPeakIdx(idx) ? ' · ★ Peak month' : '';
+                                    return `Total: ${(exportVal + localVal).toLocaleString(undefined, { maximumFractionDigits: 2 })} t${peakTag}`;
                                 }
                             }
                         },
                         datalabels: {
                             display: (ctx) => ctx.dataset.type !== 'line' && ctx.dataset.data[ctx.dataIndex] > 0,
-                            color: '#fff',
-                            font: { size: 9, weight: '600' },
-                            formatter: (v) => v ? Math.round(v).toLocaleString() : ''
+                            color: (ctx) => isPeakIdx(ctx.dataIndex) ? '#1a1500' : '#fff',
+                            font: (ctx) => ({ size: isPeakIdx(ctx.dataIndex) ? 10 : 9, weight: '700' }),
+                            formatter: (v, ctx) => {
+                                if (!v) return '';
+                                const tag = (ctx.dataset.label === 'Local' && isPeakIdx(ctx.dataIndex)) ? ' ★' : '';
+                                return Math.round(v).toLocaleString() + tag;
+                            }
                         }
                     },
                     scales: {
@@ -6177,7 +6227,7 @@
             const monthNum = parseInt(month, 10);
             const fullName = fullMonthNames[monthNum - 1] || shortMonths[monthNum - 1] || month;
             if (titleEl) titleEl.textContent = `${fullName} ${year}`;
-            if (subEl) subEl.textContent = 'Line · Offline · Products · Waste · Downtime';
+            if (subEl) subEl.textContent = 'Line · Dispatch · Offline · Products · Waste · Downtime';
             if (yearEl) yearEl.textContent = `Year ${year}`;
 
             const mainRows = mainDataRaw.filter(r => {
@@ -6185,6 +6235,10 @@
                 return info.year === String(year) && info.month === String(month).padStart(2, '0') && r['Prod. (Tons)'] !== null;
             });
             const offRows = offlineDataRaw.filter(r => {
+                const info = parseYearMonth(r['Dates']);
+                return info.year === String(year) && info.month === String(month).padStart(2, '0');
+            });
+            const dispatchRows = (typeof dispatchDataRaw !== 'undefined' ? dispatchDataRaw : []).filter(r => {
                 const info = parseYearMonth(r['Dates']);
                 return info.year === String(year) && info.month === String(month).padStart(2, '0');
             });
@@ -6227,12 +6281,30 @@
             const avgOee = typeof kpiDef !== 'undefined' && kpiDef.oee
                 ? kpiDef.oee.calculate(mainRows)
                 : avgField(mainRows, 'OEE %');
-            const avgRsLine = typeof kpiDef !== 'undefined' && kpiDef.rs_line
-                ? kpiDef.rs_line.calculate(mainRows)
-                : avgField(mainRows, 'Rs/Kg Line');
             const avgRsPlant = typeof kpiDef !== 'undefined' && kpiDef.rs_plant
                 ? kpiDef.rs_plant.calculate(mainRows)
                 : avgField(mainRows, 'Rs/Kg Plant');
+            const dispatchTotal = dispatchRows.reduce((sum, r) => sum + (Number(r['Total']) || 0), 0);
+            const dispatchExport = dispatchRows.reduce((sum, r) => sum + (Number(r['Export']) || 0), 0);
+            const dispatchLocal = dispatchRows.reduce((sum, r) => sum + (Number(r['Local']) || 0), 0);
+            const dispatchExportShare = dispatchTotal > 0 ? (dispatchExport / dispatchTotal) * 100 : 0;
+
+            // Peak dispatch month of the year → golden Dispatch card
+            const yearDispatchRows = (typeof dispatchDataRaw !== 'undefined' ? dispatchDataRaw : []).filter(r => {
+                const info = parseYearMonth(r['Dates']);
+                return info.year === String(year);
+            });
+            let peakDispatchVal = 0;
+            let peakDispatchMonth = '';
+            yearDispatchRows.forEach(r => {
+                const t = Number(r['Total']) || 0;
+                if (t > peakDispatchVal) {
+                    peakDispatchVal = t;
+                    peakDispatchMonth = parseYearMonth(r['Dates']).month;
+                }
+            });
+            const isDispatchPeak = peakDispatchVal > 0
+                && String(month).padStart(2, '0') === String(peakDispatchMonth).padStart(2, '0');
 
             const psProd = offRows.reduce((sum, r) => sum + (r['PS_Production'] || 0), 0);
             const ssProd = offRows.reduce((sum, r) => sum + (r['SS_Production'] || 0), 0);
@@ -6264,7 +6336,18 @@
             setTxt('pres-label-oee', 'OEE');
             setTxt('pres-meta-oee', `${fullName} ${year}`);
             setTxt('pres-val-oee', `${Number(avgOee || 0).toFixed(1)}%`);
-            setTxt('pres-val-rs-line', avgRsLine ? Number(avgRsLine).toFixed(2) : '0.00');
+            setTxt('pres-val-dispatch', `${dispatchTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} t`);
+            setTxt('pres-meta-dispatch', `Local ${dispatchLocal.toLocaleString(undefined, { maximumFractionDigits: 1 })} t · Export ${dispatchExport.toLocaleString(undefined, { maximumFractionDigits: 1 })} t`);
+            const presDispatchCard = document.getElementById('pres-card-dispatch');
+            if (presDispatchCard) {
+                presDispatchCard.classList.toggle('is-dispatch-peak', isDispatchPeak);
+                if (isDispatchPeak) {
+                    const metaBase = `Local ${dispatchLocal.toLocaleString(undefined, { maximumFractionDigits: 1 })} t · Export ${dispatchExport.toLocaleString(undefined, { maximumFractionDigits: 1 })} t`;
+                    setTxt('pres-meta-dispatch', `★ Peak month · ${metaBase}`);
+                }
+            }
+            const presDispatchBadge = document.getElementById('pres-badge-dispatch');
+            if (presDispatchBadge) presDispatchBadge.textContent = isDispatchPeak ? 'PEAK' : 't';
             setTxt('pres-val-rs-plant', avgRsPlant ? Number(avgRsPlant).toFixed(2) : '0.00');
             setTxt('pres-val-ps-prod', formatMass(psProd));
             setTxt('pres-val-ps-waste', `${Number(psWastePct || 0).toFixed(2)}%`);
@@ -6318,8 +6401,8 @@
             setMeter('pres-meter-waste', Math.min(100, (Number(avgWaste || 0) / 10) * 100));
             setMeter('pres-meter-oee', Number(avgOee || 0));
 
-            const rsMax = Math.max(Number(avgRsLine || 0), Number(avgRsPlant || 0), 1) * 1.15;
-            setMeter('pres-meter-rs-line', (Number(avgRsLine || 0) / rsMax) * 100);
+            setMeter('pres-meter-dispatch', dispatchExportShare || (dispatchTotal > 0 ? 100 : 0));
+            const rsMax = Math.max(Number(avgRsPlant || 0), 1) * 1.15;
             setMeter('pres-meter-rs-plant', (Number(avgRsPlant || 0) / rsMax) * 100);
 
             const setYield = (id, lbl, wastePct, ringId, numId) => {

@@ -2075,6 +2075,55 @@
             box-shadow: 0 0 14px rgba(255, 214, 10, 0.28);
         }
 
+        /* Highest dispatch month — golden Dispatch KPI card */
+        .exec-kpi-card.is-dispatch-peak {
+            --exec-kpi-accent: #ffd60a;
+            border-color: rgba(255, 214, 10, 0.65) !important;
+            background:
+                radial-gradient(120% 90% at 100% 0%, rgba(255, 214, 10, 0.22), transparent 55%),
+                radial-gradient(80% 70% at 0% 100%, rgba(255, 176, 0, 0.12), transparent 50%),
+                linear-gradient(155deg, rgba(28, 24, 10, 0.98) 0%, rgba(8, 10, 16, 0.99) 100%) !important;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 240, 180, 0.14),
+                0 0 0 1px rgba(255, 214, 10, 0.28),
+                0 0 34px rgba(255, 214, 10, 0.28) !important;
+        }
+        .exec-kpi-card.is-dispatch-peak .exec-kpi-label {
+            color: #ffe566 !important;
+        }
+        .exec-kpi-card.is-dispatch-peak .exec-kpi-label::after {
+            content: ' PEAK';
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            color: #1a1500;
+            background: linear-gradient(135deg, #ffe566, #ffd60a);
+            padding: 1px 6px;
+            border-radius: 999px;
+            margin-left: 6px;
+            vertical-align: middle;
+            box-shadow: 0 0 10px rgba(255, 214, 10, 0.4);
+        }
+        .exec-kpi-card.is-dispatch-peak .exec-kpi-value {
+            color: #fff8d6 !important;
+            text-shadow: 0 0 22px rgba(255, 214, 10, 0.45);
+        }
+        .exec-kpi-card.is-dispatch-peak .exec-kpi-meta {
+            color: rgba(255, 230, 140, 0.85) !important;
+        }
+        .exec-kpi-card.is-dispatch-peak .exec-cost-badge {
+            color: #1a1500 !important;
+            background: linear-gradient(135deg, #ffe566, #ffd60a) !important;
+            border-color: rgba(255, 214, 10, 0.8) !important;
+            box-shadow: 0 0 14px rgba(255, 214, 10, 0.35);
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+        .exec-kpi-card.is-dispatch-peak .exec-meter-fill {
+            background: linear-gradient(90deg, #ffe566, #ffd60a) !important;
+            box-shadow: 0 0 10px rgba(255, 214, 10, 0.45);
+        }
+
         .exec-machine-card:hover {
             transform: translateY(-3px);
             border-color: color-mix(in srgb, var(--machine-accent) 55%, rgba(255, 255, 255, 0.1));
