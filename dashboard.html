@@ -74,6 +74,12 @@
                     </a>
                 </li>
                 <li>
+                    <a class="nav-item" data-tab="dispatch">
+                        <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                        <span>Dispatch</span>
+                    </a>
+                </li>
+                <li>
                     <a class="nav-item" data-tab="comparison">
                         <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
                         <span>Comparison Engine</span>
@@ -1626,6 +1632,96 @@
                             <div class="chart-container">
                                 <canvas id="offlineMetChart"></canvas>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4.6: DISPATCH -->
+            <div class="tab-panel" id="dispatch-tab">
+                <div class="metrics-row" id="dispatch-metrics" style="grid-template-columns: repeat(4, 1fr);">
+                    <div class="metric-card dispatch-kpi-card" style="--accent-color: #00e5ff; --shadow-color: rgba(0, 229, 255, 0.1); --shadow-color-hover: rgba(0, 229, 255, 0.28); --glow-color: rgba(0, 229, 255, 0.45); --kpi-glow: rgba(0, 229, 255, 0.22);">
+                        <div class="dispatch-kpi-accent"></div>
+                        <div class="kpi-3d-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/>
+                                <circle cx="6" cy="18" r="1.2"/>
+                                <circle cx="18" cy="18" r="1.2"/>
+                                <path d="M17 8v3h4"/>
+                            </svg>
+                        </div>
+                        <div class="dispatch-kpi-body">
+                            <div class="metric-label">Total Dispatched</div>
+                            <div class="metric-val cyan" id="dispatch-kpi-total">0.00 t</div>
+                            <div class="metric-subtext">Cumulative for selected period</div>
+                        </div>
+                        <div class="mini-progress-bar-container">
+                            <div id="dispatch-kpi-total-progress" class="mini-progress-bar" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    <div class="metric-card dispatch-kpi-card" style="--accent-color: #2979ff; --shadow-color: rgba(41, 121, 255, 0.1); --shadow-color-hover: rgba(41, 121, 255, 0.28); --glow-color: rgba(41, 121, 255, 0.45); --kpi-glow: rgba(41, 121, 255, 0.22);">
+                        <div class="dispatch-kpi-accent"></div>
+                        <div class="kpi-3d-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 19V5"/>
+                                <path d="M5 12l7-7 7 7"/>
+                                <path d="M4 19h16"/>
+                            </svg>
+                        </div>
+                        <div class="dispatch-kpi-body">
+                            <div class="metric-label">Export</div>
+                            <div class="metric-val" id="dispatch-kpi-export" style="color: var(--accent-color);">0.00 t</div>
+                            <div class="metric-subtext" id="dispatch-kpi-export-sub">Share of total</div>
+                        </div>
+                        <div class="mini-progress-bar-container">
+                            <div id="dispatch-kpi-export-progress" class="mini-progress-bar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div class="metric-card dispatch-kpi-card" style="--accent-color: #39ff14; --shadow-color: rgba(57, 255, 20, 0.1); --shadow-color-hover: rgba(57, 255, 20, 0.28); --glow-color: rgba(57, 255, 20, 0.45); --kpi-glow: rgba(57, 255, 20, 0.22);">
+                        <div class="dispatch-kpi-accent"></div>
+                        <div class="kpi-3d-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 21s-7-4.5-7-11a7 7 0 1 1 14 0c0 6.5-7 11-7 11z"/>
+                                <circle cx="12" cy="10" r="2.5"/>
+                            </svg>
+                        </div>
+                        <div class="dispatch-kpi-body">
+                            <div class="metric-label">Local</div>
+                            <div class="metric-val green" id="dispatch-kpi-local">0.00 t</div>
+                            <div class="metric-subtext" id="dispatch-kpi-local-sub">Share of total</div>
+                        </div>
+                        <div class="mini-progress-bar-container">
+                            <div id="dispatch-kpi-local-progress" class="mini-progress-bar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div class="metric-card dispatch-kpi-card" style="--accent-color: #ffc107; --shadow-color: rgba(255, 193, 7, 0.1); --shadow-color-hover: rgba(255, 193, 7, 0.28); --glow-color: rgba(255, 193, 7, 0.45); --kpi-glow: rgba(255, 193, 7, 0.22);">
+                        <div class="dispatch-kpi-accent"></div>
+                        <div class="kpi-3d-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="16" rx="2"/>
+                                <path d="M8 9h8M8 13h5"/>
+                                <circle cx="17" cy="13" r="1.5" fill="var(--accent-color)" stroke="none"/>
+                            </svg>
+                        </div>
+                        <div class="dispatch-kpi-body">
+                            <div class="metric-label">Q2 Dispatched</div>
+                            <div class="metric-val" id="dispatch-kpi-q2" style="color: var(--accent-color);">0.00 t</div>
+                            <div class="metric-subtext">Q2 grade volume</div>
+                        </div>
+                        <div class="mini-progress-bar-container">
+                            <div id="dispatch-kpi-q2-progress" class="mini-progress-bar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-layout" id="dispatch-content">
+                    <div class="panel-card" style="width: 100%;">
+                        <div class="panel-title">
+                            Monthly Dispatch Mix
+                            <span class="panel-title-desc">Export + Local stacked · Q2 as line overlay</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="dispatchChart"></canvas>
                         </div>
                     </div>
                 </div>

@@ -3,6 +3,7 @@
         var productDataRaw = (typeof productDataRaw !== 'undefined' && Array.isArray(productDataRaw)) ? productDataRaw : [];
         var eremaDataRaw = (typeof eremaDataRaw !== 'undefined' && Array.isArray(eremaDataRaw)) ? eremaDataRaw : [];
         var offlineDataRaw = (typeof offlineDataRaw !== 'undefined' && Array.isArray(offlineDataRaw)) ? offlineDataRaw : [];
+        var dispatchDataRaw = (typeof dispatchDataRaw !== 'undefined' && Array.isArray(dispatchDataRaw)) ? dispatchDataRaw : [];
 
         // Register the datalabels plugin globally
         Chart.register(ChartDataLabels);
@@ -80,6 +81,7 @@
                     grades: '',
                     microns: '',
                     erema: ' kg',
+                    dispatch: ' t',
                     downtime_cat: ' h',
                     kg: ' kg',
                     hrs: ' h',
@@ -141,6 +143,7 @@
             products: { title: "Products Performance", subtitle: "PRODUCTION BY PRODUCT" },
             erema: { title: "Recycling", subtitle: "RECLAIMED MATERIAL THROUGHPUT" },
             offline: { title: "Offline Operations Deck", subtitle: "PS, SS & METALLIZER PERFORMANCE" },
+            dispatch: { title: "Dispatch", subtitle: "EXPORT · LOCAL · Q2 DISPATCHED" },
             comparison: { title: "Telemetry Comparison Engine", subtitle: "KPI & DOWNTIME ANALYSIS" },
             forecast: { title: "Statistical Forecast", subtitle: "LINEAR / HOLT / MOVING-AVERAGE OUTLOOK" },
             skutrends: { title: "Product Growth & Decline Analysis", subtitle: "5-MONTH OPERATIONS TREND ENGINE" },
@@ -342,6 +345,7 @@
                 if (productTypeChart) productTypeChart.resize();
                 if (activeTrendChart) activeTrendChart.resize();
                 if (eremaChart) eremaChart.resize();
+                if (dispatchChart) dispatchChart.resize();
                 if (kpiComparisonChart) kpiComparisonChart.resize();
                 if (downtimeComparisonChart) downtimeComparisonChart.resize();
                 if (window.forecastChart) window.forecastChart.resize();
@@ -1145,6 +1149,7 @@
         let downtimeChart = null;
         let productTypeChart = null;
         let eremaChart = null;
+        let dispatchChart = null;
         let kpiComparisonChart = null;
         let downtimeComparisonChart = null;
         let activeTrendChart = null;
@@ -1239,6 +1244,13 @@
                 return matchY && matchM;
             }).sort((a, b) => new Date(a['Dates']) - new Date(b['Dates']));
 
+            const dispatchFiltered = dispatchDataRaw.filter(item => {
+                const info = parseYearMonth(item['Dates']);
+                const matchY = selectedYear === 'All' || info.year === selectedYear;
+                const matchM = selectedMonth === 'All' || info.month === selectedMonth;
+                return matchY && matchM;
+            }).sort((a, b) => new Date(a['Dates']) - new Date(b['Dates']));
+
             updateHeaderContext(mainFiltered, productFiltered, eremaFiltered, offlineFiltered, selectedYear, selectedMonth);
 
             // Update respective views
@@ -1247,6 +1259,7 @@
             updateProductsTab(productFiltered, selectedYear, selectedMonth);
             updateEremaTab(eremaFiltered, selectedYear, selectedMonth);
             updateOfflineTab(offlineFiltered, selectedYear, selectedMonth);
+            updateDispatchTab(dispatchFiltered, selectedYear, selectedMonth);
             updateComparisonTab(mainFiltered, selectedYear, selectedMonth);
             
             if (activeTab === 'forecast') {
@@ -4524,6 +4537,173 @@
         }
 
         // ==========================================
+        // 4.7. DISPATCH TAB
+        // ==========================================
+        const initialDispatchContentHTML = document.getElementById('dispatch-content')
+            ? document.getElementById('dispatch-content').innerHTML
+            : '';
+
+        function formatDispatchTons(v) {
+            const n = Number(v) || 0;
+            return `${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} t`;
+        }
+
+        function updateDispatchTab(data, year, month) {
+            const contentCard = document.getElementById('dispatch-content');
+            if (!contentCard) return;
+
+            const setTxt = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+
+            if (!data || data.length === 0) {
+                const zero = formatDispatchTons(0);
+                setTxt('dispatch-kpi-total', zero);
+                setTxt('dispatch-kpi-export', zero);
+                setTxt('dispatch-kpi-local', zero);
+                setTxt('dispatch-kpi-q2', zero);
+                setTxt('dispatch-kpi-export-sub', 'Share of total');
+                setTxt('dispatch-kpi-local-sub', 'Share of total');
+                ['dispatch-kpi-total-progress', 'dispatch-kpi-export-progress', 'dispatch-kpi-local-progress', 'dispatch-kpi-q2-progress'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.style.width = '0%';
+                });
+                contentCard.innerHTML = createEmptyState("No Dispatch Data", "No monthly dispatch logs match the selected filter.");
+                return;
+            }
+
+            contentCard.innerHTML = initialDispatchContentHTML;
+
+            const total = data.reduce((sum, r) => sum + (Number(r['Total']) || 0), 0);
+            const exportTotal = data.reduce((sum, r) => sum + (Number(r['Export']) || 0), 0);
+            const localTotal = data.reduce((sum, r) => sum + (Number(r['Local']) || 0), 0);
+            const q2Total = data.reduce((sum, r) => sum + (Number(r['Q2 Dispatched']) || 0), 0);
+            const exportShare = total > 0 ? (exportTotal / total) * 100 : 0;
+            const localShare = total > 0 ? (localTotal / total) * 100 : 0;
+
+            setTxt('dispatch-kpi-total', formatDispatchTons(total));
+            setTxt('dispatch-kpi-export', formatDispatchTons(exportTotal));
+            setTxt('dispatch-kpi-local', formatDispatchTons(localTotal));
+            setTxt('dispatch-kpi-q2', formatDispatchTons(q2Total));
+            setTxt('dispatch-kpi-export-sub', `${exportShare.toFixed(1)}% of total`);
+            setTxt('dispatch-kpi-local-sub', `${localShare.toFixed(1)}% of total`);
+
+            const setBar = (id, pct) => {
+                const el = document.getElementById(id);
+                if (el) el.style.width = `${Math.max(0, Math.min(100, pct))}%`;
+            };
+            setBar('dispatch-kpi-total-progress', 100);
+            setBar('dispatch-kpi-export-progress', exportShare);
+            setBar('dispatch-kpi-local-progress', localShare);
+            setBar('dispatch-kpi-q2-progress', total > 0 ? Math.min(100, (q2Total / total) * 100 * 20) : 0);
+
+            const chartLabels = data.map(item => {
+                const info = parseYearMonth(item['Dates']);
+                return `${monthNames[info.monthNum - 1].slice(0, 3)} ${info.year.slice(2)}`;
+            });
+            const exportSeries = data.map(r => Number(r['Export']) || 0);
+            const localSeries = data.map(r => Number(r['Local']) || 0);
+            const q2Series = data.map(r => Number(r['Q2 Dispatched']) || 0);
+
+            const chartCanvas = document.getElementById('dispatchChart');
+            if (!chartCanvas) return;
+            const dispatchCtx = chartCanvas.getContext('2d');
+            if (dispatchChart) dispatchChart.destroy();
+            dispatchChart = new Chart(dispatchCtx, {
+                type: 'bar',
+                data: {
+                    labels: chartLabels,
+                    datasets: [
+                        {
+                            label: 'Export',
+                            kpiKey: 'dispatch',
+                            data: exportSeries,
+                            backgroundColor: 'rgba(41, 121, 255, 0.75)',
+                            borderColor: '#2979ff',
+                            borderWidth: 1.5,
+                            borderRadius: 4,
+                            stack: 'dispatch',
+                            order: 2
+                        },
+                        {
+                            label: 'Local',
+                            kpiKey: 'dispatch',
+                            data: localSeries,
+                            backgroundColor: 'rgba(57, 255, 20, 0.65)',
+                            borderColor: '#39ff14',
+                            borderWidth: 1.5,
+                            borderRadius: 4,
+                            stack: 'dispatch',
+                            order: 2
+                        },
+                        {
+                            type: 'line',
+                            label: 'Q2 Dispatched',
+                            kpiKey: 'dispatch',
+                            data: q2Series,
+                            borderColor: '#ffc107',
+                            backgroundColor: 'rgba(255, 193, 7, 0.15)',
+                            borderWidth: 2.5,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            pointBackgroundColor: '#ffc107',
+                            tension: 0.25,
+                            yAxisID: 'y1',
+                            order: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            align: 'end',
+                            labels: { color: 'rgba(255,255,255,0.75)', boxWidth: 12, font: { size: 11 }, padding: 12 }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                footer: (items) => {
+                                    const exportVal = items.find(i => i.dataset.label === 'Export')?.parsed?.y || 0;
+                                    const localVal = items.find(i => i.dataset.label === 'Local')?.parsed?.y || 0;
+                                    return `Total: ${(exportVal + localVal).toLocaleString(undefined, { maximumFractionDigits: 2 })} t`;
+                                }
+                            }
+                        },
+                        datalabels: {
+                            display: (ctx) => ctx.dataset.type !== 'line' && ctx.dataset.data[ctx.dataIndex] > 0,
+                            color: '#fff',
+                            font: { size: 9, weight: '600' },
+                            formatter: (v) => v ? Math.round(v).toLocaleString() : ''
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: true,
+                            grid: { color: 'rgba(255, 255, 255, 0.03)' },
+                            ticks: { color: 'rgba(255,255,255,0.55)', font: { size: 11 } }
+                        },
+                        y: {
+                            stacked: true,
+                            position: 'left',
+                            title: { display: true, text: 'Export / Local (t)', color: 'rgba(255,255,255,0.45)', font: { size: 11 } },
+                            grid: { color: 'rgba(255, 255, 255, 0.04)' },
+                            ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 10 } }
+                        },
+                        y1: {
+                            position: 'right',
+                            title: { display: true, text: 'Q2 (t)', color: 'rgba(255,193,7,0.75)', font: { size: 11 } },
+                            grid: { drawOnChartArea: false },
+                            beginAtZero: true,
+                            ticks: { color: 'rgba(255,193,7,0.65)', font: { size: 10 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ==========================================
         // 5. COMPARISON TAB
         // ==========================================
         window.comparisonPeriodPreset = window.comparisonPeriodPreset || 'selected';
@@ -6347,7 +6527,7 @@
 
             document.body.classList.toggle(
                 'dashboard-fit-view',
-                targetTab === 'executive' || targetTab === 'offline' || targetTab === 'losses' || targetTab === 'erema' || targetTab === 'products' || targetTab === 'skutrends' || targetTab === 'forecast' || targetTab === 'comparison' || targetTab === 'overview' || targetTab === 'savings' || targetTab === 'advsim'
+                targetTab === 'executive' || targetTab === 'offline' || targetTab === 'losses' || targetTab === 'erema' || targetTab === 'dispatch' || targetTab === 'products' || targetTab === 'skutrends' || targetTab === 'forecast' || targetTab === 'comparison' || targetTab === 'overview' || targetTab === 'savings' || targetTab === 'advsim'
             );
 
             if (headerTitle && tabMeta[targetTab]) {
@@ -6635,16 +6815,18 @@
             if (mainDataRaw.length > 0) return;
             const empty = [];
             try {
-                const [main, products, erema, offline] = await Promise.all([
+                const [main, products, erema, offline, dispatch] = await Promise.all([
                     fetch('data/main.json').then(r => r.ok ? r.json() : empty).catch(() => empty),
                     fetch('data/products.json').then(r => r.ok ? r.json() : empty).catch(() => empty),
                     fetch('data/erema.json').then(r => r.ok ? r.json() : empty).catch(() => empty),
-                    fetch('data/offline.json').then(r => r.ok ? r.json() : empty).catch(() => empty)
+                    fetch('data/offline.json').then(r => r.ok ? r.json() : empty).catch(() => empty),
+                    fetch('data/dispatch.json').then(r => r.ok ? r.json() : empty).catch(() => empty)
                 ]);
                 if (Array.isArray(main) && main.length) mainDataRaw = main;
                 if (Array.isArray(products) && products.length) productDataRaw = products;
                 if (Array.isArray(erema) && erema.length) eremaDataRaw = erema;
                 if (Array.isArray(offline) && offline.length) offlineDataRaw = offline;
+                if (Array.isArray(dispatch) && dispatch.length) dispatchDataRaw = dispatch;
             } catch (e) {
                 console.warn('Optional JSON refresh skipped.', e);
             }
