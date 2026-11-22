@@ -151,7 +151,7 @@
             advsim: { title: "Advanced Operations Simulator", subtitle: "WHAT-IF TUNER & PRESETS" }
         };
 
-        // Master List of 12 KPIs
+        // Plant KPIs taken from the Excel dashboard. Simulated savings are not offered here.
         const kpiOptions = [
             { key: 'prod', label: 'Production' },
             { key: 'oee', label: 'Avg OEE %' },
@@ -168,12 +168,7 @@
             { key: 'kwh_line', label: 'KWh/Kg Line' },
             { key: 'kwh_plant', label: 'KWh/Kg Plant' },
             { key: 'rs_line', label: 'Rs/Kg Line' },
-            { key: 'rs_plant', label: 'Rs/Kg Plant' },
-            { key: 'sim_total_savings', label: 'Sim. Total Savings' },
-            { key: 'sim_energy_saving', label: 'Sim. Energy Saving' },
-            { key: 'sim_recycle_saving', label: 'Sim. Recycle Saving' },
-            { key: 'sim_waste_saving', label: 'Sim. Waste Saving' },
-            { key: 'sim_downtime_saving', label: 'Sim. Downtime Saving' }
+            { key: 'rs_plant', label: 'Rs/Kg Plant' }
         ];
 
         // List of visible KPIs (by key)
@@ -1756,6 +1751,9 @@
                         }
                     }
                 });
+                requestAnimationFrame(() => {
+                    if (offlineOverviewChart) offlineOverviewChart.resize();
+                });
             }
 
             // 1. Primary Slitter (PS) Section
@@ -2154,36 +2152,6 @@
                 format: (val) => `PKR ${val.toFixed(2)}`,
                 subtext: "Avg. Rs/Kg Plant",
                 colorClass: "amber"
-            },
-            sim_total_savings: {
-                calculate: (data) => window.lastCalculatedSimSavings?.sim_total_savings || 0,
-                format: (val) => `PKR ${Math.round(val).toLocaleString()}`,
-                subtext: "Total Sim. Savings",
-                colorClass: "cyan"
-            },
-            sim_energy_saving: {
-                calculate: (data) => window.lastCalculatedSimSavings?.sim_energy_saving || 0,
-                format: (val) => `PKR ${Math.round(val).toLocaleString()}`,
-                subtext: "Sim. Energy Savings",
-                colorClass: "cyan"
-            },
-            sim_recycle_saving: {
-                calculate: (data) => window.lastCalculatedSimSavings?.sim_recycle_saving || 0,
-                format: (val) => `PKR ${Math.round(val).toLocaleString()}`,
-                subtext: "Sim. Recycling Savings",
-                colorClass: "purple"
-            },
-            sim_waste_saving: {
-                calculate: (data) => window.lastCalculatedSimSavings?.sim_waste_saving || 0,
-                format: (val) => `PKR ${Math.round(val).toLocaleString()}`,
-                subtext: "Sim. Waste Savings",
-                colorClass: "amber"
-            },
-            sim_downtime_saving: {
-                calculate: (data) => window.lastCalculatedSimSavings?.sim_downtime_saving || 0,
-                format: (val) => `PKR ${Math.round(val).toLocaleString()}`,
-                subtext: "Sim. Downtime Savings",
-                colorClass: "cyan"
             }
         };
 
@@ -2296,6 +2264,7 @@
 
         window.togglePinnedSavingCard = function(metricKey, isChecked) {
             const kpiKey = `sim_${metricKey}`;
+            if (!kpiOptions.some(o => o.key === kpiKey)) return;
             const idx = visibleKPIs.indexOf(kpiKey);
             if (isChecked && idx === -1) {
                 visibleKPIs.push(kpiKey);
@@ -6718,8 +6687,9 @@
             updatePresentationUI();
             resetPresentationTimer();
             resizeDashboardCharts();
-            if (slide.tab === 'executive' && !slide.overlay) {
-                setTimeout(() => resizeDashboardCharts(), 120);
+            if (!slide.overlay && (slide.tab === 'executive' || slide.tab === 'overview')) {
+                setTimeout(() => resizeDashboardCharts(), 80);
+                setTimeout(() => resizeDashboardCharts(), 280);
             }
         }
 

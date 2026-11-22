@@ -18,7 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 
     <!-- Styles -->
-        <link rel="stylesheet" href="assets/dashboard.css">
+        <link rel="stylesheet" href="assets/dashboard.css?v=20261122d">
 
 </head>
 <body>
@@ -165,14 +165,11 @@
             </div>
             
             <div class="controls-panel">
-                <!-- KPI Modal Trigger Button -->
-                <div class="filter-group" style="user-select: none;">
-                    <span class="filter-label">Cards:</span>
-                    <div class="filter-select" id="kpiSelectorBtn" style="min-width: 62px; display: flex; align-items: center; justify-content: space-between; gap: 6px; font-family: var(--font-display); font-size: 11px; font-weight: 500; cursor: pointer; padding: 0;" onclick="openKpiModal()">
-                        <span id="kpiBtnText">5 Active</span>
-                        <span style="font-size: 8px;">⚙</span>
-                    </div>
-                </div>
+                <button type="button" class="overview-kpi-picker" id="kpiSelectorBtn" onclick="openKpiModal()" title="Choose which Overview KPI cards are shown">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17.5h7M17.5 14v7"/></svg>
+                    Choose KPIs
+                    <strong id="kpiBtnText">5 Active</strong>
+                </button>
 
                 <!-- Date Filters -->
                 <div class="filter-group">
@@ -1268,36 +1265,8 @@
                                 <span class="offline-leg offline-leg-ss"><i></i>SS · right axis</span>
                                 <span class="offline-leg offline-leg-met"><i></i>Met · right axis</span>
                             </div>
-                            <div class="chart-container" style="height: 380px;">
+                            <div class="chart-container offline-overview-chart">
                                 <canvas id="offlineOverviewChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Overview Table Ledger -->
-                    <div class="panel-layout" style="margin-bottom: 20px; grid-template-columns: 1fr;">
-                        <div class="panel-card" style="width: 100%;">
-                            <div class="panel-title secondary">
-                                Consolidated Operations Register
-                                <span class="panel-title-desc">Overview of all slitting and metallizing operational data</span>
-                            </div>
-                            <div class="table-wrapper" style="max-height: 350px; overflow-y: auto;">
-                                <table class="ledger-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>PS Production</th>
-                                            <th>SS Production</th>
-                                            <th>Met Production</th>
-                                            <th>Total Waste %</th>
-                                            <th>Packing Cost</th>
-                                            <th>Q2 Data</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="offline-overview-ledger-body">
-                                        <!-- Dynamic data rows -->
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
                     </div>
@@ -2633,7 +2602,7 @@
 
     <!-- KPI SELECTOR MODAL -->
     <div class="modal-backdrop" id="kpiModal">
-        <div class="modal-container" onclick="event.stopPropagation()">
+        <div class="modal-container kpi-picker-modal" onclick="event.stopPropagation()">
             <div class="modal-header">
                 <h2 class="modal-title">Select Display Cards</h2>
                 <button class="modal-close-btn" onclick="closeKpiModal()">&times;</button>
@@ -2690,6 +2659,6 @@
 
     <!-- Data bundle (works with file://); JSON copies kept for HTTP hosting -->
     <script src="data/dashboard-data.js"></script>
-    <script src="assets/dashboard-app.js"></script>
+    <script src="assets/dashboard-app.js?v=20261122d"></script>
 </body>
 </html>
